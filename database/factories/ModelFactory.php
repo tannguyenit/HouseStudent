@@ -9,16 +9,78 @@
 | you a convenient way to create models for testing and seeding your
 | database. Just tell the factory how a default model should look.
 |
-*/
+ */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
-
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'username'       => $faker->name,
+        'first_name'     => $faker->name,
+        'last_name'      => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ?: $password = bcrypt('123qweasd'),
+        'avatar'         => 'default.jpg',
+        'birthday'       => date('Y-m-d'),
+        'gender'         => $faker->boolean,
+        'address'        => $faker->address,
+        'phone'          => $faker->e164PhoneNumber,
+        'provice_id'     => '',
+        'active'         => rand(1000, 9999),
+        'role'           => config('setting.role.admin'),
+        'bio'            => '01263751380',
         'remember_token' => str_random(10),
+    ];
+});
+$factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+    ];
+});
+$factory->define(App\Models\Status::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+    ];
+});
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    static $userIds;
+    static $typeId;
+    static $statusId;
+    return [
+        'user_id'      => $faker->randomElement($userIds ?: $userIds = App\Models\User::pluck('id')->toArray()),
+        'title'        => $faker->name,
+        'description'  => $faker->text,
+        'type_id'      => $faker->randomElement($typeId ?: $typeId = App\Models\Type::pluck('id')->toArray()),
+        'status_id'    => $faker->randomElement($statusId ?: $statusId = App\Models\Status::pluck('id')->toArray()),
+        'price'        => rand(10, 100),
+        'area'         => rand(10, 100),
+        'phone_boss'   => $faker->e164PhoneNumber,
+        'name_boss'    => $faker->name,
+        'address'      => $faker->address,
+        'township'     => $faker->state,
+        'country'      => $faker->country,
+        'lat'          => $faker->latitude($min = 15, $max = 16),
+        'lng'          => $faker->longitude($min = 108, $max = 109),
+        'total_view'   => rand(10, 100),
+        'total_like'   => rand(10, 100),
+        'tota_comment' => rand(10, 100),
+    ];
+});
+$factory->define(App\Models\Like::class, function (Faker\Generator $faker) {
+    static $userIds;
+    static $postId;
+    return [
+        'user_id' => $faker->randomElement($userIds ?: $userIds = App\Models\User::pluck('id')->toArray()),
+        'post_id' => $faker->randomElement($postId ?: $postId = App\Models\Post::pluck('id')->toArray()),
+        'status'  => $faker->boolean,
+    ];
+});
+$factory->define(App\Models\Comment::class, function (Faker\Generator $faker) {
+    static $userIds;
+    static $postId;
+    return [
+        'user_id' => $faker->randomElement($userIds ?: $userIds = App\Models\User::pluck('id')->toArray()),
+        'post_id' => $faker->randomElement($postId ?: $postId = App\Models\Post::pluck('id')->toArray()),
+        'content' => $faker->text,
     ];
 });
