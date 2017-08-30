@@ -23,7 +23,7 @@
                     <div id="carousel-module-grid" class="houzez-module carousel-module">
                         <div class="module-title-nav clearfix">
                             <div>
-                                <h2>Latest for Sale</h2>
+                                <h2>{{ trans('post.news') }}</h2>
                             </div>
                             <div class="module-nav">
                                 <button class="btn btn-carousel btn-sm btn-prev-uo8oC">{{ trans('post.prev') }}</button>
@@ -45,7 +45,7 @@
                                                     <div class="price hide-on-list">
                                                         <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>
                                                     </div>
-                                                    <a class="hover-effect" href="property/luxury-family-home-4/index.php">
+                                                    <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
                                                         <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06.jpg 1170w" sizes="(max-width: 385px) 100vw, 385px"/>
                                                     </a>
                                                     <ul class="actions">
@@ -71,7 +71,7 @@
                                                 <div class="body-left">
                                                     <div class="info-row">
                                                         <h3 class="property-title">
-                                                            <a href="property/luxury-family-home-4/index.php">{{ $element->title }}</a>
+                                                            <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
                                                         </h3>
                                                         <address class="property-address">{{ $element->address }}</address>
                                                     </div>
@@ -86,7 +86,7 @@
                                                         </div>
                                                         <div class="cell">
                                                             <div class="phone">
-                                                                <a href="property/luxury-family-home-4/index.php" class="btn btn-primary">
+                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
                                                                     {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                                 </a>
                                                             </div>
@@ -104,7 +104,8 @@
                                             </div>
                                             <div class="item-foot-right">
                                                 <p class="prop-date">
-                                                    <i class="fa fa-calendar"></i>{{ $element->created_at }}
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{ $element->created_at }}
                                                 </p>
                                             </div>
                                         </div>
@@ -126,7 +127,7 @@
                     <div id="carousel-module-grid" class="houzez-module carousel-module">
                         <div class="module-title-nav clearfix">
                             <div>
-                                <h2>Latest for Rent</h2>
+                                <h2>{{ trans('post.most-view') }}</h2>
                             </div>
                             <div class="module-nav">
                                 <button class="btn btn-carousel btn-sm btn-prev-cSQhv">{{ trans('post.prev') }}</button>
@@ -148,7 +149,7 @@
                                                     <div class="price hide-on-list">
                                                         <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>
                                                     </div>
-                                                    <a class="hover-effect" href="property/luxury-family-home-4/index.php">
+                                                    <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
                                                         <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06.jpg 1170w" sizes="(max-width: 385px) 100vw, 385px"/>
                                                     </a>
                                                     <ul class="actions">
@@ -174,7 +175,7 @@
                                                 <div class="body-left">
                                                     <div class="info-row">
                                                         <h3 class="property-title">
-                                                            <a href="property/luxury-family-home-4/index.php">{{ $element->title }}</a>
+                                                            <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
                                                         </h3>
                                                         <address class="property-address">{{ $element->address }}</address>
                                                     </div>
@@ -189,7 +190,7 @@
                                                         </div>
                                                         <div class="cell">
                                                             <div class="phone">
-                                                                <a href="property/luxury-family-home-4/index.php" class="btn btn-primary">
+                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
                                                                     {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                                 </a>
                                                             </div>
@@ -232,12 +233,10 @@
                     <div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_bottom-to-top bottom-to-top">
                         <div class="wpb_wrapper">
                             <h1 class="text-center">
-                                <span class="color-white">General Features</span>
+                                <span class="color-white">{{ trans('index.general-features') }}</span>
                             </h1>
                             <p class="text-center">
-                                <span class="color-white">You appreciate the numerous features and benefits</span>
-                                <br/>
-                                <span class="color-white">that our theme provides</span>
+                                <span class="color-white">{{ trans('index.general-features-content') }}</span>
                             </p>
                         </div>
                     </div>
@@ -254,14 +253,14 @@
                                                 <img class="aligncenter size-medium wp-image-1022" src="wp-content/uploads/2016/02/monitor.png" alt="monitor" width="60" height="60"/>
                                             </h3>
                                             <h3 class="text-center">
-                                                <span class="color-white">Unlimited Templates</span>
+                                                <span class="color-white">{{ trans('index.column-one') }}</span>
                                             </h3>
-                                            <h4 style="font-size: 18px; line-height: 24px; font-weight: 400; text-align: center;">
-                                                <span class="color-white">Nothing is set in stone: you can structure your pages exactly how you want without having to write any code</span>
+                                            <h4 class="content-column">
+                                                <span class="color-white">{{ trans('index.column-one-content') }}</span>
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="vc_empty_space" style="height: 60px">
+                                    <div class="vc_empty_space">
                                         <span class="vc_empty_space_inner"></span>
                                     </div>
                                 </div>
@@ -270,20 +269,20 @@
                         <div class="col-sm-4">
                             <div class="vc_column-inner ">
                                 <div class="wpb_wrapper">
-                                    <div class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_bottom-to-top bottom-to-top">
+                                    <div class="wpb_text_column wpb_content_element wpb_animate_when_almost_visible wpb_bottom-to-top bottom-to-top">
                                         <div class="wpb_wrapper">
                                             <h3 class="text-center">
                                                 <img class="aligncenter size-medium wp-image-918" src="wp-content/uploads/2016/03/layers-1.png" alt="layers" width="60" height="60"/>
                                             </h3>
                                             <h3 class="text-center">
-                                                <span class="color-white">Powerful Admin Panel</span>
+                                                <span class="color-white">{{ trans('index.column-two') }}</span>
                                             </h3>
-                                            <h4 style="text-align: center; font-size: 18px; line-height: 24px; font-weight: 400;">
-                                                <span class="color-white">Provide your agents and clients with an easy way to manage their profile, properties for sale and other settings</span>
+                                            <h4 class="content-column">
+                                                <span class="color-white">{{ trans('index.column-two-content') }}</span>
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="vc_empty_space" style="height: 60px">
+                                    <div class="vc_empty_space">
                                         <span class="vc_empty_space_inner"></span>
                                     </div>
                                 </div>
@@ -298,14 +297,14 @@
                                                 <img class="aligncenter size-medium wp-image-1023" src="wp-content/uploads/2016/02/list.png" alt="list" width="60" height="60"/>
                                             </h3>
                                             <h3 class="text-center">
-                                                <span class="color-white">Custom Modules</span>
+                                                <span class="color-white">{{ trans('index.column-three') }}</span>
                                             </h3>
-                                            <h4 style="text-align: center; font-size: 18px; line-height: 24px; font-weight: 400;">
-                                                <span class="color-white">Choose from a number of pre-designed Visual Composer modules and lay out your pages in mere minutes</span>
+                                            <h4 class="content-column">
+                                                <span class="color-white">{{ trans('index.column-three-content') }}</span>
                                             </h4>
                                         </div>
                                     </div>
-                                    <div class="vc_empty_space" style="height: 60px">
+                                    <div class="vc_empty_space">
                                         <span class="vc_empty_space_inner"></span>
                                     </div>
                                 </div>
@@ -322,8 +321,8 @@
             <div class="vc_column-inner ">
                 <div class="wpb_wrapper">
                     <div class="houzez-module module-title section-title-module text-center ">
-                        <h2>Find Properties in These Cities</h2>
-                        <h3 class="sub-heading">Here could be a nice sub title</h3>
+                        <h2>{{ trans('post.find-city-title') }}</h2>
+                        <h3 class="sub-heading">{{ trans('post.find-city-content') }}</h3>
                     </div>
                     <div id="location-module" class="houzez-module location-module  grid grid_v1">
                         <div class="row">
@@ -354,7 +353,7 @@
                                     <a href="city/chicago/index.html">
                                         <div class="location-fig-caption">
                                             <h3 class="heading">{{ $value->township }}</h3>
-                                            <p class="sub-heading"> {{ $value->total }} Properties </p>
+                                            <p class="sub-heading"> {{ $value->total }} {{ trans('post.properties') }} </p>
                                         </div>
                                     </a>
                                 </div>
@@ -376,8 +375,8 @@
             <div class="vc_column-inner ">
                 <div class="wpb_wrapper">
                     <div class="houzez-module module-title section-title-module text-center ">
-                        <h2>Our agents</h2>
-                        <h3 class="sub-heading">Here could be a nice sub title</h3> </div>
+                        <h2>{{ trans('index.our-team-title') }}</h2>
+                        <h3 class="sub-heading">{{ trans('index.our-team-content') }}</h3> </div>
                         <!--start agents module-->
                         <div id="agents-module" class="houzez-module agents-module">
                             <div class="agents-blocks-main">

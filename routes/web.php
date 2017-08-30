@@ -12,6 +12,8 @@
  */
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+Route::resource('property', 'PostController');
+
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
 });
