@@ -31,12 +31,12 @@ class Post extends AbstractModel
         return $this->hasMany(Like::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function viewser()
+    public function viewsers()
     {
         return $this->hasMany(Viewer::class);
     }
