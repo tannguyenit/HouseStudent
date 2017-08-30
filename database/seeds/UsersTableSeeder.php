@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         factory(User::class, 20)->create();
         $user = User::find('dcc23fc7-ea44-487f-84d1-87d1cb4cd38a');
-        if (!$user) {
+        if (!empty($user)) {
             factory(User::class)->create([
                 'id'             => 'dcc23fc7-ea44-487f-84d1-87d1cb4cd38a',
                 'username'       => 'tannguyenit',
