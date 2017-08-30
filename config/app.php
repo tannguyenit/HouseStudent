@@ -167,7 +167,7 @@ return [
          * start include
          */
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        Collective\Html\HtmlServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -234,6 +234,8 @@ return [
          * start include
          */
         'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'Form'         => Collective\Html\FormFacade::class,
+        'Html'         => Collective\Html\HtmlFacade::class,
 
     ],
 

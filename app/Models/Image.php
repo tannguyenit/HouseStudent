@@ -4,10 +4,13 @@ namespace App\Models;
 
 class Image extends AbstractModel
 {
-    public $incrementing = false;
-
     protected $fillable = [
         'post_id',
         'image',
     ];
+
+    public function posts()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
