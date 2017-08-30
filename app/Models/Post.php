@@ -25,4 +25,39 @@ class Post extends AbstractModel
         'total_like',
         'tota_comment',
     ];
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function viewsers()
+    {
+        return $this->hasMany(Viewer::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

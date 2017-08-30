@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ramsey\Uuid\Uuid;
 
@@ -33,5 +34,13 @@ class AbstractModel extends Authenticatable
         }
 
         return $translatedLabels;
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+        return Carbon::now()->subSeconds(time() - strtotime($value))->diffForHumans();
     }
 }
