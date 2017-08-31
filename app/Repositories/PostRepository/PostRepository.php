@@ -45,4 +45,15 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->limit(config('setting.limit.country'))
             ->get();
     }
+
+    public function getDataBySlug($slug, $array = [])
+    {
+        if (!empty($slug)) {
+            return $this->model->where('slug', $slug)
+                ->with($array)
+                ->first();
+        }
+
+        return false;
+    }
 }

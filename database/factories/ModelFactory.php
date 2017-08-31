@@ -49,7 +49,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
     return [
         'user_id'       => $faker->randomElement($userIds ?: $userIds = App\Models\User::pluck('id')->toArray()),
         'title'         => $faker->name,
-        'description'   => $faker->text,
+        'description'   => $faker->text($maxNbChars = 500),
         'type_id'       => $faker->randomElement($typeId ?: $typeId = App\Models\Type::pluck('id')->toArray()),
         'status_id'     => $faker->randomElement($statusId ?: $statusId = App\Models\Status::pluck('id')->toArray()),
         'price'         => rand(500, 2000000),

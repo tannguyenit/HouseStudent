@@ -3,55 +3,14 @@
     <div class="container">
         <div class="header-left">
             <div class="logo logo-desktop">
-                <a href="index.html"><img src="http://localhost/houzez01.favethemes.com/wp-content/uploads/2016/03/logo-houzez-color.png" alt="logo"> </a>
+                <a href="{{ action('HomeController@home') }}">
+                    <img src="http://localhost/houzez01.favethemes.com/wp-content/uploads/2016/03/logo-houzez-color.png" alt="logo">
+                </a>
             </div>
             <nav class="navi main-nav">
                 <ul id="main-nav" class="">
-                    <li id="menu-item-955" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-955"><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li id="menu-item-1333" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1333"><a href="#">Map</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-954" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-194 current_page_item menu-item-954"><a href="index.html">Map Standard</a>
-                                    </li>
-                                    <li id="menu-item-1260" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1260"><a href="index81d7.html?fullscreen=yes">Map Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1334" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1334"><a href="#">Parallax</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1013" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1013"><a href="homepage-with-image-2/index.html">Parallax Standard</a>
-                                    </li>
-                                    <li id="menu-item-2988" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2988"><a href="homepage-with-image-fullscreen/index.html">Parallax Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1335" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1335"><a href="#">Video</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-953" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-953"><a href="homepage-with-video-2/index.html">Video Standard</a>
-                                    </li>
-                                    <li id="menu-item-1261" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1261"><a href="homepage-with-video-2/index81d7.html?fullscreen=yes">Video Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1336" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1336"><a href="#">Sliders</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1065" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1065"><a href="homepage-with-revolution-slider/index.html">Slider Revolution</a>
-                                    </li>
-                                    <li id="menu-item-1017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1017"><a href="homepage-with-properties-slider/index.html">Properties Slider</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1338" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1338"><a href="#">Splash</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1274" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1274"><a href="splash-page/index76b1.html?splash_type=video">Video Fullscreen</a>
-                                    </li>
-                                    <li id="menu-item-1273" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1273"><a href="splash-page/index8835.html?splash_type=slider">Slider Fullscreen</a>
-                                    </li>
-                                    <li id="menu-item-1275" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1275"><a href="splash-page/indexc127.html?splash_type=image">Image Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <li id="menu-item-955" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-955">
+                        <a href="{{ action('HomeController@home') }}">{{ trans('index.home') }}</a>
                     </li>
                     <li id="menu-item-352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-352"><a href="#">Listing</a>
                         <ul class="sub-menu">

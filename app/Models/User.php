@@ -40,4 +40,22 @@ class User extends AbstractModel
     {
         return $this->hasMany(Post::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        if (null != $value) {
+            $path = config('path.avatar') . $value;
+
+            if (file_exists($path)) {
+                return $path;
+            }
+        }
+
+        return config('path.defaul-avatar');
+    }
 }

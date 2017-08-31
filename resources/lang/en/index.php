@@ -17,4 +17,5 @@ return [
     'contact'                  => 'Contact Us',
     'subscribe'                => 'Newsletter Subscribe',
     'follow'                   => 'Follow us',
+    'home'                     => 'Home',
 ];
