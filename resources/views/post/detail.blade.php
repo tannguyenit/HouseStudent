@@ -1,4 +1,11 @@
 @extends('layouts.layout')
+@section('footerscript')
+    <script type="text/javascript">
+$('#u_0_2').click(function () {
+alert($(this).find('#u_0_3').text())
+})
+</script>
+@endsection
 @section('content')
 <!--start detail top-->
 <section class="detail-top detail-top-grid no-margin">
@@ -232,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (Auth::check())
+ {{--                    @if (Auth::check())
                     <div class="property-reviews detail-block">
                         <div class="detail-title" data-score="0" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <h2 class="title-left">
@@ -299,8 +306,12 @@
                             </form>
                         </div>
                     </div>
-                    @endif
-                </div>
+                    @endif --}}
+<div class=" detail-block">
+<div class="fb-like" data-href="http://local.house.com/property/mabelle-skiles" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+<div class="fb-comments" data-href="http://local.house.com/property/mabelle-skiles" data-width="100%" data-numposts="5"></div>
+</div>
+</div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-md-offset-0 col-sm-offset-3 container-sidebar houzez_sticky">
                 <aside id="sidebar" class="sidebar-white">
