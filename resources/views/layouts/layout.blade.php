@@ -27,9 +27,10 @@
         {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
         {{ Html::script('wp-content/themes/houzez/js/infobox.js') }}
         {{ Html::script('wp-content/themes/houzez/js/markerclusterere1fc.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/facebook.js') }}
     @show
 </head>
-
+<div id="fb-root"></div>
 <body class="home page-template page-template-template page-template-template-homepage
 page-template-templatetemplate-homepage-php page page-id-194
 transparent-no js-comp-ver-5.1.1 vc_responsive">
