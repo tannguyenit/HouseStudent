@@ -17,8 +17,8 @@ class CreateLikesTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
-            $table->string('user_id', 36);
-            $table->string('post_id', 36);
+            $table->uuid('user_id', 36);
+            $table->uuid('post_id', 36);
             $table->tinyInteger('status');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
-            $table->string('post_id', 36);
+            $table->uuid('post_id', 36);
             $table->string('image', 255);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
