@@ -19,9 +19,10 @@ class CreatePostsTable extends Migration
             $table->primary('id');
             $table->string('user_id', 36);
             $table->string('title', 255);
+            $table->string('slug', 255);
             $table->longText('description');
-            $table->string('type_id', 36);
-            $table->string('status_id', 36);
+            $table->uuid('type_id', 36);
+            $table->uuid('status_id', 36);
             $table->string('price', 36);
             $table->string('area', 36);
             $table->string('phone_boss', 30);
