@@ -1137,7 +1137,6 @@ label {
   font-weight: 500; }
 
 label.error {
-  position: absolute;
   color: #e43012;
   font-size: 13px;
   top: 50%;

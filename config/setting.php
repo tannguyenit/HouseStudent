@@ -1,14 +1,16 @@
 <?php
 return [
-    'role'  => [
-        'admin' => 1,
+    'role'        => [
+        'admin'  => 1,
+        'member' => 0,
     ],
-    'limit' => [
+    'limit'       => [
         'news_post'    => 9,
         'country'      => 4,
         'similar_post' => 4,
     ],
-    'price' => [
+    'price'       => [
         'vi' => ' VNĐ',
     ],
+    'maintenance' => 1,
 ];

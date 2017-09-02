@@ -27,7 +27,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'phone'          => $faker->e164PhoneNumber,
         'provice_id'     => '',
         'active'         => rand(1000, 9999),
-        'role'           => config('setting.role.admin'),
+        'role'           => config('setting.role.member'),
         'bio'            => '01263751380',
         'remember_token' => str_random(10),
     ];

@@ -8,6 +8,7 @@ return [
     'area'              => ' Area',
     'view'              => ' Viewer',
     'price'             => ' Price',
+    'share'             => 'Share',
     'phone-boss'        => 'Phone Number Owner',
     'name-boss'         => 'Name Number Owner',
     'detail'            => 'Details',
@@ -26,4 +27,5 @@ return [
     'facebook'          => 'Facebook',
     'similar-post'      => 'Similar post',
     'recently'          => 'Recently View',
+    'create'            => 'Create Listing',
 ];
