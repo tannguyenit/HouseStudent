@@ -10,6 +10,7 @@ class HomeController extends BaseController
 
     public function __construct(PostRepository $postRepository)
     {
+        parent::__construct();
         $this->postRepository = $postRepository;
     }
 

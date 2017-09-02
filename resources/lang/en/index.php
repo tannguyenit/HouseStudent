@@ -15,7 +15,13 @@ return [
     'about-site-content'       => 'Houzez is a premium WordPress theme for real estate where modern aesthetics are combined with tasteful simplicity.',
     'read-more'                => 'Read more',
     'contact'                  => 'Contact Us',
+    'contact-info'             => 'Contact Info',
     'subscribe'                => 'Newsletter Subscribe',
     'follow'                   => 'Follow us',
     'home'                     => 'Home',
+    'login'                    => 'Login',
+    'register'                 => 'Register',
+    'login-with-facebook'      => 'Login with Facebook',
+    'login-with-google'        => 'Login with Google',
+    'signin'                   => 'Sign In / Register',
 ];

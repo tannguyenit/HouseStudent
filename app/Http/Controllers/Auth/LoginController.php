@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -16,7 +18,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -35,5 +37,32 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function postLogin(LoginRequest $request)
+    {
+        $checkLogin = false;
+        $login      = [
+            'email'    => $request->email,
+            'password' => $request->password,
+        ];
+        $checkLogin = Auth::attempt($login, $request->remember);
+
+        if ($checkLogin) {
+            return response()->json([
+                'success' => true,
+                'msg'     => trans('form.login-success'),
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'msg'     => trans('form.login-fail'),
+        ]);
+    }
+
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->action('HomeController@home');
     }
 }

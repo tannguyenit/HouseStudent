@@ -1,11 +1,4 @@
 @extends('layouts.layout')
-@section('footerscript')
-    <script type="text/javascript">
-$('#u_0_2').click(function () {
-alert($(this).find('#u_0_3').text())
-})
-</script>
-@endsection
 @section('content')
 <!--start detail top-->
 <section class="detail-top detail-top-grid no-margin">
@@ -47,19 +40,16 @@ alert($(this).find('#u_0_3').text())
                         <ul class="actions">
                             <li class="share-btn">
                                 <div class="share_tooltip tooltip_left fade">
-                                    <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i class="fa fa-facebook"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?text=Luxury+apartment+bay+view&amp;url=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F&amp;via=Houzez" onclick="if(!document.getElementById('td_social_networks_buttons')){window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;}"><i class="fa fa-twitter"></i></a>
-                                    <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F&amp;media=http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-05-1024x688.jpg" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i class="fa fa-pinterest"></i></a>
-                                    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F&amp;title=Luxury+apartment+bay+view&amp;source=http%3A%2F%2Fhouzez01.favethemes.com%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i class="fa fa-linkedin"></i></a>
-                                    <a href="http://plus.google.com/share?url=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F" onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i class="fa fa-google-plus"></i></a>
-                                    <a href="mailto:example.com?subject=Luxury+apartment+bay+view&body=http%3A%2F%2Fhouzez01.favethemes.com%2Fproperty%2Fluxury-apartment-bay-view%2F"><i class="fa fa-envelope"></i></a>
+                                    <a class="share_links" href="http://www.facebook.com/sharer.php?u={{ Request::url() }}" ><i class="fa fa-facebook"></i></a>
+                                    <a class="share_links" href="https://twitter.com/intent/tweet?text={{ $detailsPost->title }}url={{ Request::url() }}" ><i class="fa fa-twitter"></i></a>
+                                    <a class="share_links" href="http://plus.google.com/share?url={{ Request::url() }}" ><i class="fa fa-google-plus"></i></a>
                                 </div>
                                 <span title="" data-placement="bottom" data-toggle="tooltip" data-original-title="{{ trans('post.share') }}">
                                     <i class="fa fa-share-alt"></i>
                                 </span>
                             </li>
                             <li class="fvrt-btn">
-                                <span class="add_fav" data-placement="bottom" data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
+                                <span class="add_fav" data-placement="bottom"  data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
                                     <i class="fa fa-heart-o"></i>
                                 </span>
                             </li>
@@ -113,18 +103,6 @@ alert($(this).find('#u_0_3').text())
                                         <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/los-angeles-03-810x430.jpg)">
                                             <a class="popup-trigger banner-link" href="#"></a>
                                         </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/los-angeles-02-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/los-angeles-01-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/new-york-04-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/new-york-03-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
                                     </div>
                                     <div class="detail-slider-nav-wrap">
                                         <div class="detail-slider-nav owl-carousel owl-theme">
@@ -145,14 +123,6 @@ alert($(this).find('#u_0_3').text())
                                             <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-08-150x110.jpg" alt="los-angeles-08" width="100" height="70" />
                                             </div>
                                             <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-03-150x110.jpg" alt="los-angeles-03" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-02-150x110.jpg" alt="los-angeles-02" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-01-150x110.jpg" alt="los-angeles-01" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/new-york-04-150x110.jpg" alt="new-york-04" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/new-york-03-150x110.jpg" alt="new-york-03" width="100" height="70" />
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +176,7 @@ alert($(this).find('#u_0_3').text())
                     </div>
                     <div id="agent_bottom" class="detail-contact detail-block target-block">
                         <div class="detail-title">
-                            <h2 class="title-left">Contact info</h2>
+                            <h2 class="title-left">{{ trans('index.contact-info') }}</h2>
                         </div>
                         <div class="media agent-media">
                             <div class="media-left">
@@ -228,7 +198,7 @@ alert($(this).find('#u_0_3').text())
                                     @if ($detailsPost->user->facebook_link)
                                     <dd>
                                         <span>
-                                            <a class="btn-facebook" target="_blank" href="$detailsPost->user->facebook_link">
+                                            <a class="btn-facebook" target="_blank" href="{{ $detailsPost->user->facebook_link }}">
                                                 <i class="fa fa-facebook-square"></i>
                                                 <span>{{ trans('post.facebook') }}</span>
                                             </a>
@@ -239,79 +209,11 @@ alert($(this).find('#u_0_3').text())
                             </div>
                         </div>
                     </div>
- {{--                    @if (Auth::check())
-                    <div class="property-reviews detail-block">
-                        <div class="detail-title" data-score="0" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                            <h2 class="title-left">
-                                No Review
-                                <span class="rating-wrap">
-                                    <input class="rating-display-only" name="rating" value="4.3" type="number" min="0" max="5" step=1 data-size="md" class="rating" >
-                                    <span class="star-text star-text-right">
-                                        (<span itemprop="ratingValue">0</span> out of<span itemprop="bestRating">5</span>)
-                                    </span>
-                                </span>
-                            </h2>
-                            <div class="title-right"><strong><a href="#writ-review-block"> Write a Review </a></strong>
-                            </div>
-                        </div>
-                        <ul class="reviews-list">
-                        </ul>
-                        <div id="writ-review-block" class="add-review-block">
-                            <h4 class="review-title"> Write a Review </h4>
-                            <a href="#" data-toggle="modal" data-target="#pop-login">Login for Review</a>
-                        </div>
+                    <div class=" detail-block">
+                        <div class="fb-like" data-href="{{ Request::url() }}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+                        <div class="fb-comments" data-href="{{ Request::url() }}" data-width="100%" data-numposts="5"></div>
                     </div>
-                    @else
-                    <div class="property-reviews detail-block">
-                        <div class="detail-title" data-score="4" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-                            <div class="title-right"><strong><a href="#writ-review-block"> Write a Review </a></strong>
-                            </div>
-                        </div>
-                        <ul class="reviews-list">
-                            @forelse ($detailsPost->comments as $comment)
-                            <li class="media" itemprop="review">
-                                <div class="media-left" itemprop="author">
-                                    <a href="#"> <img class="media-object" src="{{ $comment->user->avatar }}" alt="{{ $comment->user->fullname }}" width="60" height="60"> </a>
-                                </div>
-                                <div class="media-body" itemprop="reviewBody">
-                                    <div class="review-top">
-                                        <h3 class="media-heading"><a href="#">{{ $comment->user->fullname }}</a></h3>
-                                        <p class="review-date" itemprop="datePublished" content="2017-08-31T13:58:48+00:00">
-                                            <time datetime="2017-08-31T13:58:48+00:00">{{ $comment->user->created_at }}</time>
-                                        </p>
-                                    </div>
-                                    <p> {{ $comment->content }} </p>
-                                </div>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
-                        <div id="writ-review-block" class="add-review-block">
-                            <h4 class="review-title"> Write a Review </h4>
-                            <form method="post" action="#">
-                                <input type="hidden" name="start_thread_message_form_ajax" value="973abb415a">
-                                <input type="hidden" name="action" value="houzez_property_raring">
-                                <input type="hidden" name="property_id" value="448">
-                                <div class="row">
-                                    <div class="col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="5" name="message" placeholder="Your review">ok nhé</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form_messages"></div>
-                                    <div class="col-sm-12 col-xs-12">
-                                        <button class="property_rating btn btn-secondary">Update Review</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    @endif --}}
-<div class=" detail-block">
-<div class="fb-like" data-href="http://local.house.com/property/mabelle-skiles" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
-<div class="fb-comments" data-href="http://local.house.com/property/mabelle-skiles" data-width="100%" data-numposts="5"></div>
-</div>
-</div>
+                </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-md-offset-0 col-sm-offset-3 container-sidebar houzez_sticky">
                 <aside id="sidebar" class="sidebar-white">

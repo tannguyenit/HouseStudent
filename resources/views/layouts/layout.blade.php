@@ -46,6 +46,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
     @include('layouts.includes.footer')
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
+        {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js') }}
         <script type='text/javascript'>
             /* <![CDATA[ */
             var hz_plugin = {
@@ -92,8 +93,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
             var HOUZEZ_ajaxcalls_vars = {
                 "admin_url": "{{ action('AjaxController@getMap') }}",
                 "houzez_rtl": "no",
-                "redirect_type": "same_page",
-                "login_redirect": "http:\/\/houzez01.favethemes.com\/property\/luxury-family-home-4\/",
+                "validate": '{!! json_encode(trans('validate')) !!}',
                 "login_loading": "Sending user info, please wait...",
                 "direct_pay_text": "Processing, Please wait...",
                 "user_id": "0",
