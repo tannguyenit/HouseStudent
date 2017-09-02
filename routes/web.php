@@ -12,10 +12,10 @@
  */
 
 Route::post('/login', 'Auth\LoginController@postLogin');
-Route::get('/logout', 'Auth\LoginController@getLogout');
-Route::post('/forgot-password', ['uses' => 'Auth\ForgotPasswordController@sendMail']);
-Route::get('/change-password/{id}', ['as' => 'change-password', 'uses' => 'AuthController@getChangePassword']);
-Route::post('/change-password/{id}', ['uses' => 'AuthController@postChangePassword']);
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendMail');
+Route::get('/change-password/{id}', 'Auth\ResetPasswordController@getPassword');
+Route::post('/change-password/{id}', 'Auth\ResetPasswordController@change');
 /*
 |--------------------------------------------------------------------------
 | index
@@ -26,4 +26,12 @@ Route::resource('property', 'PostController');
 
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
+});
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+ */
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    require __DIR__ . '/admin.php';
 });

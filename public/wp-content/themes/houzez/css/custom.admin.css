@@ -1,0 +1,9 @@
+.dashboard-content-area {
+    min-height:500px !important;
+}
+.dashboard-bar {
+    height:578px;
+}
+.board-panel-menu {
+    height:100%;
+}

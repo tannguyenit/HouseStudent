@@ -60,7 +60,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function getLogout()
+    public function logout()
     {
         Auth::logout();
         return redirect()->action('HomeController@home');

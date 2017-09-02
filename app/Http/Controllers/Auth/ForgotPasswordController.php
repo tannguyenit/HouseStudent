@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ForgotPassword;
 use App\Repositories\UserRepository\UserRepository;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -44,9 +45,10 @@ class ForgotPasswordController extends Controller
             $data = [
                 'id'        => $user->id,
                 'email'     => $user->email,
-                'full_name' => $user->fullname,
+                'full_name' => $user->full_name,
                 'active'    => $user->active,
             ];
+
             \Mail::to($email)->send(new ForgotPassword($data));
 
             return response()->json([

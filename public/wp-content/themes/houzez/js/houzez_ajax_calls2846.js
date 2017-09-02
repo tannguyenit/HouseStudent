@@ -5,102 +5,102 @@
  jQuery(document).ready(function ($) {
     "use strict";
 
-    if ( typeof HOUZEZ_ajaxcalls_vars !== "undefined" ) {
+    if ( typeof AJAX_VARIABLE !== "undefined" ) {
         var houzezMap;
         var markers = new Array();
         var markerCluster = null;
         var current_marker = 0;
         var has_compare = $('#compare-controller').length;
-        var validate = JSON.parse(HOUZEZ_ajaxcalls_vars.validate);
-        var ajaxurl = HOUZEZ_ajaxcalls_vars.admin_url;
-        var login_sending = HOUZEZ_ajaxcalls_vars.login_loading;
-        var userID = HOUZEZ_ajaxcalls_vars.user_id;
-        var prop_lat = HOUZEZ_ajaxcalls_vars.property_lat;
-        var prop_lng = HOUZEZ_ajaxcalls_vars.property_lng;
-        var autosearch_text = HOUZEZ_ajaxcalls_vars.autosearch_text;
-        var paypal_connecting = HOUZEZ_ajaxcalls_vars.paypal_connecting;
-        var mollie_connecting = HOUZEZ_ajaxcalls_vars.mollie_connecting;
-        var process_loader_refresh = HOUZEZ_ajaxcalls_vars.process_loader_refresh;
-        var process_loader_spinner = HOUZEZ_ajaxcalls_vars.process_loader_spinner;
-        var process_loader_circle = HOUZEZ_ajaxcalls_vars.process_loader_circle;
-        var process_loader_cog = HOUZEZ_ajaxcalls_vars.process_loader_cog;
-        var success_icon = HOUZEZ_ajaxcalls_vars.success_icon;
-        var confirm_message = HOUZEZ_ajaxcalls_vars.confirm;
-        var confirm_featured = HOUZEZ_ajaxcalls_vars.confirm_featured;
-        var confirm_featured_remove = HOUZEZ_ajaxcalls_vars.confirm_featured_remove;
-        var confirm_relist = HOUZEZ_ajaxcalls_vars.confirm_relist;
-        var is_singular_property = HOUZEZ_ajaxcalls_vars.is_singular_property;
-        var property_map = HOUZEZ_ajaxcalls_vars.property_map;
-        var property_map_street = HOUZEZ_ajaxcalls_vars.property_map_street;
-        var currency_symb = HOUZEZ_ajaxcalls_vars.currency_symbol;
-        var advanced_search_price_range_min = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_min_price );
-        var advanced_search_price_range_max = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_max_price );
-        var advanced_search_price_range_min_rent = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_min_price_range_for_rent );
-        var advanced_search_price_range_max_rent = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_max_price_range_for_rent );
-        var advanced_search_widget_min_area = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_min_area );
-        var advanced_search_widget_max_area = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_max_area );
-        var advanced_search_price_slide = HOUZEZ_ajaxcalls_vars.advanced_search_price_slide;
-        var fave_page_template = HOUZEZ_ajaxcalls_vars.fave_page_template;
-        var fave_prop_featured = HOUZEZ_ajaxcalls_vars.prop_featured;
-        var featured_listings_none = HOUZEZ_ajaxcalls_vars.featured_listings_none;
-        var prop_sent_for_approval = HOUZEZ_ajaxcalls_vars.prop_sent_for_approval;
-        var houzez_rtl = HOUZEZ_ajaxcalls_vars.houzez_rtl;
-        var infoboxClose = HOUZEZ_ajaxcalls_vars.infoboxClose;
-        var clusterIcon = HOUZEZ_ajaxcalls_vars.clusterIcon;
-        var paged = HOUZEZ_ajaxcalls_vars.paged;
-        var sort_by = HOUZEZ_ajaxcalls_vars.sort_by;
-        var google_map_style = HOUZEZ_ajaxcalls_vars.google_map_style;
-        var googlemap_default_zoom = HOUZEZ_ajaxcalls_vars.googlemap_default_zoom;
-        var googlemap_pin_cluster = HOUZEZ_ajaxcalls_vars.googlemap_pin_cluster;
-        var googlemap_zoom_cluster = HOUZEZ_ajaxcalls_vars.googlemap_zoom_cluster;
-        var map_icons_path = HOUZEZ_ajaxcalls_vars.map_icons_path;
-        var google_map_needed = HOUZEZ_ajaxcalls_vars.google_map_needed;
-        var simple_logo = HOUZEZ_ajaxcalls_vars.simple_logo;
-        var retina_logo = HOUZEZ_ajaxcalls_vars.retina_logo;
-        var retina_logo_mobile = HOUZEZ_ajaxcalls_vars.retina_logo_mobile;
-        var retina_logo_mobile_splash = HOUZEZ_ajaxcalls_vars.retina_logo_mobile_splash;
-        var retina_logo_splash = HOUZEZ_ajaxcalls_vars.retina_logo_splash;
-        var retina_logo_height = HOUZEZ_ajaxcalls_vars.retina_logo_height;
-        var retina_logo_width = HOUZEZ_ajaxcalls_vars.retina_logo_width;
-        var transparent_menu = HOUZEZ_ajaxcalls_vars.transparent_menu;
-        var transportation = HOUZEZ_ajaxcalls_vars.transportation;
-        var supermarket = HOUZEZ_ajaxcalls_vars.supermarket;
-        var schools = HOUZEZ_ajaxcalls_vars.schools;
-        var libraries = HOUZEZ_ajaxcalls_vars.libraries;
-        var pharmacies = HOUZEZ_ajaxcalls_vars.pharmacies;
-        var hospitals = HOUZEZ_ajaxcalls_vars.hospitals;
-        var currency_position = HOUZEZ_ajaxcalls_vars.currency_position;
-        var currency_updating_msg = HOUZEZ_ajaxcalls_vars.currency_updating_msg;
-        var submission_currency = HOUZEZ_ajaxcalls_vars.submission_currency;
-        var wire_transfer_text = HOUZEZ_ajaxcalls_vars.wire_transfer_text;
-        var direct_pay_thanks = HOUZEZ_ajaxcalls_vars.direct_pay_thanks;
-        var direct_payment_title = HOUZEZ_ajaxcalls_vars.direct_payment_title;
-        var direct_payment_button = HOUZEZ_ajaxcalls_vars.direct_payment_button;
-        var direct_payment_details = HOUZEZ_ajaxcalls_vars.direct_payment_details;
-        var measurement_unit = HOUZEZ_ajaxcalls_vars.measurement_unit;
-        var measurement_updating_msg = HOUZEZ_ajaxcalls_vars.measurement_updating_msg;
-        var thousands_separator = HOUZEZ_ajaxcalls_vars.thousands_separator;
-        var rent_status_for_price_range = HOUZEZ_ajaxcalls_vars.for_rent_price_range;
-        var current_tempalte = HOUZEZ_ajaxcalls_vars.current_tempalte;
-        var not_found = HOUZEZ_ajaxcalls_vars.not_found;
-        var property_detail_top = HOUZEZ_ajaxcalls_vars.property_detail_top;
-        var keyword_search_field = HOUZEZ_ajaxcalls_vars.keyword_search_field;
-        var keyword_autocomplete = HOUZEZ_ajaxcalls_vars.keyword_autocomplete;
-        var template_thankyou = HOUZEZ_ajaxcalls_vars.template_thankyou;
-        var direct_pay_text = HOUZEZ_ajaxcalls_vars.direct_pay_text;
-        var search_result_page = HOUZEZ_ajaxcalls_vars.search_result_page;
-        var houzez_default_radius = HOUZEZ_ajaxcalls_vars.houzez_default_radius;
-        var enable_radius_search = HOUZEZ_ajaxcalls_vars.enable_radius_search;
-        var enable_radius_search_halfmap = HOUZEZ_ajaxcalls_vars.enable_radius_search_halfmap;
-        var houzez_primary_color = HOUZEZ_ajaxcalls_vars.houzez_primary_color;
-        var houzez_geocomplete_country = HOUZEZ_ajaxcalls_vars.geocomplete_country;
-        var houzez_logged_in = HOUZEZ_ajaxcalls_vars.houzez_logged_in;
-        var ipinfo_location = HOUZEZ_ajaxcalls_vars.ipinfo_location;
-        var delete_property_loading = HOUZEZ_ajaxcalls_vars.delete_property;
-        var delete_property_confirmation = HOUZEZ_ajaxcalls_vars.delete_confirmation;
+        var validate = JSON.parse(AJAX_VARIABLE.validate);
+        var ajaxurl = AJAX_VARIABLE.admin_url;
+        var login_sending = AJAX_VARIABLE.login_loading;
+        var userID = AJAX_VARIABLE.user_id;
+        var prop_lat = AJAX_VARIABLE.property_lat;
+        var prop_lng = AJAX_VARIABLE.property_lng;
+        var autosearch_text = AJAX_VARIABLE.autosearch_text;
+        var paypal_connecting = AJAX_VARIABLE.paypal_connecting;
+        var mollie_connecting = AJAX_VARIABLE.mollie_connecting;
+        var process_loader_refresh = AJAX_VARIABLE.process_loader_refresh;
+        var process_loader_spinner = AJAX_VARIABLE.process_loader_spinner;
+        var process_loader_circle = AJAX_VARIABLE.process_loader_circle;
+        var process_loader_cog = AJAX_VARIABLE.process_loader_cog;
+        var success_icon = AJAX_VARIABLE.success_icon;
+        var confirm_message = AJAX_VARIABLE.confirm;
+        var confirm_featured = AJAX_VARIABLE.confirm_featured;
+        var confirm_featured_remove = AJAX_VARIABLE.confirm_featured_remove;
+        var confirm_relist = AJAX_VARIABLE.confirm_relist;
+        var is_singular_property = AJAX_VARIABLE.is_singular_property;
+        var property_map = AJAX_VARIABLE.property_map;
+        var property_map_street = AJAX_VARIABLE.property_map_street;
+        var currency_symb = AJAX_VARIABLE.currency_symbol;
+        var advanced_search_price_range_min = parseInt( AJAX_VARIABLE.advanced_search_widget_min_price );
+        var advanced_search_price_range_max = parseInt( AJAX_VARIABLE.advanced_search_widget_max_price );
+        var advanced_search_price_range_min_rent = parseInt( AJAX_VARIABLE.advanced_search_min_price_range_for_rent );
+        var advanced_search_price_range_max_rent = parseInt( AJAX_VARIABLE.advanced_search_max_price_range_for_rent );
+        var advanced_search_widget_min_area = parseInt( AJAX_VARIABLE.advanced_search_widget_min_area );
+        var advanced_search_widget_max_area = parseInt( AJAX_VARIABLE.advanced_search_widget_max_area );
+        var advanced_search_price_slide = AJAX_VARIABLE.advanced_search_price_slide;
+        var fave_page_template = AJAX_VARIABLE.fave_page_template;
+        var fave_prop_featured = AJAX_VARIABLE.prop_featured;
+        var featured_listings_none = AJAX_VARIABLE.featured_listings_none;
+        var prop_sent_for_approval = AJAX_VARIABLE.prop_sent_for_approval;
+        var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
+        var infoboxClose = AJAX_VARIABLE.infoboxClose;
+        var clusterIcon = AJAX_VARIABLE.clusterIcon;
+        var paged = AJAX_VARIABLE.paged;
+        var sort_by = AJAX_VARIABLE.sort_by;
+        var google_map_style = AJAX_VARIABLE.google_map_style;
+        var googlemap_default_zoom = AJAX_VARIABLE.googlemap_default_zoom;
+        var googlemap_pin_cluster = AJAX_VARIABLE.googlemap_pin_cluster;
+        var googlemap_zoom_cluster = AJAX_VARIABLE.googlemap_zoom_cluster;
+        var map_icons_path = AJAX_VARIABLE.map_icons_path;
+        var google_map_needed = AJAX_VARIABLE.google_map_needed;
+        var simple_logo = AJAX_VARIABLE.simple_logo;
+        var retina_logo = AJAX_VARIABLE.retina_logo;
+        var retina_logo_mobile = AJAX_VARIABLE.retina_logo_mobile;
+        var retina_logo_mobile_splash = AJAX_VARIABLE.retina_logo_mobile_splash;
+        var retina_logo_splash = AJAX_VARIABLE.retina_logo_splash;
+        var retina_logo_height = AJAX_VARIABLE.retina_logo_height;
+        var retina_logo_width = AJAX_VARIABLE.retina_logo_width;
+        var transparent_menu = AJAX_VARIABLE.transparent_menu;
+        var transportation = AJAX_VARIABLE.transportation;
+        var supermarket = AJAX_VARIABLE.supermarket;
+        var schools = AJAX_VARIABLE.schools;
+        var libraries = AJAX_VARIABLE.libraries;
+        var pharmacies = AJAX_VARIABLE.pharmacies;
+        var hospitals = AJAX_VARIABLE.hospitals;
+        var currency_position = AJAX_VARIABLE.currency_position;
+        var currency_updating_msg = AJAX_VARIABLE.currency_updating_msg;
+        var submission_currency = AJAX_VARIABLE.submission_currency;
+        var wire_transfer_text = AJAX_VARIABLE.wire_transfer_text;
+        var direct_pay_thanks = AJAX_VARIABLE.direct_pay_thanks;
+        var direct_payment_title = AJAX_VARIABLE.direct_payment_title;
+        var direct_payment_button = AJAX_VARIABLE.direct_payment_button;
+        var direct_payment_details = AJAX_VARIABLE.direct_payment_details;
+        var measurement_unit = AJAX_VARIABLE.measurement_unit;
+        var measurement_updating_msg = AJAX_VARIABLE.measurement_updating_msg;
+        var thousands_separator = AJAX_VARIABLE.thousands_separator;
+        var rent_status_for_price_range = AJAX_VARIABLE.for_rent_price_range;
+        var current_tempalte = AJAX_VARIABLE.current_tempalte;
+        var not_found = AJAX_VARIABLE.not_found;
+        var property_detail_top = AJAX_VARIABLE.property_detail_top;
+        var keyword_search_field = AJAX_VARIABLE.keyword_search_field;
+        var keyword_autocomplete = AJAX_VARIABLE.keyword_autocomplete;
+        var template_thankyou = AJAX_VARIABLE.template_thankyou;
+        var direct_pay_text = AJAX_VARIABLE.direct_pay_text;
+        var search_result_page = AJAX_VARIABLE.search_result_page;
+        var houzez_default_radius = AJAX_VARIABLE.houzez_default_radius;
+        var enable_radius_search = AJAX_VARIABLE.enable_radius_search;
+        var enable_radius_search_halfmap = AJAX_VARIABLE.enable_radius_search_halfmap;
+        var houzez_primary_color = AJAX_VARIABLE.houzez_primary_color;
+        var houzez_geocomplete_country = AJAX_VARIABLE.geocomplete_country;
+        var houzez_logged_in = AJAX_VARIABLE.houzez_logged_in;
+        var ipinfo_location = AJAX_VARIABLE.ipinfo_location;
+        var delete_property_loading = AJAX_VARIABLE.delete_property;
+        var delete_property_confirmation = AJAX_VARIABLE.delete_confirmation;
 
-        var compare_button_url = HOUZEZ_ajaxcalls_vars.compare_button_url;
-        var compare_page_not_found = HOUZEZ_ajaxcalls_vars.compare_page_not_found;
+        var compare_button_url = AJAX_VARIABLE.compare_button_url;
+        var compare_page_not_found = AJAX_VARIABLE.compare_page_not_found;
 
         if( houzez_rtl == 'yes' ) {
             houzez_rtl = true;
@@ -848,7 +848,7 @@
          * -------------------------------------------------------------------------*/
          var fave_property_status_changed = function(prop_status, $form) {
 
-            if( prop_status ==  HOUZEZ_ajaxcalls_vars.for_rent ) {
+            if( prop_status ==  AJAX_VARIABLE.for_rent ) {
                 $form.find('.prices-for-all').addClass('hide');
                 $form.find('.prices-for-all select').attr('disabled','disabled');
                 $form.find('.prices-only-for-rent').removeClass('hide');
@@ -869,7 +869,7 @@
         });
         /* On page load ( as on search page ) */
         var selected_status_header_search = $('select[name="status"]').val();
-        if( selected_status_header_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_header_search == '' ){
+        if( selected_status_header_search == AJAX_VARIABLE.for_rent || selected_status_header_search == '' ){
             var $form = $('.advance-search-header');
             fave_property_status_changed(selected_status_header_search, $form);
         }
@@ -882,7 +882,7 @@
         });
         /* On page load ( as on search page ) */
         var selected_status_header_search = $('.advanced-search-mobile #selected_status_mobile').val();
-        if( selected_status_header_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_header_search == '' ){
+        if( selected_status_header_search == AJAX_VARIABLE.for_rent || selected_status_header_search == '' ){
             var $form = $('.advanced-search-mobile');
             fave_property_status_changed(selected_status_header_search, $form);
         }
@@ -894,7 +894,7 @@
             fave_property_status_changed(selected_status, $form);
         });
         var selected_status_module_search = $('.advanced-search-module #selected_status_module').val();
-        if( selected_status_module_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_module_search == '' ){
+        if( selected_status_module_search == AJAX_VARIABLE.for_rent || selected_status_module_search == '' ){
             var $form = $('.advanced-search-module');
             fave_property_status_changed(selected_status_module_search, $form);
         }
@@ -1312,21 +1312,24 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://local.house.com/forgot-password',
+                    url: url,
                     dataType: 'JSON',
                     data:form.serialize(),
                     beforeSend: function () {
-                        $('#houzez_msg_reset').empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                        $('#result_msg_reset').empty().append('<p class="success text-success"> '+ login_sending +'</p>');
                     },
                     success: function(response) {
                         if( response.success ) {
-                            $('#houzez_msg_reset').empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
+                            $('#result_msg_reset').empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
+                            setTimeout(function () {
+                                $('.modal').modal('hide');
+                            }, 2000)
                         } else {
-                            $('#houzez_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
+                            $('#result_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.log(error);
+                        $('#result_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
                     }
                 });
             }
@@ -2288,7 +2291,7 @@
 
         var houzez_header_listing_map = function(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_lat, search_long, search_radius, search_location, use_radius ) {
             var headerMapSecurity = $('#securityHouzezHeaderMap').val();
-            var initial_city = HOUZEZ_ajaxcalls_vars.header_map_selected_city;
+            var initial_city = AJAX_VARIABLE.header_map_selected_city;
 
             $.ajax({
                 type: 'POST',
@@ -2891,30 +2894,30 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
             if(current_tempalte == 'template/property-listings-map.php') {
 
-                var state = HOUZEZ_ajaxcalls_vars.search_state;
-                var country = HOUZEZ_ajaxcalls_vars.search_country;
-                var keyword = HOUZEZ_ajaxcalls_vars.search_keyword;
-                var location = HOUZEZ_ajaxcalls_vars.search_city;
-                var features = HOUZEZ_ajaxcalls_vars.search_feature;
-                var area = HOUZEZ_ajaxcalls_vars.search_area;
-                var status = HOUZEZ_ajaxcalls_vars.search_status;
-                var type = HOUZEZ_ajaxcalls_vars.search_type;
-                var label = HOUZEZ_ajaxcalls_vars.search_label;
-                var property_id = HOUZEZ_ajaxcalls_vars.property_id;
-                var bedrooms = HOUZEZ_ajaxcalls_vars.search_bedrooms;
-                var bathrooms = HOUZEZ_ajaxcalls_vars.search_bathrooms;
-                var min_price = HOUZEZ_ajaxcalls_vars.search_min_price;
-                var max_price = HOUZEZ_ajaxcalls_vars.search_max_price;
-                var min_area = HOUZEZ_ajaxcalls_vars.search_min_area;
-                var max_area = HOUZEZ_ajaxcalls_vars.search_max_area;
-                var publish_date = HOUZEZ_ajaxcalls_vars.search_publish_date;
-                var search_no_posts = HOUZEZ_ajaxcalls_vars.search_no_posts;
+                var state = AJAX_VARIABLE.search_state;
+                var country = AJAX_VARIABLE.search_country;
+                var keyword = AJAX_VARIABLE.search_keyword;
+                var location = AJAX_VARIABLE.search_city;
+                var features = AJAX_VARIABLE.search_feature;
+                var area = AJAX_VARIABLE.search_area;
+                var status = AJAX_VARIABLE.search_status;
+                var type = AJAX_VARIABLE.search_type;
+                var label = AJAX_VARIABLE.search_label;
+                var property_id = AJAX_VARIABLE.property_id;
+                var bedrooms = AJAX_VARIABLE.search_bedrooms;
+                var bathrooms = AJAX_VARIABLE.search_bathrooms;
+                var min_price = AJAX_VARIABLE.search_min_price;
+                var max_price = AJAX_VARIABLE.search_max_price;
+                var min_area = AJAX_VARIABLE.search_min_area;
+                var max_area = AJAX_VARIABLE.search_max_area;
+                var publish_date = AJAX_VARIABLE.search_publish_date;
+                var search_no_posts = AJAX_VARIABLE.search_no_posts;
 
-                var search_lat = HOUZEZ_ajaxcalls_vars.search_lat;
-                var search_long = HOUZEZ_ajaxcalls_vars.search_long;
-                var search_radius = HOUZEZ_ajaxcalls_vars.search_radius;
-                var search_location = HOUZEZ_ajaxcalls_vars.search_location;
-                var use_radius = HOUZEZ_ajaxcalls_vars.use_radius;
+                var search_lat = AJAX_VARIABLE.search_lat;
+                var search_long = AJAX_VARIABLE.search_long;
+                var search_radius = AJAX_VARIABLE.search_radius;
+                var search_location = AJAX_VARIABLE.search_location;
+                var use_radius = AJAX_VARIABLE.use_radius;
 
                 houzez_half_map_listings(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_no_posts, search_lat, search_long, search_radius, search_location, use_radius );
 
@@ -3278,7 +3281,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                             data: {
                                 'action': 'houzez_get_auto_complete_search',
                                 'key': keyword,
-                                //'nonce' : HOUZEZ_ajaxcalls_vars.houzez_autoComplete_nonce
+                                //'nonce' : AJAX_VARIABLE.houzez_autoComplete_nonce
                             },
                             beforeSend: function( ) {
                                 ajaxCount++;
@@ -3532,7 +3535,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                 houzezSlidesToShow = '11';
             }
 
-            var gallery_autoplay = HOUZEZ_ajaxcalls_vars.gallery_autoplay;
+            var gallery_autoplay = AJAX_VARIABLE.gallery_autoplay;
 
             if( gallery_autoplay === '1' ) {
                 gallery_autoplay = true;
@@ -3795,6 +3798,6 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         }
 
 
-    }// typeof HOUZEZ_ajaxcalls_vars
+    }// typeof AJAX_VARIABLE
 
 }); // end document ready

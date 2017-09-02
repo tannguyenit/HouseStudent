@@ -9,12 +9,12 @@
 var nice = false;
 (function($){
 "use strict";
-
-    var houzez_rtl = HOUZEZ_ajaxcalls_vars.houzez_rtl;
-    var houzez_date_language = HOUZEZ_ajaxcalls_vars.houzez_date_language;
-    var currency_position = HOUZEZ_ajaxcalls_vars.currency_position;
-    var stripe_page = HOUZEZ_ajaxcalls_vars.stripe_page;
-    var twocheckout_page = HOUZEZ_ajaxcalls_vars.twocheckout_page;
+    var AJAX_VARIABLE = {};
+    var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
+    var houzez_date_language = AJAX_VARIABLE.houzez_date_language;
+    var currency_position = AJAX_VARIABLE.currency_position;
+    var stripe_page = AJAX_VARIABLE.stripe_page;
+    var twocheckout_page = AJAX_VARIABLE.twocheckout_page;
 
 
     if( houzez_rtl == 'yes' ) {
@@ -371,10 +371,10 @@ var nice = false;
         $('#houzez_mortgage_calculate').click(function(e) {
             e.preventDefault();
 
-            var monthly_payment = HOUZEZ_ajaxcalls_vars.monthly_payment;
-            var weekly_payment = HOUZEZ_ajaxcalls_vars.weekly_payment;
-            var bi_weekly_payment = HOUZEZ_ajaxcalls_vars.bi_weekly_payment;
-            var currency_symb = HOUZEZ_ajaxcalls_vars.currency_symbol;
+            var monthly_payment = AJAX_VARIABLE.monthly_payment;
+            var weekly_payment = AJAX_VARIABLE.weekly_payment;
+            var bi_weekly_payment = AJAX_VARIABLE.bi_weekly_payment;
+            var currency_symb = AJAX_VARIABLE.currency_symbol;
 
             var totalPrice  = 0;
             var down_payment = 0;
@@ -868,7 +868,7 @@ var nice = false;
         $('body').append( sticky_wrap );
 
         if($(sticky_wrap).hasClass('header-section-4')) {
-            $('.sticky_nav .logo-desktop img').attr('src',HOUZEZ_ajaxcalls_vars.simple_logo);
+            $('.sticky_nav .logo-desktop img').attr('src',AJAX_VARIABLE.simple_logo);
         }
 
         function fix_header(){
@@ -1530,8 +1530,8 @@ var nice = false;
 
     $('.prop_featured').change( function() {
 
-        var currency_symbol = HOUZEZ_ajaxcalls_vars.currency_symbol;
-        var currency_position = HOUZEZ_ajaxcalls_vars.currency_position;
+        var currency_symbol = AJAX_VARIABLE.currency_symbol;
+        var currency_position = AJAX_VARIABLE.currency_position;
         var total_price, total_price_with_currency, price_regular_with_currency;
 
         var parent = $(this).parents('.payment-side-block');
