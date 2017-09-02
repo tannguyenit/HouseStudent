@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository\UserRepository;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
@@ -16,7 +18,7 @@ class ResetPasswordController extends Controller
     | and uses a simple trait to include this behavior. You're free to
     | explore this trait and override any methods you wish to tweak.
     |
-    */
+     */
 
     use ResetsPasswords;
 
@@ -32,8 +34,32 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepository;
+    }
+
+    public function getPassword()
+    {
+        return view('emails.changepass');
+    }
+
+    public function change(Request $request, $id)
+    {
+        try {
+            $user = $this->userRepository->find($id);
+            if ($user && $user->email == $request->email && $user->active == $request->active) {
+                $user->password = bcrypt($request->new_password);
+
+                if ($user->save()) {
+                    return redirect()->action('HomeController@home');
+                }
+            }
+        } catch (Exception $ex) {
+            return view('errors.404');
+        }
     }
 }

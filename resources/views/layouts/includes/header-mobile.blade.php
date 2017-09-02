@@ -18,7 +18,7 @@
                         <ul>
                             @if (auth()->user()->role == config('setting.role.admin'))
                             <li>
-                                <a href="http://houzez01.favethemes.com/my-profile/">
+                                <a href="{{ action('Admin\DashboardController@dashboard') }}">
                                     <i class="fa fa-cogs"></i>Admin
                                 </a>
                             </li>
@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ action('Auth\LoginController@getLogout') }}">
+                                <a href="{{ action('Auth\LoginController@logout') }}">
                                     <i class="fa fa-unlock"></i>Log out
                                 </a>
                             </li>

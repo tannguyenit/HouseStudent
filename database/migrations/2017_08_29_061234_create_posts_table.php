@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
-            $table->string('user_id', 36);
+            $table->uuid('user_id', 36);
             $table->string('title', 255);
             $table->string('slug', 255);
             $table->longText('description');

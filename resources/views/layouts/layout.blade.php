@@ -46,7 +46,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
     @include('layouts.includes.footer')
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
-        {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
         <script type='text/javascript'>
             /* <![CDATA[ */
             var hz_plugin = {
@@ -90,7 +90,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
             /* <![CDATA[ */
             var lat = $('#getGoogleMaps').data('lat');
             var lng = $('#getGoogleMaps').data('lng');
-            var HOUZEZ_ajaxcalls_vars = {
+            var AJAX_VARIABLE = {
                 "admin_url": "{{ action('AjaxController@getMap') }}",
                 "houzez_rtl": "no",
                 "validate": '{!! json_encode(trans('validate')) !!}',

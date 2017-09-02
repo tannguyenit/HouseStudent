@@ -12,7 +12,7 @@ jQuery(document).ready( function($){
             dots = parseBool( obj.slide_dots),
             slide_infinite =  parseBool( obj.slide_infinite );
 
-        var houzez_rtl = HOUZEZ_ajaxcalls_vars.houzez_rtl;
+        var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
 
         if( houzez_rtl == 'yes' ) {
             houzez_rtl = true;
@@ -21,7 +21,7 @@ jQuery(document).ready( function($){
         }
 
         var faveOwl = $('#properties-carousel-v1-'+token);
-           
+
             function parseBool(str) {
                 if( str == 'true' ) { return true; } else { return false; }
             }
@@ -99,9 +99,9 @@ jQuery(document).ready( function($){
                         }
                     }
                 });
-                
+
             }
-            
+
 
             $('.btn-prev-'+token).on('click',function(){
                 faveOwl.trigger('prev.owl.carousel',[1000])

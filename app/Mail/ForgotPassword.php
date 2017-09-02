@@ -13,7 +13,7 @@ class ForgotPassword extends Mailable
     public $id;
     public $email;
     public $active;
-    public $fullname;
+    public $full_name;
 
     /**
      * Create a new message instance.
@@ -22,10 +22,10 @@ class ForgotPassword extends Mailable
      */
     public function __construct($data)
     {
-        $this->id       = $data['id'];
-        $this->email    = $data['email'];
-        $this->active   = $data['active'];
-        $this->fullname = $data['fullname'];
+        $this->id        = $data['id'];
+        $this->email     = $data['email'];
+        $this->active    = $data['active'];
+        $this->full_name = $data['full_name'];
     }
 
     /**
@@ -35,12 +35,12 @@ class ForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.forgot-password')
+        return $this->subject('Reset password')->view('emails.forgot-password')
             ->with([
-                'id'       => $this->id,
-                'email'    => $this->email,
-                'active'   => $this->active,
-                'fullname' => $this->fullname,
+                'id'        => $this->id,
+                'email'     => $this->email,
+                'active'    => $this->active,
+                'full_name' => $this->full_name,
             ]);
     }
 }

@@ -12,7 +12,7 @@ jQuery(document).ready( function($){
             slide_infinite = parseBool(obj.slide_infinite),
             dots = parseBool( obj.slide_dots );
 
-        var houzez_rtl = HOUZEZ_ajaxcalls_vars.houzez_rtl;
+        var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
 
         if( houzez_rtl == 'yes' ) {
             houzez_rtl = true;
@@ -52,7 +52,7 @@ jQuery(document).ready( function($){
                     items: 3
                 }
             }
-        });    
+        });
 
 
         $('.btn-prev-'+token).on('click',function(){

@@ -28,4 +28,5 @@ return [
     'similar-post'      => 'Similar post',
     'recently'          => 'Recently View',
     'create'            => 'Create Listing',
+    'send'              => 'Send',
 ];
