@@ -16,6 +16,8 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendMail');
 Route::get('/change-password/{id}', 'Auth\ResetPasswordController@getPassword');
 Route::post('/change-password/{id}', 'Auth\ResetPasswordController@change');
+Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
 /*
 |--------------------------------------------------------------------------
 | index

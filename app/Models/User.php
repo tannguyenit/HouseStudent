@@ -14,7 +14,17 @@ class User extends AbstractModel
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username',
+        'first_name',
+        'last_name',
+        'avatar',
+        'birthday',
+        'gender',
+        'provice_id',
+        'active',
+        'role',
+        'email',
+        'password',
     ];
 
     /**
@@ -48,12 +58,11 @@ class User extends AbstractModel
 
     public function getAvatarAttribute($value)
     {
-        if (null != $value) {
-            $path = config('path.avatar') . $value;
 
-            if (file_exists($path)) {
-                return $path;
-            }
+        $path = config('path.avatar') . $value;
+
+        if (file_exists(public_path() . $path)) {
+            return $path;
         }
 
         return config('path.defaul-avatar');

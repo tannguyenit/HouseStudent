@@ -1172,3 +1172,6 @@ span.user-name {
     font-weight: 400;
     text-align: center;
 }
+.margin-2 {
+    margin: 2px;
+}

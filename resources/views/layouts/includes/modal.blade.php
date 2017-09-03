@@ -37,9 +37,16 @@
                         <button type="submit" class="fave-login-button btn btn-primary btn-block">{{ trans('form.login') }}</button>
                         {!! Form::close() !!}
                         <hr>
-                        <button class="facebook-login btn btn-social btn-bg-facebook btn-block"><i class="fa fa-facebook"></i> login with facebook</button>
-                        <button class="yahoo-login btn btn-social btn-bg-yahoo btn-block"><i class="fa fa-yahoo"></i> login with yahoo</button>
-                        <button class="google-login btn btn-social btn-bg-google-plus btn-block"><i class="fa fa-google-plus"></i> login with google</button>
+                        <a href="{{ url('/auth/facebook') }}" title="{{ trans('index.login-with-facebook') }}" class="margin-2">
+                            <button class="btn btn-social btn-bg-facebook btn-block">
+                                <i class="fa fa-facebook"></i> {{ trans('index.login-with-facebook') }}
+                            </button>
+                        </a>
+                        <a href="{{ url('/auth/google') }}" title="{{ trans('index.login-with-google') }}">
+                            <button class="btn btn-social btn-bg-google-plus btn-block">
+                                <i class="fa fa-google-plus"></i> {{ trans('index.login-with-google') }}
+                            </button>
+                        </a>
                     </div>
                     <div class="tab-pane fade"> User registration is disabled in this demo. </div>
                 </div>
