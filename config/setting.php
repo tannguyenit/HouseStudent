@@ -4,6 +4,10 @@ return [
         'admin'  => 1,
         'member' => 0,
     ],
+    'gender'      => [
+        'male'   => 1,
+        'female' => 0,
+    ],
     'limit'       => [
         'news_post'    => 9,
         'country'      => 4,

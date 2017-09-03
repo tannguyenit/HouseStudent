@@ -2,70 +2,134 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repositories\UserRepository\UserRepository;
+use Illuminate\Support\Facades\Auth;
+use Socialite;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Redirect the user to the OAuth Provider.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Response
      */
-    protected function validator(array $data)
+    public function redirectToProvider($provider)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Obtain the user information from provider.  Check if the user already exists in our
+     * database by looking up their provider_id in the database.
+     * If the user exists, log them in. Otherwise, create a new user then log them in. After that
+     * redirect them to the authenticated users homepage.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @return Response
      */
-    protected function create(array $data)
+    public function handleProviderCallback($provider)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        if (!empty($_GET['error_code'])) {
+            return redirect()->route('client.home');
+        }
+
+        try {
+            $userSoccial = Socialite::driver($provider)->user();
+        } catch (Exception $e) {
+            return redirect()->action('HomeController@home');
+        }
+
+        $gender     = $userSoccial->user['gender'];
+        $token      = $userSoccial->token;
+        $id         = $userSoccial->getId();
+        $nickname   = $userSoccial->getNickname();
+        $name       = $userSoccial->getName();
+        $email      = $userSoccial->getEmail();
+        $avatar     = $userSoccial->avatar_original;
+        $checkEmail = $this->userRepository->findByFirst('email', $email);
+
+        if ($checkEmail) {
+            return redirect()->action('HomeController@home')
+                ->with([
+                    'status' => false,
+                    'msg'    => trans('layout.regis.success'),
+                ]);
+        }
+
+        $findUser = $this->userRepository->findByFirst('provice_id', $id);
+
+        if (!$findUser) {
+            if ($email) {
+                $username  = explode('@', $email)[0];
+                $checkUser = $this->userRepository->findByFirst('username', $username);
+
+                if ($checkUser) {
+                    $username = $username . '_' . rand(0, 99);
+                }
+            } else {
+                $username = $id;
+                $email    = $id;
+            }
+            /**
+             *---------------------------
+             * Get image avatar
+             * ---------------------------
+             */
+            $avatarName = $id . '.jpg';
+            $image      = file_get_contents($avatar);
+            $file       = public_path() . config('path.avatar') . $avatarName;
+            file_put_contents($file, $image);
+            /**
+             *---------------------------
+             * Get gender
+             * ---------------------------
+             */
+            $gender = '';
+            if ('male' == $gender) {
+                $gender = config('setting.gender.male');
+            } else {
+                $gender = config('setting.gender.female');
+            }
+            /**
+             *---------------------------
+             * data insert
+             * ---------------------------
+             */
+            $data = [
+                'username'       => $username,
+                'first_name'     => $name,
+                'last_name'      => $name,
+                'email'          => $email,
+                'password'       => '',
+                'avatar'         => $avatarName,
+                'gender'         => $gender,
+                'provice_id'     => $id,
+                'active'         => '1',
+                'role'           => config('setting.role.member'),
+                'remember_token' => $token,
+            ];
+
+            $user = $this->userRepository->create($data);
+        } else {
+            $user = $userSoccial;
+        }
+
+        auth()->login($user, true);
+
+        return redirect()->action('HomeController@home');
     }
 }

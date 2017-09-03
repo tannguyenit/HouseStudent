@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\BaseRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,6 +61,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $data;
     }
 
+    public function findByFirst($column, $option)
+    {
+        $data = $this->model->where($column, $option)->first();
+
+        return $data;
+    }
+
     public function whereIn($column, $array)
     {
         $data = $this->model->whereIn($column, $array);
@@ -71,7 +79,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->paginate($limit);
     }
 
-    public function create($input)
+    public function create($inputs)
     {
         return $this->model->create($inputs);
     }
