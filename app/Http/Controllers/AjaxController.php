@@ -38,12 +38,17 @@ class AjaxController extends BaseController
                         "retinaIcon"   => "http://sandbox.favethemes.com/houzez/wp-content/uploads/2016/02/x2-apartment.png",
                     ];
                 }
+
+                return response()->json([
+                    'getProperties' => true,
+                    'properties'    => $properties,
+                ]);
             }
         }
 
         return response()->json([
-            'getProperties' => true,
-            'properties'    => $properties,
+            'getProperties' => false,
+            'properties'    => [],
         ]);
     }
 }

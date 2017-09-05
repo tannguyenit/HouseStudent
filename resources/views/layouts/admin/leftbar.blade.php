@@ -1,25 +1,30 @@
+@php
+    $route_name = \Request::route()->getName();
+@endphp
 <div class="user-dashboard-left">
     <div class="dashboard-bar fave-screen-fix">
         <ul class="board-panel-menu">
-            <li class=active>
+            @php
+                $active = 'admin.dashboard' == $route_name ? true : false;
+            @endphp
+            <li class="{!!  $active ? 'active' : '' !!}">
                 <a href="{{ action('Admin\DashboardController@dashboard') }}">
                     <i class="fa fa-tachometer"></i> {{ trans('admin.dashboard') }}
                 </a>
             </li>
-            <li>
+            @php
+                $active = 'admin.setting' == $route_name? true : false;
+            @endphp
+            <li class="{!!  $active ? 'active' : '' !!}">
                 <a href="{{ action('Admin\SettingController@index') }}">
                     <i class="fa fa-cogs"></i>{{ trans('admin.setting') }}
                 </a>
-                <ul class="sub-menu">
-                    <li class=active><a href="http://houzez01.favethemes.com/my-properties/?prop_status=all">All</a> </li>
-                    <li><a href="http://houzez01.favethemes.com/my-properties/?prop_status=approved">Published</a> </li>
-                    <li><a href="http://houzez01.favethemes.com/my-properties/?prop_status=pending">Pending</a> </li>
-                    <li><a href="http://houzez01.favethemes.com/my-properties/?prop_status=expired">Expired</a> </li>
-                    <li><a href="http://houzez01.favethemes.com/my-properties/?prop_status=draft">Draft</a> </li>
-                </ul>
             </li>
-            <li>
-                <a href="http://houzez01.favethemes.com/add-new-property/">
+            @php
+                $active = 'admin.type' == $route_name? true : false;
+            @endphp
+            <li class="{!!  $active ? 'active' : '' !!}">
+                <a href="{{ action('Admin\TypeController@index') }}">
                     <i class="fa fa-list"></i> {{ trans('admin.type') }}
                 </a>
             </li>

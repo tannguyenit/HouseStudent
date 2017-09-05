@@ -39,6 +39,41 @@
             @yield('content')
         </div>
     </div>
+    <div class="modal fade edit_modal">
+        <div class="modal-dialog">
+            {{ Form::open(['method' => 'POST','class' => 'form-horizontal', 'id' => 'update_edit_modal']) }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center no-float">{{ trans('form.update-infomation') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('title_text', trans('form.infomation')) !!}
+                        {!! Form::text('title', '', ['class' => 'form-control', 'id' => 'title_text']) !!}
+                        {!! Form::hidden('id', '', ['class' => 'form-control', 'id' => '_id']) !!}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('form.close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('form.accept') }}</button>
+                    </div>
+                </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+    <div class="modal fade" id="confirm_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-center no-float">{{ trans('form.confirm') }}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('form.close') }}</button>
+                    <button type="button" class="btn btn-primary accept_confirm">{{ trans('form.accept') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
