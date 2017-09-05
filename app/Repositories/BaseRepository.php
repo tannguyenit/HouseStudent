@@ -126,6 +126,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
             throw $e;
         }
         DB::commit();
+
+        return $data;
     }
 
     public function search($column, $value)

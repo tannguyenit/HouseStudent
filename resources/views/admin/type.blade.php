@@ -17,7 +17,7 @@
         $('#_id').val(id);
         $('#update_edit_modal').attr('action', action)
     })
-    $("#update_edit_modal").validate({
+    $("#update_edit_modal, #create_type").validate({
         rules: {
             title: "required",
         },
@@ -65,6 +65,7 @@
                 data: {id:id},
                 success: function(res)
                 {
+console.log(res)
                     if (res.status) {
                         $('#' + id).remove();
                         $('.modal').modal('hide');
@@ -144,14 +145,14 @@
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane account-profile-block" id="tab">
-                        <form action="" method="POST" class="form-horizontal" role="form">
+                        {{ Form::open(['method' => 'POST','class' => 'form-horizontal', 'id'=>'create_type']) }}
                             <div class="form-group">
                                 <legend>Form title</legend>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <label for="" class="col-xs-12 col-sm-2">123</label>
-                                    <input type="text" name="" value="" placeholder="" class="col-xs-12 col-sm-10 form-control">
+                                    <input type="text" name="title" value="" placeholder="" class="col-xs-12 col-sm-10 form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -159,7 +160,7 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
