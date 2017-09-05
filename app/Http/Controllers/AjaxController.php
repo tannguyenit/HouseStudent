@@ -39,11 +39,11 @@ class AjaxController extends BaseController
                     ];
                 }
             }
-
-            return response()->json([
-                'getProperties' => true,
-                'properties'    => $properties,
-            ]);
         }
+
+        return response()->json([
+            'getProperties' => true,
+            'properties'    => $properties,
+        ]);
     }
 }

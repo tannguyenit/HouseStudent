@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Repositories\BaseRepositoryInterface;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +40,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function count()
     {
         return $this->model->count();
+    }
+
+    public function getFillable()
+    {
+        return $this->model->getFillable();
     }
 
     public function all($columns = ['*'])
@@ -149,7 +155,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         if (empty($path) || empty($image)) {
             return false;
         }
-        $imageName = time() . $image->getClientOriginalName();
+        $imageName = time() . '-' . $image->getClientOriginalName();
         $path      = public_path() . $path;
         $image->move($path, $imageName);
         return $imageName;

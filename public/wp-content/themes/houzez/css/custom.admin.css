@@ -7,3 +7,9 @@
 .board-panel-menu {
     height:100%;
 }
+.input-group-addon:first-child {
+   border-right:1px solid;
+}
+.input-group-addon i {
+    color: #00aeef;
+}

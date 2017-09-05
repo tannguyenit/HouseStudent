@@ -23,4 +23,5 @@ return [
     'new-pass'         => 'New Password',
     'comfirm-new-pass' => 'Confirm New Password',
     'update-pass'      => 'Update Password',
+    'update-logo'      => 'Update Logo',
 ];

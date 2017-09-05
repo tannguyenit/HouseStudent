@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 
-class DashboardController extends BaseController
+class DashboardController extends Controller
 {
     public function dashboard()
     {
