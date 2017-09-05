@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Repositories\BaseRepositoryInterface;
 use Carbon\Carbon;
 use DB;
+use Exception;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
 

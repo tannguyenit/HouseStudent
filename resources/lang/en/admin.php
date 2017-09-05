@@ -5,6 +5,8 @@ return [
     'type'      => 'Type',
     'status'    => 'Status',
     'update'    => 'Update',
+    'list'      => 'List',
+    'create'    => 'Create',
     'footer'    => [
         'copyright'   => 'Copyright',
         'email'       => 'Email',

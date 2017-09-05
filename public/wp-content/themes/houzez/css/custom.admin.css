@@ -13,3 +13,6 @@
 .input-group-addon i {
     color: #00aeef;
 }
+.no-float {
+    float:none !important;
+}

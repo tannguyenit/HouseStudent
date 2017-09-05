@@ -23,4 +23,9 @@ class TypeRepository extends BaseRepository implements TypeRepositoryInterface
             $query->limit($limit);
         }])->first();
     }
+
+    public function getData($relationship = [])
+    {
+        return $this->model->with($relationship)->paginate(config('setting.limit.similar_post'));
+    }
 }
