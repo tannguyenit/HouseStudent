@@ -16,4 +16,16 @@ class Setting extends AbstractModel
         'logo',
         'maintenance',
     ];
+
+    public function getLogoAttribute($value)
+    {
+
+        $path = config('path.logo') . $value;
+
+        if (file_exists(public_path() . $path)) {
+            return $path;
+        }
+
+        return config('path.no-image');
+    }
 }

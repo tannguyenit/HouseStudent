@@ -47,17 +47,6 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
-        <script type='text/javascript'>
-            /* <![CDATA[ */
-            var hz_plugin = {
-                "rating_terrible": "Terrible",
-                "rating_poor": "Poor",
-                "rating_average": "Average",
-                "rating_vgood": "Very Good",
-                "rating_exceptional": "Exceptional"
-            };
-            /* ]]> */
-        </script>
         {{ Html::script('wp-content/themes/houzez/js/plugins2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/core.mine899.js?ver=1.11.4') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/widget.mine899.js?ver=1.11.4') }}

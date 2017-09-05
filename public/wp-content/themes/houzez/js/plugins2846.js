@@ -1,3 +1,4 @@
+var hz_plugin = {};
 /**
  * Created by waqasriaz on 06/04/16.
  */
