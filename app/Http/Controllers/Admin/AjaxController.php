@@ -47,7 +47,7 @@ class AjaxController extends Controller
             $data   = $request->all();
             $id     = $data['id'];
             $result = $this->typeRepository->delete($id);
-            dd($result);
+
             if ($result) {
                 return response()->json([
                     'status' => true,
