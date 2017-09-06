@@ -20,9 +20,6 @@
     @section('headerscript')
         {{ Html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/jquery-migrate.min.js') }}
-        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
-        {{ Html::script('wp-content/themes/houzez/js/infobox.js') }}
-        {{ Html::script('wp-content/themes/houzez/js/markerclusterere1fc.js') }}
     @show
 </head>
 <body class="home page-template page-template-template page-template-template-homepage
@@ -76,6 +73,7 @@
     </div>
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/admin/js/custom.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/plugins2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/core.mine899.js?ver=1.11.4') }}
