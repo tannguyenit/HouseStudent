@@ -30,14 +30,14 @@
                             <div class="contact_text"></div>
                             <ul class="list-unstyled">
                                 <li>
-                                    <i class="fa fa-location-arrow"></i> 774 NE 84th St Miami, FL 33879
+                                    <i class="fa fa-location-arrow"></i> {{ $setting->address or '' }}
                                 </li>
                                 <li>
-                                    <i class="fa fa-phone"></i> Call us FREE +84 126 375 1380
+                                    <i class="fa fa-phone"></i>{{ $setting->phone or '' }}
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o"></i>
-                                    <a href="mailto:email@email.com">tannguyenit95@gmail.com</a>
+                                    <a href="mailto:{{ $setting->email or '' }}">{{ $setting->email or '' }}</a>
                                 </li>
                             </ul>
                             <p class="read">
@@ -66,18 +66,21 @@
                                     </div>
                                 </div>
                                 <ul class="social">
-                                    <li>
-                                        <a href="#" class="btn-facebook"><i class="fa fa-facebook-square"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-twitter"><i class="fa fa-twitter-square"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-google-plus"><i class="fa fa-google-plus-square"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-linkedin"><i class="fa fa-linkedin-square"></i></a>
-                                    </li>
+                                    @if ($setting->facebook)
+                                        <li>
+                                            <a href="{{ $setting->facebook }}" target="_blank" class="btn-facebook"><i class="fa fa-facebook-square"></i></a>
+                                        </li>
+                                    @endif
+                                    @if ($setting->twitter)
+                                        <li>
+                                            <a href="{{ $setting->twitter }}" target="_blank" class="btn-twitter"><i class="fa fa-twitter-square"></i></a>
+                                        </li>
+                                    @endif
+                                    @if ($setting->google)
+                                        <li>
+                                            <a href="{{ $setting->google }}" target="_blank" class="btn-google-plus"><i class="fa fa-google-plus-square"></i></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </form>
@@ -91,12 +94,31 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3">
                     <div class="footer-col">
-                        <p>House for Student - All rights reserved</p>
+                        @if ($setting->copyright)
+                            <p>{{ $setting->copyright }}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-3 pull-right">
                     <div class="footer-col foot-social">
-                        <p> {{ trans('index.follow') }} <a target="_blank" href="https://facebook.com/Favethemes"><i class="fa fa-facebook-square"></i></a> <a target="_blank" href="https://twitter.com/favethemes"><i class="fa fa-twitter-square"></i></a> <a target="_blank" href="http://linkedin.com/"><i class="fa fa-linkedin-square"></i></a> <a target="_blank" href="http://google.com/"><i class="fa fa-google-plus-square"></i></a> <a target="_blank" href="http://instagram.com/"><i class="fa fa-instagram"></i></a> </p>
+                        <p> {{ trans('index.follow') }}
+                            @if ($setting->facebook)
+                                <a target="_blank" href="{{ $setting->facebook }}">
+                                    <i class="fa fa-facebook-square"></i>
+                                </a>
+                            @endif
+                            @if ($setting->twitter)
+                                <a target="_blank" href="{{ $setting->twitter }}">
+                                    <i class="fa fa-twitter-square"></i>
+                                </a>
+                            @endif
+                            @if ($setting->google)
+                                <a target="_blank" href="{{ $setting->google }}">
+                                    <i class="fa fa-google-plus-square"></i>
+                                </a>
+                            @endif
+                            <a href="" title=""></a>
+                        </p>
                     </div>
                 </div>
             </div>

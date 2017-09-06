@@ -19,13 +19,16 @@ class TypeRepository extends BaseRepository implements TypeRepositoryInterface
             return false;
         }
 
-        return $this->model->where('id', $id)->with(['posts' => function ($query) use ($limit) {
-            $query->limit($limit);
-        }])->first();
+        return $this->model->where('id', $id)
+            ->with(['posts' => function ($query) use ($limit) {
+                $query->limit($limit);
+            }])->first();
     }
 
     public function getData($relationship = [])
     {
-        return $this->model->with($relationship)->paginate(config('setting.limit.similar_post'));
+        return $this->model->with($relationship)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(config('setting.limit.similar_post'));
     }
 }

@@ -119,11 +119,11 @@ console.log(res)
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Name</th>
-                                        <th>Total post</th>
-                                        <th>Time</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('form.stt') }}</th>
+                                        <th>{{ trans('form.title') }}</th>
+                                        <th>{{ trans('form.total_post') }}</th>
+                                        <th>{{ trans('form.time') }}</th>
+                                        <th>{{ trans('form.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -145,19 +145,16 @@ console.log(res)
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane account-profile-block" id="tab">
-                        {{ Form::open(['method' => 'POST','class' => 'form-horizontal', 'id'=>'create_type']) }}
-                            <div class="form-group">
-                                <legend>Form title</legend>
-                            </div>
+                        {{ Form::open(['method' => 'POST','class' => 'form-inline', 'id'=>'create_type']) }}
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <label for="" class="col-xs-12 col-sm-2">123</label>
+                                    <label for="" class="col-xs-12 col-sm-2">{{ trans('form.title') }}</label>
                                     <input type="text" name="title" value="" placeholder="" class="col-xs-12 col-sm-10 form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-10 col-sm-offset-2">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">{{ trans('form.submit') }}</button>
                                 </div>
                             </div>
                         {!! Form::close() !!}
