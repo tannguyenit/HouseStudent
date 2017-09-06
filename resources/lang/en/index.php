@@ -20,6 +20,7 @@ return [
     'follow'                   => 'Follow us',
     'home'                     => 'Home',
     'login'                    => 'Login',
+    'logout'                   => 'Logout',
     'register'                 => 'Register',
     'login-with-facebook'      => 'Login with Facebook',
     'login-with-google'        => 'Login with Google',

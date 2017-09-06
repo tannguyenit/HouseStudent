@@ -37,6 +37,15 @@
                     {{ trans('admin.status') }}
                 </a>
             </li>
+            @php
+                $active = 'admin.getEnv' == $route_name? true : false;
+            @endphp
+            <li class="{!!  $active ? 'active' : '' !!}">
+                <a href="{{ action('Admin\DashboardController@getEnv') }}">
+                    <i class="fa fa-cogs"></i>
+                    {{ trans('admin.env') }}
+                </a>
+            </li>
             <li>
                 <a href="{{ action('Auth\LoginController@logout') }}">
                     <i class="fa fa-unlock"></i> {{ trans('index.logout') }}
