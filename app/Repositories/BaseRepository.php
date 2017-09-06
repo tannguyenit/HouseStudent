@@ -163,4 +163,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $image->move($path, $imageName);
         return $imageName;
     }
+
+    public function getStatistic()
+    {
+        $day   = $this->model->whereDay('created_at', date('d'))->count();
+        $month = $this->model->whereMonth('created_at', date('m'))->count();
+        $year  = $this->model->whereYear('created_at', date('Y'))->count();
+        $total = $this->model->count();
+
+        return (object) [
+            'day'   => $day,
+            'month' => $month,
+            'year'  => $year,
+            'total' => $total,
+        ];
+    }
 }
