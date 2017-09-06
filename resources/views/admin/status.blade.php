@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-12 col-xs-12">
                 <div class="board-header-left">
-                    <h3 class="board-title">{{ trans('admin.type') }}</h3>
+                    <h3 class="board-title">{{ trans('admin.status') }}</h3>
                 </div>
                 <div class="board-header-right">
                     <ol class="breadcrumb">
@@ -18,7 +18,7 @@
                                 <span itemprop="title">{{ trans('admin.dashboard') }}</span>
                             </a>
                         </li>
-                        <li class="active">{{ trans('admin.type') }}</li>
+                        <li class="active">{{ trans('admin.status') }}</li>
                     </ol>
                 </div>
             </div>
@@ -51,15 +51,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($types as $key => $element)
+                                    @forelse ($status as $key => $element)
                                     <tr id="{{ $element->id }}">
                                         <td>{{ $key + 1 }}</td>
                                         <td class="title_content">{{ $element->title }}</td>
                                         <td>{{ count($element->posts) }}</td>
                                         <td>{{ $element->created_at }}</td>
                                         <td class="getData" data-title="{!! $element->title !!}" data-id={{ $element->id }} >
-                                            <a data-toggle="modal" href='.edit_modal' data-action="{{ action('Admin\AjaxController@updateType') }}"><i class="fa fa-pencil-square-o btn-edit"></i></a>
-                                            <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deleteType') }}"><i class="fa fa-trash-o btn-delete"></i></a>
+                                            <a data-toggle="modal" href='.edit_modal' data-action="{{ action('Admin\AjaxController@updateStatus') }}">
+                                                <i class="fa fa-pencil-square-o btn-edit"></i>
+                                            </a>
+                                            <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deleteStatus') }}">
+                                                <i class="fa fa-trash-o btn-delete"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     @empty
