@@ -77,4 +77,9 @@ class Post extends AbstractModel
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value, 0, ',', '.');
+    }
 }

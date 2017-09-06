@@ -33,4 +33,9 @@ return [
     'close'             => 'Close',
     'accept'            => 'Accept',
     'infomation'        => 'Infomation',
+    'stt'               => 'STT',
+    'title'             => 'Title',
+    'total_post'        => 'Total post',
+    'action'            => 'Action',
+    'submit'            => 'Submit',
 ];

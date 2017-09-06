@@ -14,56 +14,12 @@
                     </li>
                     <li id="menu-item-352" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-352"><a href="#">Listing</a>
                         <ul class="sub-menu">
-                            <li id="menu-item-1340" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1340"><a href="#">List View</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-339" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-339"><a href="simple-listing-list-view/index.html">List View Standard</a>
-                                    </li>
-                                    <li id="menu-item-340" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-340"><a href="listing-full-width/index.html">List View Fullwidth</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1341" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1341"><a href="#">Grid View</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-465"><a href="simple-listing-grid-view/index.html">Grid View Standard</a>
-                                    </li>
-                                    <li id="menu-item-337" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-337"><a href="properties-grid-view-3-cols/index.html">Grid View Fullwidth</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1342" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1342"><a href="#">Map</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-388" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-388"><a href="listing-with-google-map/index.html">Map Standard</a>
-                                    </li>
-                                    <li id="menu-item-1264" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1264"><a href="listing-with-google-map/index81d7.html?fullscreen=yes">Map Fullscreen</a>
-                                    </li>
-                                    <li id="menu-item-1628" class="new-feature menu-item menu-item-type-post_type menu-item-object-page menu-item-1628"><a href="half-map/index.html">Half Map</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1343" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1343"><a href="#">Parallax</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-470" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-470"><a href="listing-with-image/index.html">Parallax Standard</a>
-                                    </li>
-                                    <li id="menu-item-2989" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2989"><a href="listing-with-image-fullscreen/index.html">Parallax Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1344" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1344"><a href="#">Video</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-462" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-462"><a href="listing-with-video/index.html">Video Standard</a>
-                                    </li>
-                                    <li id="menu-item-1265" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1265"><a href="listing-with-video/index81d7.html?fullscreen=yes">Video Fullscreen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="menu-item-1346" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1346"><a href="#">Sliders</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1468" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1468"><a href="listing-with-slider-revoluiton-2/index.html">Slider Revolution</a>
-                                    </li>
-                                    <li id="menu-item-410" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-410"><a href="listing-with-properties-slider/index.html">Properties Slider</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @forelse ($types as $element)
+                                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1340">
+                                    <a href="{{ $element->slug }}">{{ $element->title }}</a>
+                                </li>
+                            @empty
+                            @endforelse
                         </ul>
                     </li>
                     <li id="menu-item-314" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-314"><a href="#">Property</a>
