@@ -58,6 +58,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'name_boss'     => $faker->name,
         'address'       => $faker->address,
         'township'      => $faker->state,
+        'township_slug' => str_slug($faker->state),
         'country'       => $faker->country,
         'lat'           => $faker->latitude($min = 16.018110864140947, $max = 16.09465455449266),
         'lng'           => $faker->longitude($min = 108.18053736650393, $max = 108.24714198076174),
