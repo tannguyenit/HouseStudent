@@ -14,10 +14,10 @@ class AddSlugTable extends Migration
     public function up()
     {
         Schema::table('types', function (Blueprint $table) {
-            $table->string('slug', 255)->after('title');
+            $table->string('slug', 255)->nullable()->after('title');
         });
         Schema::table('statuses', function (Blueprint $table) {
-            $table->string('slug', 255)->after('title');
+            $table->string('slug', 255)->nullable()->after('title');
         });
     }
 
