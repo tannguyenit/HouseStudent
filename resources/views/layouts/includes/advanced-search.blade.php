@@ -65,42 +65,6 @@
                             </div>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="form-group">
-                                    <select name="bedrooms" class="selectpicker" data-live-search="false" data-live-search-style="begins" title="">
-                                        <option value="">Beds</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="any">Any</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <select name="bathrooms" class="selectpicker" data-live-search="false" data-live-search-style="begins" title="">
-                                        <option value="">Baths</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="any">Any</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
                                     <input type="text" class="form-control" value="" name="min-area" placeholder="Min Area (sqft)">
                                 </div>
                             </div>
@@ -120,27 +84,6 @@
                                     <div class="range-wrap">
                                         <div class="price-range-advanced"></div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-xs-12 features-list">
-                                <label class="advance-trigger text-uppercase title"><i class="fa fa-plus-square"></i> Other Features </label>
-                                <div class="clearfix"></div>
-                                <div class="field-expand">
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-air-conditioning" type="checkbox" value="air-conditioning">Air Conditioning</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-barbeque" type="checkbox" value="barbeque">Barbeque</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-dryer" type="checkbox" value="dryer">Dryer</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-gym" type="checkbox" value="gym">Gym</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-laundry" type="checkbox" value="laundry">Laundry</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-lawn" type="checkbox" value="lawn">Lawn</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-microwave" type="checkbox" value="microwave">Microwave</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-outdoor-shower" type="checkbox" value="outdoor-shower">Outdoor Shower</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-refrigerator" type="checkbox" value="refrigerator">Refrigerator</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-sauna" type="checkbox" value="sauna">Sauna</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-swimming-pool" type="checkbox" value="swimming-pool">Swimming Pool</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-tv-cable" type="checkbox" value="tv-cable">TV Cable</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-washer" type="checkbox" value="washer">Washer</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-wifi" type="checkbox" value="wifi">WiFi</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-window-coverings" type="checkbox" value="window-coverings">Window Coverings</label>
                                 </div>
                             </div>
                         </div>
@@ -224,42 +167,6 @@
                             </div>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="form-group">
-                                    <select name="bedrooms" class="selectpicker" data-live-search="false" data-live-search-style="begins" title="">
-                                        <option value="">Beds</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="any">Any</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <select name="bathrooms" class="selectpicker" data-live-search="false" data-live-search-style="begins" title="">
-                                        <option value="">Baths</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="any">Any</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
                                     <input type="text" class="form-control" value="" name="min-area" placeholder="Min Area (sqft)">
                                 </div>
                             </div>
@@ -279,29 +186,6 @@
                                     <div class="range-wrap">
                                         <div class="price-range-advanced"></div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-xs-12">
-                                <label class="advance-trigger"><i class="fa fa-plus-square"></i> Other Features </label>
-                            </div>
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="features-list field-expand">
-                                    <div class="clearfix"></div>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-air-conditioning" type="checkbox" value="air-conditioning">Air Conditioning</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-barbeque" type="checkbox" value="barbeque">Barbeque</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-dryer" type="checkbox" value="dryer">Dryer</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-gym" type="checkbox" value="gym">Gym</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-laundry" type="checkbox" value="laundry">Laundry</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-lawn" type="checkbox" value="lawn">Lawn</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-microwave" type="checkbox" value="microwave">Microwave</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-outdoor-shower" type="checkbox" value="outdoor-shower">Outdoor Shower</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-refrigerator" type="checkbox" value="refrigerator">Refrigerator</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-sauna" type="checkbox" value="sauna">Sauna</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-swimming-pool" type="checkbox" value="swimming-pool">Swimming Pool</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-tv-cable" type="checkbox" value="tv-cable">TV Cable</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-washer" type="checkbox" value="washer">Washer</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-wifi" type="checkbox" value="wifi">WiFi</label>
-                                    <label class="checkbox-inline"><input name="feature[]" id="feature-window-coverings" type="checkbox" value="window-coverings">Window Coverings</label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-xs-12">

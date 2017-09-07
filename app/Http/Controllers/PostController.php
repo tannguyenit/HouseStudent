@@ -23,9 +23,15 @@ class PostController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function townShip(Request $request, $slug)
     {
-        //
+        $dataView['posts'] = $this->postRepository->getDataByColumn('township_slug', $slug);
+
+        if ($dataView['posts']) {
+            return view('township.detail', $dataView);
+        }
+
+        return abort(404);
     }
 
     /**

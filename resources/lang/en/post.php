@@ -9,6 +9,7 @@ return [
     'view'              => ' Viewer',
     'price'             => ' Price',
     'share'             => 'Share',
+    'address'           => 'Address',
     'phone-boss'        => 'Phone Number Owner',
     'name-boss'         => 'Name Number Owner',
     'detail'            => 'Details',

@@ -18,6 +18,7 @@ Route::post('/type', ['as' => 'store', 'uses' => 'TypeController@store']);
 Route::get('/status', ['as' => 'status', 'uses' => 'StatusController@index']);
 Route::post('/status', ['as' => 'storeStatus', 'uses' => 'StatusController@store']);
 Route::post('/setting/{id}', ['as' => 'setting.update', 'uses' => 'SettingController@update']);
+Route::post('/setting/save', ['as' => 'setting.save', 'uses' => 'SettingController@save']);
 /*
 |--------------------------------------------------------------------------
 | Ajax

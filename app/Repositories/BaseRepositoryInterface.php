@@ -21,4 +21,6 @@ interface BaseRepositoryInterface
     public function uploadImage($image, $path);
 
     public function getStatistic();
+
+    public function getDataBySlug($slug, $array = []);
 }
