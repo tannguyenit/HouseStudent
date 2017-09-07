@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'defaul-avatar' => '/uploads/avatar/default.jpg',
+    'defaul-avatar' => '/default-image/default.jpg',
     'avatar'        => '/uploads/avatar/',
     'logo'          => '/uploads/logo/',
-    'no-image'      => '/uploads/logo/No_image.png',
+    'no-image'      => '/default-image/No_image.png',
 ];

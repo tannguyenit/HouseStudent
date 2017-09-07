@@ -12,6 +12,7 @@ return [
         'news_post'    => 9,
         'country'      => 4,
         'similar_post' => 4,
+        'type'         => 6,
     ],
     'price'       => [
         'vi' => ' VNĐ',

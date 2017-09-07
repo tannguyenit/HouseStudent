@@ -11,5 +11,5 @@ interface PostRepositoryInterface
 
     public function getDataBySlug($slug);
 
-    public function getDataByColumn($column, $id);
+    public function getDataByColumn($column, $id, $sortBy);
 }

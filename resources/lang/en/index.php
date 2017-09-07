@@ -25,4 +25,12 @@ return [
     'login-with-facebook'      => 'Login with Facebook',
     'login-with-google'        => 'Login with Google',
     'signin'                   => 'Sign In / Register',
+    'sort-by'                  => 'Sort by',
+    'default'                  => 'Default Order',
+    'a-price'                  => 'Price (Low to High)',
+    'd-price'                  => 'Price (High to Low)',
+    'a-date'                   => 'Date Old to New',
+    'd-date'                   => 'Date New to Old',
+    'all'                      => 'All',
+    'type'                     => 'Property Types',
 ];
