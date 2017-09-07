@@ -350,7 +350,7 @@
                                 @endphp
                             @endif
                             <div class="{{ $class }}">
-                                <div class="location-block" style="background-image: url(http://static.asiawebdirect.com/m/bangkok/portals/vietnam/homepage/da-nang/pagePropertiesImage/da-nang-vietnam.jpg.jpg);">
+                                <div class="location-block">
                                     <a href="{{ action('PostController@townShip', str_slug($value->township)) }}">
                                         <div class="location-fig-caption">
                                             <h3 class="heading">{{ $value->township }}</h3>

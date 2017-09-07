@@ -1175,3 +1175,6 @@ span.user-name {
 .margin-2 {
     margin: 2px;
 }
+.location-block {
+    background-image:url(/default-image/da-nang-vietnam.jpg);
+}
