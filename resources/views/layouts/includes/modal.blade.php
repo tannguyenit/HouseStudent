@@ -18,10 +18,10 @@
                         {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal', 'id' => 'formLogin']) }}
                         <div class="form-group field-group">
                             <div class="input-user input-icon">
-                                {!! Form::email('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
+                                {!! Form::email('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control']) !!}
                             </div>
                             <div class="input-pass input-icon">
-                                {!! Form::password('password', '', ['placeholder' => trans('form.placeholder.password'), 'class' => 'form-control',]) !!}
+                                {!! Form::password('password', '', ['placeholder' => trans('form.placeholder.password'), 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="forget-block clearfix">
