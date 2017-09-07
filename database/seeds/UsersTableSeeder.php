@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'first_name'     => 'Nguyen',
                 'last_name'      => 'Tan',
                 'email'          => 'tannguyenit95@gmail.com',
-                'password'       => bcrypt('mylove'),
+                'password'       => '$2y$10$oSbbglRdpSeRwPBbxBlq2uvP3SJ1upZO1pVgPMsLo3/uYG9N4IKim',
                 'avatar'         => 'default.jpg',
                 'birthday'       => '1995-08-06',
                 'gender'         => null,

@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'admin'      => \App\Http\Middleware\Admin::class,
+        'chatbot'    => \App\Http\Middleware\ChatbotMiddleware::class,
         'viewpost'   => \App\Http\Middleware\ViewPost::class,
         'auth'       => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

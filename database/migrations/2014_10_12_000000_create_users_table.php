@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('address', 255)->nullable();
             $table->string('phone', 50)->nullable();
             $table->string('provice_id', 100)->nullable();
-            $table->tinyInteger('active')->default(0);
+            $table->integer('active')->default(0);
             $table->tinyInteger('role')->default(0);
             $table->text('bio')->nullable();
             $table->rememberToken();

@@ -19,10 +19,10 @@
                         {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal ' . $checkAdmin,  'id' => 'formLogin']) }}
                         <div class="form-group field-group">
                             <div class="input-user input-icon">
-                                {!! Form::text('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
+                                <input type="text" name="email" value="" class="form-control" placeholder="{{ trans('form.placeholder.email') }}">
                             </div>
                             <div class="input-pass input-icon">
-                                {!! Form::password('password', '', ['placeholder' => trans('form.placeholder.password'), 'class' => 'form-control',]) !!}
+                                <input type="password" name="password" value="" class="form-control" placeholder="{{ trans('form.placeholder.password') }}">
                             </div>
                         </div>
                         <div class="forget-block clearfix">
