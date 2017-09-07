@@ -178,4 +178,15 @@ abstract class BaseRepository implements BaseRepositoryInterface
             'total' => $total,
         ];
     }
+
+    public function getDataBySlug($slug, $array = [])
+    {
+        if (!empty($slug)) {
+            return $this->model->where('slug', $slug)
+                ->with($array)
+                ->first();
+        }
+
+        return false;
+    }
 }

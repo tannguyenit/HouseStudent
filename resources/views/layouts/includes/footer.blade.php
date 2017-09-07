@@ -66,17 +66,17 @@
                                     </div>
                                 </div>
                                 <ul class="social">
-                                    @if ($setting->facebook)
+                                    @if (isset($setting->facebook))
                                         <li>
                                             <a href="{{ $setting->facebook }}" target="_blank" class="btn-facebook"><i class="fa fa-facebook-square"></i></a>
                                         </li>
                                     @endif
-                                    @if ($setting->twitter)
+                                    @if (isset($setting->twitter))
                                         <li>
                                             <a href="{{ $setting->twitter }}" target="_blank" class="btn-twitter"><i class="fa fa-twitter-square"></i></a>
                                         </li>
                                     @endif
-                                    @if ($setting->google)
+                                    @if (isset($setting->google))
                                         <li>
                                             <a href="{{ $setting->google }}" target="_blank" class="btn-google-plus"><i class="fa fa-google-plus-square"></i></a>
                                         </li>
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3">
                     <div class="footer-col">
-                        @if ($setting->copyright)
+                        @if (isset($setting->copyright))
                             <p>{{ $setting->copyright }}</p>
                         @endif
                     </div>
@@ -102,17 +102,17 @@
                 <div class="col-md-3 col-sm-3 pull-right">
                     <div class="footer-col foot-social">
                         <p> {{ trans('index.follow') }}
-                            @if ($setting->facebook)
+                            @if (isset($setting->facebook))
                                 <a target="_blank" href="{{ $setting->facebook }}">
                                     <i class="fa fa-facebook-square"></i>
                                 </a>
                             @endif
-                            @if ($setting->twitter)
+                            @if (isset($setting->twitter))
                                 <a target="_blank" href="{{ $setting->twitter }}">
                                     <i class="fa fa-twitter-square"></i>
                                 </a>
                             @endif
-                            @if ($setting->google)
+                            @if (isset($setting->google))
                                 <a target="_blank" href="{{ $setting->google }}">
                                     <i class="fa fa-google-plus-square"></i>
                                 </a>

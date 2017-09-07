@@ -23,7 +23,8 @@ class ViewComposer
     public function compose(View $view)
     {
         $this->dataView['setting'] = $this->settingRepository->getSetting();
-        $this->dataView['types']   = $this->typeRepository->all();
+        $relationship              = ['posts'];
+        $this->dataView['types']   = $this->typeRepository->getData($relationship);
 
         $view->with($this->dataView);
     }

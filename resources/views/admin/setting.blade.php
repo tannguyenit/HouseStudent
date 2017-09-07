@@ -30,14 +30,18 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="profile-content-area">
-                        {{ Form::open(['action' => ['Admin\SettingController@update', $setting->id],'method' => 'POST', 'enctype'=>'multipart/form-data']) }}
-                            <div class="account-block account-profile-block">
+                        @if (isset($setting->id))
+                            {{ Form::open(['action' => ['Admin\SettingController@update', $setting->id],'method' => 'POST', 'enctype'=>'multipart/form-data']) }}
+                        @else
+                            {{ Form::open(['action' => ['Admin\SettingController@save'],'method' => 'POST', 'enctype'=>'multipart/form-data']) }}
+                        @endif
+                        <div class="account-block account-profile-block">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="my-avatar">
                                             <div id="houzez_profile_photo">
                                                 <div class="houzez-thumb">
-                                                    <img class="img-circle" id="previewHolder" width="200" height="200" src="{{ $setting->logo }}" alt="{{ $setting->logo }}">
+                                                    <img class="img-circle" id="previewHolder" width="200" height="200" src="{{ $setting->logo or '' }}" alt="{{ $setting->logo or '' }}">
                                                 </div>
                                             </div>
                                             <div id="profile_upload_containder">
@@ -55,7 +59,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-envelope"></i>
                                                         </span>
-                                                        {!! Form::email('email', $setting->email, ['id' => 'setting_email', 'class' => 'form-control']) !!}
+                                                        {!! Form::email('email', $setting->email or '', ['id' => 'setting_email', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,7 +70,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-copyright"></i>
                                                         </span>
-                                                        {!! Form::text('copyright', $setting->copyright, ['id' => 'setting_copyright', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('copyright', $setting->copyright or '', ['id' => 'setting_copyright', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,7 +81,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-map"></i>
                                                         </span>
-                                                        {!! Form::text('address', $setting->address, ['id' => 'setting_address', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('address', $setting->address or '', ['id' => 'setting_address', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,7 +92,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-phone"></i>
                                                         </span>
-                                                        {!! Form::text('phone', $setting->phone, ['id' => 'setting_phone', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('phone', $setting->phone or '', ['id' => 'setting_phone', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +103,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-mobile"></i>
                                                         </span>
-                                                        {!! Form::text('mobile', $setting->mobile, ['id' => 'setting_mobile', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('mobile', $setting->mobile or '', ['id' => 'setting_mobile', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +114,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-facebook"></i>
                                                         </span>
-                                                        {!! Form::text('facebook', $setting->facebook, ['id' => 'setting_facebook', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('facebook', $setting->facebook or '', ['id' => 'setting_facebook', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +125,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-google"></i>
                                                         </span>
-                                                        {!! Form::text('google', $setting->google, ['id' => 'setting_google', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('google', $setting->google or '', ['id' => 'setting_google', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,7 +136,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-twitter"></i>
                                                         </span>
-                                                        {!! Form::text('twitter', $setting->twitter, ['id' => 'setting_twitter', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('twitter', $setting->twitter or '', ['id' => 'setting_twitter', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>

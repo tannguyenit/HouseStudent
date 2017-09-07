@@ -28,6 +28,7 @@
         {{ Html::script('wp-content/themes/houzez/js/infobox.js') }}
         {{ Html::script('wp-content/themes/houzez/js/markerclusterere1fc.js') }}
         {{ Html::script('wp-content/themes/houzez/js/facebook.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/jquery.jscroll.js') }}
     @show
 </head>
 <div id="fb-root"></div>
@@ -46,6 +47,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
     @include('layouts.includes.footer')
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/jquery.custom.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/plugins2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/core.mine899.js?ver=1.11.4') }}
@@ -96,7 +98,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
                 "retina_logo_width": "140",
                 "property_lat": lat,
                 "property_lng": lng,
-                "property_map": "1",
+                "property_map": "",
                 "property_map_street": "show",
                 "is_singular_property": "yes",
                 "process_loader_refresh": "fa fa-spin fa-refresh",
@@ -126,7 +128,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
                 "advanced_search_widget_min_area": "50",
                 "advanced_search_widget_max_area": "13000",
                 "advanced_search_price_slide": "1",
-                "fave_page_template": "page.php",
+                "fave_page_template": "",
                 "google_map_style": "[{\"featureType\":\"administrative\",\"elementType\":\"labels.text.fill\",\"stylers\":[{\"color\":\"#444444\"}]},{\"featureType\":\"landscape\",\"elementType\":\"all\",\"stylers\":[{\"color\":\"#f2f2f2\"}]},{\"featureType\":\"poi\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"road\",\"elementType\":\"all\",\"stylers\":[{\"saturation\":-100},{\"lightness\":45}]},{\"featureType\":\"road.highway\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"simplified\"}]},{\"featureType\":\"road.arterial\",\"elementType\":\"labels.icon\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"transit\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"water\",\"elementType\":\"all\",\"stylers\":[{\"color\":\"#46bcec\"},{\"visibility\":\"on\"}]}]",
                 "googlemap_default_zoom": "1",
                 "googlemap_pin_cluster": "yes",
@@ -135,7 +137,7 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
                 "infoboxClose": "http:\/\/houzez01.favethemes.com\/wp-content\/themes\/houzez\/images\/map\/close.png",
                 "clusterIcon": "http:\/\/houzez01.favethemes.com\/wp-content\/themes\/houzez\/images\/map\/cluster-icon.png",
                 "google_map_needed": "yes",
-                "paged": "0",
+                "paged": "",
                 "search_result_page": "normal_page",
                 "search_keyword": "",
                 "search_country": "",

@@ -8,13 +8,13 @@
                 <div class="header-detail">
                     <div class="header-left">
                         <ol class="breadcrumb">
-                            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <li>
                                 <a itemprop="url" href="{{ action('HomeController@home') }}">
                                     <span itemprop="{{ trans('index.home') }}">{{ trans('index.home') }}</span>
                                 </a>
                             </li>
-                            <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                                <a itemprop="url" href="../../property-type/apartment/index.html">
+                            <li>
+                                <a itemprop="url" href="{{ action('TypeController@show', $detailsPost->type->slug) }}">
                                     <span itemprop="title">{{ $detailsPost->type->title }}</span>
                                 </a>
                             </li>

@@ -56,4 +56,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         return false;
     }
+
+    public function getDataByColumn($column, $id)
+    {
+        if (empty($id) || empty($column)) {
+            return false;
+        }
+
+        return $this->model->where($column, $id)->paginate(5);
+    }
 }
