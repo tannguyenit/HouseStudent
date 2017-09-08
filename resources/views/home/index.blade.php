@@ -28,7 +28,6 @@
                             <div class="module-nav">
                                 <button class="btn btn-carousel btn-sm btn-prev-uo8oC">{{ trans('post.prev') }}</button>
                                 <button class="btn btn-carousel btn-sm btn-next-uo8oC">{{ trans('post.next') }}</button>
-                                <a href="simple-listing-list-view/index.html" class="btn btn-carousel btn-sm">{{ trans('post.view-all') }}</a>
                             </div>
                         </div>
                         <div class="row grid-row">
@@ -87,7 +86,7 @@
                                                         </div>
                                                         <div class="cell">
                                                             <div class="phone">
-                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
+                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary col-xs-12">
                                                                     {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                                 </a>
                                                             </div>
@@ -97,13 +96,13 @@
                                             </div>
                                         </div>
                                         <div class="item-foot date hide-on-list">
-                                            <div class="item-foot-left">
+                                            <div class="item-foot-left col-xs-12 col-sm-6 no-padding">
                                                 <p class="prop-user-agent">
                                                     <i class="fa fa-user"></i>
                                                     <a href="agencies/all-american-real-estate/index.html">{{ $element->user->username }}</a>
                                                 </p>
                                             </div>
-                                            <div class="item-foot-right">
+                                            <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
                                                 <p class="prop-date">
                                                     <i class="fa fa-calendar"></i>
                                                     {{ $element->created_at }}
@@ -133,7 +132,6 @@
                             <div class="module-nav">
                                 <button class="btn btn-carousel btn-sm btn-prev-cSQhv">{{ trans('post.prev') }}</button>
                                 <button class="btn btn-carousel btn-sm btn-next-cSQhv">{{ trans('post.next') }}</button>
-                                <a href="simple-listing-list-view/index.html" class="btn btn-carousel btn-sm">{{ trans('post.view-all') }}</a>
                             </div>
                         </div>
                         <div class="row grid-row">
@@ -191,7 +189,7 @@
                                                         </div>
                                                         <div class="cell">
                                                             <div class="phone">
-                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
+                                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary col-xs-12">
                                                                     {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                                 </a>
                                                             </div>

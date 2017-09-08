@@ -7,7 +7,7 @@
         </div>
         <!--end mobile nav-->
         <div class="header-logo logo-mobile">
-            <a href="index.html"> <img src="/wp-content/uploads/2016/03/logo.png" alt="Mobile logo"> </a>
+            <a href="{{ action('HomeController@home') }}"> <img src="/wp-content/uploads/2016/03/logo.png" alt="Mobile logo"> </a>
         </div>
         <div class="header-user">
             <ul class="account-action">
