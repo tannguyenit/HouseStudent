@@ -1178,3 +1178,9 @@ span.user-name {
 .location-block {
     background-image:url(/default-image/da-nang-vietnam.jpg);
 }
+.label-wrap .label {
+    padding:6px;
+}
+.header-mobile .header-logo img {
+    max-height: inherit;
+}

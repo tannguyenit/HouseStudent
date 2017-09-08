@@ -57,10 +57,19 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return false;
     }
 
-    public function getDataByColumn($column, $id, $sortBy)
+    public function getDataByColumn($column, $id, $sortBy = '')
     {
         if (empty($id) || empty($column)) {
             return false;
+        }
+
+        if (!$sortBy) {
+            $sortBy = [
+                'key'   => 'created_at',
+                'value' => 'DESC',
+            ];
+
+            $sortBy = (object) $sortBy;
         }
 
         return $this->model->where($column, $id)

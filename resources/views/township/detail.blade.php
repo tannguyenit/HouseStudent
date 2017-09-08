@@ -106,7 +106,7 @@
                                                 <span class="item-price">$ {{ $element->price . config('setting.price.vi') }}</span>
                                             </div>
                                             <div class="info-row phone text-right">
-                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
+                                                <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary col-xs-12">
                                                     {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                 </a>
                                             </div>
@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="cell">
                                                 <div class="phone">
-                                                    <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary">
+                                                    <a href="{{ action('PostController@show', $element->slug) }}" class="btn btn-primary col-xs-12">
                                                         {{ trans('post.detail') }} <i class="fa fa-angle-right fa-right"></i>
                                                     </a>
                                                 </div>
@@ -132,13 +132,13 @@
                                     </div>
                                 </div>
                                 <div class="item-foot date hide-on-list">
-                                    <div class="item-foot-left">
+                                    <div class="item-foot-left col-xs-12 col-sm-6 no-padding">
                                         <p class="prop-user-agent">
                                             <i class="fa fa-user"></i>
                                             <a href="">{{ $element->user->full_name }}</a>
                                         </p>
                                     </div>
-                                    <div class="item-foot-right">
+                                    <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
                                         <p class="prop-date">
                                             <i class="fa fa-calendar"></i>{{ $element->created_at }}
                                         </p>
