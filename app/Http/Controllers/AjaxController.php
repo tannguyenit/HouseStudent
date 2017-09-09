@@ -17,7 +17,9 @@ class AjaxController extends BaseController
     public function getMap(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->postRepository->getAllData(['user']);
+            $dataSearch = $request->all();
+
+            $data = $this->postRepository->getAllData($dataSearch, ['user']);
 
             if ($data) {
                 $properties = [];

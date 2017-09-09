@@ -166,7 +166,7 @@ return [
         /**
          * start include
          */
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
@@ -236,7 +236,7 @@ return [
         /**
          * start include
          */
-        'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        // 'Debugbar'     => Barryvdh\Debugbar\Facade::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
         'Socialite'    => Laravel\Socialite\Facades\Socialite::class,

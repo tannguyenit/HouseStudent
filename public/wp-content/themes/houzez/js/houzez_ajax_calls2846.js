@@ -2379,12 +2379,8 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
             'type': type,
             'label': label,
             'property_id': property_id,
-            'bedrooms': bedrooms,
-            'bathrooms': bathrooms,
             'min_price': min_price,
             'max_price': max_price,
-            'min_area': min_area,
-            'max_area': max_area,
             'features': features,
             'publish_date': publish_date,
             'search_lat': search_lat,
@@ -2392,10 +2388,6 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
             'use_radius': use_radius,
             'search_location': search_location,
             'search_radius': search_radius,
-            'security': headerMapSecurity,
-
-            'paged': paged,
-            'post_per_page': search_no_posts
         },
         beforeSend: function() {
             $('#houzez-map-loading').show();
@@ -3192,7 +3184,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                             url: ajaxurl,
                             data: {
                                 'action': 'houzez_get_auto_complete_search',
-                                'key': keyword,
+                                'keyword': keyword,
                                 //'nonce' : AJAX_VARIABLE.houzez_autoComplete_nonce
                             },
                             beforeSend: function( ) {
@@ -3285,38 +3277,38 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*
          * Property Message Notifications
          * -----------------------------*/
-         var houzez_message_notifications = function () {
+        //  var houzez_message_notifications = function () {
 
-            $.ajax({
-                url: ajaxurl,
-                data: {
-                    action : 'houzez_chcek_messages_notifications'
-                },
-                method: "POST",
-                dataType: "JSON",
+        //     $.ajax({
+        //         url: ajaxurl,
+        //         data: {
+        //             action : 'houzez_chcek_messages_notifications'
+        //         },
+        //         method: "POST",
+        //         dataType: "JSON",
 
-                beforeSend: function( ) {
-                    // code here...
-                },
-                success: function(response) {
-                    if( response.success ) {
-                        if ( response.notification ) {
-                            $( '.user-alert' ).show();
-                            $( '.msg-alert' ).show();
-                        } else {
-                            $( '.user-alert' ).hide();
-                            $( '.msg-alert' ).hide();
-                        }
-                    }
-                }
-            });
+        //         beforeSend: function( ) {
+        //             // code here...
+        //         },
+        //         success: function(response) {
+        //             if( response.success ) {
+        //                 if ( response.notification ) {
+        //                     $( '.user-alert' ).show();
+        //                     $( '.msg-alert' ).show();
+        //                 } else {
+        //                     $( '.user-alert' ).hide();
+        //                     $( '.msg-alert' ).hide();
+        //                 }
+        //             }
+        //         }
+        //     });
 
-        };
+        // };
 
-        $( document ).ready(function() {
-            houzez_message_notifications();
-            setInterval(function() { houzez_message_notifications(); }, 180000);
-        });
+        // $( document ).ready(function() {
+        //     houzez_message_notifications();
+        //     setInterval(function() { houzez_message_notifications(); }, 180000);
+        // });
 
 
         /*
