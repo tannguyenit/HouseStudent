@@ -12,15 +12,17 @@
                             </div>
                             <select name="location" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                 <option value="">All Cities</option>
-                                <option data-parentstate="illinois" value="chicago"> Chicago</option>
-                                <option data-parentstate="california" value="los-angeles"> Los Angeles</option>
-                                <option data-parentstate="florida" value="miami"> Miami</option>
-                                <option data-parentstate="new-york" value="new-york"> New York</option>
+                                @forelse ($countries as $element)
+                                    <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
+                                @empty
+                                @endforelse
                             </select>
                             <select name="area" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                 <option value="">All Areas</option>
-                                <option data-parentcity="los-angeles" value="westwood"> Westwood</option>
-                                <option data-parentcity="miami" value="wynwood"> Wynwood</option>
+                                @forelse ($countries as $element)
+                                    <option data-parentcity="{{ $element->township }}" value="{{ $element->country }}">{{ $element->country }}</option>
+                                @empty
+                                @endforelse
                             </select>
                             <div class="advance-btn-holder">
                                 <button class="advance-btn btn" type="button"><i class="fa fa-gear"></i> Advanced</button>
@@ -36,14 +38,10 @@
                                 <div class="form-group">
                                     <select class="selectpicker" id="selected_status" name="status" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Status</option>
-                                        <option value="for-rent"> For Rent</option>
-                                        <option value="for-sale"> For Sale</option>
-                                        <option value="foreclosures"> Foreclosures</option>
-                                        <option value="new-costruction"> New Costruction</option>
-                                        <option value="new-listing"> New Listing</option>
-                                        <option value="open-house"> Open House</option>
-                                        <option value="reduced-price"> Reduced Price</option>
-                                        <option value="resale"> Resale</option>
+                                        @forelse ($statuses as $element)
+                                        <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -51,26 +49,11 @@
                                 <div class="form-group">
                                     <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Types</option>
-                                        <option value="apartment"> Apartment</option>
-                                        <option value="condo"> Condo</option>
-                                        <option value="farm"> Farm</option>
-                                        <option value="loft"> Loft</option>
-                                        <option value="lot"> Lot</option>
-                                        <option value="multi-family-home"> Multi Family Home</option>
-                                        <option value="single-family-home"> Single Family Home</option>
-                                        <option value="townhouse"> Townhouse</option>
-                                        <option value="villa"> Villa</option>
+                                        @forelse ($types as $element)
+                                        <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" value="" name="min-area" placeholder="Min Area (sqft)">
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" value="" name="max-area" placeholder="Max Area (sqft)">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-xs-6">
@@ -163,16 +146,6 @@
                                         <option value="townhouse"> Townhouse</option>
                                         <option value="villa"> Villa</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" value="" name="min-area" placeholder="Min Area (sqft)">
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" value="" name="max-area" placeholder="Max Area (sqft)">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-xs-12">

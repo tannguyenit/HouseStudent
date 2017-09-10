@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="xmlrpc.php">
-    <title>Houzez - Real Estate WordPress Theme</title>
+    <title>House For Student</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="wp-content/uploads/2016/03/favicon.png">
     <!-- end favicon -->
@@ -22,7 +22,7 @@
         {{ Html::style('wp-content/plugins/js_composer/assets/lib/bower/animate-css/animate.min3c21.css') }}
     @show
     @section('headerscript')
-        {{ Html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/jquery.min.js') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/jquery-migrate.min.js') }}
         {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
         {{ Html::script('wp-content/themes/houzez/js/infobox.js') }}
@@ -32,9 +32,7 @@
     @show
 </head>
 <div id="fb-root"></div>
-<body class="home page-template page-template-template page-template-template-homepage
-page-template-templatetemplate-homepage-php page page-id-194
-transparent-no js-comp-ver-5.1.1 vc_responsive">
+<body>
     @section('include')
         @include('layouts.includes.modal')
         @include('layouts.includes.header')
@@ -121,8 +119,8 @@ transparent-no js-comp-ver-5.1.1 vc_responsive">
                 "for_rent": "for-rent",
                 "for_rent_price_range": "for-rent",
                 "currency_symbol": "$",
-                "advanced_search_widget_min_price": "1000",
-                "advanced_search_widget_max_price": "4500000",
+                "advanced_search_widget_min_price": "{{ $prices->min }}",
+                "advanced_search_widget_max_price": "{{ $prices->max }}",
                 "advanced_search_min_price_range_for_rent": "50",
                 "advanced_search_max_price_range_for_rent": "26000",
                 "advanced_search_widget_min_area": "50",
