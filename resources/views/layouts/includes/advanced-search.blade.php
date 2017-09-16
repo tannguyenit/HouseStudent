@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <form method="get" autocomplete="off" action="/houzez01.favethemes.com/advanced-search/">
+                <form method="get" autocomplete="off" action="{{ action('PostController@search') }}">
                     <div class="form-group search-long">
                         <div class="search">
                             <div class="input-search input-icon">
@@ -39,7 +39,7 @@
                                     <select class="selectpicker" id="selected_status" name="status" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Status</option>
                                         @forelse ($statuses as $element)
-                                        <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                            <option value="{{ $element->id }}">{{ $element->title }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -50,7 +50,7 @@
                                     <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Types</option>
                                         @forelse ($types as $element)
-                                        <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                            <option value="{{ $element->id }}">{{ $element->title }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -61,7 +61,10 @@
                                     <div class="range-text">
                                         <input type="hidden" name="min-price" class="min-price-range-hidden range-input" readonly>
                                         <input type="hidden" name="max-price" class="max-price-range-hidden range-input" readonly>
-                                        <p><span class="range-title">Price Range:</span> From <span class="min-price-range"></span> to <span class="max-price-range"></span>
+                                        <p>
+                                            <span class="range-title">Price Range:</span>
+                                            From <span class="min-price-range"></span>
+                                            to <span class="max-price-range"></span>
                                         </p>
                                     </div>
                                     <div class="range-wrap">
@@ -80,7 +83,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <form autocomplete="off" method="get" action="http://houzez01.favethemes.com/advanced-search/">
+                <form autocomplete="off" method="get" action="{{ action('PostController@search') }}">
                     <div class="single-search-wrap">
                         <div class="single-search-inner advance-btn">
                             <button class="table-cell text-left" type="button"><i class="fa fa-gear"></i>
@@ -101,10 +104,10 @@
                                 <div class="form-group">
                                     <select name="location" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Cities</option>
-                                        <option data-parentstate="illinois" value="chicago"> Chicago</option>
-                                        <option data-parentstate="california" value="los-angeles"> Los Angeles</option>
-                                        <option data-parentstate="florida" value="miami"> Miami</option>
-                                        <option data-parentstate="new-york" value="new-york"> New York</option>
+                                        @forelse ($countries as $element)
+                                            <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -112,8 +115,10 @@
                                 <div class="form-group">
                                     <select name="area" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Areas</option>
-                                        <option data-parentcity="los-angeles" value="westwood"> Westwood</option>
-                                        <option data-parentcity="miami" value="wynwood"> Wynwood</option>
+                                        @forelse ($countries as $element)
+                                            <option data-parentcity="{{ $element->township }}" value="{{ $element->country }}">{{ $element->country }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -121,14 +126,10 @@
                                 <div class="form-group">
                                     <select class="selectpicker" id="selected_status_mobile" name="status" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Status</option>
-                                        <option value="for-rent"> For Rent</option>
-                                        <option value="for-sale"> For Sale</option>
-                                        <option value="foreclosures"> Foreclosures</option>
-                                        <option value="new-costruction"> New Costruction</option>
-                                        <option value="new-listing"> New Listing</option>
-                                        <option value="open-house"> Open House</option>
-                                        <option value="reduced-price"> Reduced Price</option>
-                                        <option value="resale"> Resale</option>
+                                        @forelse ($statuses as $element)
+                                            <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -136,15 +137,10 @@
                                 <div class="form-group">
                                     <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
                                         <option value="">All Types</option>
-                                        <option value="apartment"> Apartment</option>
-                                        <option value="condo"> Condo</option>
-                                        <option value="farm"> Farm</option>
-                                        <option value="loft"> Loft</option>
-                                        <option value="lot"> Lot</option>
-                                        <option value="multi-family-home"> Multi Family Home</option>
-                                        <option value="single-family-home"> Single Family Home</option>
-                                        <option value="townhouse"> Townhouse</option>
-                                        <option value="villa"> Villa</option>
+                                        @forelse ($types as $element)
+                                            <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -153,7 +149,10 @@
                                     <div class="range-text">
                                         <input type="hidden" name="min-price" class="min-price-range-hidden range-input">
                                         <input type="hidden" name="max-price" class="max-price-range-hidden range-input">
-                                        <p><span class="range-title">Price Range:</span> From <span class="min-price-range"></span> to <span class="max-price-range"></span>
+                                        <p>
+                                            <span class="range-title">Price Range:</span>
+                                            From <span class="min-price-range"></span>
+                                            to <span class="max-price-range"></span>
                                         </p>
                                     </div>
                                     <div class="range-wrap">
@@ -162,7 +161,9 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-xs-12">
-                                <button type="submit" class="btn btn-secondary btn-block houzez-theme-button"><i class="fa fa-search pull-left"></i> Search</button>
+                                <button type="submit" class="btn btn-secondary btn-block houzez-theme-button">
+                                    <i class="fa fa-search pull-left"></i> Search
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -23,4 +23,6 @@ interface BaseRepositoryInterface
     public function getStatistic();
 
     public function getDataBySlug($slug, $array = []);
+
+    public function getSortBy($data);
 }
