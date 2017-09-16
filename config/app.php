@@ -174,7 +174,13 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        /*
+         * BotMan Service Providers...
+         */
+        BotMan\Tinker\TinkerServiceProvider::class,
+        App\Providers\BotMan\DriverServiceProvider::class,
+        BotMan\BotMan\BotManServiceProvider::class,
+        BotMan\Studio\Providers\StudioServiceProvider::class,
         /*
          * Application Service Providers...
          */
