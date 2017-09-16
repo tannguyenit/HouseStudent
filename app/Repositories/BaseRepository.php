@@ -158,7 +158,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         if (empty($path) || empty($image)) {
             return false;
         }
-        $imageName = time() . '-' . $image->getClientOriginalName();
+        $imageName = $image->getClientOriginalName();
         $path      = public_path() . $path;
         $image->move($path, $imageName);
         return $imageName;
@@ -188,5 +188,44 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         return false;
+    }
+
+    public function getSortBy($data)
+    {
+        switch ($data) {
+            case 'a_price':
+                $sortBy = [
+                    'key'   => 'price',
+                    'value' => 'ASC',
+                ];
+                break;
+            case 'd_price':
+                $sortBy = [
+                    'key'   => 'price',
+                    'value' => 'DESC',
+                ];
+                break;
+            case 'a_date':
+                $sortBy = [
+                    'key'   => 'created_at',
+                    'value' => 'ASC',
+                ];
+                break;
+            case 'd_date':
+                $sortBy = [
+                    'key'   => 'created_at',
+                    'value' => 'DESC',
+                ];
+                break;
+
+            default:
+                $sortBy = [
+                    'key'   => 'created_at',
+                    'value' => 'DESC',
+                ];
+                break;
+        }
+
+        return (object) $sortBy;
     }
 }

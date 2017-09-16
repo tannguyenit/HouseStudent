@@ -66,7 +66,9 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="http://houzez01.favethemes.com/add-new-property/"><i class="fa fa-plus-circle"></i>Add new property</a>
+                                <a href="{{ action('PostController@create') }}">
+                                    <i class="fa fa-plus-circle"></i>{{ trans('post.create') }}
+                                </a>
                             </li>
                             <li>
                                 <a href="http://houzez01.favethemes.com/favorite-properties/"><i class="fa fa-heart"></i>Favourite properties</a>
@@ -98,7 +100,7 @@
                     <i class="fa fa-user hidden-md hidden-lg"></i>
                     <span class="hidden-sm hidden-xs">{{ trans('index.signin') }}</span>
                 </a>
-                <a href="add-new-property/index.html" class="btn btn-default hidden-xs hidden-sm">{{ trans('post.create') }}</a>
+                <a href="{{ action('PostController@create') }}" class="btn btn-default hidden-xs hidden-sm">{{ trans('post.create') }}</a>
             </div>
             @endif
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PostRepository\PostRepository;
 use Illuminate\Http\Request;
+use View;
 
 class AjaxController extends BaseController
 {
@@ -20,6 +21,11 @@ class AjaxController extends BaseController
             $dataSearch = $request->all();
 
             $data = $this->postRepository->getAllData($dataSearch, ['user']);
+
+            if ($request->keyword) {
+                $keyword = $request->keyword;
+                return view('ajax.search-keyword', compact('data', 'keyword'));
+            }
 
             if ($data) {
                 $properties = [];
@@ -52,5 +58,98 @@ class AjaxController extends BaseController
             'getProperties' => false,
             'properties'    => [],
         ]);
+    }
+
+    public function uploadFileUploader(Request $request)
+    {
+        if ($request->ajax()) {
+            $files  = $request->file('file')[0];
+            $upload = $this->postRepository->uploadImage($files, config('path.temp'));
+
+            if ($upload) {
+                return response()->json([
+                    'status'  => true,
+                    'type'    => trans('forums.result.success'),
+                    'message' => trans('forums.action.create') . trans('forums.result.is_success'),
+                ]);
+            }
+
+            return response()->json([
+                'status'  => false,
+                'type'    => trans('forums.result.error'),
+                'message' => trans('forums.action.create') . trans('forums.result.is_fail'),
+            ]);
+        }
+    }
+
+    public function removeFileUploader(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            $file = $data['file_name'];
+            $path = public_path() . config('path.temp') . $file;
+
+            if (isset($data['file_id'])) {
+                $managerFile = ManagerFile::where($data)->delete();
+
+                if ($managerFile) {
+                    $path = public_path() . config('path.topics') . $file;
+
+                    if (file_exists($path)) {
+                        unlink($path);
+
+                        return response()->json([
+                            'status'  => true,
+                            'type'    => trans('forums.result.success'),
+                            'message' => trans('forums.action.delete') . trans('forums.result.is_success'),
+                        ]);
+                    }
+                }
+            }
+
+            if (file_exists($path)) {
+                unlink($path);
+
+                return response()->json([
+                    'status'  => true,
+                    'type'    => trans('forums.result.success'),
+                    'message' => trans('forums.action.delete') . trans('forums.result.is_success'),
+                ]);
+            }
+
+            return response()->json([
+                'status'  => false,
+                'type'    => trans('forums.result.error'),
+                'message' => trans('forums.action.delete') . trans('forums.result.is_fail'),
+            ]);
+        }
+    }
+
+    public function moveImage($file, $fileNew)
+    {
+        if (empty($file) || empty($fileNew)) {
+            return false;
+        }
+
+        $pathOld = public_path() . config('path.temp') . $file;
+        $pathNew = public_path() . config('path.topics') . $fileNew;
+
+        if (file_exists($pathOld)) {
+            if (!is_dir(public_path() . config('path.forums'))) {
+                mkdir(public_path() . config('path.forums'), 0777);
+            }
+
+            if (!is_dir(public_path() . config('path.topics'))) {
+                mkdir(public_path() . config('path.topics'), 0777);
+            }
+
+            $rename = rename($pathOld, $pathNew);
+
+            if ($rename) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

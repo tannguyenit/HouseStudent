@@ -27,42 +27,8 @@ class TypeController extends BaseController
      */
     public function show(Request $request, $slug)
     {
-        $getSortBy = $request->get('sortby');
-
-        switch ($getSortBy) {
-            case 'a_price':
-                $sortBy = [
-                    'key'   => 'price',
-                    'value' => 'ASC',
-                ];
-                break;
-            case 'd_price':
-                $sortBy = [
-                    'key'   => 'price',
-                    'value' => 'DESC',
-                ];
-                break;
-            case 'a_date':
-                $sortBy = [
-                    'key'   => 'created_at',
-                    'value' => 'ASC',
-                ];
-                break;
-            case 'd_date':
-                $sortBy = [
-                    'key'   => 'created_at',
-                    'value' => 'DESC',
-                ];
-                break;
-
-            default:
-                $sortBy = [
-                    'key'   => 'created_at',
-                    'value' => 'DESC',
-                ];
-                break;
-        }
-        $sortBy            = (object) $sortBy;
+        $getSortBy         = $request->get('sortby');
+        $sortBy            = $this->typeRepository->getSortBy($getSortBy);
         $detailsTypes      = $this->typeRepository->getDataBySlug($slug);
         $id                = $detailsTypes->id;
         $dataView['posts'] = $this->postRepository->getDataByColumn('type_id', $id, $sortBy);

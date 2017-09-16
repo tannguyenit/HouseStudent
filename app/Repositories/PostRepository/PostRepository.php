@@ -18,13 +18,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         $getPrice = $this->getPrice();
 
-        if (isset($search['min_price']) && strpos($search['min_price'], '$')) {
+        if (isset($search['min_price']) && strpos($search['min_price'], ',')) {
             $minPrice = $this->changePrice($search['min_price']);
         } else {
             $minPrice = $getPrice->min;
         }
 
-        if (isset($search['max_price']) && strpos($search['max_price'], '$')) {
+        if (isset($search['max_price']) && strpos($search['max_price'], ',')) {
             $maxPrice = $this->changePrice($search['max_price']);
         } else {
             $maxPrice = $getPrice->max;
@@ -34,11 +34,14 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $arrWhere  = $this->getDataSearch($search);
         $min_price = $minPrice;
         $max_price = $maxPrice;
-
-        return $this->model->with($array)
+        $keyword   = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
+        $result    = $this->model->with($array)
             ->where($arrWhere)
-            ->whereBetween('price', [$min_price, $max_price])
-            ->get();
+            ->whereBetween('price', [$min_price, $max_price]);
+        if ($keyword) {
+            $result->where('address', 'LIKE', $keyword);
+        }
+        return $result->get();
     }
 
     /**
@@ -136,8 +139,6 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function getDataSearch($search)
     {
         $arrWhere = [];
-
-        isset($search['keyword']) ? $arrWhere['address'] = ' LIKE %' . $search['keyword'] . '%' : '';
 
         if (isset($search['location']) && 'all' != $search['location']) {
             $arrWhere['township'] = $search['location'];

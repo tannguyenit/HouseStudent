@@ -1184,3 +1184,6 @@ span.user-name {
 .header-mobile .header-logo img {
     max-height: inherit;
 }
+.width-40 {
+    width:40%;
+}

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\TypeRepository\TypeRepository;
-use Illuminate\Http\Request;
+use Request;
 use Session;
 
 class PostController extends BaseController
@@ -41,7 +41,7 @@ class PostController extends BaseController
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -52,7 +52,8 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        dd($data);
     }
 
     /**
@@ -129,5 +130,15 @@ class PostController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function search()
+    {
+        $getSortBy           = Request::get('sortby');
+        $sortBy              = $this->postRepository->getSortBy($getSortBy);
+        $dataSearch          = Request::query();
+        $dataView['searchs'] = $this->postRepository->getAllData($dataSearch, ['user']);
+
+        return view('post.search', $dataView);
     }
 }

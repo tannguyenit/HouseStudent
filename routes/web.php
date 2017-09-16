@@ -26,10 +26,13 @@ Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCa
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::get('/type/{slug}', ['as' => 'show', 'uses' => 'TypeController@show']);
 Route::get('/township/{slug}', ['as' => 'township', 'uses' => 'PostController@townShip']);
+Route::get('/advanced-search', ['as' => 'search', 'uses' => 'PostController@search']);
 Route::resource('property', 'PostController');
 
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
+    Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
+    Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);
 });
 /*
 |--------------------------------------------------------------------------

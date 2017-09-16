@@ -38,11 +38,14 @@
         @include('layouts.includes.header')
         @include('layouts.includes.header-mobile')
     @show
+    @yield('create')
     <div class="container">
         @yield('content')
     </div>
 
-    @include('layouts.includes.footer')
+    @if (\Route::currentRouteName() != 'property.create')
+        @include('layouts.includes.footer')
+    @endif
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.custom.js') }}
