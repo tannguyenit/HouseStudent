@@ -25,7 +25,8 @@ class PostController extends BaseController
      */
     public function townShip(Request $request, $slug)
     {
-        $dataView['posts'] = $this->postRepository->getDataByColumn('township_slug', $slug);
+        $sortBy            = $this->postRepository->getSortBy(null);
+        $dataView['posts'] = $this->postRepository->getDataByColumn('township_slug', $slug, $sortBy);
 
         if ($dataView['posts']) {
             return view('township.detail', $dataView);
@@ -134,10 +135,12 @@ class PostController extends BaseController
 
     public function search()
     {
-        $getSortBy           = Request::get('sortby');
-        $sortBy              = $this->postRepository->getSortBy($getSortBy);
-        $dataSearch          = Request::query();
-        $dataView['searchs'] = $this->postRepository->getAllData($dataSearch, ['user']);
+        $getSortBy              = Request::get('sortby');
+        $sortBy                 = $this->postRepository->getSortBy($getSortBy);
+        $dataSearch             = Request::query();
+        $dataView['dataSearch'] = $dataSearch;
+        $dataView['searchs']    = $this->postRepository->getAllData($dataSearch, $sortBy, ['user'])
+            ->paginate(config('setting.limit.search'));
 
         return view('post.search', $dataView);
     }

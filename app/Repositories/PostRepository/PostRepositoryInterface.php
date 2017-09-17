@@ -3,7 +3,7 @@ namespace App\Repositories\PostRepository;
 
 interface PostRepositoryInterface
 {
-    public function getAllData($search, $array = []);
+    public function getAllData($search, $sortBy, $array = []);
 
     public function getPost($limit, $array = [], $orderBy = null);
 
@@ -11,7 +11,7 @@ interface PostRepositoryInterface
 
     public function getDataBySlug($slug);
 
-    public function getDataByColumn($column, $id, $sortBy);
+    public function getDataByColumn($column, $id, $sortBy, $limit);
 
     public function getDataDistinct($column, $parentColunm);
 

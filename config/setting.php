@@ -13,6 +13,8 @@ return [
         'country'      => 4,
         'similar_post' => 4,
         'type'         => 6,
+        'search'       => 9,
+        'first'        => 1,
     ],
     'price'       => [
         'vi' => ' VNĐ',
