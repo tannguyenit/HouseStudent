@@ -1,22 +1,30 @@
 {
     "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "The House For Student",
+    "keywords": ["framework", "laravel", "houseforent"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
-        "cviebrock/eloquent-sluggable": "^4.1",
-        "laravel/framework": "5.4.*",
+        "php": ">=7.0",
+        "botman/botman": "~2.0",
+        "botman/driver-facebook": "^1.0",
+        "botman/driver-web": "~1.0",
+        "botman/studio-addons": "~1.0",
+        "botman/tinker": "~1.0",
+        "clue/stdio-react": "^1.0",
+        "fideloper/proxy": "~3.3",
+        "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "mpociot/slack-client": "^0.3.0",
         "laravelcollective/html": "^5.3.0",
+        "cviebrock/eloquent-sluggable": "^4.1",
         "laravel/socialite": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "barryvdh/laravel-debugbar": "^2.4",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~6.0",
+        "filp/whoops": "~2.0"
     },
     "autoload": {
         "classmap": [
@@ -44,16 +52,27 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     }
 }
