@@ -1187,3 +1187,6 @@ span.user-name {
 .width-40 {
     width:40%;
 }
+.list-search .form-control[readonly] {
+    height:auto;
+}

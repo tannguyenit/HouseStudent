@@ -14,7 +14,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return Post::class;
     }
 
-    public function getAllData($search, $array = [])
+    public function getAllData($search, $sortBy, $array = [])
     {
         $getPrice = $this->getPrice();
 
@@ -38,10 +38,12 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $result    = $this->model->with($array)
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
+
         if ($keyword) {
             $result->where('address', 'LIKE', $keyword);
         }
-        return $result->get();
+
+        return $result->orderBy($sortBy->key, $sortBy->value);
     }
 
     /**
@@ -82,24 +84,19 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return false;
     }
 
-    public function getDataByColumn($column, $id, $sortBy = '')
+    public function getDataByColumn($column, $id, $sortBy, $limit = '')
     {
         if (empty($id) || empty($column)) {
             return false;
         }
 
-        if (!$sortBy) {
-            $sortBy = [
-                'key'   => 'created_at',
-                'value' => 'DESC',
-            ];
-
-            $sortBy = (object) $sortBy;
+        if (empty($limit)) {
+            $limit = 1;
         }
 
         return $this->model->where($column, $id)
             ->orderBy($sortBy->key, $sortBy->value)
-            ->paginate(config('setting.limit.type'));
+            ->paginate($limit);
     }
 
     public function getDataDistinct($column, $parentColumn)

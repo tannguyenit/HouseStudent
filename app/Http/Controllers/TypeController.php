@@ -31,7 +31,7 @@ class TypeController extends BaseController
         $sortBy            = $this->typeRepository->getSortBy($getSortBy);
         $detailsTypes      = $this->typeRepository->getDataBySlug($slug);
         $id                = $detailsTypes->id;
-        $dataView['posts'] = $this->postRepository->getDataByColumn('type_id', $id, $sortBy);
+        $dataView['posts'] = $this->postRepository->getDataByColumn('type_id', $id, $sortBy, config('setting.limit.type'));
 
         if ($detailsTypes && $dataView['posts']) {
             $dataView['detailsTypes'] = $detailsTypes;

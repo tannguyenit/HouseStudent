@@ -19,8 +19,8 @@ class AjaxController extends BaseController
     {
         if ($request->ajax()) {
             $dataSearch = $request->all();
-
-            $data = $this->postRepository->getAllData($dataSearch, ['user']);
+            $sortBy     = $this->postRepository->getSortBy(null);
+            $data       = $this->postRepository->getAllData($dataSearch, $sortBy, ['user'])->get();
 
             if ($request->keyword) {
                 $keyword = $request->keyword;
