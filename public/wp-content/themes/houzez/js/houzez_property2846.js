@@ -1,7 +1,7 @@
 /**
  * Created by waqasriaz on 06/10/15.
  */
-jQuery(document).ready( function($) {
+ jQuery(document).ready( function($) {
     "use strict";
 
     if ( typeof houzezProperty !== "undefined" ) {
@@ -50,22 +50,17 @@ jQuery(document).ready( function($) {
         var mu_availability_text = houzezProperty.mu_availability_text;
 
         // For validation
-        var prop_title = houzezProperty.prop_title;
-        var prop_price = houzezProperty.prop_price;
         var prop_sec_price = houzezProperty.prop_sec_price;
-        var prop_type = houzezProperty.prop_type;
-        var prop_status = houzezProperty.prop_status;
         var file = houzezProperty.file;
-        //var prop_description = houzezProperty.description;
         var price_label = houzezProperty.price_label;
         var prop_id = houzezProperty.prop_id;
-        var bedrooms = houzezProperty.bedrooms;
-        var bathrooms = houzezProperty.bathrooms;
+        var phone_boss = houzezProperty.phone_boss;
+        var name_boss = houzezProperty.name_boss;
         var area_size = houzezProperty.area_size;
         var land_area = houzezProperty.land_area;
         var garages = houzezProperty.garages;
         var year_built = houzezProperty.year_built;
-        var property_map_address = houzezProperty.property_map_address;
+        var address = houzezProperty.address;
         var neighborhood = houzezProperty.neighborhood;
         var city = houzezProperty.city;
         var state = houzezProperty.state;
@@ -340,7 +335,7 @@ jQuery(document).ready( function($) {
         $( "#save_as_draft" ).click(function() {
             var $form = $('#submit_property_form');
             var save_as_draft = $('#save_as_draft');
-            var description = tinyMCE.get('prop_des').getContent();
+            var description = tinyMCE.get('description').getContent();
 
             $.ajax({
                 type: 'post',
@@ -368,7 +363,7 @@ jQuery(document).ready( function($) {
 
         /* ------------------------------------------------------------------------ */
         /*  START CREATE LISTING FORM STEPS AND VALIDATION
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         $("[data-hide]").on("click", function(){
             $(this).closest("." + $(this).attr("data-hide")).hide();
         });
@@ -499,50 +494,50 @@ jQuery(document).ready( function($) {
 
         if(form.length > 0){
             form.validate({ // initialize plugin
-                //ignore:[],
+                // ignore:[],
                 ignore: ":hidden:not(.form-step.active .selectpicker)",
-                errorPlacement: function (error, element) {
-                    return false;
-                },
+                // errorPlacement: function (error, element) {
+                //     return false;
+                // },
                 rules: {
-                    prop_title: {
-                        required: houzez_validation(prop_title)
+                    title: {
+                        required: true
                     },
-                    prop_price: {
-                        required: houzez_validation(prop_price),
+                    price: {
+                        required: true,
                         digits: true
                     },
-                    prop_des: {
-                        required: houzez_validation(prop_sec_price),
-                        digits: true
+                    description: {
+                        required: true
                     },
-                    prop_type: {
-                        required: houzez_validation(prop_type)
+                    type_id: {
+                        required: true
                     },
-                    prop_status: {
-                        required: houzez_validation(prop_status)
+                    status_id: {
+                        required: true
                     },
                     file: {
                         required: houzez_validation(file)
                     },
-                    prop_label: {
+                    phone_boss: {
                         required: houzez_validation(price_label)
                     },
-                    property_id: {
+                    name_boss: {
                         required: houzez_validation(prop_id)
                     },
-                    prop_size: {
+                    area: {
                         required: houzez_validation(area_size),
                         number: true
                     },
                     prop_land_area: {
                         required: houzez_validation(land_area)
                     },
-                    prop_beds: {
-                        required: houzez_validation(bedrooms)
+                    phone_boss: {
+                        required: houzez_validation(phone_boss),
+                        number: true
                     },
-                    prop_baths: {
-                        required: houzez_validation(bathrooms)
+                    name_boss: {
+                        required: houzez_validation(name_boss)
                     },
                     prop_garage: {
                         required: houzez_validation(garages)
@@ -550,8 +545,8 @@ jQuery(document).ready( function($) {
                     prop_year_built: {
                         required: houzez_validation(year_built)
                     },
-                    property_map_address: {
-                        required: houzez_validation(property_map_address)
+                    address: {
+                        required: houzez_validation(address)
                     },
                     /*neighborhood: {
                         required: houzez_validation(neighborhood)
@@ -564,28 +559,29 @@ jQuery(document).ready( function($) {
                     }*/
                 },
                 messages: {
-                    prop_title: "",
-                    prop_des: "",
-                    prop_price: "",
+                    title: "Vui long nhap noi dung",
+                    description: "Vui long nhap noi dung",
+                    price: "Vui long nhap gia",
                     prop_beds: msg_digits,
                     prop_baths: msg_digits,
-                    prop_size: msg_digits,
-                    property_map_address: "",
-                    prop_type: "",
-                    prop_status: "",
-                    prop_labels: "",
+                    area: msg_digits,
+                    address: "Vui long nhap noi dung",
+                    type_id: "Vui long nhap noi dung",
+                    status_id: "Vui long nhap noi dung",
+                    phone_boss: "Vui long nhap noi dung",
+                    name_boss: "Vui long nhap noi dung",
                     file: "Vui long chon anh",
-                    prop_land_area: "",
-                    property_id: "",
-                    prop_garage: "",
-                    prop_year_built: "",
+                    prop_land_area: "Vui long nhap noi dung",
+                    property_id: "Vui long nhap noi dung",
+                    prop_garage: "Vui long nhap noi dung",
+                    prop_year_built: "Vui long nhap noi dung",
                     /*neighborhood: "",
                     locality: "",
                     administrative_area_level_1: ""*/
                     /*username: {
                      required: "Please enter a username",
                      minlength: "Your username must consist of at least 2 characters"
-                     },*/
+                 },*/
                     /*password: {
                      required: "Please provide a password",
                      minlength: "Your password must be at least 5 characters long"
@@ -594,9 +590,9 @@ jQuery(document).ready( function($) {
                      required: "Please provide a password",
                      minlength: "Your password must be at least 5 characters long",
                      equalTo: "Please enter the same password as above"
-                     },*/
-                }
-            });
+                 },*/
+             }
+         });
             // The default value for $('#frm_editCategory').validate().settings.ignore
             // is ':hidden'.  Log this to the console to verify:
             //console.log(form.validate().settings.ignore);
@@ -607,7 +603,7 @@ jQuery(document).ready( function($) {
 
         /* ------------------------------------------------------------------------ */
         /*	Property additional Features
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         $( "#houzez_additional_details_main" ).sortable({
             revert: 100,
             placeholder: "detail-placeholder",
@@ -625,19 +621,19 @@ jQuery(document).ready( function($) {
             });
 
             var newAdditionalDetail = '<tr>'+
-                '<td class="action-field">'+
-                '<span class="sort-additional-row"><i class="fa fa-navicon"></i></span>'+
-                '</td>'+
-                '<td class="field-title">'+
-                '<input class="form-control" type="text" name="additional_features['+numVal+'][fave_additional_feature_title]" id="fave_additional_feature_title_'+numVal+'" value="">'+
-                '</td>'+
-                '<td>'+
-                '<input class="form-control" type="text" name="additional_features['+numVal+'][fave_additional_feature_value]" id="fave_additional_feature_value_'+numVal+'" value="">'+
-                '</td>'+
-                '<td class="action-field">'+
-                '<span data-remove="'+numVal+'" class="remove-additional-row"><i class="fa fa-remove"></i></span>'+
-                '</td>'+
-                '</tr>';
+            '<td class="action-field">'+
+            '<span class="sort-additional-row"><i class="fa fa-navicon"></i></span>'+
+            '</td>'+
+            '<td class="field-title">'+
+            '<input class="form-control" type="text" name="additional_features['+numVal+'][fave_additional_feature_title]" id="fave_additional_feature_title_'+numVal+'" value="">'+
+            '</td>'+
+            '<td>'+
+            '<input class="form-control" type="text" name="additional_features['+numVal+'][fave_additional_feature_value]" id="fave_additional_feature_value_'+numVal+'" value="">'+
+            '</td>'+
+            '<td class="action-field">'+
+            '<span data-remove="'+numVal+'" class="remove-additional-row"><i class="fa fa-remove"></i></span>'+
+            '</td>'+
+            '</tr>';
 
             $( '#houzez_additional_details_main').append( newAdditionalDetail );
             removeAdditionalDetails();
@@ -655,7 +651,7 @@ jQuery(document).ready( function($) {
 
         /* ------------------------------------------------------------------------ */
         /*	Floor Plans
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         $( "#houzez_floor_plans_main" ).sortable({
             revert: 100,
             placeholder: "detail-placeholder",
@@ -673,94 +669,94 @@ jQuery(document).ready( function($) {
             });
 
             var newFloorPlan = '' +
-                '<tr>'+
-                '<td class="row-sort">'+
-                '<span class="sort sort-floorplan-row"><i class="fa fa-navicon"></i></span>'+
-                '</td>'+
-                '<td class="sort-middle">'+
-                '<div class="sort-inner-block">'+
-                '<div class="row">'+
-                '<div class="col-sm-12 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_title]">'+plan_title_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_title]" type="text" id="fave_plan_title_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_rooms]">'+plan_bedrooms_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_rooms]" type="text" id="fave_plan_rooms_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_bathrooms]">'+plan_bathrooms_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_bathrooms]" type="text" id="fave_plan_bathrooms_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_price]">'+plan_price_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_price]" type="text" id="fave_plan_price_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_price_postfix]">'+plan_price_postfix_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_price_postfix]" type="text" id="fave_plan_price_postfix_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_size]">'+plan_size_text+'</label>'+
-                '<input name="floor_plans['+numVal+'][fave_plan_size]" type="text" id="fave_plan_size_'+numVal+'" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_image]">'+plan_image_text+'</label>'+
-                '<div class="file-upload-block">'+
-                '<input name="floor_plans['+numVal+'][fave_plan_image]" type="text" id="fave_plan_image_'+numVal+'" class="fave_plan_image form-control">'+
-                '<button id="'+numVal+'" class="floorPlansImg btn btn-primary">'+plan_upload_text+'</button>'+
-                '</div>'+
-                '<div id="plupload-container"></div>'+
-                '<div id="errors-log"></div>'+
-                '<div id="progress-'+numVal+'"></div>'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-12 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="floor_plans['+numVal+'][fave_plan_description]">'+plan_description_text+'</label>'+
-                '<textarea name="floor_plans['+numVal+'][fave_plan_description]" rows="4" id="fave_plan_description_'+numVal+'" class="form-control"></textarea>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</td>'+
-                '<td class="row-remove">'+
-                '<span data-remove="'+numVal+'" class="remove-floorplan-row remove"><i class="fa fa-remove"></i></span>'+
-                '</td>'+
-                '</tr>';
+            '<tr>'+
+            '<td class="row-sort">'+
+            '<span class="sort sort-floorplan-row"><i class="fa fa-navicon"></i></span>'+
+            '</td>'+
+            '<td class="sort-middle">'+
+            '<div class="sort-inner-block">'+
+            '<div class="row">'+
+            '<div class="col-sm-12 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_title]">'+plan_title_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_title]" type="text" id="fave_plan_title_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_rooms]">'+plan_bedrooms_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_rooms]" type="text" id="fave_plan_rooms_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_bathrooms]">'+plan_bathrooms_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_bathrooms]" type="text" id="fave_plan_bathrooms_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_price]">'+plan_price_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_price]" type="text" id="fave_plan_price_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_price_postfix]">'+plan_price_postfix_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_price_postfix]" type="text" id="fave_plan_price_postfix_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_size]">'+plan_size_text+'</label>'+
+            '<input name="floor_plans['+numVal+'][fave_plan_size]" type="text" id="fave_plan_size_'+numVal+'" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_image]">'+plan_image_text+'</label>'+
+            '<div class="file-upload-block">'+
+            '<input name="floor_plans['+numVal+'][fave_plan_image]" type="text" id="fave_plan_image_'+numVal+'" class="fave_plan_image form-control">'+
+            '<button id="'+numVal+'" class="floorPlansImg btn btn-primary">'+plan_upload_text+'</button>'+
+            '</div>'+
+            '<div id="plupload-container"></div>'+
+            '<div id="errors-log"></div>'+
+            '<div id="progress-'+numVal+'"></div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-12 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="floor_plans['+numVal+'][fave_plan_description]">'+plan_description_text+'</label>'+
+            '<textarea name="floor_plans['+numVal+'][fave_plan_description]" rows="4" id="fave_plan_description_'+numVal+'" class="form-control"></textarea>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</td>'+
+            '<td class="row-remove">'+
+            '<span data-remove="'+numVal+'" class="remove-floorplan-row remove"><i class="fa fa-remove"></i></span>'+
+            '</td>'+
+            '</tr>';
 
             $( '#houzez_floor_plans_main').append( newFloorPlan );
             removeFloorPlans();
             floorPlanImage();
         });
 
-        var removeFloorPlans = function (){
+var removeFloorPlans = function (){
 
-            $( '.remove-floorplan-row').click(function( event ){
-                event.preventDefault();
-                var $this = $( this );
-                $this.closest( 'tr' ).remove();
-            });
-        }
-        removeFloorPlans();
+    $( '.remove-floorplan-row').click(function( event ){
+        event.preventDefault();
+        var $this = $( this );
+        $this.closest( 'tr' ).remove();
+    });
+}
+removeFloorPlans();
 
 
-        /* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
         /*	Multi Units
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         $( "#multi_units_main" ).sortable({
             revert: 100,
             placeholder: "detail-placeholder",
@@ -778,72 +774,72 @@ jQuery(document).ready( function($) {
             });
 
             var newSubProperty = '' +
-                '<tr>'+
-                '<td class="row-sort">'+
-                '<span class="sort-subproperty-row sort"><i class="fa fa-navicon"></i></span>'+
-                '</td>'+
-                '<td class="sort-middle">'+
-                '<div class="sort-inner-block">'+
-                '<div class="row">'+
-                '<div class="col-sm-12 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_title]">'+mu_title_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_title]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_beds]">'+mu_beds_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_beds]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_baths]">'+mu_baths_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_baths]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_size]">'+mu_size_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_size]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_size_postfix]">'+mu_size_postfix_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_size_postfix]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_price]">'+mu_price_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_price]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_price_postfix]">'+mu_price_postfix_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_price_postfix]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<div class="form-group">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_type]">'+mu_type_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_type]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '<div class="col-sm-6 col-xs-12">'+
-                '<label for="fave_multi_units['+numVal+'][fave_mu_availability_date]">'+mu_availability_text+'</label>'+
-                '<input name="fave_multi_units['+numVal+'][fave_mu_availability_date]" type="text" class="form-control">'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</td>'+
-                '<td class="row-remove">'+
-                '<span data-remove="'+numVal+'" class="remove-subproperty-row remove"><i class="fa fa-remove"></i></span>'+
-                '</td>'+
-                '</tr>';
+            '<tr>'+
+            '<td class="row-sort">'+
+            '<span class="sort-subproperty-row sort"><i class="fa fa-navicon"></i></span>'+
+            '</td>'+
+            '<td class="sort-middle">'+
+            '<div class="sort-inner-block">'+
+            '<div class="row">'+
+            '<div class="col-sm-12 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_title]">'+mu_title_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_title]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_beds]">'+mu_beds_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_beds]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_baths]">'+mu_baths_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_baths]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_size]">'+mu_size_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_size]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_size_postfix]">'+mu_size_postfix_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_size_postfix]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_price]">'+mu_price_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_price]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_price_postfix]">'+mu_price_postfix_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_price_postfix]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<div class="form-group">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_type]">'+mu_type_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_type]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-sm-6 col-xs-12">'+
+            '<label for="fave_multi_units['+numVal+'][fave_mu_availability_date]">'+mu_availability_text+'</label>'+
+            '<input name="fave_multi_units['+numVal+'][fave_mu_availability_date]" type="text" class="form-control">'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</td>'+
+            '<td class="row-remove">'+
+            '<span data-remove="'+numVal+'" class="remove-subproperty-row remove"><i class="fa fa-remove"></i></span>'+
+            '</td>'+
+            '</tr>';
 
             $( '#multi_units_main').append( newSubProperty );
             removeSubProperty();
@@ -861,7 +857,7 @@ jQuery(document).ready( function($) {
 
         /* ------------------------------------------------------------------------ */
         /*	Property attachment delete
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         var propertyAttachmentEvents = function() {
 
             //Remove Image
@@ -905,7 +901,7 @@ jQuery(document).ready( function($) {
 
         /* ------------------------------------------------------------------------ */
         /*	Property Thumbnails actions ( make features & delete )
-         /* ------------------------------------------------------------------------ */
+        /* ------------------------------------------------------------------------ */
         var propertyThumbnailEvents = function() {
 
             // Set Featured Image

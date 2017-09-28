@@ -75,16 +75,16 @@
         },
         {
             "name": "botman/driver-facebook",
-            "version": "1.0.3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/botman/driver-facebook.git",
-                "reference": "f3d6cfc2e03b4ed2c7c786e27a281517dcd39a5a"
+                "reference": "7087eba4c7042a7dcf3479f88b54b7434be99b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/botman/driver-facebook/zipball/f3d6cfc2e03b4ed2c7c786e27a281517dcd39a5a",
-                "reference": "f3d6cfc2e03b4ed2c7c786e27a281517dcd39a5a",
+                "url": "https://api.github.com/repos/botman/driver-facebook/zipball/7087eba4c7042a7dcf3479f88b54b7434be99b7d",
+                "reference": "7087eba4c7042a7dcf3479f88b54b7434be99b7d",
                 "shasum": ""
             },
             "require": {
@@ -121,20 +121,20 @@
                 "facebook",
                 "facebook messenger"
             ],
-            "time": "2017-09-09T21:15:54+00:00"
+            "time": "2017-09-19T20:09:49+00:00"
         },
         {
             "name": "botman/driver-web",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/botman/driver-web.git",
-                "reference": "ad15ef88f57712dab883fb56edcbb237ead77175"
+                "reference": "d22dae5940422c480782f40270e4a8daa1c60b86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/botman/driver-web/zipball/ad15ef88f57712dab883fb56edcbb237ead77175",
-                "reference": "ad15ef88f57712dab883fb56edcbb237ead77175",
+                "url": "https://api.github.com/repos/botman/driver-web/zipball/d22dae5940422c480782f40270e4a8daa1c60b86",
+                "reference": "d22dae5940422c480782f40270e4a8daa1c60b86",
                 "shasum": ""
             },
             "require": {
@@ -170,7 +170,7 @@
                 "bot",
                 "web"
             ],
-            "time": "2017-08-28T13:48:28+00:00"
+            "time": "2017-09-14T21:09:59+00:00"
         },
         {
             "name": "botman/studio-addons",
@@ -1224,16 +1224,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.4",
+            "version": "v5.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d3e0493bead126cf7fb9a005c64e6b58a9190e51"
+                "reference": "a0fdfd2c90318c107b6a8d69189ec9a6607379e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d3e0493bead126cf7fb9a005c64e6b58a9190e51",
-                "reference": "d3e0493bead126cf7fb9a005c64e6b58a9190e51",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a0fdfd2c90318c107b6a8d69189ec9a6607379e3",
+                "reference": "a0fdfd2c90318c107b6a8d69189ec9a6607379e3",
                 "shasum": ""
             },
             "require": {
@@ -1352,7 +1352,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-09-13T13:36:29+00:00"
+            "time": "2017-09-20T13:45:36+00:00"
         },
         {
             "name": "laravel/socialite",

@@ -25,4 +25,6 @@ interface BaseRepositoryInterface
     public function getDataBySlug($slug, $array = []);
 
     public function getSortBy($data);
+
+    public function moveImage($file, $fileNew, $path);
 }

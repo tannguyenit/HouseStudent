@@ -32,7 +32,9 @@ class CreatePostsTable extends Migration
             $table->string('country', 200);
             $table->string('lat', 200);
             $table->string('lng', 200);
+            $table->text('note')->nullable();
             $table->string('total_view', 50)->default(0);
+            $table->integer('status')->default(0);
             $table->string('total_like', 50)->default(0);
             $table->string('total_comment', 50)->default(0);
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
