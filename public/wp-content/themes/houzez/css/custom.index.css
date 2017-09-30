@@ -1166,6 +1166,9 @@ span.user-name {
 .color-white {
     color: #ffffff;
 }
+.bg-white {
+    background-color: #ffffff;
+}
 .content-column {
     font-size: 18px;
     line-height: 24px;
@@ -1193,13 +1196,19 @@ span.user-name {
 .property-item .body-left {
     width:auto;
 }
-/*.owl-carousel .owl-item img {
-    height: -webkit-fill-available;
-}*/
+#carousel-module-grid .owl-carousel .owl-item img {
+    height: 258px
+}
 .height-70 {
     height:70px;
 }
 .owl-stage {
     float: none;
     margin: 0 auto;
+}
+.limit-200 p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }

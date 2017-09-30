@@ -43,6 +43,9 @@ return [
     ],
     'errors'      => 'Errors !',
     'success'     => 'Success !',
+    'accept'      => 'Accept',
+    'sending'     => 'Sending.....',
+    'done'        => 'Done !',
     'add-image'   => 'Upload at least one image.',
     'required'    => 'Please fill out the following required fields',
 ];

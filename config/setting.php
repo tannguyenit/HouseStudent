@@ -21,4 +21,5 @@ return [
     ],
     'maintenance' => 1,
     'active'      => 1,
+    'no-active'   => 0,
 ];
