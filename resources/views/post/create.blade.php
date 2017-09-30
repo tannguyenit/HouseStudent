@@ -7,25 +7,63 @@
 @section('headerscript')
     @parent
     {{ Html::script('wp-content/wp-includes/js/plupload/plupload.full.mincc91.js') }}
-    <script type='text/javascript' src='/wp-content/wp-includes/js/jquery/ui/datepicker.mine899.js?ver=1.11.4'></script>
-    <script type='text/javascript'>
-        jQuery(document).ready(function(jQuery) {
-            jQuery.datepicker.setDefaults({
-                "closeText": "Close",
-                "currentText": "Today",
-                "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                "nextText": "Next",
-                "prevText": "Previous",
-                "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                "dayNamesMin": ["S", "M", "T", "W", "T", "F", "S"],
-                "dateFormat": "MM d, yy",
-                "firstDay": 1,
-                "isRTL": false
-            });
-        });
+    <script>
+        jQuery(function($) {
+            "use strict";
+            var geo_input = $("#geocomplete");
 
+            function getLocationByGoogleMap() {
+                geo_input.geocomplete({
+                    map: ".map_canvas",
+                    details: "form",
+                    types: ["geocode", "establishment"],
+                    country: '',
+                    markerOptions: {
+                        draggable: true
+                    }
+                });
+                geo_input.bind("geocode:dragged", function(event, latLng) {
+                    $("input[name=lat]").val(latLng.lat());
+                    $("input[name=lng]").val(latLng.lng());
+                    $("#reset").show();
+                    var map = $("#geocomplete").geocomplete("map");
+                    map.panTo(latLng);
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({
+                        'latLng': latLng
+                    }, function(results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) { //alert(JSON.stringify(results));
+                                if (results[0]) {
+                                    var _length = results[0].address_components.length;
+                                    var road = results[0].address_components[1].long_name;
+                                    var town = results[0].address_components[_length-4].long_name;
+                                    var county = results[0].address_components[_length-3].long_name;
+                                    var country = results[0].address_components[_length-2].short_name;
+                                    var formatted_address = results[0].formatted_address;
+                                    $("input[name=address]").val(formatted_address);
+                                    $("#countyState").val(county);
+                                    $("#country").val(road);
+                                    $("#country_short").val(country);
+                                }
+                            }
+                        });
+                });
+                geo_input.on('focus', function() {
+                    var map = $("#geocomplete").geocomplete("map");
+                    google.maps.event.trigger(map, 'resize')
+                });
+                $("#reset").on("click", function() {
+                    $("#geocomplete").geocomplete("resetMarker");
+                    $("#reset").hide();
+                    return false;
+                });
+                $("#find").on("click", function(e) {
+                    e.preventDefault();
+                    $("#geocomplete").trigger("geocode");
+                });
+            }
+            getLocationByGoogleMap();
+        });
     </script>
 @endsection
 @section('create')
@@ -58,12 +96,20 @@
                         </li>
                         <li class="pay-step-block ">
                             <span>
-                                <span class="hidden-xs"> Select a </span> Package
+                                {{ trans('post.add-image') }}
                             </span>
                         </li>
                         <li class="pay-step-block ">
-                            <span>Payment</span>
+                            <span>{{ trans('post.home-information') }}</span>
                         </li>
+                        <li class="pay-step-block ">
+                            <span>{{ trans('post.add-address') }}</span>
+                        </li>
+                        @if (!auth()->user())
+                            <li class="pay-step-block ">
+                                <span>{{ trans('post.note') }}</span>
+                            </li>
+                        @endif
                         <li class="pay-step-block ">
                             <span>{{ trans('post.done') }}</span>
                         </li>
@@ -75,13 +121,13 @@
                                 <button type="button" class="close" data-hide="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <strong>Error!</strong> Please fill out the following required fields.
+                                <strong>{{ trans('validate.errors') }}</strong> {{ trans('validate.required') }}.
                             </div>
                             <div class="validate-errors-gal alert alert-danger alert-dismissible" role="alert">
                                 <button type="button" class="close" data-hide="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <strong>Error!</strong> Upload at least one image.
+                                <strong>{{ trans('validate.errors') }}</strong> {{ trans('validate.add-image') }}
                             </div>
                             <div class="submit-form-wrap">
                                 <div class="account-block form-step">
@@ -94,21 +140,14 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        {!! Form::label('prop_title', trans('post.title') . ' *') !!}
-                                                        {!! Form::text('prop_title', '', ['class' => 'form-control', 'id' => 'prop_title', 'placeholder' => trans('validate.placeholder.title')]) !!}
+                                                        {!! Form::label('title', trans('post.title') . ' *') !!}
+                                                        {!! Form::text('title', '', ['class' => 'form-control', 'id' => 'title', 'placeholder' => trans('validate.placeholder.title')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        {!! Form::label('prop_des', trans('post.description')) !!}
-                                                        <div id="wp-prop_des-wrap" class="wp-core-ui wp-editor-wrap html-active">
-                                                            <link rel='stylesheet' id='dashicons-css' href='/wp-content/wp-includes/css/dashicons.min66f2.css?ver=4.7.5' type='text/css' media='all' />
-                                                            <link rel='stylesheet' id='editor-buttons-css' href='/wp-content/wp-includes/css/editor.min66f2.css?ver=4.7.5' type='text/css' media='all' />
-                                                            <div id="wp-prop_des-editor-container" class="wp-editor-container">
-                                                                <div id="qt_prop_des_toolbar" class="quicktags-toolbar"></div>
-                                                                {!! Form::textarea('prop_des', '', ['class' => 'text-editor-area', 'id' => 'prop_des', 'rows' => 10, 'cols' => 30]) !!}
-                                                            </div>
-                                                        </div>
+                                                        {!! Form::label('description', trans('post.description')) !!}
+                                                        {!! Form::textarea('description', '', ['class' => 'text-editor-area form-control', 'id' => 'description', 'rows' => 10, 'cols' => 30]) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,9 +156,9 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="prop_type">Type</label>
-                                                        <select name="prop_type" id="prop_type" class="selectpicker" data-live-search="false" data-live-search-style="begins">
-                                                            <option selected="selected" value="">None</option>
+                                                        {!! Form::label('type_id', trans('post.type')) !!}
+                                                        <select name="type_id" id="type_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                                                            <option selected="selected" value="">{{ trans('post.none') }}</option>
                                                             @forelse ($types as $element)
                                                                 <option value="{{ $element->id }}">{{ $element->title }}</option>
                                                             @empty
@@ -129,9 +168,9 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="prop_status">Status</label>
-                                                        <select name="prop_status" id="prop_status" class="selectpicker" data-live-search="false" data-live-search-style="begins">
-                                                            <option selected="selected" value="">None</option>
+                                                        {!! Form::label('status_id', trans('post.status')) !!}
+                                                        <select name="status_id" id="status_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                                                            <option selected="selected" value="">{{ trans('post.none') }}</option>
                                                             @forelse ($statuses as $element)
                                                                 <option value="{{ $element->id }}">{{ $element->title }}</option>
                                                             @empty
@@ -141,40 +180,13 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('prop_price', trans('post.price')) !!}
-                                                        {!! Form::text('prop_price', '', ['class' => 'form-control', 'id' => 'prop_price', 'placeholder' => trans('validate.placeholder.price')]) !!}
+                                                        {!! Form::label('price', trans('post.price')) !!}
+  {{-- <input type="text" name="currency-field" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000,000.00"> --}}
+                                                        {!! Form::text('price', '', ['class' => 'form-control','pattern' =>'^\$\d{1,3}(,\d{3})*(\.\d+)?$', 'id' => 'price', 'placeholder' => trans('validate.placeholder.price')]) !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="add-tab-row push-padding-bottom">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_price"> Sale or Rent Price* </label>
-                                                        <input type="text" id="prop_price" class="form-control" name="prop_price" value="" placeholder="Enter Sale or Rent Price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_sec_price">Second Price (Optional)</label>
-                                                        <input type="text" id="prop_sec_price" class="form-control" name="prop_sec_price" placeholder="Enter your property second price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_label">After Price Label (ex: monthly)</label>
-                                                        <input type="text" id="prop_label" class="form-control" name="prop_label" placeholder="Enter after price label">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_price_prefix">Price Prefix (ex: Start from)</label>
-                                                        <input type="text" id="prop_price_prefix" class="form-control" name="prop_price_prefix" placeholder="Enter before price label">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="account-block form-step">
@@ -205,84 +217,32 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="property_id">Property ID</label>
-                                                        <input type="text" id="property_id" class="form-control" name="property_id" placeholder="Enter property ID">
+                                                        {!! Form::label('name_boss', trans('post.name-boss')) !!}
+                                                        {!! Form::text('name_boss', '', ['id' => 'name_boss', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.name-boss')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="prop_size">Area Size ( Only digits )*</label>
-                                                        <input type="text" id="prop_size" class="form-control" name="prop_size" placeholder="Enter property area size" value="">
+                                                        {!! Form::label('phone_boss', trans('post.name-boss')) !!}
+                                                        {!! Form::number('phone_boss', '', ['id' => 'phone_boss', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.phone-boss')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="prop_size_prefix">Size Prefix</label>
-                                                        <input type="text" id="prop_size_prefix" class="form-control" name="prop_size_prefix" value="sqft">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_land_area">Land Area ( Only digits )</label>
-                                                        <input type="text" id="prop_land_area" class="form-control" name="prop_land_area" placeholder="Enter property land area size" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_land_area_prefix">Land Area Size Postfix</label>
-                                                        <input type="text" id="prop_land_area_prefix" class="form-control" name="prop_land_area_prefix" value="sqft">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_beds">Bedrooms</label>
-                                                        <input type="text" id="prop_beds" class="form-control" name="prop_beds" placeholder="Enter number of bedrooms" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_baths">Bathrooms</label>
-                                                        <input type="text" id="prop_baths" class="form-control" name="prop_baths" placeholder="Enter number of bathrooms" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_garage">Garages</label>
-                                                        <input type="text" id="prop_garage" class="form-control" name="prop_garage" placeholder="Enter number of garages" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_garage_size">Garages Size</label>
-                                                        <input type="text" id="prop_garage_size" class="form-control" name="prop_garage_size" placeholder="Enter garage size" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_year_built">Year Built</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                            <input type="text" id="prop_year_built" class="input_date form-control" name="prop_year_built" placeholder="Enter year built" value="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="prop_video_url">Video URL</label>
-                                                        <input class="form-control" name="prop_video_url" id="prop_video_url" placeholder="YouTube, Vimeo, SWF File and MOV File are supported">
+                                                        {!! Form::label('area', trans('post.area')) !!}
+                                                        {!! Form::text('area', '', ['id' => 'area', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.area')]) !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="add-tab-row">
-                                            <h4>Additional Features</h4>
+                                            <h4>{{ trans('post.features') }}</h4>
                                             <table class="additional-block">
                                                 <thead>
                                                     <tr>
                                                         <td> </td>
-                                                        <td><label>Title</label></td>
-                                                        <td><label>Value</label></td>
+                                                        <td><label>{{ trans('post.title') }}</label></td>
+                                                        <td><label>{{ trans('post.value') }}</label></td>
                                                         <td> </td>
                                                     </tr>
                                                 </thead>
@@ -292,10 +252,10 @@
                                                             <span class="sort-additional-row"><i class="fa fa-navicon"></i></span>
                                                         </td>
                                                         <td class="field-title">
-                                                            <input class="form-control" type="text" name="additional_features[0][fave_additional_feature_title]" id="fave_additional_feature_title_0" placeholder="Eg: Equipment" value="">
+                                                            {!! Form::text('additional_features[0][key]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_title_0', 'placeholder' => trans('validate.placeholder.electricity')]) !!}
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" type="text" name="additional_features[0][fave_additional_feature_value]" id="fave_additional_feature_value_0" placeholder="Grill - Gas" value="">
+                                                            {!! Form::text('additional_features[0][value]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_value_0', 'placeholder' => trans('validate.placeholder.value')]) !!}
                                                         </td>
                                                         <td class="action-field">
                                                             <span data-remove="0" class="remove-additional-row"><i class="fa fa-remove"></i></span>
@@ -306,7 +266,9 @@
                                                     <tr>
                                                         <td></td>
                                                         <td>
-                                                            <button data-increment="0" class="add-additional-row"><i class="fa fa-plus"></i> Add New</button>
+                                                            <button data-increment="0" class="add-additional-row">
+                                                                <i class="fa fa-plus"></i>{{ trans('post.add-new') }}
+                                                            </button>
                                                         </td>
                                                         <td></td>
                                                     </tr>
@@ -317,177 +279,7 @@
                                 </div>
                                 <div class="account-block form-step">
                                     <div class="add-title-tab">
-                                        <h3>Property Features</h3>
-                                        <div class="add-expand"></div>
-                                    </div>
-                                    <div class="add-tab-content">
-                                        <div class="add-tab-row push-padding-bottom">
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-1" value="21"/>Air Conditioning
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-2" value="22"/>Barbeque
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-3" value="20"/>Dryer
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-4" value="11"/>Gym
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-5" value="12"/>Laundry
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-6" value="6"/>Lawn
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-7" value="18"/>Microwave
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-8" value="26"/>Outdoor Shower
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-9" value="15"/>Refrigerator
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-10" value="14"/>Sauna
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-11" value="4"/>Swimming Pool
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-12" value="13"/>TV Cable
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-13" value="19"/>Washer
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-14" value="5"/>WiFi
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" name="prop_features[]" id="feature-15" value="25"/>Window Coverings
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-block form-step">
-                                    <script>
-                                        jQuery(function($) {
-                                            "use strict";
-                                            var geo_input = $("#geocomplete");
-
-                                            function houzez_geocomplete() {
-                                                geo_input.geocomplete({
-                                                    map: ".map_canvas",
-                                                    details: "form",
-                                                    types: ["geocode", "establishment"],
-                                                    country: '',
-                                                    markerOptions: {
-                                                        draggable: true
-                                                    }
-                                                });
-                                                geo_input.bind("geocode:dragged", function(event, latLng) {
-                                                    $("input[name=lat]").val(latLng.lat());
-                                                    $("input[name=lng]").val(latLng.lng());
-                                                    $("#reset").show();
-                                                    var map = $("#geocomplete").geocomplete("map");
-                                                    map.panTo(latLng);
-                                                    var geocoder = new google.maps.Geocoder();
-                                                    geocoder.geocode({
-                                                        'latLng': latLng
-                                                    }, function(results, status) {
-                                                            if (status == google.maps.GeocoderStatus.OK) { //alert(JSON.stringify(results));
-                                                                if (results[0]) {
-                                                                    var road = results[0].address_components[1].short_name;
-                                                                    var town = results[0].address_components[2].short_name;
-                                                                    var county = results[0].address_components[3].long_name;
-                                                                    var country = results[0].address_components[4].short_name;
-                                                                    $("input[name=property_map_address]").val(road + ' ' + town + ' ' + county + ' ' + country);
-                                                                }
-                                                            }
-                                                        });
-                                                });
-                                                geo_input.on('focus', function() {
-                                                    var map = $("#geocomplete").geocomplete("map");
-                                                    google.maps.event.trigger(map, 'resize')
-                                                });
-                                                $("#reset").on("click", function() {
-                                                    $("#geocomplete").geocomplete("resetMarker");
-                                                    $("#reset").hide();
-                                                    return false;
-                                                });
-                                                $("#find").on("click", function(e) {
-                                                    e.preventDefault();
-                                                    $("#geocomplete").trigger("geocode");
-                                                });
-                                            }
-                                            houzez_geocomplete();
-                                        });
-                                    </script>
-                                    <div class="add-title-tab">
-                                        <h3>Property location</h3>
+                                        <h3>{{ trans('post.location') }}</h3>
                                         <div class="add-expand"></div>
                                     </div>
                                     <div class="add-tab-content">
@@ -495,66 +287,40 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="geocomplete">Address*</label>
-                                                        <input class="form-control" name="property_map_address" id="geocomplete" placeholder="Enter your property address">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="zip">Postal Code / Zip</label>
-                                                        <input class="form-control" name="postal_code" id="zip" placeholder="Enter your property zip code">
+                                                        {!! Form::label('geocomplete', trans('post.street') . ' *:') !!}
+                                                        {!! Form::text('address', '', ['class' => 'form-control', 'id' => 'geocomplete', 'placeholder' => trans('validate.placeholder.address')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 submit_country_field">
                                                     <div class="form-group">
-                                                        <label for="country">Country</label>
-                                                        <input class="form-control" name="country" id="country" placeholder="Enter your property country">
-                                                        <input name="country_short" type="hidden" value="">
+                                                        {!! Form::label('country', trans('post.address') . ' *:') !!}
+                                                        {!! Form::text('route', '', ['class' => 'form-control', 'id' => 'country', 'placeholder' => trans('validate.placeholder.address')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="countyState">County / State</label>
-                                                        <input class="form-control" name="administrative_area_level_1" id="countyState" placeholder="Enter your property county/state">
+                                                        {!! Form::label('countyState', trans('post.county') . ' *:') !!}
+                                                        {!! Form::text('administrative_area_level_2', '', ['class' => 'form-control', 'id' => 'countyState', 'placeholder' => trans('validate.placeholder.county')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="city">City</label>
-                                                        <input class="form-control" name="locality" id="city" placeholder="Enter your property city">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="neighborhood">Neighborhood</label>
-                                                        <input class="form-control" name="neighborhood" id="neighborhood" placeholder="Enter your property neighborhood">
+                                                        {!! Form::label('city', trans('post.city') . ' *:') !!}
+                                                        {!! Form::text('administrative_area_level_1', '', ['class' => 'form-control', 'id' => 'city', 'placeholder' => trans('validate.placeholder.city')]) !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="add-tab-row">
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="map_canvas" id="map"> </div>
-                                                    <button id="find" class="btn btn-primary btn-block">Place the pin the address above</button>
-                                                    <a id="reset" href="#" style="display:none;">Reset Marker</a>
+                                                <div class="col-sm-12">
+                                                    <div class="map_canvas" id="map"></div>
+                                                    <button id="find" class="btn btn-primary btn-block">{{ trans('post.pin') }}</button>
+                                                    <a id="reset" href="#" class="hidden">{{ trans('post.reset-maker') }}</a>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="latitude">Google Maps latitude</label>
-                                                        <input class="form-control" name="lat" id="latitude" placeholder="Enter google maps latitude">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="longitude">Google Maps longitude</label>
-                                                        <input class="form-control" name="lng" id="longitude" placeholder="Enter google maps longitude">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="prop_google_street_view">Google Map Street View</label>
-                                                        <select name="prop_google_street_view" id="prop_google_street_view" class="selectpicker" data-live-search="false">
-                                                            <option value="hide">Hide</option>
-                                                            <option selected value="show">Show</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="col-sm-6 hidden">
+                                                    {!! Form::hidden('lat', '', ['id' => 'latitude']) !!}
+                                                    {!! Form::hidden('lng', '', ['id' => 'longitude']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -562,7 +328,7 @@
                                 </div>
                                 <div class="account-block form-step">
                                     <div class="add-title-tab">
-                                        <h3>Private Note</h3>
+                                        <h3>{{ trans('post.note') }}</h3>
                                         <div class="add-expand"></div>
                                     </div>
                                     <div class="add-tab-content">
@@ -570,94 +336,97 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <textarea class="form-control" name="private_note" id="private_note" rows="6" placeholder="Write private note for this property, it will not display for public."></textarea>
+                                                        {!! Form::textarea('note', '', ['class' => 'form-control', 'rows' => 6, 'placeholder' => trans('validate.placeholder.note') ]) !!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="account-block class-for-register-msg form-step">
-                                    <div class="add-title-tab">
-                                        <h3>Do you have an account?</h3>
-                                        <div class="add-expand"></div>
-                                    </div>
-                                    <div class="add-tab-content">
-                                        <div class="add-tab-row push-padding-bottom">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <p>If you don't have an account you can create one below by entering your email address. Your account details will be confirmed via email. Otherwise you can </p>
-                                                    <div class="form-group step-login-btn">
-                                                        <a href="#" class="login-here">Login here</a>
-                                                        <a href="#" class="register-here" style="display: none">Register here</a>
+                                @if (!auth()->user())
+                                    {!! Form::hidden('check_login', '1') !!}
+                                    <div class="account-block class-for-register-msg form-step">
+                                        <div class="add-title-tab">
+                                            <h3>{{ trans('post.not-account') }}</h3>
+                                            <div class="add-expand"></div>
+                                        </div>
+                                        <div class="add-tab-content">
+                                            <div class="add-tab-row push-padding-bottom">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p>{{ trans('post.register-account') }}</p>
+                                                        <div class="form-group">
+                                                            <div class="houzez_messages_register message"></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="houzez_messages_register message"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane fade in active step-tab-register">
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label for="username">Username* </label>
-                                                                        <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username">
+                                                    <div class="col-sm-12">
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane fade in active step-tab-register">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('user_name', trans('form.username') . ' *:') !!}
+                                                                            {!! Form::text('username', '', ['class' => 'form-control', 'id' => 'user_name', 'placeholder' => trans('validate.placeholder.username')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('first_name', trans('form.first_name') . ' *:') !!}
+                                                                            {!! Form::text('first_name', '', ['class' => 'form-control', 'id' => 'first_name', 'placeholder' => trans('validate.placeholder.first_name')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('last_name', trans('form.last_name') . ' *:') !!}
+                                                                            {!! Form::text('last_name', '', ['class' => 'form-control', 'id' => 'last_name', 'placeholder' => trans('validate.placeholder.last_name')]) !!}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="form-group">
-                                                                        <label for="user_email">Email Address* </label>
-                                                                        <input type="email" id="user_email" class="form-control" name="user_email" placeholder="Enter your email address">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('email', trans('form.username') . ' *:') !!}
+                                                                            {!! Form::email('email', '', ['class' => 'form-control', 'id' => 'email', 'placeholder' => trans('validate.placeholder.email')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('password', trans('form.password') . ' *:') !!}
+                                                                            {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'placeholder' => trans('validate.placeholder.password')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('phone', trans('form.phone') . ' *:') !!}
+                                                                            {!! Form::number('phone', '', ['class' => 'form-control', 'id' => 'phone', 'placeholder' => trans('validate.placeholder.phone')]) !!}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade step-tab-login">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label for="sp_username">Username* </label>
-                                                                        <input type="text" id="sp_username" name="sp_username" class="form-control" placeholder="Enter Your Username">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label for="sp_password">Password* </label>
-                                                                        <input type="password" id="sp_password" class="form-control" name="sp_password" placeholder="Enter Your Password">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="houzez_register_security2" name="houzez_register_security2" value="65b705e9ec"/>
-                                                <input type="hidden" name="_wp_http_referer" value="/add-new-property/"/>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <input type="hidden" id="property_nonce" name="property_nonce" value="b9c50e0257"/>
-                                <input type="hidden" name="_wp_http_referer" value="/add-new-property/"/>
-                                <input type="hidden" name="action" value="add_property"/>
-                                <input type="hidden" name="prop_featured" value="0"/>
-                                <input type="hidden" name="prop_payment" value="not_paid"/>
-                                <input type="hidden" name="user_submit_has_no_membership" value="yes"/>
+                                @else
+                                    {!! Form::hidden('check_login', '0') !!}
+                                @endif
                                 <div class="steps-nav">
                                     <div class="btn-left btn-back action">
                                         <button type="button" class="btn">
                                             <i class="fa fa-angle-left"></i>
                                         </button>
-                                        <span>Back</span>
+                                        <span>{{ trans('form.prev') }}</span>
                                     </div>
                                     <div class="btn-right btn-next action">
-                                        <span>Next</span>
+                                        <span>{{ trans('form.next') }}</span>
                                         <button type="button" class="btn">
                                             <i class="fa fa-angle-right"></i>
                                         </button>
                                     </div>
                                     <div class="btn-right action btn-submit btn-step-submit">
-                                        <span>Submit Property</span>
+                                        <span>{{ trans('form.submit') }}</span>
                                         <button id="add_new_property" type="submit" class="btn">
                                             <i class="fa fa-angle-right"></i>
                                         </button>
@@ -672,173 +441,130 @@
     </div>
 @endsection
 @section('footerscript')
-@parent
+    @parent
     <script type='text/javascript'>
-        var houzezProperty = {
+        var houseStudent = {
             "ajaxURL": "{{ action('AjaxController@uploadFileUploader') }}",
-            "verify_nonce": "bbde4a9854",
-            "verify_file_type": "Valid file formats",
-            "msg_digits": "Please enter only digits",
-            "max_prop_images": "10",
-            "image_max_file_size": "1000kb",
-            "plan_title_text": "Plan Title",
-            "plan_size_text": "Plan Size",
-            "plan_bedrooms_text": "Plan Bedrooms",
-            "plan_bathrooms_text": "Plan Bathrooms",
-            "plan_price_text": "Plan Price",
-            "plan_price_postfix_text": "Price Postfix",
-            "plan_image_text": "Plan Image",
-            "plan_description_text": "Plan Description",
-            "plan_upload_text": "Upload",
-            "mu_title_text": "Title",
-            "mu_type_text": "Property Type",
-            "mu_beds_text": "Bedrooms",
-            "mu_baths_text": "Bathrooms",
-            "mu_size_text": "Property Size",
-            "mu_size_postfix_text": "Size Postfix",
-            "mu_price_text": "Property Price",
-            "mu_price_postfix_text": "Price Postfix",
-            "mu_availability_text": "Availability Date",
-            "prop_title": "1",
-            "prop_type": "1",
-            "file": "1",
-            "prop_des": "1",
-            "prop_status": "1",
-            "prop_labels": "",
-            "prop_price": "1",
-            "prop_sec_price": "",
-            "price_label": "",
-            "prop_id": "",
-            "bedrooms": "",
-            "bathrooms": "",
-            "area_size": "1",
-            "land_area": "",
-            "garages": "",
-            "year_built": "",
-            "property_map_address": "1",
-            "houzez_logged_in": "yes",
-            "process_loader_refresh": "fa fa-spin fa-refresh",
-            "process_loader_spinner": "fa fa-spin fa-spinner",
-            "process_loader_circle": "fa fa-spin fa-circle-o-notch",
-            "process_loader_cog": "fa fa-spin fa-cog",
-            "success_icon": "fa fa-check",
+            "url_check_email": "{{ action('UserController@checkEmail') }}",
+            "url_check_username": "{{ action('UserController@checkusername') }}",
+            "msg_digits": '{{ trans('validate.msg.digits') }}',
             "login_loading": "Sending user info, please wait...",
+            "checkusername": "User name đã tồn tại. Vui lòng nhập lại",
+            "checkemail": "Email đã tồn tại. Vui lòng nhập lại",
             "processing_text": "Processing, Please wait...",
             "add_listing_msg": "Submitting, Please wait..."
         };
     </script>
-    <script type='text/javascript' src='/wp-content/themes/houzez/js/houzez_property2846.js?ver=1.5.5'></script>
-    <script type='text/javascript' src='/wp-content/wp-includes/js/wp-embed.min66f2.js?ver=4.7.5'></script>
-<script type="text/javascript">
-
-    var url = '{{ action('AjaxController@uploadFileUploader') }}';
-    var urlRemove = '{{ action('AjaxController@removeFileUploader') }}';
-    $('#post_file_topic').fileuploader({
-      extensions: ['jpg', 'jpeg', 'png', 'gif', 'ppm', 'pgm'],
-      changeInput: 'false',
-      theme: 'thumbnails',
-      enableApi: true,
-      fileMaxSize : 5,
-      addMore: true,
-      thumbnails: {
-        box: '<div class="fileuploader-items">\
-              <ul class="fileuploader-items-list">\
-              <li class="fileuploader-thumbnails-input"><div class="fileuploader-thumbnails-input-inner">+</div></li>\
-              </ul>\
-              </div>',
-        item: '<li class="fileuploader-item">\
-              <div class="fileuploader-item-inner">\
-              <div class="thumbnail-holder" >${image}</div>\
-              <div class="actions-holder" title="${name}">\
-              <a class="fileuploader-action fileuploader-action-remove" title="${captions.remove}"><i class="remove"></i></a>\
-              </div>\
-              <div class="progress-holder">${progressBar}</div>\
-              </div>\
-              </li>',
-        item2: '<li class="fileuploader-item">\
-              <div class="fileuploader-item-inner">\
-              <div class="thumbnail-holder">${image}</div>\
-              <div class="actions-holder" title="${name}">\
-              <a class="fileuploader-action fileuploader-action-remove" title="${captions.remove}"><i class="remove"></i></a>\
-              </div>\
-              </div>\
-              </li>',
-        startImageRenderer: false,
-        canvasImage: false,
-        _selectors: {
-          list: '.fileuploader-items-list',
-          item: '.fileuploader-item',
-          start: '.fileuploader-action-start',
-          retry: '.fileuploader-action-retry',
-          remove: '.fileuploader-action-remove'
-        },
-        onItemShow: function(item, listEl) {
-          var plusInput = listEl.find('.fileuploader-thumbnails-input');
-
-          plusInput.insertAfter(item.html);
-
-          if(item.format == 'image') {
-            item.html.find('.fileuploader-item-icon').hide();
-          }
-        }
-      },
-      afterRender: function(listEl, parentEl, newInputEl, inputEl) {
-        var plusInput = listEl.find('.fileuploader-thumbnails-input'),
-        api = $.fileuploader.getInstance(inputEl.get(0));
-
-        plusInput.on('click', function() {
-          api.open();
+    {{ Html::script('wp-content/themes/houzez/js/houzez_property2846.js') }}
+    {{ Html::script('wp-content/wp-includes/js/wp-embed.min66f2.js') }}
+    {{ Html::script('wp-content/themes/houzez/js/jquery.uploadFile.js') }}
+    <script type="text/javascript">
+        var upload = new Upload('{{ action('AjaxController@uploadFileUploader') }}','{{ action('AjaxController@removeFileUploader') }}')
+        upload.init();
+        $('#type_id').on('hidden.bs.select', function (e) {
+            var value = $(this).val();
+            showError('type_id', value);
         });
-      },
-      upload: {
-        url: url,
-        data: null,
-        type: 'POST',
-        enctype: 'multipart/form-data',
-        start: true,
-        synchron: true,
-        beforeSend: null,
-        onSuccess: function(data, item) {
-          setTimeout(function() {
-            item.html.find('.progress-holder').hide();
-            item.renderImage();
-          }, 400);
-        },
-        onError: function(item) {
-          item.html.find('.progress-holder').hide();
-          item.html.find('.fileuploader-item-icon i').text('Failed!');
-        },
-        onProgress: function(data, item) {
-          var progressBar = item.html.find('.progress-holder');
-
-          if (progressBar.length > 0) {
-            progressBar.show();
-            progressBar.find('.fileuploader-progressbar .bar').width(data.percentage + "%");
-          }
-        }
-      },
-      dragDrop: {
-        container: '.fileuploader-thumbnails-input'
-      },
-      onRemove: function(item) {
-        $.post(urlRemove, {
-          file_name: item.name,
-          file_id: '',
+        $('#status_id').on('hidden.bs.select', function (e) {
+            var value = $(this).val();
+            showError('status_id', value);
         });
-      },
-      captions: {
-        close: 'close',
-        download: 'download',
-        remove: 'remove',
-        errors: {
-          filesLimit:  'File nang',
-          filesType: 'kieu',
-          fileSize:'size',
-          filesSizeAll: 'max size',
-          fileName:'name file',
-          folderUpload: 'upload',
+        function showError(element, value) {
+            if (value != '') {
+                $('#' + element + '-error').fadeOut();
+                $('button[data-id="' + element + '"]').css('border-color', '#00aeef');
+            } else {
+                $('#' + element + '-error').fadeIn();
+                $('button[data-id="' + element + '"]').css('border-color', 'red');
+            }
         }
-      }
-    });
-</script>
+
+// Jquery Dependency
+
+$("input#price").on({
+    keyup: function() {
+      formatCurrency($(this));
+    },
+    blur: function() {
+      formatCurrency($(this), "blur");
+    }
+});
+
+
+function formatNumber(n) {
+  // format number 1000000 to 1,234,567
+  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+
+function formatCurrency(input, blur) {
+  // appends $ to value, validates decimal side
+  // and puts cursor back in right position.
+
+  // get input value
+  var input_val = input.val();
+
+  // don't validate empty input
+  if (input_val === "") { return; }
+
+  // original length
+  var original_len = input_val.length;
+
+  // initial caret position
+  var caret_pos = input.prop("selectionStart");
+
+  // check for decimal
+  if (input_val.indexOf(".") >= 0) {
+
+    // get position of first decimal
+    // this prevents multiple decimals from
+    // being entered
+    var decimal_pos = input_val.indexOf(".");
+
+    // split number by decimal point
+    var left_side = input_val.substring(0, decimal_pos);
+    var right_side = input_val.substring(decimal_pos);
+
+    // add commas to left side of number
+    left_side = formatNumber(left_side);
+
+    // validate right side
+    right_side = formatNumber(right_side);
+
+    // On blur make sure 2 numbers after decimal
+    if (blur === "blur") {
+      right_side += "00";
+    }
+
+    // Limit decimal to only 2 digits
+    right_side = right_side.substring(0, 2);
+
+    // join number by .
+    input_val = " " + left_side + "." + right_side;
+
+  } else {
+    // no decimal entered
+    // add commas to number
+    // remove all non-digits
+    input_val = formatNumber(input_val);
+    input_val = " " + input_val;
+
+    // final formatting
+    if (blur === "blur") {
+      input_val += ".00";
+    }
+  }
+
+  // send updated string to input
+  input.val(input_val);
+
+  // put caret back in the right position
+  var updated_len = input_val.length;
+  caret_pos = updated_len - original_len + caret_pos;
+  input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+
+
+    </script>
 @endsection

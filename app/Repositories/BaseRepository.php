@@ -228,4 +228,28 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
         return (object) $sortBy;
     }
+
+    public function moveImage($file, $fileNew, $path)
+    {
+        if (empty($file) || empty($fileNew)) {
+            return false;
+        }
+
+        $pathOld = public_path() . config('path.temp') . $file;
+        $pathNew = public_path() . $path . $fileNew;
+
+        if (file_exists($pathOld)) {
+            if (!is_dir(public_path() . $path)) {
+                mkdir(public_path() . $path, 0777);
+            }
+
+            $rename = rename($pathOld, $pathNew);
+
+            if ($rename) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

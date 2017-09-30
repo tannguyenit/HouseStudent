@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\TypeRepository\TypeRepository;
+use App\Repositories\UserRepository\UserRepository;
+use Auth;
+use DB;
+use Illuminate\Http\Request as NewRequest;
 use Request;
 use Session;
 
@@ -11,11 +15,16 @@ class PostController extends BaseController
 {
     protected $postRepository;
     protected $typeRepository;
+    protected $userRepository;
 
-    public function __construct(PostRepository $postRepository, TypeRepository $typeRepository)
-    {
+    public function __construct(
+        PostRepository $postRepository,
+        TypeRepository $typeRepository,
+        UserRepository $userRepository
+    ) {
         $this->postRepository = $postRepository;
         $this->typeRepository = $typeRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -51,10 +60,87 @@ class PostController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewRequest $request)
     {
-        $data = $request->all();
-        dd($data);
+        DB::beginTransaction();
+        try {
+            $result                     = true;
+            $data                       = $request->all();
+            $fillable                   = $this->postRepository->getFillable();
+            $attribute                  = array_only($data, $fillable);
+            $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
+            $attribute['township']      = $request->administrative_area_level_2;
+            $attribute['country']       = $request->administrative_area_level_1;
+            $attribute['description']   = $request->description;
+            $auth                       = Auth::user();
+            /* ------------------------------------------------------------------------ */
+            /*  Save Auth
+            /* ------------------------------------------------------------------------ */
+            if ($auth) {
+                $attribute['user_id'] = $auth->id;
+            } else {
+                $fillableUser         = $this->userRepository->getFillable();
+                $attributeUser        = array_only($data, $fillableUser);
+                $user                 = $this->userRepository->create($attributeUser);
+                $attribute['user_id'] = $user->id;
+            }
+
+            $savePost = $this->postRepository->create($attribute);
+            if ($savePost) {
+                /* ------------------------------------------------------------------------ */
+                /*  Save Features
+                /* ------------------------------------------------------------------------ */
+                $features = $request->additional_features;
+
+                if ($features) {
+                    $featuresArray = [];
+                    foreach ($features as $key => $element) {
+                        if ($element['key'] && $element['value']) {
+                            $featuresArray[$key]['title'] = $element['key'];
+                            $featuresArray[$key]['value'] = $element['value'];
+                        }
+                    }
+                    if (count($featuresArray)) {
+                        if (!$savePost->features()->createMany($featuresArray)) {
+                            return $result = false;
+                        };
+                    }
+                }
+
+                /* ------------------------------------------------------------------------ */
+                /*  Save Files
+                /* ------------------------------------------------------------------------ */
+                if ($request->file && "[]" != $request->file) {
+                    $FileArray = json_decode($request->file);
+
+                    foreach ($FileArray as $key => $value) {
+                        $fileNew = time() . $value;
+                        $this->postRepository->moveImage($value, $fileNew, config('path.post'));
+                        $filesArray[]['image'] = $fileNew;
+                    }
+
+                    if (!$savePost->images()->createMany($filesArray)) {
+                        return $result = false;
+                    };
+                }
+            } else {
+                $result = false;
+            }
+            if ($result) {
+                DB::commit();
+                if (!$auth) {
+                    $user = $this->userRepository->find($savePost->user_id);
+                    Auth::login($user);
+                }
+
+                return redirect()->action('HomeController@home')
+                    ->with('success', trans('message.create_successful'));
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            return redirect()->action('HomeController@home')
+                ->with('error', trans('message.create_successful'));
+        }
     }
 
     /**
