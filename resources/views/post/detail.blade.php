@@ -26,7 +26,7 @@
                             </div>
                             <div class="table-cell hidden-sm hidden-xs">
                                 <span class="label-wrap">
-                                    <span class="label-status label-status-7 label label-default">{{ $detailsPost->type->title }}</span>
+                                    <span class="label-featured label label-success">{{ $detailsPost->type->title }}</span>
                                 </span>
                             </div>
                         </div>
@@ -76,54 +76,21 @@
                                 </span>
                                 <div class="detail-slider-wrap">
                                     <div class="detail-slider owl-carousel owl-theme">
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-living-room-3-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-studio-room-1-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-living-room-2-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-bath-room-1-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-living-room-1-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-bed-room-1-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/01/inner-pool-1-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/los-angeles-08-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
-                                        <div class="item" style="background-image: url(../../wp-content/uploads/2016/03/los-angeles-03-810x430.jpg)">
-                                            <a class="popup-trigger banner-link" href="#"></a>
-                                        </div>
+                                        @forelse ($detailsPost->images as $image)
+                                            <div class="item" style="background-image: url('{{ $image->image }}')">
+                                                <a class="popup-trigger banner-link" href="#"></a>
+                                            </div>
+                                        @empty
+                                        @endforelse
                                     </div>
                                     <div class="detail-slider-nav-wrap">
                                         <div class="detail-slider-nav owl-carousel owl-theme">
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-living-room-3-150x110.jpg" alt="inner-living-room-3" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-studio-room-1-150x110.jpg" alt="inner-studio-room-1" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-living-room-2-150x110.jpg" alt="inner-living-room-2" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-bath-room-1-150x110.jpg" alt="inner-bath-room-1" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-living-room-1-150x110.jpg" alt="inner-living-room-1" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-bed-room-1-150x110.jpg" alt="inner-bed-room-1" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/01/inner-pool-1-150x110.jpg" alt="inner-pool-1" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-08-150x110.jpg" alt="los-angeles-08" width="100" height="70" />
-                                            </div>
-                                            <div class="item"><img src="../../wp-content/uploads/2016/03/los-angeles-03-150x110.jpg" alt="los-angeles-03" width="100" height="70" />
-                                            </div>
+                                            @forelse ($detailsPost->images as $image)
+                                                <div class="item">
+                                                    <img src="{{ $image->image }}" alt="{{ $detailsPost->title }}" class="height-70"/>
+                                                </div>
+                                            @empty
+                                            @endforelse
                                         </div>
                                     </div>
                                 </div>
@@ -136,6 +103,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="street-map" class="tab-pane fade "></div>
                         </div>
                         <div class="media-tabs">
                             <ul class="media-tabs-list">
@@ -162,16 +130,28 @@
                         <div class="detail-title">
                             <h2 class="title-left">{{ trans('post.detail') }}</h2>
                             <div class="title-right">
-                                <p>{{ $detailsPost->created_at }}</p>
+                                <p><i class="fa fa-clock-o"></i> {{ $detailsPost->created_at }}</p>
                             </div>
                         </div>
                         <div class="alert alert-info">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>{{ trans('post.name-boss') }}:<br></strong> {{ $detailsPost->name_boss }}</td>
+                                        <td><strong>{{ trans('post.phone-boss') }}:<br></strong> <a href="tel:{{ $detailsPost->phone_boss }}" "email me">{{ $detailsPost->phone_boss }}</a></td>
+                                        <td><strong>{{ trans('post.area') }}:<br></strong> {{ $detailsPost->area }} {{ config('setting.unit.vi') }}</td>
+                                        <td><strong>{{ trans('post.price') }}:<br></strong> $ {{ $detailsPost->price }} {{ config('setting.price,vi') }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @if (count($detailsPost->features))
                             <ul class="list-three-col">
-                                <li><strong>{{ trans('post.price') }}:</strong> ${{ $detailsPost->price }} {{ config('setting.price,vi') }}</li>
-                                <li><strong>{{ trans('post.area') }}:</strong> {{ $detailsPost->area }} {{ config('setting.unit.vi') }}</li>
-                                <li><strong>{{ trans('post.phone-boss') }}:</strong> {{ $detailsPost->phone_boss }}</li>
-                                <li><strong>{{ trans('post.name-boss') }}:</strong> {{ $detailsPost->name_boss }}</li>
+                                @forelse ($detailsPost->features as $feature)
+                                    <li><strong>{{ $feature->title }} : </strong> {{ $feature->value }}</li>
+                                @empty
+                                @endforelse
                             </ul>
+                            @endif
                         </div>
                     </div>
                     <div id="agent_bottom" class="detail-contact detail-block target-block">

@@ -1193,6 +1193,13 @@ span.user-name {
 .property-item .body-left {
     width:auto;
 }
-.owl-carousel .owl-item img {
+/*.owl-carousel .owl-item img {
     height: -webkit-fill-available;
+}*/
+.height-70 {
+    height:70px;
+}
+.owl-stage {
+    float: none;
+    margin: 0 auto;
 }

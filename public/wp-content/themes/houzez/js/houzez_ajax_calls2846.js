@@ -2,105 +2,107 @@
  * Created by waqasriaz on 02/10/15.
  */
 
- jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
     "use strict";
 
-    if ( typeof AJAX_VARIABLE !== "undefined" ) {
+    if ( typeof HOUZEZ_ajaxcalls_vars !== "undefined" ) {
         var houzezMap;
         var markers = new Array();
         var markerCluster = null;
         var current_marker = 0;
         var has_compare = $('#compare-controller').length;
-        var validate = JSON.parse(AJAX_VARIABLE.validate);
-        var ajaxurl = AJAX_VARIABLE.admin_url;
-        var login_sending = AJAX_VARIABLE.login_loading;
-        var userID = AJAX_VARIABLE.user_id;
-        var prop_lat = AJAX_VARIABLE.property_lat;
-        var prop_lng = AJAX_VARIABLE.property_lng;
-        var autosearch_text = AJAX_VARIABLE.autosearch_text;
-        var paypal_connecting = AJAX_VARIABLE.paypal_connecting;
-        var mollie_connecting = AJAX_VARIABLE.mollie_connecting;
-        var process_loader_refresh = AJAX_VARIABLE.process_loader_refresh;
-        var process_loader_spinner = AJAX_VARIABLE.process_loader_spinner;
-        var process_loader_circle = AJAX_VARIABLE.process_loader_circle;
-        var process_loader_cog = AJAX_VARIABLE.process_loader_cog;
-        var success_icon = AJAX_VARIABLE.success_icon;
-        var confirm_message = AJAX_VARIABLE.confirm;
-        var confirm_featured = AJAX_VARIABLE.confirm_featured;
-        var confirm_featured_remove = AJAX_VARIABLE.confirm_featured_remove;
-        var confirm_relist = AJAX_VARIABLE.confirm_relist;
-        var is_singular_property = AJAX_VARIABLE.is_singular_property;
-        var property_map = AJAX_VARIABLE.property_map;
-        var property_map_street = AJAX_VARIABLE.property_map_street;
-        var currency_symb = AJAX_VARIABLE.currency_symbol;
-        var advanced_search_price_range_min = parseInt( AJAX_VARIABLE.advanced_search_widget_min_price );
-        var advanced_search_price_range_max = parseInt( AJAX_VARIABLE.advanced_search_widget_max_price );
-        var advanced_search_price_range_min_rent = parseInt( AJAX_VARIABLE.advanced_search_min_price_range_for_rent );
-        var advanced_search_price_range_max_rent = parseInt( AJAX_VARIABLE.advanced_search_max_price_range_for_rent );
-        var advanced_search_widget_min_area = parseInt( AJAX_VARIABLE.advanced_search_widget_min_area );
-        var advanced_search_widget_max_area = parseInt( AJAX_VARIABLE.advanced_search_widget_max_area );
-        var advanced_search_price_slide = AJAX_VARIABLE.advanced_search_price_slide;
-        var fave_page_template = AJAX_VARIABLE.fave_page_template;
-        var fave_prop_featured = AJAX_VARIABLE.prop_featured;
-        var featured_listings_none = AJAX_VARIABLE.featured_listings_none;
-        var prop_sent_for_approval = AJAX_VARIABLE.prop_sent_for_approval;
-        var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
-        var infoboxClose = AJAX_VARIABLE.infoboxClose;
-        var clusterIcon = AJAX_VARIABLE.clusterIcon;
-        var paged = AJAX_VARIABLE.paged;
-        var sort_by = AJAX_VARIABLE.sort_by;
-        var google_map_style = AJAX_VARIABLE.google_map_style;
-        var googlemap_default_zoom = AJAX_VARIABLE.googlemap_default_zoom;
-        var googlemap_pin_cluster = AJAX_VARIABLE.googlemap_pin_cluster;
-        var googlemap_zoom_cluster = AJAX_VARIABLE.googlemap_zoom_cluster;
-        var map_icons_path = AJAX_VARIABLE.map_icons_path;
-        var google_map_needed = AJAX_VARIABLE.google_map_needed;
-        var simple_logo = AJAX_VARIABLE.simple_logo;
-        var retina_logo = AJAX_VARIABLE.retina_logo;
-        var retina_logo_mobile = AJAX_VARIABLE.retina_logo_mobile;
-        var retina_logo_mobile_splash = AJAX_VARIABLE.retina_logo_mobile_splash;
-        var retina_logo_splash = AJAX_VARIABLE.retina_logo_splash;
-        var retina_logo_height = AJAX_VARIABLE.retina_logo_height;
-        var retina_logo_width = AJAX_VARIABLE.retina_logo_width;
-        var transparent_menu = AJAX_VARIABLE.transparent_menu;
-        var transportation = AJAX_VARIABLE.transportation;
-        var supermarket = AJAX_VARIABLE.supermarket;
-        var schools = AJAX_VARIABLE.schools;
-        var libraries = AJAX_VARIABLE.libraries;
-        var pharmacies = AJAX_VARIABLE.pharmacies;
-        var hospitals = AJAX_VARIABLE.hospitals;
-        var currency_position = AJAX_VARIABLE.currency_position;
-        var currency_updating_msg = AJAX_VARIABLE.currency_updating_msg;
-        var submission_currency = AJAX_VARIABLE.submission_currency;
-        var wire_transfer_text = AJAX_VARIABLE.wire_transfer_text;
-        var direct_pay_thanks = AJAX_VARIABLE.direct_pay_thanks;
-        var direct_payment_title = AJAX_VARIABLE.direct_payment_title;
-        var direct_payment_button = AJAX_VARIABLE.direct_payment_button;
-        var direct_payment_details = AJAX_VARIABLE.direct_payment_details;
-        var measurement_unit = AJAX_VARIABLE.measurement_unit;
-        var measurement_updating_msg = AJAX_VARIABLE.measurement_updating_msg;
-        var thousands_separator = AJAX_VARIABLE.thousands_separator;
-        var rent_status_for_price_range = AJAX_VARIABLE.for_rent_price_range;
-        var current_tempalte = AJAX_VARIABLE.current_tempalte;
-        var not_found = AJAX_VARIABLE.not_found;
-        var property_detail_top = AJAX_VARIABLE.property_detail_top;
-        var keyword_search_field = AJAX_VARIABLE.keyword_search_field;
-        var keyword_autocomplete = AJAX_VARIABLE.keyword_autocomplete;
-        var template_thankyou = AJAX_VARIABLE.template_thankyou;
-        var direct_pay_text = AJAX_VARIABLE.direct_pay_text;
-        var search_result_page = AJAX_VARIABLE.search_result_page;
-        var houzez_default_radius = AJAX_VARIABLE.houzez_default_radius;
-        var enable_radius_search = AJAX_VARIABLE.enable_radius_search;
-        var enable_radius_search_halfmap = AJAX_VARIABLE.enable_radius_search_halfmap;
-        var houzez_primary_color = AJAX_VARIABLE.houzez_primary_color;
-        var houzez_geocomplete_country = AJAX_VARIABLE.geocomplete_country;
-        var houzez_logged_in = AJAX_VARIABLE.houzez_logged_in;
-        var ipinfo_location = AJAX_VARIABLE.ipinfo_location;
-        var delete_property_loading = AJAX_VARIABLE.delete_property;
-        var delete_property_confirmation = AJAX_VARIABLE.delete_confirmation;
 
-        var compare_button_url = AJAX_VARIABLE.compare_button_url;
-        var compare_page_not_found = AJAX_VARIABLE.compare_page_not_found;
+        var ajaxurl = HOUZEZ_ajaxcalls_vars.admin_url+ 'admin-ajax.php';
+        var login_sending = HOUZEZ_ajaxcalls_vars.login_loading;
+        var userID = HOUZEZ_ajaxcalls_vars.user_id;
+        var login_redirect_type = HOUZEZ_ajaxcalls_vars.redirect_type
+        var login_redirect = HOUZEZ_ajaxcalls_vars.login_redirect
+        var prop_lat = HOUZEZ_ajaxcalls_vars.property_lat;
+        var prop_lng = HOUZEZ_ajaxcalls_vars.property_lng;
+        var autosearch_text = HOUZEZ_ajaxcalls_vars.autosearch_text;
+        var paypal_connecting = HOUZEZ_ajaxcalls_vars.paypal_connecting;
+        var mollie_connecting = HOUZEZ_ajaxcalls_vars.mollie_connecting;
+        var process_loader_refresh = HOUZEZ_ajaxcalls_vars.process_loader_refresh;
+        var process_loader_spinner = HOUZEZ_ajaxcalls_vars.process_loader_spinner;
+        var process_loader_circle = HOUZEZ_ajaxcalls_vars.process_loader_circle;
+        var process_loader_cog = HOUZEZ_ajaxcalls_vars.process_loader_cog;
+        var success_icon = HOUZEZ_ajaxcalls_vars.success_icon;
+        var confirm_message = HOUZEZ_ajaxcalls_vars.confirm;
+        var confirm_featured = HOUZEZ_ajaxcalls_vars.confirm_featured;
+        var confirm_featured_remove = HOUZEZ_ajaxcalls_vars.confirm_featured_remove;
+        var confirm_relist = HOUZEZ_ajaxcalls_vars.confirm_relist;
+        var is_singular_property = HOUZEZ_ajaxcalls_vars.is_singular_property;
+        var property_map = HOUZEZ_ajaxcalls_vars.property_map;
+        var property_map_street = HOUZEZ_ajaxcalls_vars.property_map_street;
+        var currency_symb = HOUZEZ_ajaxcalls_vars.currency_symbol;
+        var advanced_search_price_range_min = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_min_price );
+        var advanced_search_price_range_max = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_max_price );
+        var advanced_search_price_range_min_rent = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_min_price_range_for_rent );
+        var advanced_search_price_range_max_rent = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_max_price_range_for_rent );
+        var advanced_search_widget_min_area = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_min_area );
+        var advanced_search_widget_max_area = parseInt( HOUZEZ_ajaxcalls_vars.advanced_search_widget_max_area );
+        var advanced_search_price_slide = HOUZEZ_ajaxcalls_vars.advanced_search_price_slide;
+        var fave_page_template = HOUZEZ_ajaxcalls_vars.fave_page_template;
+        var fave_prop_featured = HOUZEZ_ajaxcalls_vars.prop_featured;
+        var featured_listings_none = HOUZEZ_ajaxcalls_vars.featured_listings_none;
+        var prop_sent_for_approval = HOUZEZ_ajaxcalls_vars.prop_sent_for_approval;
+        var houzez_rtl = HOUZEZ_ajaxcalls_vars.houzez_rtl;
+        var infoboxClose = HOUZEZ_ajaxcalls_vars.infoboxClose;
+        var clusterIcon = HOUZEZ_ajaxcalls_vars.clusterIcon;
+        var paged = HOUZEZ_ajaxcalls_vars.paged;
+        var sort_by = HOUZEZ_ajaxcalls_vars.sort_by;
+        var google_map_style = HOUZEZ_ajaxcalls_vars.google_map_style;
+        var googlemap_default_zoom = HOUZEZ_ajaxcalls_vars.googlemap_default_zoom;
+        var googlemap_pin_cluster = HOUZEZ_ajaxcalls_vars.googlemap_pin_cluster;
+        var googlemap_zoom_cluster = HOUZEZ_ajaxcalls_vars.googlemap_zoom_cluster;
+        var map_icons_path = HOUZEZ_ajaxcalls_vars.map_icons_path;
+        var google_map_needed = HOUZEZ_ajaxcalls_vars.google_map_needed;
+        var simple_logo = HOUZEZ_ajaxcalls_vars.simple_logo;
+        var retina_logo = HOUZEZ_ajaxcalls_vars.retina_logo;
+        var retina_logo_mobile = HOUZEZ_ajaxcalls_vars.retina_logo_mobile;
+        var retina_logo_mobile_splash = HOUZEZ_ajaxcalls_vars.retina_logo_mobile_splash;
+        var retina_logo_splash = HOUZEZ_ajaxcalls_vars.retina_logo_splash;
+        var retina_logo_height = HOUZEZ_ajaxcalls_vars.retina_logo_height;
+        var retina_logo_width = HOUZEZ_ajaxcalls_vars.retina_logo_width;
+        var transparent_menu = HOUZEZ_ajaxcalls_vars.transparent_menu;
+        var transportation = HOUZEZ_ajaxcalls_vars.transportation;
+        var supermarket = HOUZEZ_ajaxcalls_vars.supermarket;
+        var schools = HOUZEZ_ajaxcalls_vars.schools;
+        var libraries = HOUZEZ_ajaxcalls_vars.libraries;
+        var pharmacies = HOUZEZ_ajaxcalls_vars.pharmacies;
+        var hospitals = HOUZEZ_ajaxcalls_vars.hospitals;
+        var currency_position = HOUZEZ_ajaxcalls_vars.currency_position;
+        var currency_updating_msg = HOUZEZ_ajaxcalls_vars.currency_updating_msg;
+        var submission_currency = HOUZEZ_ajaxcalls_vars.submission_currency;
+        var wire_transfer_text = HOUZEZ_ajaxcalls_vars.wire_transfer_text;
+        var direct_pay_thanks = HOUZEZ_ajaxcalls_vars.direct_pay_thanks;
+        var direct_payment_title = HOUZEZ_ajaxcalls_vars.direct_payment_title;
+        var direct_payment_button = HOUZEZ_ajaxcalls_vars.direct_payment_button;
+        var direct_payment_details = HOUZEZ_ajaxcalls_vars.direct_payment_details;
+        var measurement_unit = HOUZEZ_ajaxcalls_vars.measurement_unit;
+        var measurement_updating_msg = HOUZEZ_ajaxcalls_vars.measurement_updating_msg;
+        var thousands_separator = HOUZEZ_ajaxcalls_vars.thousands_separator;
+        var rent_status_for_price_range = HOUZEZ_ajaxcalls_vars.for_rent_price_range;
+        var current_tempalte = HOUZEZ_ajaxcalls_vars.current_tempalte;
+        var not_found = HOUZEZ_ajaxcalls_vars.not_found;
+        var property_detail_top = HOUZEZ_ajaxcalls_vars.property_detail_top;
+        var keyword_search_field = HOUZEZ_ajaxcalls_vars.keyword_search_field;
+        var keyword_autocomplete = HOUZEZ_ajaxcalls_vars.keyword_autocomplete;
+        var template_thankyou = HOUZEZ_ajaxcalls_vars.template_thankyou;
+        var direct_pay_text = HOUZEZ_ajaxcalls_vars.direct_pay_text;
+        var search_result_page = HOUZEZ_ajaxcalls_vars.search_result_page;
+        var houzez_default_radius = HOUZEZ_ajaxcalls_vars.houzez_default_radius;
+        var enable_radius_search = HOUZEZ_ajaxcalls_vars.enable_radius_search;
+        var enable_radius_search_halfmap = HOUZEZ_ajaxcalls_vars.enable_radius_search_halfmap;
+        var houzez_primary_color = HOUZEZ_ajaxcalls_vars.houzez_primary_color;
+        var houzez_geocomplete_country = HOUZEZ_ajaxcalls_vars.geocomplete_country;
+        var houzez_logged_in = HOUZEZ_ajaxcalls_vars.houzez_logged_in;
+        var ipinfo_location = HOUZEZ_ajaxcalls_vars.ipinfo_location;
+        var delete_property_loading = HOUZEZ_ajaxcalls_vars.delete_property;
+        var delete_property_confirmation = HOUZEZ_ajaxcalls_vars.delete_confirmation;
+
+        var compare_button_url = HOUZEZ_ajaxcalls_vars.compare_button_url;
+        var compare_page_not_found = HOUZEZ_ajaxcalls_vars.compare_page_not_found;
 
         if( houzez_rtl == 'yes' ) {
             houzez_rtl = true;
@@ -112,7 +114,7 @@
         /*
          *  Retina logo
          * *************************************** */
-         if ( retina_logo !== '' && retina_logo_width !== '' && retina_logo_height !== '') {
+        if ( retina_logo !== '' && retina_logo_width !== '' && retina_logo_height !== '') {
             if (window.devicePixelRatio == 2) {
                 if( transparent_menu == 'yes' ) {
                     $(".houzez-header-transparent .logo-desktop img").attr("src", retina_logo_splash);
@@ -238,23 +240,23 @@
 
                 switch(poiType) {
                     case 'transportations':
-                    types = ['bus_station', 'subway_station', 'train_station', 'airport'];
-                    break;
+                        types = ['bus_station', 'subway_station', 'train_station', 'airport'];
+                        break;
                     case 'supermarkets':
-                    types = ['grocery_or_supermarket', 'shopping_mall'];
-                    break;
+                        types = ['grocery_or_supermarket', 'shopping_mall'];
+                        break;
                     case 'schools':
-                    types = ['school', 'university'];
-                    break;
+                        types = ['school', 'university'];
+                        break;
                     case 'libraries':
-                    types = ['library'];
-                    break;
+                        types = ['library'];
+                        break;
                     case 'pharmacies':
-                    types = ['pharmacy'];
-                    break;
+                        types = ['pharmacy'];
+                        break;
                     case 'hospitals':
-                    types = ['hospital'];
-                    break;
+                        types = ['hospital'];
+                        break;
                 }
 
                 service.nearbySearch({
@@ -279,53 +281,53 @@
 
                 switch(type) {
                     case 'transportations':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'transportation.png'
-                    });
-                    transportationsMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'transportation.png'
+                        });
+                        transportationsMarkers.push(marker);
+                        break;
                     case 'supermarkets':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'supermarket.png'
-                    });
-                    supermarketsMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'supermarket.png'
+                        });
+                        supermarketsMarkers.push(marker);
+                        break;
                     case 'schools':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'school.png'
-                    });
-                    schoolsMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'school.png'
+                        });
+                        schoolsMarkers.push(marker);
+                        break;
                     case 'libraries':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'libraries.png'
-                    });
-                    librariesMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'libraries.png'
+                        });
+                        librariesMarkers.push(marker);
+                        break;
                     case 'pharmacies':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'pharmacy.png'
-                    });
-                    pharmaciesMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'pharmacy.png'
+                        });
+                        pharmaciesMarkers.push(marker);
+                        break;
                     case 'hospitals':
-                    marker = new google.maps.Marker({
-                        map: poiMap,
-                        position: place.geometry.location,
-                        icon: map_icons_path+'hospital.png'
-                    });
-                    hospitalsMarkers.push(marker);
-                    break;
+                        marker = new google.maps.Marker({
+                            map: poiMap,
+                            position: place.geometry.location,
+                            icon: map_icons_path+'hospital.png'
+                        });
+                        hospitalsMarkers.push(marker);
+                        break;
                 }
 
                 google.maps.event.addListener(marker, 'mouseover', function() {
@@ -541,7 +543,7 @@
 
         /* ------------------------------------------------------------------------ */
         /*  COMPARE PANEL
-        /* ------------------------------------------------------------------------ */
+         /* ------------------------------------------------------------------------ */
         if( has_compare == 1) {
 
             var compare_panel = function () {
@@ -644,7 +646,7 @@
         /*
          *  Print Property
          * *************************************** */
-         if( $('#houzez-print').length > 0 ) {
+        if( $('#houzez-print').length > 0 ) {
             $('#houzez-print').click(function (e) {
                 e.preventDefault();
                 var propID, printWindow;
@@ -680,7 +682,7 @@
         /*
          *  Visual Composer Stretch row
          * *************************************** */
-         if( houzez_rtl ) {
+        if( houzez_rtl ) {
             var visual_composer_stretch_row = function () {
 
                 var $elements = $('[data-vc-full-width="true"]');
@@ -724,7 +726,7 @@
 
         /* ------------------------------------------------------------------------ */
         /*  Property page layout cookies
-        /* ------------------------------------------------------------------------ */
+         /* ------------------------------------------------------------------------ */
         var view_btn = $('.view-btn ');
         if( view_btn.length > 0 ) {
             view_btn.click(function () {
@@ -798,8 +800,8 @@
         /*--------------------------------------------------------------------------
          *  Property Module Ajax Pagination
          * -------------------------------------------------------------------------*/
-         var properties_module_section = $('#properties_module_section');
-         if( properties_module_section.length > 0 ) {
+        var properties_module_section = $('#properties_module_section');
+        if( properties_module_section.length > 0 ) {
 
             var properties_module_container = $('#properties_module_container');
             var paginationLink = $('.property-item-module ul.pagination li a');
@@ -846,9 +848,9 @@
         /*--------------------------------------------------------------------------
          *  Change advanced search price
          * -------------------------------------------------------------------------*/
-         var fave_property_status_changed = function(prop_status, $form) {
+        var fave_property_status_changed = function(prop_status, $form) {
 
-            if( prop_status ==  AJAX_VARIABLE.for_rent ) {
+            if( prop_status ==  HOUZEZ_ajaxcalls_vars.for_rent ) {
                 $form.find('.prices-for-all').addClass('hide');
                 $form.find('.prices-for-all select').attr('disabled','disabled');
                 $form.find('.prices-only-for-rent').removeClass('hide');
@@ -869,7 +871,7 @@
         });
         /* On page load ( as on search page ) */
         var selected_status_header_search = $('select[name="status"]').val();
-        if( selected_status_header_search == AJAX_VARIABLE.for_rent || selected_status_header_search == '' ){
+        if( selected_status_header_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_header_search == '' ){
             var $form = $('.advance-search-header');
             fave_property_status_changed(selected_status_header_search, $form);
         }
@@ -882,7 +884,7 @@
         });
         /* On page load ( as on search page ) */
         var selected_status_header_search = $('.advanced-search-mobile #selected_status_mobile').val();
-        if( selected_status_header_search == AJAX_VARIABLE.for_rent || selected_status_header_search == '' ){
+        if( selected_status_header_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_header_search == '' ){
             var $form = $('.advanced-search-mobile');
             fave_property_status_changed(selected_status_header_search, $form);
         }
@@ -894,7 +896,7 @@
             fave_property_status_changed(selected_status, $form);
         });
         var selected_status_module_search = $('.advanced-search-module #selected_status_module').val();
-        if( selected_status_module_search == AJAX_VARIABLE.for_rent || selected_status_module_search == '' ){
+        if( selected_status_module_search == HOUZEZ_ajaxcalls_vars.for_rent || selected_status_module_search == '' ){
             var $form = $('.advanced-search-module');
             fave_property_status_changed(selected_status_module_search, $form);
         }
@@ -902,7 +904,7 @@
         /*--------------------------------------------------------------------------
          *  Save Search
          * -------------------------------------------------------------------------*/
-         $("#save_search_click").click(function(e) {
+        $("#save_search_click").click(function(e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -976,7 +978,7 @@
         /*--------------------------------------------------------------------------
          *  Property Agent Contact Form
          * -------------------------------------------------------------------------*/
-         $( '.agent_contact_form').click(function(e) {
+        $( '.agent_contact_form').click(function(e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -1019,7 +1021,7 @@
          *   Contact agent form on agent detail page
          * -------------------------------------------------------------------------*/
 
-         $('#agent_detail_contact_btn').click(function(e) {
+        $('#agent_detail_contact_btn').click(function(e) {
             e.preventDefault();
             var current_element = $(this);
             var $this = $(this);
@@ -1056,7 +1058,7 @@
         /*--------------------------------------------------------------------------
          *  Property Schedule Contact Form
          * -------------------------------------------------------------------------*/
-         $( '.schedule_contact_form').click(function(e) {
+        $( '.schedule_contact_form').click(function(e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -1098,7 +1100,7 @@
         /*--------------------------------------------------------------------------
          *   Resend Property For approval - only for per listing
          * -------------------------------------------------------------------------*/
-         $('.resend-for-approval-perlisting').click(function (e) {
+        $('.resend-for-approval-perlisting').click(function (e) {
             e.preventDefault();
 
             var prop_id = $(this).attr('data-propid');
@@ -1106,7 +1108,7 @@
             $(this).unbind( "click" );
         });
 
-         var resend_for_approval_perlisting = function( prop_id, currentDiv ) {
+        var resend_for_approval_perlisting = function( prop_id, currentDiv ) {
 
             $.ajax({
                 type: 'POST',
@@ -1187,78 +1189,53 @@
         }
 
         /* ------------------------------------------------------------------------ */
-        /*	Fave login and regsiter
-        /* ------------------------------------------------------------------------ */
+        /*  Fave login and regsiter
+         /* ------------------------------------------------------------------------ */
         $('.fave-login-button').click(function(e){
             e.preventDefault();
-            var _this = $(this);
-            houzez_login(_this);
+            var currnt = $(this);
+            houzez_login( currnt );
         });
 
         $('.fave-register-button').click(function(e){
             e.preventDefault();
-            var _this = $(this);
-            houzez_register(_this);
-        });
-        /*
-        * validate form
-        */
-        $("#formLogin").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                }
-            },
-            messages: {
-                email: {
-                    required: validate.email.required,
-                    email: validate.email.email,
-                },
-                password: {
-                    required: validate.password.required,
-                    minlength: validate.password.min,
-                }
-            }
+            var currnt = $(this);
+            houzez_register( currnt );
         });
 
-        var houzez_login = function(_this) {
-            if ($("#formLogin").valid()) {
-                var form = _this.parents('form');
-                var url = form.attr('action');
-                var $messages = _this.parents('.login-block').find('.houzez_messages');
+        var houzez_login = function( currnt ) {
+            var $form = currnt.parents('form');
+            var $messages = currnt.parents('.login-block').find('.houzez_messages');
 
-                $.ajax({
-                    type: 'post',
-                    url: url,
-                    dataType: 'json',
-                    data: form.serialize(),
-                    beforeSend: function () {
-                        $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
-                    },
-                    success: function(response) {
-
-                        if(response.success) {
-                            $messages.empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
+            $.ajax({
+                type: 'post',
+                url: ajaxurl,
+                dataType: 'json',
+                data: $form.serialize(),
+                beforeSend: function () {
+                    $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                },
+                success: function( response ) {
+                    if( response.success ) {
+                        $messages.empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
+                        if( login_redirect_type == 'same_page' ) {
                             window.location.reload();
                         } else {
-                            $messages.empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
+                            window.location.href = login_redirect;
                         }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
+
+                    } else {
+                        $messages.empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
                     }
-                })
-            }
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            })
+
         } // end houzez_login
 
-        /* ------------------------------------------------------------------------ */
-        /*  Register User
-        /* ------------------------------------------------------------------------ */
         var houzez_register = function ( currnt ) {
 
             var $form = currnt.parents('form');
@@ -1272,7 +1249,7 @@
                 beforeSend: function () {
                     $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
                 },
-                success: function(response) {
+                success: function( response ) {
                     if( response.success ) {
                         $messages.empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
                     } else {
@@ -1287,52 +1264,37 @@
         }
 
         /* ------------------------------------------------------------------------ */
-        /*	Reset Password
-        /* ------------------------------------------------------------------------ */
-        $("#formFogotPassword").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-            },
-            messages: {
-                email: {
-                    required: validate.email.required,
-                    email: validate.email.email,
-                },
-            }
-        });
+        /*  Reset Password
+         /* ------------------------------------------------------------------------ */
+        $( '#houzez_forgetpass').click(function(){
+            var user_login = $('#user_login_forgot').val(),
+                security    = $('#fave_resetpassword_security').val();
 
-        $( '#submit_forgetpass').click(function(){
-            if ($("#formFogotPassword").valid()) {
-                var _this = $(this);
-                var form = _this.parents('form');
-                var url = form.attr('action');
-
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    dataType: 'JSON',
-                    data:form.serialize(),
-                    beforeSend: function () {
-                        $('#result_msg_reset').empty().append('<p class="success text-success"> '+ login_sending +'</p>');
-                    },
-                    success: function(response) {
-                        if( response.success ) {
-                            $('#result_msg_reset').empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
-                            setTimeout(function () {
-                                $('.modal').modal('hide');
-                            }, 2000)
-                        } else {
-                            $('#result_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        $('#result_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
+            $.ajax({
+                type: 'post',
+                url: ajaxurl,
+                dataType: 'json',
+                data: {
+                    'action': 'houzez_reset_password',
+                    'user_login': user_login,
+                    'security': security
+                },
+                beforeSend: function () {
+                    $('#houzez_msg_reset').empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                },
+                success: function( response ) {
+                    if( response.success ) {
+                        $('#houzez_msg_reset').empty().append('<p class="success text-success"><i class="fa fa-check"></i> '+ response.msg +'</p>');
+                    } else {
+                        $('#houzez_msg_reset').empty().append('<p class="error text-danger"><i class="fa fa-close"></i> '+ response.msg +'</p>');
                     }
-                });
-            }
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
+
         });
 
 
@@ -1384,8 +1346,8 @@
         }
 
         /* ------------------------------------------------------------------------ */
-        /*	Paypal single listing payment
-        /* ------------------------------------------------------------------------ */
+        /*  Paypal single listing payment
+         /* ------------------------------------------------------------------------ */
         $('#houzez_complete_order').click(function(e) {
             e.preventDefault();
             var hform, payment_gateway, houzez_listing_price, property_id, is_prop_featured, is_prop_upgrade;
@@ -1409,8 +1371,8 @@
                     hform.find('.houzez_stripe_simple button').trigger("click");
                 }
             } else if ( payment_gateway == 'direct_pay' ) {
-                fave_processing_modal( direct_pay_text );
-                direct_bank_transfer(property_id, houzez_listing_price);
+                    fave_processing_modal( direct_pay_text );
+                    direct_bank_transfer(property_id, houzez_listing_price);
             }
             return;
 
@@ -1428,32 +1390,32 @@
 
 
         /* ------------------------------------------------------------------------ */
-        /*	Paypal payment function
-        /* ------------------------------------------------------------------------ */
+        /*  Paypal payment function
+         /* ------------------------------------------------------------------------ */
         var fave_paypal_payment = function( property_id, is_prop_featured, is_prop_upgrade ) {
 
             $.ajax({
-             type: 'post',
-             url: ajaxurl,
-             data: {
-               'action': 'houzez_property_paypal_payment',
-               'prop_id': property_id,
-               'is_prop_featured': is_prop_featured,
-               'is_prop_upgrade': is_prop_upgrade,
-           },
-           success: function(response) {
-            window.location.href = response;
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            console.log(err.Message);
-        }
-    });
+               type: 'post',
+               url: ajaxurl,
+               data: {
+                 'action': 'houzez_property_paypal_payment',
+                 'prop_id': property_id,
+                 'is_prop_featured': is_prop_featured,
+                 'is_prop_upgrade': is_prop_upgrade,
+                },
+                success: function( response ) {
+                    window.location.href = response;
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
         }
 
         /* ------------------------------------------------------------------------ */
-        /*	Select Membership payment
-        /* ------------------------------------------------------------------------ */
+        /*  Select Membership payment
+         /* ------------------------------------------------------------------------ */
 
         var houzez_membership_data = function(currnt) {
             var payment_gateway = $("input[name='houzez_payment_type']:checked").val();
@@ -1505,7 +1467,7 @@
                 beforeSend: function () {
                     $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
                 },
-                success: function(response) {
+                success: function( response ) {
                     if( response.success ) {
                         houzez_membership_data(currnt);
                     } else {
@@ -1602,17 +1564,17 @@
                     'selected_package' : houzez_package_id,
                 },
                 success: function (data) {
-                 window.location.href = data;
+                       window.location.href = data;
 
-             },
-             error: function (errorThrown) {}
-         });
+                },
+                error: function (errorThrown) {}
+            });
         }
 
         /*--------------------------------------------------------------------------
          *   Houzez Free Membership Package
          * -------------------------------------------------------------------------*/
-         var houzez_free_membership_package = function ( houzez_package_id ) {
+        var houzez_free_membership_package = function ( houzez_package_id ) {
             jQuery.ajax({
                 type: 'POST',
                 url: ajaxurl,
@@ -1631,7 +1593,7 @@
         /*--------------------------------------------------------------------------
          *   Resend Property For approval - only for membership
          * -------------------------------------------------------------------------*/
-         $('.resend-for-approval').click(function (e) {
+        $('.resend-for-approval').click(function (e) {
             e.preventDefault();
 
             if (confirm(confirm_relist)) {
@@ -1641,7 +1603,7 @@
             }
         });
 
-         var resend_for_approval = function( prop_id, currentDiv ) {
+        var resend_for_approval = function( prop_id, currentDiv ) {
 
             $.ajax({
                 type: 'POST',
@@ -1673,7 +1635,7 @@
         /*--------------------------------------------------------------------------
          *   Make Property Featured - only for membership
          * -------------------------------------------------------------------------*/
-         $('.make-prop-featured').click(function (e) {
+        $('.make-prop-featured').click(function (e) {
             e.preventDefault();
 
             if (confirm(confirm_featured)) {
@@ -1684,7 +1646,7 @@
             }
         });
 
-         var make_prop_featured = function( prop_id, currentDiv, prop_type ) {
+        var make_prop_featured = function( prop_id, currentDiv, prop_type ) {
 
             $.ajax({
                 type: 'POST',
@@ -1719,7 +1681,7 @@
         /*--------------------------------------------------------------------------
          *   Make Property Featured - only for membership
          * -------------------------------------------------------------------------*/
-         $('.remove-prop-featured').click(function (e) {
+        $('.remove-prop-featured').click(function (e) {
             e.preventDefault();
 
             if (confirm(confirm_featured_remove)) {
@@ -1729,7 +1691,7 @@
             }
         });
 
-         var remove_prop_featured = function( prop_id, currentDiv ) {
+        var remove_prop_featured = function( prop_id, currentDiv ) {
 
             $.ajax({
                 type: 'POST',
@@ -1756,8 +1718,8 @@
         }
 
         /* ------------------------------------------------------------------------ */
-        /*	Wire Transfer per listing payment
-        /* ------------------------------------------------------------------------ */
+        /*  Wire Transfer per listing payment
+         /* ------------------------------------------------------------------------ */
         var direct_bank_transfer = function( prop_id, listing_price ) {
             var is_featured = $('input[name="featured_pay"]').val();
             var is_upgrade = $('input[name="is_upgrade"]').val();
@@ -1779,22 +1741,110 @@
 
         }
 
+
+        /*--------------------------------------------------------------------------
+         *  Social Logins
+         * -------------------------------------------------------------------------*/
+        $('.yahoo-login').click(function () {
+            var current = $(this);
+            houzez_login_via_yahoo( current );
+        });
+
+        var houzez_login_via_yahoo = function ( current ) {
+            var $form = current.parents('form');
+            var $messages = current.parents('.login-block').find('.houzez_messages');
+
+            $.ajax({
+                type: 'POST',
+                url: ajaxurl,
+                data: {
+                    'action' : 'houzez_yahoo_login'
+                },
+                beforeSend: function () {
+                    $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                },
+                success: function (data) {
+                    window.location.href = data;
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
+        }
+
+        $('.google-login').click(function () {
+            var current = $(this);
+            houzez_login_via_google( current );
+        });
+
+        var houzez_login_via_google = function ( current ) {
+            var $form = current.parents('form');
+            var $messages = current.parents('.login-block').find('.houzez_messages');
+
+            $.ajax({
+                type: 'POST',
+                url: ajaxurl,
+                data: {
+                    'action' : 'houzez_google_login_oauth'
+                },
+                beforeSend: function () {
+                    $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                },
+                success: function (data) {
+                    window.location.href = data;
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
+        }
+
+        $('.facebook-login').click(function () {
+            var current = $(this);
+            houzez_login_via_facebook( current );
+        });
+
+        var houzez_login_via_facebook = function ( current ) {
+            var $form = current.parents('form');
+            var $messages = current.parents('.login-block').find('.houzez_messages');
+
+            $.ajax({
+                type: 'POST',
+                url: ajaxurl,
+                data: {
+                    'action' : 'houzez_facebook_login_oauth'
+                },
+                beforeSend: function () {
+                    $messages.empty().append('<p class="success text-success"> '+ login_sending +'</p>');
+                },
+                success: function (data) {
+                    window.location.href = data;
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
+        }
+
         /*--------------------------------------------------------------------------
          *  Invoice Filter
          * -------------------------------------------------------------------------*/
-         $('#invoice_status, #invoice_type').change(function() {
+        $('#invoice_status, #invoice_type').change(function() {
             houzez_invoices_filter();
         });
 
-         $('#startDate, #endDate').focusout(function() {
+        $('#startDate, #endDate').focusout(function() {
             houzez_invoices_filter();
         })
 
-         var houzez_invoices_filter = function() {
+        var houzez_invoices_filter = function() {
             var inv_status = $('#invoice_status').val(),
-            inv_type   = $('#invoice_type').val(),
-            startDate  = $('#startDate').val(),
-            endDate  = $('#endDate').val();
+                inv_type   = $('#invoice_type').val(),
+                startDate  = $('#startDate').val(),
+                endDate  = $('#endDate').val();
 
             $.ajax({
                 url: ajaxurl,
@@ -1823,7 +1873,7 @@
         /*--------------------------------------------------------------------------
          *  Houzez Add Marker
          * -------------------------------------------------------------------------*/
-         var houzezAddMarkers = function( props, map ) {
+        var houzezAddMarkers = function( props, map ) {
 
             $.each(props, function(i, prop) {
 
@@ -1852,36 +1902,37 @@
                     icon: marker_icon,
                     draggable: false,
                     animation: google.maps.Animation.DROP,
-                    // title: 'marker-'+prop.sanitizetitle
+                    //title: 'marker-'+prop.sanitizetitle
                 });
+
                 var prop_title = prop.data ? prop.data.post_title : prop.title;
 
                 var infoboxContent = document.createElement("div");
                 infoboxContent.className = 'property-item item-grid map-info-box';
                 infoboxContent.innerHTML = '' +
-                '<div class="figure-block">' +
-                '<figure class="item-thumb">' +
-                '<div class="price hide-on-list">' +
-                '<span class="item-price">'+prop.price+'</span>' +
-                '</div>' +
-                '<a href="'+prop.url+'" class="hover-effect" tabindex="0">' + prop.thumbnail + '</a>' +
-                '</figure>' +
-                '</div>' +
-                '<div class="item-body">' +
-                '<div class="body-left">' +
-                '<div class="info-row">' +
-                '<h2><a target="_blank" href="'+prop.url+'">'+prop_title+'</a></h2>' +
-                '<h4>'+prop.address+'</h4>' +
-                '</div>' +
-                '<div class="table-list full-width info-row">' +
-                '<div class="cell">' +
-                '<div class="info-row amenities">' + prop.prop_meta +
-                '<p>'+prop.type+'</p>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+                    '<div class="figure-block">' +
+                    '<figure class="item-thumb">' +
+                    '<div class="price hide-on-list">' +
+                    '<span class="item-price">'+prop.price+'</span>' +
+                    '</div>' +
+                    '<a href="'+prop.url+'" class="hover-effect" tabindex="0">' + prop.thumbnail + '</a>' +
+                    '</figure>' +
+                    '</div>' +
+                    '<div class="item-body">' +
+                    '<div class="body-left">' +
+                    '<div class="info-row">' +
+                    '<h2><a target="_blank" href="'+prop.url+'">'+prop_title+'</a></h2>' +
+                    '<h4>'+prop.address+'</h4>' +
+                    '</div>' +
+                    '<div class="table-list full-width info-row">' +
+                    '<div class="cell">' +
+                    '<div class="info-row amenities">' + prop.prop_meta +
+                    '<p>'+prop.type+'</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
@@ -1907,7 +1958,7 @@
          *  Header Map
          * -------------------------------------------------------------------------*/
 
-         var houzez_map_zoomin = function(houzezMap) {
+        var houzez_map_zoomin = function(houzezMap) {
             google.maps.event.addDomListener(document.getElementById('listing-mapzoomin'), 'click', function () {
                 var current= parseInt( houzezMap.getZoom(),10);
                 current++;
@@ -2039,8 +2090,8 @@
             houzezMap.panBy(((houzezHeaderMapOptions.scroll.x-offset.left)/3),((houzezHeaderMapOptions.scroll.y-offset.top)/3));
             google.maps.event.addDomListener(window, 'scroll', function(){
                 var scrollY = $(window).scrollTop(),
-                scrollX = $(window).scrollLeft(),
-                scroll = houzezMap.get('scroll');
+                    scrollX = $(window).scrollLeft(),
+                    scroll = houzezMap.get('scroll');
                 if(scroll){
                     houzezMap.panBy(-((scroll.x-scrollX)/3),-((scroll.y-scrollY)/3));
                 }
@@ -2203,7 +2254,7 @@
 
         var houzez_header_listing_map = function(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_lat, search_long, search_radius, search_location, use_radius ) {
             var headerMapSecurity = $('#securityHouzezHeaderMap').val();
-            var initial_city = AJAX_VARIABLE.header_map_selected_city;
+            var initial_city = HOUZEZ_ajaxcalls_vars.header_map_selected_city;
 
             $.ajax({
                 type: 'POST',
@@ -2299,7 +2350,7 @@
                                         draggable: false,
                                     });
                                 }
-                                );
+                            );
                         } else {
                             $("#houzez-gmap-full").toggle(
                                 function () {
@@ -2313,7 +2364,7 @@
                                         scrollwheel: false,
                                     });
                                 }
-                                );
+                            );
                         }
                     }
 
@@ -2335,12 +2386,12 @@
                             maxZoom: 18,
                             gridSize: 60,
                             styles: [
-                            {
-                                url: clusterIcon,
-                                width: 48,
-                                height: 48,
-                                textColor: "#fff"
-                            }
+                                {
+                                    url: clusterIcon,
+                                    width: 48,
+                                    height: 48,
+                                    textColor: "#fff"
+                                }
                             ]
                         });
                     } else {
@@ -2354,52 +2405,60 @@
                     console.log(thrownError);
                 }
             });
-}
+        }
 
-var houzez_half_map_listings = function(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_no_posts, search_lat, search_long, search_radius, search_location, use_radius, current_page ) {
-    var headerMapSecurity = $('#securityHouzezHeaderMap').val();
-    var ajax_container = $('#houzez_ajax_container');
+        var houzez_half_map_listings = function(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_no_posts, search_lat, search_long, search_radius, search_location, use_radius, current_page ) {
+            var headerMapSecurity = $('#securityHouzezHeaderMap').val();
+            var ajax_container = $('#houzez_ajax_container');
 
-    if( current_page != undefined ) {
-        paged = current_page;
-    }
+            if( current_page != undefined ) {
+                paged = current_page;
+            }
 
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: ajaxurl,
-        data: {
-            'action': 'houzez_half_map_listings',
-            'keyword': keyword,
-            'location': location,
-            'country': country,
-            'state': state,
-            'area': area,
-            'status': status,
-            'type': type,
-            'label': label,
-            'property_id': property_id,
-            'min_price': min_price,
-            'max_price': max_price,
-            'features': features,
-            'publish_date': publish_date,
-            'search_lat': search_lat,
-            'search_long': search_long,
-            'use_radius': use_radius,
-            'search_location': search_location,
-            'search_radius': search_radius,
-        },
-        beforeSend: function() {
-            $('#houzez-map-loading').show();
-            ajax_container.empty().append(''
-                +'<div class="list-loading">'
-                +'<div class="list-loading-bar"></div>'
-                +'<div class="list-loading-bar"></div>'
-                +'<div class="list-loading-bar"></div>'
-                +'<div class="list-loading-bar"></div>'
-                +'</div>'
-                );
-        },
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: ajaxurl,
+                data: {
+                    'action': 'houzez_half_map_listings',
+                    'keyword': keyword,
+                    'location': location,
+                    'country': country,
+                    'state': state,
+                    'area': area,
+                    'status': status,
+                    'type': type,
+                    'label': label,
+                    'property_id': property_id,
+                    'bedrooms': bedrooms,
+                    'bathrooms': bathrooms,
+                    'min_price': min_price,
+                    'max_price': max_price,
+                    'min_area': min_area,
+                    'max_area': max_area,
+                    'features': features,
+                    'publish_date': publish_date,
+                    'search_lat': search_lat,
+                    'search_long': search_long,
+                    'use_radius': use_radius,
+                    'search_location': search_location,
+                    'search_radius': search_radius,
+                    'security': headerMapSecurity,
+
+                    'paged': paged,
+                    'post_per_page': search_no_posts
+                },
+                beforeSend: function() {
+                    $('#houzez-map-loading').show();
+                    ajax_container.empty().append(''
+                        +'<div class="list-loading">'
+                        +'<div class="list-loading-bar"></div>'
+                        +'<div class="list-loading-bar"></div>'
+                        +'<div class="list-loading-bar"></div>'
+                        +'<div class="list-loading-bar"></div>'
+                        +'</div>'
+                    );
+                },
                 success: function(data) { //alert(JSON.stringify(data.properties)); return;
 
                     if ( data.query != '' ) {
@@ -2437,7 +2496,7 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
                                         draggable: false,
                                     });
                                 }
-                                );
+                            );
                         } else {
                             $("#houzez-gmap-full").toggle(
                                 function () {
@@ -2451,7 +2510,7 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
                                         scrollwheel: false,
                                     });
                                 }
-                                );
+                            );
                         }
 
                     }
@@ -2508,12 +2567,12 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
                             maxZoom: 12,
                             gridSize: 60,
                             styles: [
-                            {
-                                url: clusterIcon,
-                                width: 48,
-                                height: 48,
-                                textColor: "#fff"
-                            }
+                                {
+                                    url: clusterIcon,
+                                    width: 48,
+                                    height: 48,
+                                    textColor: "#fff"
+                                }
                             ]
                         });
                     } else {
@@ -2528,60 +2587,60 @@ var houzez_half_map_listings = function(keyword, country, state, location, area,
                     console.log(thrownError);
                 }
             });
-return false;
-}
-
-var houzez_search_on_change = function (current_form, form_widget, current_page,  min_price_onchange_status, max_price_onchange_status, only_city, only_state, only_country ) {
-    var country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, keyword, publish_date, search_lat, search_long, search_radius, search_location, use_radius, features;
-
-    if( min_price_onchange_status != null && max_price_onchange_status != null ) {
-        min_price = min_price_onchange_status;
-        max_price = max_price_onchange_status;
-    } else {
-        if (form_widget.hasClass('widget') || advanced_search_price_slide != 0 ) {
-            min_price = current_form.find('input[name="min-price"]').val();
-            max_price = current_form.find('input[name="max-price"]').val();
-        } else {
-            min_price = current_form.find('select[name="min-price"]:not(:disabled)').val();
-            max_price = current_form.find('select[name="max-price"]:not(:disabled)').val();
+            return false;
         }
-    }
 
-    state = current_form.find('select[name="state"]').val();
-    location = current_form.find('select[name="location"]').val();
-    if (location == '' || location == null || typeof location == 'undefined' ) {
-        location = 'all';
-    }
+        var houzez_search_on_change = function (current_form, form_widget, current_page,  min_price_onchange_status, max_price_onchange_status, only_city, only_state, only_country ) {
+            var country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, keyword, publish_date, search_lat, search_long, search_radius, search_location, use_radius, features;
 
-    if( only_city != 'yes' ) {
-        area = current_form.find('select[name="area"]').val();
-    }
+            if( min_price_onchange_status != null && max_price_onchange_status != null ) {
+                min_price = min_price_onchange_status;
+                max_price = max_price_onchange_status;
+            } else {
+                if (form_widget.hasClass('widget') || advanced_search_price_slide != 0 ) {
+                    min_price = current_form.find('input[name="min-price"]').val();
+                    max_price = current_form.find('input[name="max-price"]').val();
+                } else {
+                    min_price = current_form.find('select[name="min-price"]:not(:disabled)').val();
+                    max_price = current_form.find('select[name="max-price"]:not(:disabled)').val();
+                }
+            }
 
-    if( only_state == 'yes' ) {
-        area = '';
-        location = 'all';
-    }
+            state = current_form.find('select[name="state"]').val();
+            location = current_form.find('select[name="location"]').val();
+            if (location == '' || location == null || typeof location == 'undefined' ) {
+                location = 'all';
+            }
 
-    if( only_country == 'yes' ) {
-        state = '';
-        area = '';
-        location = 'all';
-    }
+            if( only_city != 'yes' ) {
+                area = current_form.find('select[name="area"]').val();
+            }
 
-    country   = current_form.find('select[name="country"]').val();
-    status    = current_form.find('select[name="status"]').val();
-    type      = current_form.find('select[name="type"]').val();
-    bedrooms  = current_form.find('select[name="bedrooms"]').val();
-    bathrooms = current_form.find('select[name="bathrooms"]').val();
-    label     = current_form.find('select[name="label"]').val();
-    property_id     = current_form.find('input[name="property_id"]').val();
-    min_area  = current_form.find('input[name="min-area"]').val();
-    max_area  = current_form.find('input[name="max-area"]').val();
-    keyword   = current_form.find('input[name="keyword"]').val();
-    publish_date   = current_form.find('input[name="publish_date"]').val();
-    features = current_form.find('.features-list input[type=checkbox]:checked').map(function(_, el) {
-        return $(el).val();
-    }).toArray();
+            if( only_state == 'yes' ) {
+                area = '';
+                location = 'all';
+            }
+
+            if( only_country == 'yes' ) {
+                state = '';
+                area = '';
+                location = 'all';
+            }
+
+            country   = current_form.find('select[name="country"]').val();
+            status    = current_form.find('select[name="status"]').val();
+            type      = current_form.find('select[name="type"]').val();
+            bedrooms  = current_form.find('select[name="bedrooms"]').val();
+            bathrooms = current_form.find('select[name="bathrooms"]').val();
+            label     = current_form.find('select[name="label"]').val();
+            property_id     = current_form.find('input[name="property_id"]').val();
+            min_area  = current_form.find('input[name="min-area"]').val();
+            max_area  = current_form.find('input[name="max-area"]').val();
+            keyword   = current_form.find('input[name="keyword"]').val();
+            publish_date   = current_form.find('input[name="publish_date"]').val();
+            features = current_form.find('.features-list input[type=checkbox]:checked').map(function(_, el) {
+                return $(el).val();
+            }).toArray();
 
             //Radius Search
             search_lat  = current_form.find('input[name="lat"]').val();
@@ -2705,7 +2764,6 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
             });
 
             $('input[name="keyword"]').on('change', function() {
-
                 var current_form = $(this).parents('form');
                 var form_widget = $(this).parents('.widget_houzez_advanced_search');
 
@@ -2798,30 +2856,30 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
             if(current_tempalte == 'template/property-listings-map.php') {
 
-                var state = AJAX_VARIABLE.search_state;
-                var country = AJAX_VARIABLE.search_country;
-                var keyword = AJAX_VARIABLE.search_keyword;
-                var location = AJAX_VARIABLE.search_city;
-                var features = AJAX_VARIABLE.search_feature;
-                var area = AJAX_VARIABLE.search_area;
-                var status = AJAX_VARIABLE.search_status;
-                var type = AJAX_VARIABLE.search_type;
-                var label = AJAX_VARIABLE.search_label;
-                var property_id = AJAX_VARIABLE.property_id;
-                var bedrooms = AJAX_VARIABLE.search_bedrooms;
-                var bathrooms = AJAX_VARIABLE.search_bathrooms;
-                var min_price = AJAX_VARIABLE.search_min_price;
-                var max_price = AJAX_VARIABLE.search_max_price;
-                var min_area = AJAX_VARIABLE.search_min_area;
-                var max_area = AJAX_VARIABLE.search_max_area;
-                var publish_date = AJAX_VARIABLE.search_publish_date;
-                var search_no_posts = AJAX_VARIABLE.search_no_posts;
+                var state = HOUZEZ_ajaxcalls_vars.search_state;
+                var country = HOUZEZ_ajaxcalls_vars.search_country;
+                var keyword = HOUZEZ_ajaxcalls_vars.search_keyword;
+                var location = HOUZEZ_ajaxcalls_vars.search_city;
+                var features = HOUZEZ_ajaxcalls_vars.search_feature;
+                var area = HOUZEZ_ajaxcalls_vars.search_area;
+                var status = HOUZEZ_ajaxcalls_vars.search_status;
+                var type = HOUZEZ_ajaxcalls_vars.search_type;
+                var label = HOUZEZ_ajaxcalls_vars.search_label;
+                var property_id = HOUZEZ_ajaxcalls_vars.property_id;
+                var bedrooms = HOUZEZ_ajaxcalls_vars.search_bedrooms;
+                var bathrooms = HOUZEZ_ajaxcalls_vars.search_bathrooms;
+                var min_price = HOUZEZ_ajaxcalls_vars.search_min_price;
+                var max_price = HOUZEZ_ajaxcalls_vars.search_max_price;
+                var min_area = HOUZEZ_ajaxcalls_vars.search_min_area;
+                var max_area = HOUZEZ_ajaxcalls_vars.search_max_area;
+                var publish_date = HOUZEZ_ajaxcalls_vars.search_publish_date;
+                var search_no_posts = HOUZEZ_ajaxcalls_vars.search_no_posts;
 
-                var search_lat = AJAX_VARIABLE.search_lat;
-                var search_long = AJAX_VARIABLE.search_long;
-                var search_radius = AJAX_VARIABLE.search_radius;
-                var search_location = AJAX_VARIABLE.search_location;
-                var use_radius = AJAX_VARIABLE.use_radius;
+                var search_lat = HOUZEZ_ajaxcalls_vars.search_lat;
+                var search_long = HOUZEZ_ajaxcalls_vars.search_long;
+                var search_radius = HOUZEZ_ajaxcalls_vars.search_radius;
+                var search_location = HOUZEZ_ajaxcalls_vars.search_location;
+                var use_radius = HOUZEZ_ajaxcalls_vars.use_radius;
 
                 houzez_half_map_listings(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_no_posts, search_lat, search_long, search_radius, search_location, use_radius );
 
@@ -2861,8 +2919,8 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
 
         /* ------------------------------------------------------------------------ */
-        /*	RANGE SLIDER
-        /* ------------------------------------------------------------------------ */
+        /*  RANGE SLIDER
+         /* ------------------------------------------------------------------------ */
         var price_range_main_search = function( min_price, max_price ) {
             $(".price-range-advanced").slider({
                 range: true,
@@ -2995,25 +3053,25 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
         var radius_search_slider = function(default_radius) {
             $("#radius-range-slider").slider(
-            {
-                value: default_radius,
-                min: 0,
-                max: 100,
-                step: 1,
-                slide: function (event, ui) {
-                    $("#radius-range-text").html(ui.value);
-                    $("#radius-range-value").val(ui.value);
-                },
-                stop: function( event, ui ) {
+                {
+                    value: default_radius,
+                    min: 0,
+                    max: 100,
+                    step: 1,
+                    slide: function (event, ui) {
+                        $("#radius-range-text").html(ui.value);
+                        $("#radius-range-value").val(ui.value);
+                    },
+                    stop: function( event, ui ) {
 
-                    if($("#houzez-listing-map").length > 0 || $('#mapViewHalfListings').length > 0 ) {
-                        var current_page = 0;
-                        var current_form = $(this).parents('form');
-                        var form_widget = $(this).parents('form');
-                        houzez_search_on_change(current_form, form_widget, current_page);
+                        if($("#houzez-listing-map").length > 0 || $('#mapViewHalfListings').length > 0 ) {
+                            var current_page = 0;
+                            var current_form = $(this).parents('form');
+                            var form_widget = $(this).parents('form');
+                            houzez_search_on_change(current_form, form_widget, current_page);
+                        }
                     }
                 }
-            }
             );
 
             $("#radius-range-text").html($('#radius-range-slider').slider('value'));
@@ -3044,8 +3102,8 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*--------------------------------------------------------------------------
          *  Currency Switcher
          * -------------------------------------------------------------------------*/
-         var currencySwitcherList = $('#houzez-currency-switcher-list');
-         if( currencySwitcherList.length > 0 ) {
+        var currencySwitcherList = $('#houzez-currency-switcher-list');
+        if( currencySwitcherList.length > 0 ) {
 
             $('#houzez-currency-switcher-list > li').click(function(e) {
                 e.stopPropagation();
@@ -3101,8 +3159,8 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*--------------------------------------------------------------------------
          *  Area Switcher
          * -------------------------------------------------------------------------*/
-         var areaSwitcherList = $('#houzez-area-switcher-list');
-         if( areaSwitcherList.length > 0 ) {
+        var areaSwitcherList = $('#houzez-area-switcher-list');
+        if( areaSwitcherList.length > 0 ) {
 
             $('#houzez-area-switcher-list > li').click(function(e) {
                 e.stopPropagation();
@@ -3158,7 +3216,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*--------------------------------------------------------------------------
          *  AutoComplete Search
          * -------------------------------------------------------------------------*/
-         if( keyword_autocomplete != 0 ) {
+        if( keyword_autocomplete != 0 ) {
             var houzezAutoComplete = function () {
 
                 var ajaxCount = 0;
@@ -3184,8 +3242,8 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                             url: ajaxurl,
                             data: {
                                 'action': 'houzez_get_auto_complete_search',
-                                'keyword': keyword,
-                                //'nonce' : AJAX_VARIABLE.houzez_autoComplete_nonce
+                                'key': keyword,
+                                //'nonce' : HOUZEZ_ajaxcalls_vars.houzez_autoComplete_nonce
                             },
                             beforeSend: function( ) {
                                 ajaxCount++;
@@ -3234,7 +3292,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*
          * Property Thread Form
          * -----------------------------*/
-         $( '.start_thread_form').click(function(e) {
+        $( '.start_thread_form').click(function(e) {
 
             e.preventDefault();
 
@@ -3277,44 +3335,44 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*
          * Property Message Notifications
          * -----------------------------*/
-        //  var houzez_message_notifications = function () {
+        var houzez_message_notifications = function () {
 
-        //     $.ajax({
-        //         url: ajaxurl,
-        //         data: {
-        //             action : 'houzez_chcek_messages_notifications'
-        //         },
-        //         method: "POST",
-        //         dataType: "JSON",
+            $.ajax({
+                url: ajaxurl,
+                data: {
+                    action : 'houzez_chcek_messages_notifications'
+                },
+                method: "POST",
+                dataType: "JSON",
 
-        //         beforeSend: function( ) {
-        //             // code here...
-        //         },
-        //         success: function(response) {
-        //             if( response.success ) {
-        //                 if ( response.notification ) {
-        //                     $( '.user-alert' ).show();
-        //                     $( '.msg-alert' ).show();
-        //                 } else {
-        //                     $( '.user-alert' ).hide();
-        //                     $( '.msg-alert' ).hide();
-        //                 }
-        //             }
-        //         }
-        //     });
+                beforeSend: function( ) {
+                    // code here...
+                },
+                success: function(response) {
+                    if( response.success ) {
+                        if ( response.notification ) {
+                            $( '.user-alert' ).show();
+                            $( '.msg-alert' ).show();
+                        } else {
+                            $( '.user-alert' ).hide();
+                            $( '.msg-alert' ).hide();
+                        }
+                    }
+                }
+            });
 
-        // };
+        };
 
-        // $( document ).ready(function() {
-        //     houzez_message_notifications();
-        //     setInterval(function() { houzez_message_notifications(); }, 180000);
-        // });
+        $( document ).ready(function() {
+            houzez_message_notifications();
+            setInterval(function() { houzez_message_notifications(); }, 180000);
+        });
 
 
         /*
          * Property Thread Message Form
          * -----------------------------*/
-         $( '.start_thread_message_form').click(function(e) {
+        $( '.start_thread_message_form').click(function(e) {
 
             e.preventDefault();
 
@@ -3332,7 +3390,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                     $this.children('i').remove();
                     $this.prepend('<i class="fa-left '+process_loader_spinner+'"></i>');
                 },
-                success: function(response) {
+                success: function( response ) {
                     window.location.replace( response.url );
                 },
                 complete: function(){
@@ -3343,7 +3401,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
         });
 
-         var agency_listings_ajax_pagi = function() {
+        var agency_listings_ajax_pagi = function() {
             $('body.single-houzez_agency ul.pagination li a').click(function(e){
                 e.preventDefault();
                 var current_page = $(this).data('houzepagi');
@@ -3367,9 +3425,9 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                             +'<div class="list-loading-bar"></div>'
                             +'<div class="list-loading-bar"></div>'
                             +'</div>'
-                            );
+                        );
                     },
-                    success: function(response) {
+                    success: function( response ) {
                         ajax_container.empty().html(response);
                         agency_listings_ajax_pagi();
                     },
@@ -3393,7 +3451,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*--------------------------------------------------------------------------
          *  Delete property
          * -------------------------------------------------------------------------*/
-         $( 'a.delete-property' ).on( 'click', function (){
+        $( 'a.delete-property' ).on( 'click', function (){
             var r = confirm(delete_property_confirmation);
             if (r == true) {
 
@@ -3431,7 +3489,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         /*--------------------------------------------------------------------------
          *  Single Property
          * -------------------------------------------------------------------------*/
-         if( is_singular_property == "yes" ) {
+        if( is_singular_property == "yes" ) {
             var houzezSlidesToShow = 0;
             if( property_detail_top == 'v3' ) {
                 houzezSlidesToShow = '8';
@@ -3439,7 +3497,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                 houzezSlidesToShow = '11';
             }
 
-            var gallery_autoplay = AJAX_VARIABLE.gallery_autoplay;
+            var gallery_autoplay = HOUZEZ_ajaxcalls_vars.gallery_autoplay;
 
             if( gallery_autoplay === '1' ) {
                 gallery_autoplay = true;
@@ -3561,7 +3619,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
             /*--------------------------------------------------------------------------
              *  Property Rating
              * -------------------------------------------------------------------------*/
-             $( '.property_rating').click(function(e) {
+            $( '.property_rating').click(function(e) {
 
                 e.preventDefault();
 
@@ -3579,7 +3637,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                         $this.children('i').remove();
                         $this.prepend('<i class="fa-left '+process_loader_spinner+'"></i>');
                     },
-                    success: function(response) {
+                    success: function( response ) {
                         window.location.reload();
                     },
                     complete: function(){
@@ -3702,6 +3760,6 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
         }
 
 
-    }// typeof AJAX_VARIABLE
+    }// typeof HOUZEZ_ajaxcalls_vars
 
 }); // end document ready

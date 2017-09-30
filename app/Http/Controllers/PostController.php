@@ -152,7 +152,7 @@ class PostController extends BaseController
     public function show(Request $request, $slug)
     {
 
-        $relationShip = ['user', 'likes', 'images', 'type', 'comments' => function ($query) {
+        $relationShip = ['user', 'likes', 'images', 'type', 'features', 'comments' => function ($query) {
             $query->with('user')->get();
         }];
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
