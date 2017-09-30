@@ -20,4 +20,5 @@ return [
         'vi' => ' VNĐ',
     ],
     'maintenance' => 1,
+    'active'      => 1,
 ];

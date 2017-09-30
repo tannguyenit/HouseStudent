@@ -88,7 +88,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return false;
     }
 
-    public function getDataByColumn($column, $id, $sortBy, $limit = '')
+    public function getDataByColumn($relationship, $column, $id, $sortBy, $limit = '')
     {
         if (empty($id) || empty($column)) {
             return false;
@@ -100,6 +100,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         return $this->model->where($column, $id)
             ->orderBy($sortBy->key, $sortBy->value)
+            ->with($relationship)
             ->where('status', config('setting.active'))
             ->paginate($limit);
     }

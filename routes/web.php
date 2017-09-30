@@ -34,6 +34,8 @@ Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
     Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
     Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);
+    Route::post('checkEmail', ['as' => 'checkEmail', 'uses' => 'UserController@checkEmail']);
+    Route::post('checkusername', ['as' => 'checkusername', 'uses' => 'UserController@checkusername']);
 });
 /*
 |--------------------------------------------------------------------------

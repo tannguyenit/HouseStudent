@@ -21,4 +21,19 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         return $this->model->whereEmail($email)->first();
     }
+
+    public function checkExists($column, $value, $id = null)
+    {
+        if (empty($value) || empty($column)) {
+            return false;
+        }
+
+        if ($id) {
+            return $this->model->where($column, $value)
+                ->where('id', '<>', $id)
+                ->first();
+        }
+
+        return $this->model->where($column, $value)->first();
+    }
 }

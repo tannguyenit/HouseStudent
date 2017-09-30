@@ -24,7 +24,7 @@
             <!-- Table -->
             <table class="table table-statistic">
                 <tr>
-                    <td class="registered col-xs-2">{{ trans('admin.register') }}</td>
+                    <td class="registered col-xs-12 col-sm-2">{{ trans('admin.register') }}</td>
                     <td class="col-xs-2">
                         <div class="widget-sales">
                             <div class="no-of-sales">{{ $users->day }}</div>

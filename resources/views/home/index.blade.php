@@ -5,17 +5,6 @@
         @include('layouts.includes.map')
     @endsection
 @section('content')
-    <div id="compare-controller" class="compare-panel">
-        <div class="compare-panel-header">
-            <h4 class="title">
-                Compare Listings
-                <span class="panel-btn-close pull-right">
-                    <i class="fa fa-times"></i>
-                </span>
-            </h4>
-        </div>
-        <div id="compare-properties-basket"> </div>
-    </div>
     <div class="row row-fluid">
         <div class="col-sm-12">
             <div class="vc_column-inner ">
@@ -45,7 +34,11 @@
                                                         <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>
                                                     </div>
                                                     <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                                        <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06.jpg 1170w" sizes="(max-width: 385px) 100vw, 385px"/>
+                                                        @if (count($element->images))
+                                                            <img width="385" height="258" src="{{ $element->images[0]->image }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
+                                                        @else
+                                                            <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
+                                                        @endif
                                                     </a>
                                                     <ul class="actions">
                                                         <li>
@@ -103,7 +96,7 @@
                                                 </p>
                                             </div>
                                             <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
-                                                <p class="prop-date">
+                                                <p class="prop-date text-right">
                                                     <i class="fa fa-calendar"></i>
                                                     {{ $element->created_at }}
                                                 </p>
@@ -376,7 +369,6 @@
                     <div class="houzez-module module-title section-title-module text-center ">
                         <h2>{{ trans('index.our-team-title') }}</h2>
                         <h3 class="sub-heading">{{ trans('index.our-team-content') }}</h3> </div>
-                        <!--start agents module-->
                         <div id="agents-module" class="houzez-module agents-module">
                             <div class="agents-blocks-main">
                                 <div class="row no-margin">
@@ -457,7 +449,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--end post agents module-->
                         <div class="vc_empty_space">
                             <span class="vc_empty_space_inner"></span>
                         </div>

@@ -63,7 +63,7 @@
                                     <div class="table-cell">
                                         <div class="figure-block">
                                             <figure class="item-thumb">
-                                                <span class="label-featured label label-success hidden-md hidden-lg hidden-sm">{{ $detailsTypes->title }}</span>
+                                                <span class="label-featured label label-success hide-on-list">{{ $detailsTypes->title }}</span>
                                                 <div class="price hide-on-list">
                                                     <span class="item-price">$ {{ $element->price . config('setting.price.vi') }}</span>
                                                 </div>
@@ -77,7 +77,7 @@
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span data-toggle="tooltip" data-placement="top" title="(7) {{ trans('post.photo') }}">
+                                                        <span data-toggle="tooltip" data-placement="top" title="{{ count($element->images) }} {{ trans('post.photo') }}">
                                                             <i class="fa fa-camera"></i>
                                                         </span>
                                                     </li>
@@ -94,14 +94,18 @@
                                                 <h2 class="property-title">
                                                     <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
                                                 </h2>
-                                                <address class="property-address">{{ $element->status->title }}</address>
+                                                <address class="property-address">{{ $element->address }}</address>
                                             </div>
                                             <div class="info-row amenities hide-on-grid">
                                                 <p>
                                                     <span>{{ trans('post.address') }} : {{ $element->address }}</span><br>
                                                     <span>{{ trans('post.area') }} : {{ $element->area }}</span><br>
-                                                    <span>{{ trans('post.like') }} : {{ $element->total_like }}</span><br>
-                                                    <span>{{ trans('post.comment') }} : {{ $element->total_comment }}</span>
+                                                    @if (count($element->features))
+                                                        @forelse ($element->features as $feature)
+                                                        <span>{{ $feature->title }}</span> : <span>{{ $feature->value }}</span>
+                                                        @empty
+                                                        @endforelse
+                                                    @endif
                                                 </p>
                                             </div>
                                             <div class="info-row date hide-on-grid">
@@ -128,8 +132,12 @@
                                                     <p>
                                                         <span>{{ trans('post.address') }} : {{ $element->address }}</span><br>
                                                         <span>{{ trans('post.area') }} : {{ $element->area }}</span><br>
-                                                        <span>{{ trans('post.like') }} : {{ $element->total_like }}</span><br>
-                                                        <span>{{ trans('post.comment') }} : {{ $element->total_comment }}</span>
+                                                        @if (count($element->features))
+                                                            @forelse ($element->features as $feature)
+                                                            <span>{{ $feature->title }}</span> : <span>{{ $feature->value }}</span>
+                                                            @empty
+                                                            @endforelse
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>
@@ -151,7 +159,7 @@
                                         </p>
                                     </div>
                                     <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
-                                        <p class="prop-date">
+                                        <p class="prop-date text-right">
                                             <i class="fa fa-calendar"></i>{{ $element->created_at }}
                                         </p>
                                     </div>

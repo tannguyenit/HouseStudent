@@ -6,4 +6,5 @@ return [
     'logo'          => '/uploads/logo/',
     'no-image'      => '/default-image/No_image.png',
     'temp'          => '/uploads/temp/',
+    'post'          => '/uploads/post/',
 ];

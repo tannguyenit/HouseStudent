@@ -432,12 +432,12 @@ var nice = false;
     /* ------------------------------------------------------------------------ */
     /*  Date picker
      /* ------------------------------------------------------------------------ */
-    if($('.input_date').length > 0) {
-        $( ".input_date" ).datepicker(jQuery.datepicker.regional[houzez_date_language]);
-    }
-    if($('.search-date').length > 0) {
-        $( ".search-date" ).datepicker(jQuery.datepicker.regional[houzez_date_language]);
-    }
+    // if($('.input_date').length > 0) {
+    //     $( ".input_date" ).datepicker(jQuery.datepicker.regional[houzez_date_language]);
+    // }
+    // if($('.search-date').length > 0) {
+    //     $( ".search-date" ).datepicker(jQuery.datepicker.regional[houzez_date_language]);
+    // }
 
     /* ------------------------------------------------------------------------
      /*  parallax

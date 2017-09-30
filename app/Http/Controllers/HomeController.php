@@ -16,6 +16,7 @@ class HomeController extends BaseController
 
     public function home()
     {
+
         $relation = ['user', 'type', 'images', 'features'];
         $limit    = config('setting.limit.news_post');
 

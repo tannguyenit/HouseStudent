@@ -59,7 +59,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-envelope"></i>
                                                         </span>
-                                                        {!! Form::email('email', $setting->email or '', ['id' => 'setting_email', 'class' => 'form-control']) !!}
+                                                        {!! Form::email('email', isset($setting) ? $setting->email : '', ['id' => 'setting_email', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,7 +70,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-copyright"></i>
                                                         </span>
-                                                        {!! Form::text('copyright', $setting->copyright or '', ['id' => 'setting_copyright', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('copyright', isset($setting) ? $setting->copyright : '', ['id' => 'setting_copyright', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-map"></i>
                                                         </span>
-                                                        {!! Form::text('address', $setting->address or '', ['id' => 'setting_address', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('address', isset($setting) ? $setting->address : '', ['id' => 'setting_address', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-phone"></i>
                                                         </span>
-                                                        {!! Form::text('phone', $setting->phone or '', ['id' => 'setting_phone', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('phone', isset($setting) ? $setting->phone : '', ['id' => 'setting_phone', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-mobile"></i>
                                                         </span>
-                                                        {!! Form::text('mobile', $setting->mobile or '', ['id' => 'setting_mobile', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('mobile', isset($setting) ? $setting->mobile : '', ['id' => 'setting_mobile', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-facebook"></i>
                                                         </span>
-                                                        {!! Form::text('facebook', $setting->facebook or '', ['id' => 'setting_facebook', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('facebook', isset($setting) ? $setting->facebook : '', ['id' => 'setting_facebook', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,7 +125,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-google"></i>
                                                         </span>
-                                                        {!! Form::text('google', $setting->google or '', ['id' => 'setting_google', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('google', isset($setting) ? $setting->google : '', ['id' => 'setting_google', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,7 +136,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-twitter"></i>
                                                         </span>
-                                                        {!! Form::text('twitter', $setting->twitter or '', ['id' => 'setting_twitter', 'class' => 'form-control']) !!}
+                                                        {!! Form::text('twitter', isset($setting) ? $setting->twitter : '', ['id' => 'setting_twitter', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
