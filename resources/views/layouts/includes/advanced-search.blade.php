@@ -10,14 +10,14 @@
                                 {!! Form::text('keyword', '', ['class' => 'form-control', 'placeholder' => trans('validate.placeholder.keyword')]) !!}
                                 <div id="auto_complete_ajax" class="auto-complete"></div>
                             </div>
-                            <select name="location" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                            <select name="location" class="selectpicker" data-live-search="true" data-live-search-style="begins">
                                 <option value="">{{ trans('form.all-township') }}</option>
                                 @forelse ($countries as $element)
                                     <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
                                 @empty
                                 @endforelse
                             </select>
-                            <select name="area" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                            <select name="area" class="selectpicker" data-live-search="true" data-live-search-style="begins">
                                 <option value="">{{ trans('form.all-countries') }}</option>
                                 @forelse ($countries as $element)
                                     <option data-parentcity="{{ $element->township }}" value="{{ $element->country }}">{{ $element->country }}</option>

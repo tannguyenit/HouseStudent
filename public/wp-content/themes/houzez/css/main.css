@@ -6117,6 +6117,10 @@ figure .thumb-caption .cap-social {
     border-radius: 4px 0 0 4px;
     border-left: 1px solid #ccc;
 }
+.bs-searchbox input {
+    border:1px solid #ccc !important;
+    border-radius: 4px !important;
+}
 .advanced-search .search-long .btn-group {
     border: 1px solid #ccc;
     border-top: 0;

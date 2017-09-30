@@ -35,9 +35,11 @@ class Post extends AbstractModel
         'name_boss',
         'address',
         'township',
+        'township_slug',
         'country',
         'lat',
         'lng',
+        'note',
         'total_view',
         'total_like',
         'tota_comment',
@@ -86,5 +88,10 @@ class Post extends AbstractModel
     public function getPriceAttribute($value)
     {
         return number_format($value, 0, ',', '.');
+    }
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = explode('.', str_replace(',', '', trim($value)))[0];
     }
 }

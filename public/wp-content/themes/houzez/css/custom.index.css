@@ -1190,3 +1190,9 @@ span.user-name {
 .list-search .form-control[readonly] {
     height:auto;
 }
+.property-item .body-left {
+    width:auto;
+}
+.owl-carousel .owl-item img {
+    height: -webkit-fill-available;
+}
