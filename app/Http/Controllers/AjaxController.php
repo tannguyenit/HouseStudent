@@ -152,4 +152,38 @@ class AjaxController extends BaseController
 
         return false;
     }
+
+    public function changeStatusPost(Request $request)
+    {
+        if ($request->ajax()) {
+            $id     = $request->id;
+            $status = $request->status;
+            if ($id) {
+                if (config('setting.active') == $status) {
+                    $value = config('setting.no-active');
+                } else {
+                    $value = config('setting.active');
+                }
+                $inputs = [
+                    'status' => $value,
+                ];
+                $updatePost = $this->postRepository->update($inputs, $id);
+
+                if ($updatePost) {
+                    return response()->json([
+                        'status' => true,
+                        'title'  => trans('validate.success'),
+                        'msg'    => trans('validate.msg.change-success'),
+                        'result' => $value,
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'status' => false,
+                'title'  => trans('validate.fail'),
+                'msg'    => trans('validate.msg.change-fail'),
+            ]);
+        }
+    }
 }

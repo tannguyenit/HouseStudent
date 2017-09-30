@@ -162,4 +162,27 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         return $arrWhere;
     }
+
+    public function getAllDatasAdmin($relationship, $limit)
+    {
+        return $this->model->with($relationship)->paginate($limit);
+    }
+
+    public function deletePost($id)
+    {
+        DB::beginTransaction();
+        try {
+            $post = $this->model->find($id);
+
+            if (empty($data)) {
+                throw new Exception(trans('message.delete_error'));
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        DB::commit();
+
+        return $data;
+    }
 }
