@@ -2,9 +2,12 @@
 @section('footerscript')
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/type-status.js') }}
+    {{ Html::script('wp-content/themes/houzez/admin/js/main.js') }}
     <script type="text/javascript">
-        var action = new ActionModal();
-        action.init();
+        var main = new Main('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}'),
+            action = new ActionModal('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}');
+            main.onClick();
+            action.init();
     </script>
 @endsection
 @section('content')

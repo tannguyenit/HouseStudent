@@ -9,7 +9,7 @@
     {{ Html::script('wp-content/themes/houzez/admin/js/main.js') }}
     {{ Html::script('wp-content/themes/houzez/admin/js/post.js') }}
     <script type="text/javascript">
-        var main = new Main(),
+        var main = new Main('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}'),
             post = new Post();
             main.onClick();
             post.init();

@@ -19,6 +19,8 @@ Route::get('/status', ['as' => 'status', 'uses' => 'StatusController@index']);
 Route::post('/status', ['as' => 'storeStatus', 'uses' => 'StatusController@store']);
 Route::post('/setting/{id}', ['as' => 'setting.update', 'uses' => 'SettingController@update']);
 Route::post('/setting/save', ['as' => 'setting.save', 'uses' => 'SettingController@save']);
+Route::get('/post', ['as' => 'post', 'uses' => 'PostController@index']);
+Route::get('/post/edit/{id}', ['as' => 'post', 'uses' => 'PostController@show']);
 /*
 |--------------------------------------------------------------------------
 | Ajax
@@ -29,4 +31,5 @@ Route::group(['as' => 'ajax.'], function () {
     Route::post('deleteType', ['as' => 'deleteType', 'uses' => 'AjaxController@deleteType']);
     Route::post('updateStatus', ['as' => 'updateStatus', 'uses' => 'AjaxController@updateStatus']);
     Route::post('deleteStatus', ['as' => 'deleteStatus', 'uses' => 'AjaxController@deleteStatus']);
+    Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'AjaxController@deletePost']);
 });
