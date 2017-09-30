@@ -2,6 +2,10 @@
 @section('footerscript')
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/type-status.js') }}
+    <script type="text/javascript">
+        var action = new ActionModal();
+        action.init();
+    </script>
 @endsection
 @section('content')
 <div class="board-header board-header-4">

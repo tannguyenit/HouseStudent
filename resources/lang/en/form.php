@@ -34,6 +34,7 @@ return [
     'accept'            => 'Accept',
     'infomation'        => 'Infomation',
     'stt'               => 'STT',
+    'time'              => 'Time',
     'title'             => 'Title',
     'total_post'        => 'Total post',
     'action'            => 'Action',
@@ -64,4 +65,6 @@ return [
     'email'             => 'Email',
     'password'          => 'Password',
     'phone'             => 'Phone',
+    'address'           => 'Address',
+    'price'             => 'Price',
 ];

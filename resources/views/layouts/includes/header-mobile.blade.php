@@ -17,11 +17,7 @@
                     <div class="account-dropdown">
                         <ul>
                             @if (auth()->user()->role == config('setting.role.admin'))
-                            <li>
-                                <a href="{{ action('Admin\DashboardController@dashboard') }}">
-                                    <i class="fa fa-cogs"></i>Admin
-                                </a>
-                            </li>
+                                @include('layouts.includes.dropdown-admin')
                             @endif
                             <li>
                                 <a href="http://houzez01.favethemes.com/my-profile/">

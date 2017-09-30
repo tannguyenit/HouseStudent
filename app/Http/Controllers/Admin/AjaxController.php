@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\StatusRepository\StatusRepository;
 use App\Repositories\TypeRepository\TypeRepository;
 use Illuminate\Http\Request;
@@ -11,13 +12,16 @@ class AjaxController extends Controller
 {
     protected $typeRepository;
     protected $statusRepository;
+    protected $postRepository;
 
     public function __construct(
         TypeRepository $typeRepository,
-        StatusRepository $statusRepository
+        StatusRepository $statusRepository,
+        PostRepository $postRepository
     ) {
         $this->typeRepository   = $typeRepository;
         $this->statusRepository = $statusRepository;
+        $this->postRepository   = $postRepository;
     }
 
     public function updateType(Request $request)
@@ -100,6 +104,27 @@ class AjaxController extends Controller
             $id     = $data['id'];
             $result = $this->statusRepository->delete($id);
 
+            if ($result) {
+                return response()->json([
+                    'status' => true,
+                    'msg'    => trans('form.result.success'),
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => false,
+            'msg'    => trans('form.result.fail'),
+        ]);
+    }
+
+    public function deletePost(Request $request)
+    {
+        if ($request->ajax()) {
+            $data   = $request->all();
+            $id     = $data['id'];
+            $result = $this->postRepository->deletePost($id);
+            dd($result);
             if ($result) {
                 return response()->json([
                     'status' => true,

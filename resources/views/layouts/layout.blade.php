@@ -17,6 +17,7 @@
         {{ Html::style('wp-content/themes/houzez/css/all.min.css') }}
         {{ Html::style('wp-content/themes/houzez/css/main.css') }}
         {{ Html::style('wp-content/themes/houzez/css/style.css') }}
+        {{ Html::style('wp-content/themes/houzez/css/toastr.min.css') }}
         {{ Html::style('wp-content/themes/houzez/css/custom.index.css') }}
         {{ Html::style('wp-content/plugins/js_composer/assets/css/js_composer.min3c21.css') }}
         {{ Html::style('wp-content/plugins/js_composer/assets/lib/bower/animate-css/animate.min3c21.css') }}
@@ -49,6 +50,8 @@
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.custom.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/toastr.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/custom.toastr.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/plugins2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/core.mine899.js?ver=1.11.4') }}

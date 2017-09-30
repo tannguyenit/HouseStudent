@@ -20,4 +20,8 @@ interface PostRepositoryInterface
     public function changePrice($value);
 
     public function getDataSearch($search);
+
+    public function getAllDatasAdmin($relationship, $limit);
+
+    public function deletePost($id);
 }

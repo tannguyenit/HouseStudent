@@ -7,10 +7,11 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="xmlrpc.php">
     <title>Houzez - Real Estate WordPress Theme</title>
-    <link rel="shortcut icon" href="wp-content/uploads/2016/03/favicon.png">
+    <link rel="shortcut icon" href="/wp-content/uploads/2016/03/favicon.png">
     @section('css')
         {{ Html::style('wp-content/themes/houzez/css/bootstrap.min.css') }}
         {{ Html::style('wp-content/themes/houzez/css/font-awesome.min.css') }}
+        {{ Html::style('wp-content/themes/houzez/css/toastr.min.css') }}
         {{ Html::style('wp-content/themes/houzez/css/all.min.css') }}
         {{ Html::style('wp-content/themes/houzez/css/main.css') }}
         {{ Html::style('wp-content/themes/houzez/css/style.css') }}
@@ -73,6 +74,8 @@
     </div>
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/toastr.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/custom.toastr.js') }}
         {{ Html::script('wp-content/themes/houzez/admin/js/custom.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/plugins2846.js?ver=1.5.5') }}
