@@ -22,25 +22,21 @@ class AbstractModel extends Authenticatable
         });
     }
 
-    public static function transTypes($type)
-    {
-        if (count($type) < 2) {
-            $translatedLabels = trans($type);
-        } else {
-            $translatedLabels = [];
-            foreach ($type as $key => $label) {
-                $translatedLabels[$key] = trans($label);
-            }
-        }
-
-        return $translatedLabels;
-    }
-
     public function getCreatedAtAttribute($value)
     {
         if (empty($value)) {
             return false;
         }
+
+        return Carbon::now()->subSeconds(time() - strtotime($value))->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return false;
+        }
+
         return Carbon::now()->subSeconds(time() - strtotime($value))->diffForHumans();
     }
 }

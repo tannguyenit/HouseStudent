@@ -93,6 +93,10 @@ class Post extends AbstractModel
 
     public function setPriceAttribute($value)
     {
-        $this->attributes['price'] = explode('.', str_replace(',', '', trim($value)))[0];
+        if (strpos($value, ',')) {
+            return $this->attributes['price'] = explode(',', str_replace('.', '', trim($value)))[0];
+        }
+
+        return $this->attributes['price'] = str_replace('.', '', trim($value));
     }
 }

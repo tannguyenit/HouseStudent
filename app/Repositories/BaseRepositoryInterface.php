@@ -6,7 +6,7 @@ interface BaseRepositoryInterface
 {
     public function all($columns = ['*']);
 
-    public function find($id, $columns = ['*']);
+    public function find($id, $relationship = [], $columns = ['*']);
 
     public function findByFirst($id, $columns);
 

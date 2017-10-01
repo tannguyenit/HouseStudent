@@ -38,7 +38,8 @@ class AjaxController extends Controller
                 if ($result) {
                     return response()->json([
                         'status' => true,
-                        'msg'    => trans('form.result.success'),
+                        'title'  => trans('validate.success'),
+                        'msg'    => trans('validate.msg.edit-success'),
                     ]);
                 }
             }
@@ -46,7 +47,8 @@ class AjaxController extends Controller
 
         return response()->json([
             'status' => false,
-            'msg'    => trans('form.result.fail'),
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.edit-fail'),
         ]);
     }
 
@@ -60,14 +62,16 @@ class AjaxController extends Controller
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'msg'    => trans('form.result.success'),
+                    'title'  => trans('validate.success'),
+                    'msg'    => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'msg'    => trans('form.result.fail'),
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.delete-fail'),
         ]);
     }
 
@@ -85,7 +89,8 @@ class AjaxController extends Controller
                 if ($result) {
                     return response()->json([
                         'status' => true,
-                        'msg'    => trans('form.result.success'),
+                        'title'  => trans('validate.success'),
+                        'msg'    => trans('validate.msg.edit-success'),
                     ]);
                 }
             }
@@ -93,7 +98,8 @@ class AjaxController extends Controller
 
         return response()->json([
             'status' => false,
-            'msg'    => trans('form.result.fail'),
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.edit-fail'),
         ]);
     }
 
@@ -107,14 +113,16 @@ class AjaxController extends Controller
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'msg'    => trans('form.result.success'),
+                    'title'  => trans('validate.success'),
+                    'msg'    => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'msg'    => trans('form.result.fail'),
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.delete-fail'),
         ]);
     }
 
@@ -124,18 +132,20 @@ class AjaxController extends Controller
             $data   = $request->all();
             $id     = $data['id'];
             $result = $this->postRepository->deletePost($id);
-            dd($result);
+
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'msg'    => trans('form.result.success'),
+                    'title'  => trans('validate.success'),
+                    'msg'    => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'msg'    => trans('form.result.fail'),
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.delete-fail'),
         ]);
     }
 }

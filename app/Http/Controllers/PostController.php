@@ -114,7 +114,7 @@ class PostController extends BaseController
                     $FileArray = json_decode($request->file);
 
                     foreach ($FileArray as $key => $value) {
-                        $fileNew = time() . $value;
+                        $fileNew = time() . str_replace(' ', '-', $value);
                         $this->postRepository->moveImage($value, $fileNew, config('path.post'));
                         $filesArray[]['image'] = $fileNew;
                     }
@@ -126,6 +126,7 @@ class PostController extends BaseController
             } else {
                 $result = false;
             }
+
             if ($result) {
                 DB::commit();
                 if (!$auth) {
@@ -134,12 +135,15 @@ class PostController extends BaseController
                 }
 
                 return redirect()->action('HomeController@home')
-                    ->with('success', trans('message.create_successful'));
+                    ->with('success', trans('validate.msg.create-success'));
             }
+
+            return redirect()->action('HomeController@home')
+                ->with('error', trans('validate.msg.create-fail'));
         } catch (Exception $e) {
             DB::rollback();
             return redirect()->action('HomeController@home')
-                ->with('error', trans('message.create_successful'));
+                ->with('error', trans('validate.msg.create-fail'));
         }
     }
 

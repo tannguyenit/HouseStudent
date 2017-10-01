@@ -53,12 +53,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->all();
     }
 
-    public function find($id, $columns = ['*'])
+    public function find($id, $relationship = [], $columns = ['*'])
     {
-        $data = $this->model->find($id);
+        $data = $this->model->with($relationship)->find($id);
+
         if (empty($data)) {
             throw new Exception(trans('message.not_found'));
         }
+
         return $data;
     }
 
@@ -106,11 +108,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         DB::beginTransaction();
         try {
             $data = $this->model->where('id', $id)->update($inputs);
+
+            if ($data) {
+                DB::commit();
+                return $data;
+            }
         } catch (Exception $e) {
             DB::rollBack();
         }
-        DB::commit();
-        return $data;
     }
 
     public function delete($ids)
