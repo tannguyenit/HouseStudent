@@ -1212,3 +1212,15 @@ span.user-name {
     text-overflow: ellipsis;
     max-width: 200px;
 }
+.limit-100 p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+.limit-150 p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}

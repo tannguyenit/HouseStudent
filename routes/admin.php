@@ -19,8 +19,9 @@ Route::get('/status', ['as' => 'status', 'uses' => 'StatusController@index']);
 Route::post('/status', ['as' => 'storeStatus', 'uses' => 'StatusController@store']);
 Route::post('/setting/{id}', ['as' => 'setting.update', 'uses' => 'SettingController@update']);
 Route::post('/setting/save', ['as' => 'setting.save', 'uses' => 'SettingController@save']);
-Route::get('/post', ['as' => 'post', 'uses' => 'PostController@index']);
-Route::get('/post/edit/{id}', ['as' => 'post', 'uses' => 'PostController@show']);
+Route::get('/post', ['as' => 'indexPost', 'uses' => 'PostController@index']);
+Route::get('/post/edit/{id}', ['as' => 'showPost', 'uses' => 'PostController@show']);
+Route::post('/post/edit/{id}', ['as' => 'updatePost', 'uses' => 'PostController@update']);
 /*
 |--------------------------------------------------------------------------
 | Ajax

@@ -295,7 +295,9 @@
                 $(".dashboard-content-area").animate({ scrollTop: 0 }, "slow");
             }
         });
-
+        /* ------------------------------------------------------------------------ */
+        /*  Validate form property
+        /* ------------------------------------------------------------------------ */
         if(form.length > 0){
             jQuery.validator.addMethod("checkemail", function(value, element) {
                 var result = false;
@@ -351,157 +353,8 @@
 
                 return result;
             }, msg_check_username);
-
-            form.validate({ // initialize plugin
-                // ignore:[],
-                ignore: ":hidden:not(.form-step.active .selectpicker)",
-                // errorPlacement: function (error, element) {
-                //     return false;
-                // },
-                rules: {
-                    title: {
-                        required: true
-                    },
-                    price: {
-                        required: true,
-                    },
-                    description: {
-                        required: true
-                    },
-                    type_id: {
-                        required: true
-                    },
-                    status_id: {
-                        required: true
-                    },
-                    file: {
-                        required: true
-                    },
-                    name_boss: {
-                        required: true
-                    },
-                    area: {
-                        required: true,
-                        number: true
-                    },
-                    phone_boss: {
-                        required: true,
-                        number: true,
-                        minlength:10,
-                        maxlength:11
-                    },
-                    address: {
-                        required: true
-                    },
-                    username: {
-                        required: true,
-                        checkusername:true
-                    },
-                    first_name: {
-                        required: true
-                    },
-                    last_name: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email:true,
-                        checkemail:true
-                    },
-                    password: {
-                        required: true
-                    },
-                    phone: {
-                        required: true,
-                        number:true,
-                        minlength:10,
-                        maxlength:11
-                    },
-                },
-                messages: {
-                    title: "Vui long nhap noi dung",
-                    description: "Vui long nhap noi dung",
-                    price: "Vui long nhap gia",
-                    prop_beds: msg_digits,
-                    prop_baths: msg_digits,
-                    area: msg_digits,
-                    address: "Vui long nhap noi dung",
-                    type_id: "Vui long nhap noi dung",
-                    status_id: "Vui long nhap noi dung",
-                    phone_boss: {
-                        required: 'Vui long nhap tai day',
-                        number:'Ban phai nhap so',
-                        minlength:'it nhat 10 ky tu',
-                        maxlength:'nhieu nhat 11 ky tu'
-                    },
-                    name_boss: "Vui long nhap noi dung",
-                    file: "Vui long chon anh",
-                    username: {
-                        required: 'Vui long nhap ten'
-                    },
-                    first_name: "Please enter a username",
-                    last_name: "Please enter a username",
-                    email: {
-                        required: 'Vui long nhap email',
-                        email: 'Email chua dung dinh dang',
-                    },
-                    password: "Please enter a username",
-                    phone: {
-                        required: 'Vui long nhap tai day',
-                        number:'Ban phai nhap so',
-                        minlength:'it nhat 10 ky tu',
-                        maxlength:'nhieu nhat 11 ky tu'
-                    },
-                }
-            });
+            var validate = new Validate(form);
+            validate.init();
         }
-
-        /* ------------------------------------------------------------------------ */
-        /*	Property additional Features
-        /* ------------------------------------------------------------------------ */
-        $( "#houzez_additional_details_main" ).sortable({
-            revert: 100,
-            placeholder: "detail-placeholder",
-            handle: ".sort-additional-row",
-            cursor: "move"
-        });
-
-        $( '.add-additional-row' ).click(function( e ){
-            e.preventDefault();
-
-            var numVal = $(this).data("increment") + 1;
-            $(this).data('increment', numVal);
-            $(this).attr({
-                "data-increment" : numVal
-            });
-
-            var newAdditionalDetail = '<tr>'+
-            '<td class="action-field">'+
-            '<span class="sort-additional-row"><i class="fa fa-navicon"></i></span>'+
-            '</td>'+
-            '<td class="field-title">'+
-            '<input class="form-control" type="text" name="additional_features['+numVal+'][key]" id="fave_additional_feature_title_'+numVal+'" value="">'+
-            '</td>'+
-            '<td>'+
-            '<input class="form-control" type="text" name="additional_features['+numVal+'][value]" id="fave_additional_feature_value_'+numVal+'" value="">'+
-            '</td>'+
-            '<td class="action-field">'+
-            '<span data-remove="'+numVal+'" class="remove-additional-row"><i class="fa fa-remove"></i></span>'+
-            '</td>'+
-            '</tr>';
-
-            $( '#houzez_additional_details_main').append( newAdditionalDetail );
-            removeAdditionalDetails();
-        });
-
-        var removeAdditionalDetails = function (){
-
-            $( '.remove-additional-row').click(function( event ){
-                event.preventDefault();
-                var $this = $( this );
-                $this.closest( 'tr' ).remove();
-            });
-        }
-        removeAdditionalDetails();
     }
 });

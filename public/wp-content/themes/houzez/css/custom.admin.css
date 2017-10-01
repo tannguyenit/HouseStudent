@@ -45,3 +45,9 @@
 .no-resize {
     resize:none;
 }
+ul.dropdown-menu.inner .selected{
+    color: #000;
+    text-decoration: none;
+    background-color: rgba(0, 174, 239, 0.12);
+    border: 1px solid rgba(0, 174, 239, 0.12);
+}

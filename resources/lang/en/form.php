@@ -35,6 +35,8 @@ return [
     'infomation'        => 'Infomation',
     'stt'               => 'STT',
     'time'              => 'Time',
+    'time-created'      => 'Creating time',
+    'time-update'       => 'Refresh time',
     'title'             => 'Title',
     'total_post'        => 'Total post',
     'action'            => 'Action',

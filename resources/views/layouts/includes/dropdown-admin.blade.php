@@ -4,7 +4,8 @@
         || 'admin.getEnv' == $route_name
         || 'admin.setting' == $route_name
         || 'admin.type' == $route_name
-        || 'admin.post' == $route_name
+        || 'admin.indexPost' == $route_name
+        || 'admin.showPost' == $route_name
         || 'admin.status' == $route_name ? true : false;
 @endphp
 <li class="{!!  $active ? 'active' : '' !!}">
@@ -22,7 +23,7 @@
                 <i class="fa fa-cog"></i>{{ trans('admin.setting') }}
             </a>
         </li>
-        <li class="{!!  $route_name == 'admin.post' ? 'active' : '' !!}">
+        <li class="{!!  $route_name == 'admin.indexPost' || $route_name == 'admin.showPost' ? 'active' : '' !!}">
             <a href="{{ action('Admin\PostController@index') }}">
                 <i class="fa fa-file-text"></i>{{ trans('admin.post') }}
             </a>
