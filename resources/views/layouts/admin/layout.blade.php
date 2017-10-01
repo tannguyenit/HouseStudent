@@ -17,10 +17,13 @@
         {{ Html::style('wp-content/themes/houzez/css/style.css') }}
         {{ Html::style('wp-content/themes/houzez/css/custom.index.css') }}
         {{ Html::style('wp-content/themes/houzez/css/custom.admin.css') }}
+        {{ Html::style('wp-content/themes/houzez/css/jquery.fileuploader.css') }}
+        {{ Html::style('wp-content/themes/houzez/css/jquery.fileuploader-theme-thumbnails.css') }}
     @show
     @section('headerscript')
         {{ Html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/jquery-migrate.min.js') }}
+        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
     @show
 </head>
 <body class="home page-template page-template-template page-template-template-homepage
@@ -89,6 +92,30 @@
         {{ Html::script('wp-content/wp-includes/js/jquery/jquery.ui.touch-punchc682.js?ver=0.2.2') }}
         {{ Html::script('wp-content/themes/houzez/js/custom2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/wp-embed.min66f2.js?ver=4.7.5') }}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var type = '';
+                var msg =  '';
+                var title =  'Message';
+                @if(Session::has('info'))
+                    type = "'info";
+                    msg= "{{ Session::get('info') }}";
+                    toastr[type](msg, title);
+                @elseif(Session::has('success'))
+                    type = "success";
+                    msg= "{{ Session::get('success') }}";
+                    toastr[type](msg, title);
+                @elseif(Session::has('warning'))
+                    type = "warning";
+                    msg= "{{ Session::get('warning') }}";
+                    toastr[type](msg, title);
+                @elseif(Session::has('error'))
+                    type = "error";
+                    msg= "{{ Session::get('error') }}";
+                    toastr[type](msg, title);
+                @endif
+            });
+        </script>
     @show
 </body>
 </html>

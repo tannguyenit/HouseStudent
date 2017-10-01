@@ -43,6 +43,6 @@ Route::group(['as' => 'ajax.'], function () {
 | Admin
 |--------------------------------------------------------------------------
  */
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
     require __DIR__ . '/admin.php';
 });
