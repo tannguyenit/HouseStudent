@@ -24,7 +24,11 @@ interface BaseRepositoryInterface
 
     public function getDataBySlug($slug, $array = []);
 
+    public function getAllDatas($relationship = [], $limit = null);
+
     public function getSortBy($data);
 
     public function moveImage($file, $fileNew, $path);
+
+    public function deleteFiles($file, $path);
 }

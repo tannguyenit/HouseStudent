@@ -195,6 +195,17 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return false;
     }
 
+    public function getAllDatas($relationship = [], $limit = null)
+    {
+        if ($limit) {
+            return $this->model->with($relationship)
+                ->orderBy('created_at', 'DESC')->paginate($limit);
+        }
+
+        return $this->model->with($relationship)
+            ->orderBy('created_at', 'DESC')->get();
+    }
+
     public function getSortBy($data)
     {
         switch ($data) {
@@ -256,5 +267,20 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         return false;
+    }
+
+    public function deleteFiles($file, $path)
+    {
+        if ($file && $path) {
+            if (file_exists($path)) {
+                if (unlink($path)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

@@ -6,6 +6,9 @@
         || 'admin.type' == $route_name
         || 'admin.indexPost' == $route_name
         || 'admin.showPost' == $route_name
+        || 'admin.user.index' == $route_name
+        || 'admin.user.show' == $route_name
+        || 'admin.profile' == $route_name
         || 'admin.status' == $route_name ? true : false;
 @endphp
 <li class="{!!  $active ? 'active' : '' !!}">
@@ -26,6 +29,11 @@
         <li class="{!!  $route_name == 'admin.indexPost' || $route_name == 'admin.showPost' ? 'active' : '' !!}">
             <a href="{{ action('Admin\PostController@index') }}">
                 <i class="fa fa-file-text"></i>{{ trans('admin.post') }}
+            </a>
+        </li>
+        <li class="{!!  $route_name == 'admin.user.index' || $route_name == 'admin.user.show' ? 'active' : '' !!}">
+            <a href="{{ action('Admin\UserController@index') }}">
+                <i class="fa fa-file-text"></i>{{ trans('admin.user') }}
             </a>
         </li>
         <li class="{!!  $route_name == 'admin.type' ? 'active' : '' !!}">

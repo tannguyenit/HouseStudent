@@ -1,14 +1,14 @@
-function Post(url) {
+function User(url) {
     this.url = url;
 }
-Post.prototype = {
+User.prototype = {
     init:function () {
         var _self = this;
         _self.onChange();
     },
     onChange: function () {
         var _self = this;
-        $('.change-status').on('change', function () {
+        $('.change-active').on('change', function () {
             var _this = $(this);
             var value = _this.val();
             var id = _this.closest('tr').attr('id');

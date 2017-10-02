@@ -14,6 +14,7 @@ return [
         'similar_post' => 4,
         'type'         => 6,
         'search'       => 9,
+        'user-table'   => 10,
         'first'        => 1,
     ],
     'price'       => [
