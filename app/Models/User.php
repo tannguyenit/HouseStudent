@@ -17,14 +17,18 @@ class User extends AbstractModel
         'username',
         'first_name',
         'last_name',
+        'email',
+        'password',
         'avatar',
         'birthday',
         'gender',
+        'address',
+        'phone',
         'provice_id',
         'active',
         'role',
-        'email',
-        'password',
+        'bio',
+
     ];
 
     /**

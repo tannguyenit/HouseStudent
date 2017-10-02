@@ -21,9 +21,8 @@
         {{ Html::style('wp-content/themes/houzez/css/jquery.fileuploader-theme-thumbnails.css') }}
     @show
     @section('headerscript')
-        {{ Html::script('http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/jquery.min.js') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/jquery-migrate.min.js') }}
-        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
     @show
 </head>
 <body class="home page-template page-template-template page-template-template-homepage

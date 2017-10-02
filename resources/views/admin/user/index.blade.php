@@ -7,12 +7,12 @@
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/sort-table.js') }}
     {{ Html::script('wp-content/themes/houzez/admin/js/main.js') }}
-    {{ Html::script('wp-content/themes/houzez/admin/js/post.js') }}
+    {{ Html::script('wp-content/themes/houzez/admin/js/user.js') }}
     <script type="text/javascript">
         var main = new Main('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}'),
-            post = new Post('{{ action('Admin\AjaxController@changeStatusPost') }}');
+            user = new User('{{ action('Admin\AjaxController@changeActiveUser') }}');
             main.onClick();
-            post.init();
+            user.init();
         $(document).ready(function () {
             SortTable.table('.post-table');
         })
@@ -48,49 +48,41 @@
                     <thead>
                         <tr>
                             <th>{{ trans('form.stt') }}</th>
-                            <th>{{ trans('form.title') }}</th>
                             <th>{{ trans('form.username') }}</th>
                             <th>{{ trans('form.address') }}</th>
-                            <th>{{ trans('form.type') }}</th>
-                            <th>{{ trans('form.price') }}</th>
+                            <th>{{ trans('form.post') }}</th>
+                            <th>{{ trans('form.phone') }}</th>
                             <th>{{ trans('form.status') }}</th>
-                            <th>{{ trans('form.time-update') }}</th>
                             <th>{{ trans('form.time-created') }}</th>
                             <th>{{ trans('form.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($posts as $key => $element)
+                        @forelse ($users as $key => $element)
                         <tr id="{{ $element->id }}">
                             <td>{{ $key + 1 }}</td>
                             <td class="title_content limit-150">
-                                <a href='{{ action('Admin\PostController@show', $element->id) }}' title="{{ $element->title }}"><p>{{ $element->title }}</p></a>
-                            </td>
-                            <td class="title_content limit-100">
-                                <p>{{ $element->user->username }}</p>
+                                <a href='{{ action('Admin\UserController@show', $element->username) }}' title="{{ $element->username }}"><p>{{ $element->username }}</p></a>
                             </td>
                             <td class="limit-100">
                                 <p>{{ $element->address }}</p>
                             </td>
                             <td>
-                                <p>{{ $element->type->title }}</p>
+                                <p>{{ count($element->posts) }} {{ trans('form.post-unit') }}</p>
                             </td>
                             <td>
-                                <p>{{ $element->price }} {{ config('setting.price.vi') }}</p>
+                                <p>{{ $element->phone }}</p>
                             </td>
                             <td class="tg-list-item">
-                                {!! Form::checkbox('status', $element->status, $element->status == config('setting.active') ? 'checked="checked"' : '', ['class' => 'tgl tgl-ios change-status', 'id' => 'status'. $element->id]) !!}
-                                {!! Form::label('status' . $element->id, ' ', ['class' => 'tgl-btn']) !!}
-                            </td>
-                            <td class="limit-100">
-                                <p>{{ $element->updated_at }}</p>
+                                {!! Form::checkbox('user', $element->active, $element->active != config('setting.no-active') ? 'checked="checked"' : '', ['class' => 'tgl tgl-ios change-active', 'id' => 'user'. $element->id]) !!}
+                                {!! Form::label('user' . $element->id, ' ', ['class' => 'tgl-btn']) !!}
                             </td>
                             <td class="limit-100">
                                 <p>{{ $element->created_at }}</p>
                             </td>
                             <td class="getData" data-id={{ $element->id }}>
-                                <a href='{{ action('Admin\PostController@show', $element->id) }}'><i class="fa fa-pencil-square-o btn-edit"></i></a>
-                                <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deletePost') }}"><i class="fa fa-trash-o btn-delete"></i></a>
+                                <a href='{{ action('Admin\UserController@show', $element->username) }}'><i class="fa fa-pencil-square-o btn-edit"></i></a>
+                                <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deleteUser') }}"><i class="fa fa-trash-o btn-delete"></i></a>
                             </td>
                         </tr>
                         @empty
@@ -98,7 +90,7 @@
                     </tbody>
                 </table>
                 <div class="text-center">
-                    {{ $posts->links() }}
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

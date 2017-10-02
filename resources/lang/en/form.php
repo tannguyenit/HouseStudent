@@ -34,6 +34,8 @@ return [
     'accept'            => 'Accept',
     'infomation'        => 'Infomation',
     'stt'               => 'STT',
+    'post'              => 'Post',
+    'post-unit'         => 'post',
     'time'              => 'Time',
     'time-created'      => 'Creating time',
     'time-update'       => 'Refresh time',

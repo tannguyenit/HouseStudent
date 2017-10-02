@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (config('setting.role.admin') == Auth::user()->role) {
+        if (Auth::user() && config('setting.role.admin') == Auth::user()->role) {
             return $next($request);
         }
 

@@ -1,4 +1,8 @@
 @extends('layouts.admin.layout')
+@section('headerscript')
+    @parent
+    {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
+@endsection
 @section('footerscript')
     @parent
     {{ Html::script('wp-content/wp-includes/js/plupload/plupload.full.mincc91.js') }}
