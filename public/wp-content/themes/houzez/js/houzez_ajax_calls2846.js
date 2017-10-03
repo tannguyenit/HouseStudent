@@ -1207,7 +1207,6 @@
             rules: {
                 email: {
                     required: true,
-                    email: true
                 },
                 password: {
                     required: true,
@@ -1217,7 +1216,6 @@
             messages: {
                 email: {
                     required: validate.email.required,
-                    email: validate.email.email,
                 },
                 password: {
                     required: validate.password.required,

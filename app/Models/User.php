@@ -71,4 +71,9 @@ class User extends AbstractModel
 
         return config('path.defaul-avatar');
     }
+
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = bcrypt($value);
+    }
 }
