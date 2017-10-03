@@ -73,3 +73,12 @@ function getBrowser()
 
     return (object) $result;
 }
+
+function setPrice($value)
+{
+    if (strpos($value, ',')) {
+        return explode(',', str_replace('.', '', trim($value)))[0];
+    }
+
+    return str_replace('.', '', trim($value));
+}
