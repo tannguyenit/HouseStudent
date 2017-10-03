@@ -90,13 +90,4 @@ class Post extends AbstractModel
     {
         return number_format($value, 0, ',', '.');
     }
-
-    public function setPriceAttribute($value)
-    {
-        if (strpos($value, ',')) {
-            return $this->attributes['price'] = explode(',', str_replace('.', '', trim($value)))[0];
-        }
-
-        return $this->attributes['price'] = str_replace('.', '', trim($value));
-    }
 }

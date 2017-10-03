@@ -63,6 +63,7 @@ class PostController extends Controller
                 $data                       = $request->all();
                 $fillable                   = $this->postRepository->getFillable();
                 $attribute                  = array_only($data, $fillable);
+                $attribute['price']         = setPrice($request->price);
                 $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
                 $attribute['township']      = $request->administrative_area_level_2;
                 $attribute['country']       = $request->administrative_area_level_1;
