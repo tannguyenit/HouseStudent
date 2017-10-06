@@ -66,20 +66,19 @@ class LoginController extends Controller
             }
         }
 
-        if (config('setting.no-active') == $findUser->active) {
-            return response()->json([
-                'success' => false,
-                'msg'     => trans('form.login-watting'),
-            ]);
-        }
-
-        if ($findUser && config('setting.active') == $findUser->active) {
-            $checkLogin = Auth::attempt($login, $request->remember);
-
-            if ($checkLogin) {
+        if ($findUser) {
+            if (config('setting.active') == $findUser->active) {
+                $checkLogin = Auth::attempt($login);
+                if ($checkLogin) {
+                    return response()->json([
+                        'success' => true,
+                        'msg'     => trans('form.login-success'),
+                    ]);
+                }
+            } else {
                 return response()->json([
-                    'success' => true,
-                    'msg'     => trans('form.login-success'),
+                    'success' => false,
+                    'msg'     => trans('form.login-watting'),
                 ]);
             }
         }

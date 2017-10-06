@@ -5,11 +5,7 @@
     <div class="dashboard-bar fave-screen-fix">
         <ul class="board-panel-menu">
             @include('layouts.includes.dropdown-admin')
-            <li>
-                <a href="{{ action('Auth\LoginController@logout') }}">
-                    <i class="fa fa-unlock"></i> {{ trans('index.logout') }}
-                </a>
-            </li>
+            @include('layouts.includes.dropdown-member')
         </ul>
     </div>
 </div>

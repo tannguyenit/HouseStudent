@@ -13,11 +13,6 @@
                 </div>
                 <div class="board-header-right">
                     <ol class="breadcrumb">
-                        <li>
-                            <a itemprop="url" href="{{ action('Admin\DashboardController@dashboard') }}">
-                                <span itemprop="title">{{ trans('admin.dashboard') }}</span>
-                            </a>
-                        </li>
                         <li class="active">{{ trans('admin.user') }}</li>
                     </ol>
                 </div>
@@ -30,7 +25,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="profile-content-area">
-                    {{ Form::open(['action' => ['Admin\UserController@update', $detailUser->id], 'method' => 'PUT', 'enctype'=>'multipart/form-data', 'id' => 'manager_user']) }}
+                    {{ Form::open(['action' => ['UserController@update', $detailUser->id], 'method' => 'PUT', 'enctype'=>'multipart/form-data', 'id' => 'manager_user']) }}
                     <div class="account-block account-profile-block">
                         <div class="row">
                             <div class="col-md-3 col-sm-12 col-xs-12">

@@ -39,7 +39,7 @@
             @yield('content')
         </div>
     </div>
-    <div class="modal fade edit_modal">
+    <div class="modal fade" id="edit_modal">
         <div class="modal-dialog">
             {{ Form::open(['method' => 'POST','class' => 'form-horizontal', 'id' => 'update_edit_modal']) }}
                 <div class="modal-content">

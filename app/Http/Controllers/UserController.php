@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\UserRepository\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
-    protected $postRepository;
     protected $userRepository;
 
     public function __construct(
-        PostRepository $postRepository,
         UserRepository $userRepository
     ) {
-        $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -25,21 +21,52 @@ class UserController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $slug)
+    public function index(Request $request, $slug)
     {
-        $getSortBy         = $request->get('sortby');
-        $sortBy            = $this->typeRepository->getSortBy($getSortBy);
-        $detailsTypes      = $this->typeRepository->getDataBySlug($slug);
-        $id                = $detailsTypes->id;
-        $dataView['posts'] = $this->postRepository->getDataByColumn('type_id', $id, $sortBy, config('setting.limit.type'));
+        $detailUser = $this->userRepository->findByFirst('username', $slug);
 
-        if ($detailsTypes && $dataView['posts']) {
-            $dataView['detailsTypes'] = $detailsTypes;
-
-            return view('type.detail', $dataView);
+        if ($detailUser) {
+            return view('author.my-profile', compact('detailUser'));
         }
 
         return abort(404);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = $this->userRepository->find($id);
+        if ($user) {
+            $status    = true;
+            $data      = $request->all();
+            $fillable  = $this->userRepository->getFillable();
+            $attribute = array_only($data, $fillable);
+
+            if ($request->avatar) {
+                if ($user->avatar) {
+                    $path   = public_path() . $user->avatar;
+                    $remove = $this->userRepository->deleteFiles($user->avatar, $path);
+
+                    if (!$remove) {
+                        $status = false;
+                    }
+                }
+
+                $avatar = $this->userRepository->uploadImage($request->avatar, config('path.avatar'));
+
+                if ($avatar && $status) {
+                    $attribute['avatar'] = $avatar;
+                }
+            }
+            $update = $this->userRepository->update($attribute, $id);
+
+            if ($update) {
+                return redirect()->action('UserController@index', $user->username)
+                    ->with('success', trans('validate.msg.edit-success'));
+            } else {
+                return redirect()->action('UserController@index', $user->username)
+                    ->with('error', trans('validate.msg.edit-fail'));
+            }
+        }
     }
 
     public function checkEmail(Request $request)

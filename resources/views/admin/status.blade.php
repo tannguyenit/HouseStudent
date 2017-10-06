@@ -2,6 +2,13 @@
 @section('footerscript')
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/type-status.js') }}
+    {{ Html::script('wp-content/themes/houzez/admin/js/main.js') }}
+    <script type="text/javascript">
+        var main = new Main('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}'),
+            action = new ActionModal('{{ trans('validate.sending') }}', '{{ trans('validate.done') }}', '{{ trans('validate.accept') }}');
+            action.init();
+            main.onClick();
+    </script>
 @endsection
 @section('content')
 <div class="board-header board-header-4">
@@ -58,7 +65,7 @@
                                         <td>{{ count($element->posts) }}</td>
                                         <td>{{ $element->created_at }}</td>
                                         <td class="getData" data-title="{!! $element->title !!}" data-id={{ $element->id }} >
-                                            <a data-toggle="modal" href='.edit_modal' data-action="{{ action('Admin\AjaxController@updateStatus') }}">
+                                            <a data-toggle="modal" href='#edit_modal' data-action="{{ action('Admin\AjaxController@updateStatus') }}">
                                                 <i class="fa fa-pencil-square-o btn-edit"></i>
                                             </a>
                                             <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deleteStatus') }}">
