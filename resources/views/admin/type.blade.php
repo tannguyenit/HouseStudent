@@ -65,7 +65,7 @@
                                         <td>{{ count($element->posts) }}</td>
                                         <td>{{ $element->created_at }}</td>
                                         <td class="getData" data-title="{!! $element->title !!}" data-id={{ $element->id }} >
-                                            <a data-toggle="modal" href='.edit_modal' data-action="{{ action('Admin\AjaxController@updateType') }}"><i class="fa fa-pencil-square-o btn-edit"></i></a>
+                                            <a data-toggle="modal" href='#edit_modal' data-action="{{ action('Admin\AjaxController@updateType') }}"><i class="fa fa-pencil-square-o btn-edit"></i></a>
                                             <a data-toggle="modal" href='#confirm_modal' data-action="{{ action('Admin\AjaxController@deleteType') }}"><i class="fa fa-trash-o btn-delete"></i></a>
                                         </td>
                                     </tr>

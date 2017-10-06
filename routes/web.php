@@ -30,6 +30,8 @@ Route::get('/advanced-search', ['as' => 'search', 'uses' => 'PostController@sear
 Route::match(['get', 'post'], '/botman', 'ChatBotFacebookController@handle');
 Route::resource('property', 'PostController');
 Route::get('/author/{slug}', ['as' => 'profile', 'uses' => 'UserController@index']);
+Route::put('/author/update/{id}', ['as' => 'updateUser', 'uses' => 'UserController@update']);
+Route::get('/member/{slug}', ['as' => 'member', 'uses' => 'UserController@member']);
 
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);

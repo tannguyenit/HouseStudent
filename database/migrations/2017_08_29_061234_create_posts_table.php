@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->longText('description');
             $table->uuid('type_id', 36);
             $table->uuid('status_id', 36);
-            $table->string('price', 36);
+            $table->integer('price', 36);
             $table->string('area', 36);
             $table->string('phone_boss', 30);
             $table->string('name_boss', 200);
