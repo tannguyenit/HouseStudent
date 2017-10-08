@@ -32,6 +32,7 @@ return [
     'step'              => 'Step',
     'infomation'        => 'Infomation',
     'add-image'         => 'Images',
+    'no-image'          => 'No Image',
     'add-address'       => 'Address',
     'add-new'           => 'Add New',
     'features'          => 'Additional Features',

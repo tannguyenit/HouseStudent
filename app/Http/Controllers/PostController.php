@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ImageRepository\ImageRepository;
 use App\Repositories\PostRepository\PostRepository;
+use App\Repositories\StatusRepository\StatusRepository;
 use App\Repositories\TypeRepository\TypeRepository;
 use App\Repositories\UserRepository\UserRepository;
 use Auth;
@@ -15,16 +17,22 @@ class PostController extends BaseController
 {
     protected $postRepository;
     protected $typeRepository;
+    protected $statusRepository;
+    protected $imageRepository;
     protected $userRepository;
 
     public function __construct(
         PostRepository $postRepository,
         TypeRepository $typeRepository,
+        ImageRepository $imageRepository,
+        StatusRepository $statusRepository,
         UserRepository $userRepository
     ) {
-        $this->postRepository = $postRepository;
-        $this->typeRepository = $typeRepository;
-        $this->userRepository = $userRepository;
+        $this->postRepository   = $postRepository;
+        $this->typeRepository   = $typeRepository;
+        $this->statusRepository = $statusRepository;
+        $this->imageRepository  = $imageRepository;
+        $this->userRepository   = $userRepository;
     }
 
     /**
@@ -34,8 +42,9 @@ class PostController extends BaseController
      */
     public function townShip(Request $request, $slug)
     {
+        $relationShip      = ['user', 'type', 'status'];
         $sortBy            = $this->postRepository->getSortBy(null);
-        $dataView['posts'] = $this->postRepository->getDataByColumn('township_slug', $slug, $sortBy);
+        $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy);
 
         if ($dataView['posts']) {
             return view('township.detail', $dataView);
@@ -57,7 +66,7 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request as NewRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(NewRequest $request)
@@ -135,14 +144,25 @@ class PostController extends BaseController
                     Auth::login($user);
                 }
 
-                return redirect()->action('HomeController@home')
+                return redirect()->action('PostController@myProperties')
                     ->with('success', trans('validate.msg.create-success'));
+            }
+
+            if (auth()->check()) {
+                return redirect()->action('PostController@myProperties')
+                    ->with('error', trans('validate.msg.create-fail'));
             }
 
             return redirect()->action('HomeController@home')
                 ->with('error', trans('validate.msg.create-fail'));
         } catch (Exception $e) {
             DB::rollback();
+
+            if (auth()->check()) {
+                return redirect()->action('PostController@myProperties')
+                    ->with('error', trans('validate.msg.create-fail'));
+            }
+
             return redirect()->action('HomeController@home')
                 ->with('error', trans('validate.msg.create-fail'));
         }
@@ -198,32 +218,112 @@ class PostController extends BaseController
      */
     public function edit($id)
     {
-        //
+        if ($id) {
+            $relationship         = ['images', 'type', 'status', 'features'];
+            $dataView['types']    = $this->typeRepository->all();
+            $dataView['statuses'] = $this->statusRepository->all();
+            $dataView['post']     = $this->postRepository->find($id, $relationship);
+
+            return view('post.edit', $dataView);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request as NewRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NewRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            if ($id) {
+                $result                     = true;
+                $deleteFeatures             = true;
+                $data                       = $request->all();
+                $fillable                   = $this->postRepository->getFillable();
+                $attribute                  = array_only($data, $fillable);
+                $attribute['price']         = setPrice($request->price);
+                $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
+                $attribute['township']      = $request->administrative_area_level_2;
+                $attribute['country']       = $request->administrative_area_level_1;
+                $updatePost                 = $this->postRepository->update($attribute, $id);
+                $detailPost                 = $this->postRepository->find($id, ['features']);
+
+                if (count($detailPost->features)) {
+                    $deleteFeatures = $this->featuresRepository->deleteByColum('post_id', $id);
+                }
+
+                if ($updatePost && $deleteFeatures) {
+                    $features = $request->additional_features;
+
+                    if ($features) {
+                        $featuresArray = [];
+
+                        foreach ($features as $key => $element) {
+                            if ($element['key'] && $element['value']) {
+                                $featuresArray[$key]['title'] = $element['key'];
+                                $featuresArray[$key]['value'] = $element['value'];
+                            }
+                        }
+
+                        if (count($featuresArray)) {
+                            if (!$detailPost->features()->createMany($featuresArray)) {
+                                return $result = false;
+                            };
+                        }
+                    }
+                    /* ------------------------------------------------------------------------ */
+                    /*  Save Files
+                    /* ------------------------------------------------------------------------ */
+                    $fileUpload = $request->file;
+                    if ($fileUpload && "[]" != $fileUpload) {
+                        $images = json_decode($fileUpload);
+
+                        foreach ($images as $key => $value) {
+                            $fileExists = strstr($value, config('path.post'));
+
+                            if (!$fileExists) {
+                                $fileNew = $this->imageRepository->addFile($value, $id);
+
+                                if ($fileNew) {
+                                    $moveFile = $this->imageRepository->moveImage($value, $fileNew, config('path.post'));
+
+                                    if (!$moveFile) {
+                                        $result = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ($result) {
+                    DB::commit();
+
+                    return redirect()->action('PostController@myProperties')
+                        ->with('success', trans('validate.msg.edit-success'));
+                } else {
+                    return redirect()->action('PostController@myProperties')
+                        ->with('error', trans('validate.msg.edit-fail'));
+                }
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return redirect()->action('PostController@myProperties')
+                ->with('error', trans('validate.msg.edit-fail'));
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Search the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function search()
     {
         $getSortBy              = Request::get('sortby');
@@ -234,5 +334,25 @@ class PostController extends BaseController
             ->paginate(config('setting.limit.search'));
 
         return view('post.search', $dataView);
+    }
+
+    /**
+     * Get My Property the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request as NewRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function myProperties(NewRequest $request)
+    {
+        $relationShip = ['user', 'type', 'firstImages'];
+        $getSortBy    = $request->get('sortby');
+        $sortBy       = $this->postRepository->getSortBy($getSortBy);
+        $myProperties = $this->postRepository->getDataByColumn($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'));
+
+        if ($myProperties) {
+            return view('author.my-properties', compact('myProperties'));
+        }
+
+        return abort(404);
     }
 }
