@@ -92,6 +92,9 @@
         {{ Html::script('wp-content/themes/houzez/js/custom2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/wp-embed.min66f2.js?ver=4.7.5') }}
         <script type="text/javascript">
+            var VALIDATE_JS = {
+                "variable" : '{!! json_encode(trans('validate')) !!}'
+            }
             $(document).ready(function() {
                 var type = '';
                 var msg =  '';

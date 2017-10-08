@@ -1115,8 +1115,7 @@ padding-bottom: 15px;
 .profile-properties .property-listing.grid-view .item-wrap:nth-child(3n+1) {
     clear: both;
 }
-.qr-image,
-span.user-name {
+.qr-image{
     display: none !important;
 }
 .banner-video-inner:before {
@@ -1223,4 +1222,16 @@ span.user-name {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
+}
+#previewHolder {
+    width: 200px;
+    height: 200px;
+}
+.inline-block {
+    display: inline-block !important;
+}
+.user-image,
+.user-image img {
+    width: 36px !important;
+    height: 36px !important;
 }

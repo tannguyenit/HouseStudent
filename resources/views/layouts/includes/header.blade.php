@@ -25,7 +25,7 @@
             @if (auth()->check())
             <ul class="account-action">
                 <li class="">
-                    <span class="user-name">
+                    <span class="user-name inline-block">
                         <span>{{ auth()->user()->fullname }}</span>
                         <i class="fa fa-angle-down"></i>
                     </span>

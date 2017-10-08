@@ -1701,10 +1701,6 @@ label.success {
 .btn-md {
     padding: 8px 15px;
 }
-strong,
-b {
-    font-weight: 500;
-}
 .blog-article strong,
 .blog-article b,
 .detail-block strong,
