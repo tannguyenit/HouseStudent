@@ -2,6 +2,12 @@
 @section('footerscript')
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/setting.js') }}
+    {{ Html::script('wp-content/themes/houzez/js/tannguyen/edit-user.js') }}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        var user = new User('{{ action('UserController@checkEmail') }}', '{{ action('UserController@checkusername') }}');
+            user.init();
+    </script>
 @endsection
 @section('content')
 <div class="board-header board-header-4">
@@ -52,6 +58,7 @@
                                         <div class="form-group">
                                             {!! Form::label('username', trans('admin.attribute.username')) !!}
                                             {!! Form::text('username', $detailUser->username, ['id' => 'username', 'class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                            {!! Form::hidden('id', $detailUser->id, ['id' => 'get-user__id']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
@@ -75,7 +82,7 @@
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             {!! Form::label('birthday', trans('admin.attribute.birthday')) !!}
-                                            {!! Form::date('birthday', $detailUser->birthday, ['id' => 'birthday', 'class' => 'form-control']) !!}
+                                            {!! Form::text('birthday', $detailUser->birthday, ['id' => 'birthday', 'class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
