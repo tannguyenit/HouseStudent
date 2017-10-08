@@ -122,17 +122,17 @@ class PostController extends Controller
                     DB::commit();
 
                     return redirect()->action('Admin\PostController@index')
-                        ->with('success', trans('validate.msg.create-success'));
+                        ->with('success', trans('validate.msg.edit-success'));
                 } else {
                     return redirect()->action('Admin\PostController@index')
-                        ->with('error', trans('validate.msg.create-fail'));
+                        ->with('error', trans('validate.msg.edit-fail'));
                 }
             }
         } catch (Exception $e) {
             DB::rollback();
 
             return redirect()->action('Admin\PostController@index')
-                ->with('error', trans('validate.msg.create-fail'));
+                ->with('error', trans('validate.msg.edit-fail'));
         }
     }
 }

@@ -68,7 +68,7 @@ class LoginController extends Controller
 
         if ($findUser) {
             if (config('setting.active') == $findUser->active) {
-                $checkLogin = Auth::attempt($login);
+                $checkLogin = Auth::attempt($login, $request->remember);
                 if ($checkLogin) {
                     return response()->json([
                         'success' => true,

@@ -66,6 +66,11 @@ class Post extends AbstractModel
         return $this->hasMany(Image::class);
     }
 
+    public function firstImages()
+    {
+        return $this->hasOne(Image::class);
+    }
+
     public function features()
     {
         return $this->hasMany(Features::class);

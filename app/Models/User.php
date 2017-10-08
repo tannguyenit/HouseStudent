@@ -28,7 +28,11 @@ class User extends AbstractModel
         'active',
         'role',
         'bio',
-
+    ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'birthday',
     ];
 
     /**
@@ -75,5 +79,17 @@ class User extends AbstractModel
     public function setPasswordAttribute($value)
     {
         return $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setBirthdayAttribute($value)
+    {
+        $date = str_replace('/', '-', $value);
+
+        return $this->attributes['birthday'] = date('Y-m-d', strtotime($date));
+    }
+
+    public function getBirthdayAttribute($value)
+    {
+        return date("d/m/Y", strtotime($value));
     }
 }

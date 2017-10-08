@@ -3,6 +3,7 @@ return [
     'email'       => [
         'required' => 'Please enter email',
         'email'    => 'Email is not correct',
+        'exists'   => 'Email is exists',
     ],
     'password'    => [
         'required' => 'Please enter password',
@@ -29,6 +30,8 @@ return [
         'password'    => 'Enter your password',
         'phone'       => 'Enter your phone',
         'note'        => 'Enter your note',
+        'listing'     => 'Enter title you want search ...',
+        'date'        => 'dd/mm/yyyy',
     ],
     'msg'         => [
         'digits'         => 'Please enter only digits',
@@ -48,4 +51,27 @@ return [
     'done'        => 'Done !',
     'add-image'   => 'Upload at least one image.',
     'required'    => 'Please fill out the following required fields',
+    'username'    => [
+        'exists'   => 'Username is exists',
+        'required' => 'The username field is required.',
+    ],
+    'first_name'  => [
+        'title'    => 'First name',
+        'required' => 'The Firstname field is required ',
+    ],
+    'last_name'   => [
+        'title'    => 'Last name',
+        'required' => 'The Lastname field is required ',
+    ],
+    'phone'       => [
+        'title'     => 'Phone',
+        'required'  => 'The phone field is required ',
+        'number'    => 'The phone field is number ',
+        'minlength' => 'The phone must be at least 10 characters',
+        'maxlength' => 'The phone may not be greater than 11 characters.',
+    ],
+    'date'        => [
+        'title'  => 'Date',
+        'format' => 'Please enter a date in the format dd/mm/yyyy and  between 1900 and 2099',
+    ],
 ];

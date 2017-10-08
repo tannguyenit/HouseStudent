@@ -150,4 +150,27 @@ class AjaxController extends BaseController
 
         return false;
     }
+
+    public function deletePost(Request $request)
+    {
+        if ($request->ajax()) {
+            $data   = $request->all();
+            $id     = $data['id'];
+            $result = $this->postRepository->deletePost($id);
+
+            if ($result) {
+                return response()->json([
+                    'status' => true,
+                    'title'  => trans('validate.success'),
+                    'msg'    => trans('validate.msg.delete-success'),
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => false,
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.delete-fail'),
+        ]);
+    }
 }

@@ -271,6 +271,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function deleteFiles($file, $path)
     {
+        if (strpos($path, config('path.default-folder'))) {
+            return true;
+        }
+
         if ($file && $path) {
             if (file_exists($path)) {
                 if (unlink($path)) {
