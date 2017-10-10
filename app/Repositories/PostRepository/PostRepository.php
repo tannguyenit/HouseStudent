@@ -36,7 +36,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $max_price = $maxPrice;
         $keyword   = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
         $result    = $this->model->with($array)
-            ->where('status', config('setting.active'))
+            ->where('active', config('setting.active'))
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
 
@@ -60,7 +60,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         }
 
         return $this->model->with($array)
-            ->where('status', config('setting.active'))
+            ->where('active', config('setting.active'))
             ->limit($limit)
             ->orderBy($orderBy, 'DESC')
             ->get();
@@ -71,7 +71,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $this->model->select(DB::raw('count(township) as total, township'))
             ->groupBy('township')
             ->orderBy('total', 'DESC')
-            ->where('status', config('setting.active'))
+            ->where('active', config('setting.active'))
             ->limit(config('setting.limit.country'))
             ->get();
     }
@@ -79,7 +79,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function getDataBySlug($slug, $array = [])
     {
         if (!empty($slug)) {
-            return $this->model->where('status', config('setting.active'))
+            return $this->model->where('active', config('setting.active'))
                 ->where('slug', $slug)
                 ->with($array)
                 ->first();
@@ -101,7 +101,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $this->model->where($column, $id)
             ->orderBy($sortBy->key, $sortBy->value)
             ->with($relationship)
-            ->where('status', config('setting.active'))
+            ->where('active', config('setting.active'))
             ->paginate($limit);
     }
 
@@ -109,7 +109,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         if ($column && $parentColumn) {
             return $this->model->groupBy($column, $parentColumn)
-                ->where('status', config('setting.active'))
+                ->where('active', config('setting.active'))
                 ->select($column, $parentColumn)
                 ->get();
         }

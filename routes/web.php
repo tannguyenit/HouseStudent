@@ -39,6 +39,7 @@ Route::get('/member/{slug}', ['as' => 'member', 'uses' => 'UserController@member
 
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
+    Route::post('getSingleProperty', ['as' => 'getSingleProperty', 'uses' => 'AjaxController@getSingleProperty']);
     Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
     Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);
     Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'AjaxController@deletePost']);

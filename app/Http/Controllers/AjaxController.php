@@ -25,7 +25,7 @@ class AjaxController extends BaseController
         if ($request->ajax()) {
             $dataSearch   = $request->all();
             $sortBy       = $this->postRepository->getSortBy(null);
-            $relationship = ['user', 'images'];
+            $relationship = ['user', 'images', 'firstImages', 'type'];
             $data         = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)->get();
 
             if ($request->keyword) {
@@ -35,16 +35,18 @@ class AjaxController extends BaseController
 
             if ($data) {
                 $properties = [];
+
                 foreach ($data as $element) {
+                    $image        = isset($element->firstImages) ? $element->firstImages->image : config('path.no-image');
                     $properties[] = [
                         "id"           => $element->id,
                         "title"        => $element->title,
                         "lat"          => $element->lat,
                         "lng"          => $element->lng,
                         "address"      => $element->address,
-                        "thumbnail"    => "<img width=\"385\" height=\"258\" src=\"http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-385x258.jpg\" class=\"attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image\" alt=\"\" srcset=\"http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-08.jpg 1170w\" sizes=\"(max-width: 385px) 100vw, 385px\" />",
+                        "thumbnail"    => "<img width=\"385\" height=\"258\" src=\"$image\" class=\"attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image\" alt=\"\" sizes=\"(max-width: 385px) 100vw, 385px\" />",
                         "url"          => action('PostController@show', $element->slug),
-                        "prop_meta"    => "<p><span>Dien tich: " . $element->area . " metvuong</span></p>",
+                        "prop_meta"    => "<p><span>" . trans('post.area') . $element->area . "</span></p>",
                         "type"         => $element->user->username,
                         "images_count" => count($element->images),
                         "price"        => "<span class=\"item-price\">" . $element->price . "</span><span class=\"item-sub-price\">" . $element->price . "VND/thang</span>",
@@ -172,5 +174,41 @@ class AjaxController extends BaseController
             'title'  => trans('validate.errors'),
             'msg'    => trans('validate.msg.delete-fail'),
         ]);
+    }
+
+    public function getSingleProperty(Request $request)
+    {
+        if ($request->ajax()) {
+            $id           = $request->id;
+            $relationship = ['user', 'firstImages', 'type'];
+            $post         = $this->postRepository->find($id, $relationship);
+            $firstImage   = isset($post->firstImages) ? $post->firstImages->image : config('path.no-image');
+
+            if ($post) {
+                $properties[] = [
+                    "title"      => $post->title,
+                    "lat"        => $post->lat,
+                    "lng"        => $post->lng,
+                    "address"    => $post->address,
+                    "thumbnail"  => "<img width=\"385\" height=\"258\" src=\"$firstImage\" class=\"attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image\" alt=\"\" sizes=\"(max-width: 385px) 100vw, 385px\" />",
+                    "url"        => action('PostController@show', $post->slug),
+                    "prop_meta"  => "<p><span>" . trans('post.area') . $post->area . "</span></p>",
+                    "type"       => $post->type->title,
+                    "price"      => '$' . $post->price,
+                    "icon"       => "http://sandbox.favethemes.com/houzez/wp-content/uploads/2016/02/x1-apartment.png",
+                    "retinaIcon" => "http://sandbox.favethemes.com/houzez/wp-content/uploads/2016/02/x2-apartment.png",
+                ];
+
+                return response()->json([
+                    'status'  => true,
+                    'details' => $properties,
+                ]);
+            }
+
+            return response()->json([
+                'status'  => false,
+                'details' => [],
+            ]);
+        }
     }
 }

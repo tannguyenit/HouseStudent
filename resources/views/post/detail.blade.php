@@ -35,6 +35,7 @@
                             <a target="_blank" href="http://maps.google.com/?q={{ $detailsPost->address }}"> {{ trans('post.open-map') }} <i class="fa fa-paper-plane"></i> </a>
                         </address>
                         <span id="getGoogleMaps" data-lat="{{ $detailsPost->lat }}" data-lng="{{ $detailsPost->lng }}"></span>
+                        <span id="getPropertiesId" data-id="{{ $detailsPost->id }}"></span>
                     </div>
                     <div class="header-right">
                         <ul class="actions">
@@ -48,11 +49,11 @@
                                     <i class="fa fa-share-alt"></i>
                                 </span>
                             </li>
-                            <li class="fvrt-btn">
+                            {{-- <li class="fvrt-btn">
                                 <span class="add_fav" data-placement="bottom"  data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
                                     <i class="fa fa-heart-o"></i>
                                 </span>
-                            </li>
+                            </li> --}}
                         </ul>
                         <span class="item-price">${{ $detailsPost->price }} {{ config('setting.price.vi') }}</span>
                     </div>
@@ -72,7 +73,7 @@
                         <div class="tab-content">
                             <div id="gallery" class="tab-pane fade in active">
                                 <span class="label-wrap visible-sm visible-xs">
-                                    <span class="label label-primary label-status-7">For Sale</span>
+                                    <span class="label label-primary label-status-7">{{ $detailsPost->type->title }}</span>
                                 </span>
                                 <div class="detail-slider-wrap">
                                     <div class="detail-slider owl-carousel owl-theme">
@@ -81,6 +82,9 @@
                                                 <a class="popup-trigger banner-link" href="#"></a>
                                             </div>
                                         @empty
+                                            <div class="item" style="background-image: url('{{ config('path.no-image') }}')">
+                                                <a class="popup-trigger banner-link" href="#"></a>
+                                            </div>
                                         @endforelse
                                     </div>
                                     <div class="detail-slider-nav-wrap">
@@ -90,6 +94,9 @@
                                                     <img src="{{ $image->image }}" alt="{{ $detailsPost->title }}" class="height-70"/>
                                                 </div>
                                             @empty
+                                                <div class="item">
+                                                    <img src="{{ config('path.no-image') }}" alt="{{ $detailsPost->title }}" class="height-70"/>
+                                                </div>
                                             @endforelse
                                         </div>
                                     </div>
@@ -118,6 +125,16 @@
                                     </a>
                                 </li>
                             </ul>
+                            <ul class="actions">
+                                <li class="share-btn">
+                                    <div class="share_tooltip tooltip_left fade">
+                                        <a class="share_links" href="http://www.facebook.com/sharer.php?u={{ Request::url() }}" ><i class="fa fa-facebook"></i></a>
+                                        <a class="share_links" href="https://twitter.com/intent/tweet?text={{ $detailsPost->title }}url={{ Request::url() }}" ><i class="fa fa-twitter"></i></a>
+                                        <a class="share_links" href="http://plus.google.com/share?url={{ Request::url() }}" ><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                    <span title="" data-placement="right" data-toggle="tooltip" data-original-title="share"><i class="fa fa-share-alt"></i></span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div id="description" class="property-description detail-block target-block">
@@ -133,7 +150,7 @@
                                 <p><i class="fa fa-clock-o"></i> {{ $detailsPost->created_at }}</p>
                             </div>
                         </div>
-                        <div class="alert alert-info">
+                        <div class="alert alert-info table-responsive">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
@@ -147,7 +164,7 @@
                             @if (count($detailsPost->features))
                             <ul class="list-three-col">
                                 @forelse ($detailsPost->features as $feature)
-                                    <li><strong>{{ $feature->title }} : </strong> {{ $feature->value }}</li>
+                                <li><strong>{{ $feature->title }} : </strong> {{ $feature->value }}</li>
                                 @empty
                                 @endforelse
                             </ul>
@@ -211,16 +228,16 @@
                                         <figure class="item-thumb">
                                             <span class="label-featured label label-success">{{ $similarPost->title }}</span>
                                             <a href="{{ action('PostController@show', $element->slug) }}" class="hover-effect">
-                                                <img width="385" height="258" src="../../wp-content/uploads/2016/03/los-angeles-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt=""/>
+                                                <img width="385" height="258" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt=""/>
                                             </a>
                                             <figcaption class="thumb-caption">
                                                 <div class="cap-price pull-left"> ${{ $element->price }} {{ config('setting.price.vi') }}</div>
                                                 <ul class="list-unstyled actions pull-right">
-                                                    <li>
+                                                    {{-- <li>
                                                         <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
                                                             <i class="fa fa-heart-o"></i>
                                                         </span>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <span data-toggle="tooltip" data-placement="top" title="{{ $element->total_comment . trans('post.comment') }}">
                                                             <i class="fa fa-comment"></i>
@@ -254,7 +271,7 @@
                                 <div class="media-left">
                                     <figure class="item-thumb">
                                         <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                            <img width="150" height="110" src="../../wp-content/uploads/2016/03/new-york-05-150x110.jpg" class="attachment-houzez-widget-prop size-houzez-widget-prop wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-05-150x110.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/new-york-05-380x280.jpg 380w" sizes="(max-width: 150px) 100vw, 150px" />
+                                            <img width="150" height="110" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-widget-prop size-houzez-widget-prop wp-post-image" alt="" sizes="(max-width: 150px) 100vw, 150px" />
                                         </a>
                                     </figure>
                                 </div>

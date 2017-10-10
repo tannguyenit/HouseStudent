@@ -40,7 +40,7 @@ class Post extends AbstractModel
         'lat',
         'lng',
         'note',
-        'status',
+        'active',
         'total_view',
         'total_like',
         'tota_comment',

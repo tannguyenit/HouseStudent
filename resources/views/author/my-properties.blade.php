@@ -49,7 +49,7 @@
                                 <div class="media-left">
                                     <div class="figure-block">
                                         <figure class="item-thumb">
-                                            <a href="{{ action('PostController@show', $element->slug) }}">
+                                            <a href="{{ action('PostController@show', $element->slug) }}" target="_blank">
                                                 <img width="150" height="110" src="{{ isset($element->firstImages) ? $element->firstImages->image : config('path.no-image') }}" class="attachment-houzez-widget-prop size-houzez-widget-prop wp-post-image" alt="{{ isset($element->firstImages) ? $element->firstImages->image : trans('post.no-image') }}" sizes="(max-width: 150px) 100vw, 150px">
                                             </a>
                                         </figure>
@@ -58,7 +58,7 @@
                                 <div class="media-body media-middle">
                                     <div class="my-description">
                                         <h4 class="my-heading">
-                                            <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>                                                                  </a>
+                                            <a href="{{ action('PostController@show', $element->slug) }}" target="_blank">{{ $element->title }}</a>                                                                  </a>
                                         </h4>
                                         <address class="address">{{ $element->address }}</address>
                                         <div class="status">

@@ -3639,17 +3639,13 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
                     if( $('#street-map').length > 0 ) {
                         panorama = new google.maps.StreetViewPanorama(document.getElementById('street-map'), panoramaOptions);
                     }
-alert(1)
-                    var propsSecurity = $('#securityHouzezMap').val();
 
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        url: ajaxurl,
+                        url: '/getSingleProperty',
                         data: {
-                            'action': 'houzez_get_single_property',
-                            'prop_id': $('#prop_id').val(),
-                            'security': propsSecurity
+                            'id': $('#getPropertiesId').data('id'),
                         },
                         success: function(data) {
                             if( google_map_style !== '' ) {
@@ -3657,8 +3653,8 @@ alert(1)
                                 map.setOptions({styles: styles});
                             }
 
-                            if(data.getprops === true) {
-                                houzezAddMarkers(data.props, map);
+                            if(data.status === true) {
+                                houzezAddMarkers(data.details, map);
                                 houzezSetPOIControls(map, map.getCenter());
                             }
                         },
