@@ -87,7 +87,7 @@ var nice = false;
         }else{
             $('.header-media').height($('#houzez-gmap-main').height());
             $(this).addClass('active').children('span').text('Default');
-            $(this).children('i').removeClass('fa-arrows-alt').addClass('fa fa-square-o');
+            $(this).children('i').removeClass('fa-arrows-alt').addClass('fa fa-compress');
             $('#houzez-gmap-main').addClass('mapfull');
         }
     });

@@ -102,7 +102,7 @@
                 "retina_logo_width": "50",
                 "property_lat": lat,
                 "property_lng": lng,
-                "property_map": "",
+                "property_map": "1",
                 "property_map_street": "show",
                 "is_singular_property": "yes",
                 "process_loader_refresh": "fa fa-spin fa-refresh",

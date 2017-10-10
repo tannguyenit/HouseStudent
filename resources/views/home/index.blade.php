@@ -34,11 +34,7 @@
                                                         <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>
                                                     </div>
                                                     <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                                        @if (count($element->images))
-                                                            <img width="385" height="258" src="{{ $element->images[0]->image }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
-                                                        @else
-                                                            <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
-                                                        @endif
+                                                        <img width="385" height="258" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
                                                     </a>
                                                     <ul class="actions">
                                                         <li>
@@ -142,7 +138,7 @@
                                                         <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>
                                                     </div>
                                                     <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                                        <img width="385" height="258" src="wp-content/uploads/2016/03/chicago-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/chicago-06.jpg 1170w" sizes="(max-width: 385px) 100vw, 385px"/>
+                                                        <img width="385" height="258" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" sizes="(max-width: 385px) 100vw, 385px"/>
                                                     </a>
                                                     <ul class="actions">
                                                         <li>

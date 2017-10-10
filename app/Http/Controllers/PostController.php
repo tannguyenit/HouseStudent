@@ -44,7 +44,7 @@ class PostController extends BaseController
     {
         $relationShip      = ['user', 'type', 'status'];
         $sortBy            = $this->postRepository->getSortBy(null);
-        $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy);
+        $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
 
         if ($dataView['posts']) {
             return view('township.detail', $dataView);
@@ -177,7 +177,7 @@ class PostController extends BaseController
     public function show(Request $request, $slug)
     {
 
-        $relationShip = ['user', 'likes', 'images', 'type', 'features', 'comments' => function ($query) {
+        $relationShip = ['user', 'likes', 'firstImages', 'images', 'type', 'features', 'comments' => function ($query) {
             $query->with('user')->get();
         }];
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
