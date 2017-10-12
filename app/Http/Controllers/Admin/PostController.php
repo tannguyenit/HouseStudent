@@ -67,7 +67,7 @@ class PostController extends Controller
                 $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
                 $attribute['township']      = $request->administrative_area_level_2;
                 $attribute['country']       = $request->administrative_area_level_1;
-                $updatePost                 = $this->postRepository->update($attribute, $id);
+                $updatePost                 = $this->postRepository->update($attribute, $id, true);
                 $detailPost                 = $this->postRepository->find($id, ['features']);
 
                 if (count($detailPost->features)) {

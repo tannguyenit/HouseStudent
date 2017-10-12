@@ -31,7 +31,7 @@ class TypeController extends BaseController
         $sortBy            = $this->typeRepository->getSortBy($getSortBy);
         $detailsTypes      = $this->typeRepository->getDataBySlug($slug);
         $id                = $detailsTypes->id;
-        $relationship      = ['user', 'type', 'images', 'features'];
+        $relationship      = ['user', 'type', 'images', 'features', 'firstImages'];
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationship, 'type_id', $id, $sortBy, config('setting.limit.type'));
 
         if ($detailsTypes && $dataView['posts']) {

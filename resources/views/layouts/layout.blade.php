@@ -8,7 +8,7 @@
     <link rel="pingback" href="xmlrpc.php">
     <title>House For Student</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="wp-content/uploads/2016/03/favicon.png">
+    <link rel="shortcut icon" href="/wp-content/uploads/2016/03/favicon.png">
     <!-- end favicon -->
     @section('css')
         {{ Html::style('wp-content/plugins/revslider/public/assets/css/settingsc225.css?ver=5.4.1') }}

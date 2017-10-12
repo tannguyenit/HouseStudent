@@ -38,7 +38,7 @@ class AjaxController extends Controller
             $type      = $this->typeRepository->find($id);
 
             if ($type) {
-                $result = $this->typeRepository->update($attribute, $id);
+                $result = $this->typeRepository->update($attribute, $id, $slug = true);
                 if ($result) {
                     return response()->json([
                         'status' => true,
@@ -89,7 +89,7 @@ class AjaxController extends Controller
             $type      = $this->statusRepository->find($id);
 
             if ($type) {
-                $result = $this->statusRepository->update($attribute, $id);
+                $result = $this->statusRepository->update($attribute, $id, $slug = true);
                 if ($result) {
                     return response()->json([
                         'status' => true,

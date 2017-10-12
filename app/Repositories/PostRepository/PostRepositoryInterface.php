@@ -13,6 +13,8 @@ interface PostRepositoryInterface
 
     public function getDataByColumn($column, $id, $sortBy, $limit);
 
+    public function getMyProperties($relationship, $column, $id, $sortBy, $limit);
+
     public function getDataDistinct($column, $parentColunm);
 
     public function getPrice();

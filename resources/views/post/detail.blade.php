@@ -264,7 +264,7 @@
                             <h3 class="widget-title">{{ trans('post.recently') }}</h3>
                         </div>
                         <div class="widget-body">
-                            @php($arrRecently = Session::get('arrRecently'))
+                            @php($arrRecently = array_unique(Session::get('arrRecently')))
                             @foreach ($arrRecently as $element)
                             @if ($element->id != $detailsPost->id)
                             <div class="media">

@@ -58,7 +58,12 @@
                                 <div class="media-body media-middle">
                                     <div class="my-description">
                                         <h4 class="my-heading">
-                                            <a href="{{ action('PostController@show', $element->slug) }}" target="_blank">{{ $element->title }}</a>                                                                  </a>
+                                            <a href="{{ action('PostController@show', $element->slug) }}" target="_blank">{{ $element->title }}</a>
+                                            @if ($element->active == config('setting.active'))
+                                            <span class="label-status-8 label label-featured">{{ trans('post.active') }}</span>
+                                            @else
+                                            <span class="label label-default label-color-289">{{ trans('post.no-active') }}</span>
+                                            @endif
                                         </h4>
                                         <address class="address">{{ $element->address }}</address>
                                         <div class="status">

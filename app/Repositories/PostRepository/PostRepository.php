@@ -105,6 +105,18 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->paginate($limit);
     }
 
+    public function getMyProperties($relationship, $column, $id, $sortBy, $limit)
+    {
+        if (empty($id) || empty($column)) {
+            return false;
+        }
+
+        return $this->model->where($column, $id)
+            ->orderBy($sortBy->key, $sortBy->value)
+            ->with($relationship)
+            ->paginate($limit);
+    }
+
     public function getDataDistinct($column, $parentColumn)
     {
         if ($column && $parentColumn) {
