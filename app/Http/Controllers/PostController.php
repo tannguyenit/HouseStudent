@@ -181,26 +181,27 @@ class PostController extends BaseController
             $query->with('user')->get();
         }];
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
-        if (Session::has('arrRecently')) {
-            $sessionData = Session::get('arrRecently');
-
-            foreach ($sessionData as $value) {
-                if ($value->id != $detailsPost->id) {
-                    if (count($sessionData) >= 4) {
-                        break;
-                    }
-                    Session::push('arrRecently', $detailsPost);
-                }
-            }
-        } else {
-            Session::push('arrRecently', $detailsPost);
-        }
-
-        $id          = $detailsPost->type->id;
-        $limit       = config('setting.limit.similar_post');
-        $similarPost = $this->typeRepository->getSimilarPost($id, $limit);
 
         if ($detailsPost) {
+            if (Session::has('arrRecently')) {
+                $sessionData = array_unique(Session::get('arrRecently'));
+
+                foreach ($sessionData as $value) {
+                    if ($value->id != $detailsPost->id) {
+                        if (count($sessionData) >= 4) {
+                            array_shift($sessionData);
+                            break;
+                        }
+                        Session::push('arrRecently', $detailsPost);
+                    }
+                }
+            } else {
+                Session::push('arrRecently', $detailsPost);
+            }
+
+            $id                      = $detailsPost->type->id;
+            $limit                   = config('setting.limit.similar_post');
+            $similarPost             = $this->typeRepository->getSimilarPost($id, $limit);
             $dataView['detailsPost'] = $detailsPost;
             $dataView['similarPost'] = $similarPost;
 
@@ -249,7 +250,7 @@ class PostController extends BaseController
                 $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
                 $attribute['township']      = $request->administrative_area_level_2;
                 $attribute['country']       = $request->administrative_area_level_1;
-                $updatePost                 = $this->postRepository->update($attribute, $id);
+                $updatePost                 = $this->postRepository->update($attribute, $id, $slug = true);
                 $detailPost                 = $this->postRepository->find($id, ['features']);
 
                 if (count($detailPost->features)) {
@@ -330,7 +331,7 @@ class PostController extends BaseController
         $sortBy                 = $this->postRepository->getSortBy($getSortBy);
         $dataSearch             = Request::query();
         $dataView['dataSearch'] = $dataSearch;
-        $dataView['searchs']    = $this->postRepository->getAllData($dataSearch, $sortBy, ['user'])
+        $dataView['searchs']    = $this->postRepository->getAllData($dataSearch, $sortBy, ['user', 'firstImages'])
             ->paginate(config('setting.limit.search'));
 
         return view('post.search', $dataView);
@@ -347,7 +348,7 @@ class PostController extends BaseController
         $relationShip = ['user', 'type', 'firstImages'];
         $getSortBy    = $request->get('sortby');
         $sortBy       = $this->postRepository->getSortBy($getSortBy);
-        $myProperties = $this->postRepository->getDataByColumn($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'));
+        $myProperties = $this->postRepository->getMyProperties($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'));
 
         if ($myProperties) {
             return view('author.my-properties', compact('myProperties'));

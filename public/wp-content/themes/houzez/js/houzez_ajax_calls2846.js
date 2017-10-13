@@ -3617,7 +3617,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
             }); // End tabs height
 
             // Map and street view
-            if( property_map != 0 ) {
+            if( property_map != 0 && $('#singlePropertyMap').length > 0) {
                 var map = null;
                 var panorama = null;
                 var fenway = new google.maps.LatLng(prop_lat, prop_lng);

@@ -1235,3 +1235,15 @@ padding-bottom: 15px;
     width: 36px !important;
     height: 36px !important;
 }
+@media (min-width: 768px) {
+    .grid-view .property-item .attachment-houzez-property-thumb-image {
+        height: 258px;
+    }
+    .property-item .attachment-houzez-property-thumb-image {
+        max-height: 200px;
+        min-height: 170px;
+    }
+}
+#houzez_properties_viewed-5 .item-thumb img {
+    max-height: 80px;
+}

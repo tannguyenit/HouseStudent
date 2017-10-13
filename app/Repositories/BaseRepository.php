@@ -103,11 +103,17 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->model->insert($inputs);
     }
 
-    public function update($inputs, $id)
+    public function update($inputs, $id, $slug = false)
     {
         DB::beginTransaction();
         try {
-            $data = $this->model->where('id', $id)->update($inputs);
+            if ($slug) {
+                $detail       = $this->model->find($id);
+                $detail->slug = null;
+                $data         = $detail->update($inputs);
+            } else {
+                $data = $this->model->where('id', $id)->update($inputs);
+            }
 
             if ($data) {
                 DB::commit();

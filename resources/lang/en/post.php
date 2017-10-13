@@ -59,6 +59,8 @@ return [
     'home-information'  => 'Home State Information',
     'type'              => 'Type',
     'status'            => 'Status',
+    'active'            => 'Active',
+    'no-active'         => 'Watting',
     'none'              => 'None',
     'pin'               => 'Place the pin the address above',
     'reset-maker'       => 'Reset Marker',

@@ -19,6 +19,8 @@ Validate.prototype = {
                 },
                 price: {
                     required: true,
+                    minlength:6,
+                    maxlength:10,
                 },
                 description: {
                     required: true
@@ -84,7 +86,11 @@ Validate.prototype = {
             messages: {
                 title: "Vui long nhap noi dung",
                 description: "Vui long nhap noi dung",
-                price: "Vui long nhap gia",
+                price: {
+                    required: 'Vui long nhap gia',
+                    minlength: 'Phai nhap it nhat 6 so',
+                    maxlength:'Toi da 10 so',
+                },
                 prop_beds: 'Vui long nhap so',
                 prop_baths: 'Vui long nhap so',
                 area: {
@@ -124,68 +130,68 @@ Validate.prototype = {
                 },
             }
         });
-    },
-    setingSortable: function () {
-        $( "#houzez_additional_details_main" ).sortable({
-            revert: 100,
-            placeholder: "detail-placeholder",
-            handle: ".sort-additional-row",
-            cursor: "move"
+},
+setingSortable: function () {
+    $( "#houzez_additional_details_main" ).sortable({
+        revert: 100,
+        placeholder: "detail-placeholder",
+        handle: ".sort-additional-row",
+        cursor: "move"
+    });
+},
+feature: function() {
+    var _self = this;
+    $( '.add-additional-row' ).click(function( e ){
+        e.preventDefault();
+        var numVal = $(this).data("increment") + 1;
+        $(this).data('increment', numVal);
+        $(this).attr({
+            "data-increment" : numVal
         });
-    },
-    feature: function() {
-        var _self = this;
-        $( '.add-additional-row' ).click(function( e ){
-            e.preventDefault();
-            var numVal = $(this).data("increment") + 1;
-            $(this).data('increment', numVal);
-            $(this).attr({
-                "data-increment" : numVal
-            });
-            var add =   '<tr>'
-            add +=  '<td class="action-field hidden-xs">'
-            add +=  '<span class="sort-additional-row"><i class="fa fa-navicon"></i></span>'
-            add +=  '</td>'
-            add +=  '<td class="field-title">'
-            add +=  '<input class="form-control" type="text" name="additional_features['+numVal+'][key]" id="fave_additional_feature_title_'+numVal+'" value="">'
-            add +=  '</td>'
-            add +=  '<td>'
-            add +=  '<input class="form-control" type="text" name="additional_features['+numVal+'][value]" id="fave_additional_feature_value_'+numVal+'" value="">'
-            add +=  '</td>'
-            add +=  '<td class="action-field">'
-            add +=  '<span data-remove="'+numVal+'" class="remove-additional-row"><i class="fa fa-remove"></i></span>'
-            add +=  '</td>'
-            add +=  '</tr>';
-            $( '#houzez_additional_details_main').append(add);
-            _self.removeFeature();
-        });
-    },
-    removeFeature: function () {
-        $( '.remove-additional-row').click(function( event ){
-            event.preventDefault();
-            var $this = $(this);
-            $this.closest('tr').remove();
-        });
-    },
-    validateSelectBox: function () {
-        var _self = this;
-        $('#type_id').on('hidden.bs.select', function (e) {
-            var value = $(this).val();
-            _self.showError('type_id', value);
-        });
-        $('#status_id').on('hidden.bs.select', function (e) {
-            var value = $(this).val();
-            _self.showError('status_id', value);
-        });
-    },
-    showError: function (element,value) {
-        if (value != '') {
-            $('#' + element + '-error').fadeOut();
-            $('button[data-id="' + element + '"]').css('border-color', '#00aeef');
-        } else {
-            $('#' + element + '-error').fadeIn();
-            $('button[data-id="' + element + '"]').css('border-color', 'red');
-        }
+        var add =   '<tr>'
+        add +=  '<td class="action-field hidden-xs">'
+        add +=  '<span class="sort-additional-row"><i class="fa fa-navicon"></i></span>'
+        add +=  '</td>'
+        add +=  '<td class="field-title">'
+        add +=  '<input class="form-control" type="text" name="additional_features['+numVal+'][key]" id="fave_additional_feature_title_'+numVal+'" value="">'
+        add +=  '</td>'
+        add +=  '<td>'
+        add +=  '<input class="form-control" type="text" name="additional_features['+numVal+'][value]" id="fave_additional_feature_value_'+numVal+'" value="">'
+        add +=  '</td>'
+        add +=  '<td class="action-field">'
+        add +=  '<span data-remove="'+numVal+'" class="remove-additional-row"><i class="fa fa-remove"></i></span>'
+        add +=  '</td>'
+        add +=  '</tr>';
+        $( '#houzez_additional_details_main').append(add);
+        _self.removeFeature();
+    });
+},
+removeFeature: function () {
+    $( '.remove-additional-row').click(function( event ){
+        event.preventDefault();
+        var $this = $(this);
+        $this.closest('tr').remove();
+    });
+},
+validateSelectBox: function () {
+    var _self = this;
+    $('#type_id').on('hidden.bs.select', function (e) {
+        var value = $(this).val();
+        _self.showError('type_id', value);
+    });
+    $('#status_id').on('hidden.bs.select', function (e) {
+        var value = $(this).val();
+        _self.showError('status_id', value);
+    });
+},
+showError: function (element,value) {
+    if (value != '') {
+        $('#' + element + '-error').fadeOut();
+        $('button[data-id="' + element + '"]').css('border-color', '#00aeef');
+    } else {
+        $('#' + element + '-error').fadeIn();
+        $('button[data-id="' + element + '"]').css('border-color', 'red');
     }
+}
 }
 

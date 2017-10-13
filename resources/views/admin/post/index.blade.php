@@ -79,8 +79,8 @@
                                 <p>{{ $element->price }} {{ config('setting.price.vi') }}</p>
                             </td>
                             <td class="tg-list-item">
-                                {!! Form::checkbox('status', $element->status, $element->status == config('setting.active') ? 'checked="checked"' : '', ['class' => 'tgl tgl-ios change-status', 'id' => 'status'. $element->id]) !!}
-                                {!! Form::label('status' . $element->id, ' ', ['class' => 'tgl-btn']) !!}
+                                {!! Form::checkbox('active', $element->active, $element->active == config('setting.active') ? 'checked="checked"' : '', ['class' => 'tgl tgl-ios change-status', 'id' => 'status'. $element->id]) !!}
+                                {!! Form::label('active' . $element->id, ' ', ['class' => 'tgl-btn']) !!}
                             </td>
                             <td class="limit-100">
                                 <p>{{ $element->updated_at }}</p>
