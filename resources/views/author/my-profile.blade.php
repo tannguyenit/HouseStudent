@@ -3,10 +3,10 @@
     @parent
     {{ Html::script('wp-content/themes/houzez/admin/js/setting.js') }}
     {{ Html::script('wp-content/themes/houzez/js/tannguyen/edit-user.js') }}
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{ Html::script('wp-content/themes/houzez/js/tannguyen/jquery-ui.js') }}
     <script type="text/javascript">
         var user = new User('{{ action('UserController@checkEmail') }}', '{{ action('UserController@checkusername') }}');
-            user.init();
+        user.init();
     </script>
 @endsection
 @section('content')
@@ -83,7 +83,10 @@
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             {!! Form::label('gender', trans('admin.attribute.gender')) !!}
-                                            {!! Form::text('gender', $detailUser->gender, ['id' => 'gender', 'class' => 'form-control']) !!}
+                                            <select name="gender" id='gender' class='form-control'>
+                                                <option value="{{ config('setting.gender.male') }}" {{ $detailUser->gender == config('setting.gender.male') ? 'selected="selected"' : '' }}>{{ trans('user.male') }}</option>
+                                                <option value="{{ config('setting.gender.female') }}" {{ $detailUser->gender == config('setting.gender.female') ? 'selected="selected"' : '' }}>{{ trans('user.female') }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
