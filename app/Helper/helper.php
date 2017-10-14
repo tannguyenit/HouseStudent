@@ -76,9 +76,12 @@ function getBrowser()
 
 function setPrice($value)
 {
-    if (strpos($value, ',')) {
-        return explode(',', str_replace('.', '', trim($value)))[0];
-    }
-
     return str_replace('.', '', trim($value));
+}
+
+function setBirthdayUser($value)
+{
+    $date = str_replace('/', '-', $value);
+
+    return date('Y-m-d', strtotime($date));
 }

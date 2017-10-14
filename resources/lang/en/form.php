@@ -76,4 +76,6 @@ return [
     'phone'             => 'Phone',
     'address'           => 'Address',
     'price'             => 'Price',
+    'list'              => 'Properties listed',
+    'overview'          => 'Overview',
 ];

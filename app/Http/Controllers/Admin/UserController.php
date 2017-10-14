@@ -58,10 +58,11 @@ class UserController extends Controller
     {
         $user = $this->userRepository->find($id);
         if ($user) {
-            $status    = true;
-            $data      = $request->all();
-            $fillable  = $this->userRepository->getFillable();
-            $attribute = array_only($data, $fillable);
+            $status                = true;
+            $data                  = $request->all();
+            $fillable              = $this->userRepository->getFillable();
+            $attribute             = array_only($data, $fillable);
+            $attribute['birthday'] = setBirthdayUser($request->birthday);
 
             if ($request->avatar) {
                 if ($user->avatar) {

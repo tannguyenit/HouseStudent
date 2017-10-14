@@ -88,7 +88,7 @@
                                             <div class="item-foot-left col-xs-12 col-sm-6 no-padding">
                                                 <p class="prop-user-agent">
                                                     <i class="fa fa-user"></i>
-                                                    <a href="agencies/all-american-real-estate/index.html">{{ $element->user->username }}</a>
+                                                    <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->username }}</a>
                                                 </p>
                                             </div>
                                             <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
@@ -191,7 +191,7 @@
                                             <div class="item-foot-left">
                                                 <p class="prop-user-agent">
                                                     <i class="fa fa-user"></i>
-                                                    <a href="agencies/all-american-real-estate/index.html">{{ $element->user->username }}</a>
+                                                    <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->username }}</a>
                                                 </p>
                                             </div>
                                             <div class="item-foot-right">

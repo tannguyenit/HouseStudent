@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\UserRepository\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
     protected $userRepository;
+    protected $postRepository;
 
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        PostRepository $postRepository
     ) {
         $this->userRepository = $userRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -36,10 +40,11 @@ class UserController extends BaseController
     {
         $user = $this->userRepository->find($id);
         if ($user) {
-            $status    = true;
-            $data      = $request->all();
-            $fillable  = $this->userRepository->getFillable();
-            $attribute = array_only($data, $fillable);
+            $status                = true;
+            $data                  = $request->all();
+            $fillable              = $this->userRepository->getFillable();
+            $attribute             = array_only($data, $fillable);
+            $attribute['birthday'] = setBirthdayUser($request->birthday);
 
             if ($request->avatar) {
                 if ($user->avatar) {
@@ -114,5 +119,19 @@ class UserController extends BaseController
         return response()->json([
             'result' => false,
         ]);
+    }
+
+    public function member(Request $request, $slug)
+    {
+        $detailUser           = $this->userRepository->findByFirst('username', $slug);
+        $relationShip         = ['user', 'type', 'firstImages'];
+        $sortBy               = $this->postRepository->getSortBy(null);
+        $dataView['listings'] = $this->postRepository->getMyProperties($relationShip, 'user_id', $detailUser->id, $sortBy, config('setting.limit.my-properties'));
+
+        if ($detailUser) {
+            $dataView['detailUser'] = $detailUser;
+
+            return view('member.index', $dataView);
+        }
     }
 }
