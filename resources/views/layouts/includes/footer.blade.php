@@ -14,7 +14,7 @@
                         <div class="widget-body">
                             <p>{{ trans('index.about-site-content') }}</p>
                             <p class="read">
-                                <a href="about-houzez/index.html">
+                                <a href="{{ action('PageController@about') }}">
                                     {{ trans('index.read-more') }} <i class="fa fa-caret-right"></i>
                                 </a>
                             </p>
@@ -30,10 +30,12 @@
                             <div class="contact_text"></div>
                             <ul class="list-unstyled">
                                 <li>
-                                    <i class="fa fa-location-arrow"></i> {{ $setting->address or '' }}
+                                    <i class="fa fa-location-arrow"></i>
+                                    <a target="_blank" href="http://maps.google.com/?q={{ $setting->address or 'javascript:void(0)' }}">{{ $setting->address or '' }}</a>
                                 </li>
                                 <li>
-                                    <i class="fa fa-phone"></i>{{ $setting->phone or '' }}
+                                    <i class="fa fa-phone"></i>
+                                    <a href="tel:{{ $setting->phone or '' }}">{{ $setting->phone or '' }}</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o"></i>
@@ -41,7 +43,7 @@
                                 </li>
                             </ul>
                             <p class="read">
-                                <a href="contact/index.html">
+                                <a href="{{ action('PageController@contact') }}">
                                     {{ trans('index.contact') }} <i class="fa fa-caret-right"></i>
                                 </a>
                             </p>
@@ -124,6 +126,4 @@
             </div>
         </div>
     </div>
-    <!-- End footer bottom -->
 </footer>
-<!--end footer section-->

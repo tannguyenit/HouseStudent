@@ -13,6 +13,7 @@
         var has_compare = $('#compare-controller').length;
         var validate = JSON.parse(AJAX_VARIABLE.validate);
         var ajaxurl = AJAX_VARIABLE.admin_url;
+        var like_url = AJAX_VARIABLE.like_url;
         var login_sending = AJAX_VARIABLE.login_loading;
         var userID = AJAX_VARIABLE.user_id;
         var prop_lat = AJAX_VARIABLE.property_lat;
@@ -1139,8 +1140,9 @@
         var houzez_init_add_favorite = function() {
             $(".add_fav").click(function () {
                 var curnt = $(this).children('i');
-                var propID = $(this).attr('data-propid');
-                add_to_favorite( propID, curnt );
+                var postId = $(this).attr('data-postid');
+                var status = $(this).find('.fa').attr('data-status');
+                add_to_favorite( postId, curnt ,status);
             });
         }
         houzez_init_add_favorite();
@@ -1148,34 +1150,41 @@
         var houzez_init_remove_favorite = function() {
             $(".remove_fav").click(function () {
                 var curnt = $(this);
-                var propID = $(this).attr('data-propid');
-                add_to_favorite( propID, curnt );
+                var postId = $(this).attr('data-postid');
+                var status = $(this).find('.fa').attr('data-status');
+                add_to_favorite( postId, curnt, status);
                 var itemWrap = curnt.parents('.item-wrap').remove();
             });
         }
         houzez_init_remove_favorite();
 
-        var add_to_favorite = function ( propID, curnt ) {
+        var add_to_favorite = function ( postId, curnt, status) {
             if( parseInt( userID, 10 ) === 0 ) {
                 $('#pop-login').modal('show');
             } else {
                 jQuery.ajax({
                     type: 'post',
-                    url: ajaxurl,
+                    url: like_url,
                     dataType: 'json',
                     data: {
-                        'action': 'houzez_add_to_favorite',
-                        'property_id': propID
+                        'status': status,
+                        'id': postId
                     },
                     beforeSend: function( ) {
                         curnt.addClass('faa-pulse animated');
                     },
                     success: function( data ) {
-                        if( data.added ) {
-                            curnt.removeClass('fa-heart-o').addClass('fa-heart');
+                        if( data.status ) {
+                            if (data.active) {
+                                curnt.removeClass('fa-heart').addClass('fa-heart-o');
+                            } else {
+                                curnt.removeClass('fa-heart-o').addClass('fa-heart');
+                            }
+                            curnt.parent().attr('data-original-title', data.total_like).tooltip('fixTitle').tooltip('show');
                         } else {
                             curnt.removeClass('fa-heart').addClass('fa-heart-o');
                         }
+                        curnt.attr('data-status', data.type);
                         curnt.removeClass('faa-pulse animated');
                     },
                     error: function(xhr, status, error) {
@@ -1431,22 +1440,22 @@
         var fave_paypal_payment = function( property_id, is_prop_featured, is_prop_upgrade ) {
 
             $.ajax({
-             type: 'post',
-             url: ajaxurl,
-             data: {
-               'action': 'houzez_property_paypal_payment',
-               'prop_id': property_id,
-               'is_prop_featured': is_prop_featured,
-               'is_prop_upgrade': is_prop_upgrade,
-           },
-           success: function(response) {
-            window.location.href = response;
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            console.log(err.Message);
-        }
-    });
+               type: 'post',
+               url: ajaxurl,
+               data: {
+                 'action': 'houzez_property_paypal_payment',
+                 'prop_id': property_id,
+                 'is_prop_featured': is_prop_featured,
+                 'is_prop_upgrade': is_prop_upgrade,
+             },
+             success: function(response) {
+                window.location.href = response;
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                console.log(err.Message);
+            }
+        });
         }
 
         /* ------------------------------------------------------------------------ */
@@ -1600,11 +1609,11 @@
                     'selected_package' : houzez_package_id,
                 },
                 success: function (data) {
-                 window.location.href = data;
+                   window.location.href = data;
 
-             },
-             error: function (errorThrown) {}
-         });
+               },
+               error: function (errorThrown) {}
+           });
         }
 
         /*--------------------------------------------------------------------------

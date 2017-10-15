@@ -39,7 +39,20 @@
                                                     <ul class="actions">
                                                         <li>
                                                             <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
-                                                                <i class="fa fa-heart-o"></i>
+                                                                @forelse ($element->likes as $value)
+                                                                    @php
+                                                                        if (auth()->check() && $value->user_id == auth()->user()->id) {
+                                                                            $like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>';
+                                                                        } else {
+                                                                            $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                        }
+                                                                    @endphp
+                                                                @empty
+                                                                    @php
+                                                                        $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                    @endphp
+                                                                @endforelse
+                                                                {!! $like !!}
                                                             </span>
                                                         </li>
                                                         <li>
@@ -143,7 +156,20 @@
                                                     <ul class="actions">
                                                         <li>
                                                             <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
-                                                                <i class="fa fa-heart-o"></i>
+                                                                @forelse ($element->likes as $value)
+                                                                    @php
+                                                                        if (auth()->check() && $value->user_id == auth()->user()->id) {
+                                                                            $like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>';
+                                                                        } else {
+                                                                            $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                        }
+                                                                    @endphp
+                                                                @empty
+                                                                    @php
+                                                                        $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                    @endphp
+                                                                @endforelse
+                                                                {!! $like !!}
                                                             </span>
                                                         </li>
                                                         <li>
@@ -152,7 +178,7 @@
                                                             </span>
                                                         </li>
                                                         <li>
-                                                            <span id="compare-link-361" class="compare-property" data-toggle="tooltip" data-placement="top" title="{{ $element->total_view . trans('post.view') }}">
+                                                            <span data-toggle="tooltip" data-placement="top" title="{{ $element->total_view . trans('post.view') }}">
                                                                 <i class="fa fa-eye"></i>
                                                             </span>
                                                         </li>

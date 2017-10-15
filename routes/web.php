@@ -28,7 +28,15 @@ Route::get('/type/{slug}', ['as' => 'show', 'uses' => 'TypeController@show']);
 Route::get('/township/{slug}', ['as' => 'township', 'uses' => 'PostController@townShip']);
 Route::get('/advanced-search', ['as' => 'search', 'uses' => 'PostController@search']);
 Route::match(['get', 'post'], '/botman', 'ChatBotFacebookController@handle');
-Route::resource('property', 'PostController');
+Route::get('/about', ['as' => 'about', 'uses' => 'PageController@about']);
+Route::get('/faq', ['as' => 'faq', 'uses' => 'PageController@faq']);
+Route::get('/contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
+Route::group(['middleware' => 'viewpost'], function () {
+    Route::resource('property', 'PostController');
+});
+/* ------------------------------------------------------------------------ */
+/*  Auth
+/* ------------------------------------------------------------------------ */
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/author/{slug}', ['as' => 'profile', 'uses' => 'UserController@index']);
     Route::put('/author/update/{id}', ['as' => 'updateUser', 'uses' => 'UserController@update']);
@@ -36,9 +44,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/member/{slug}', ['as' => 'member', 'uses' => 'UserController@member']);
-
+/* ------------------------------------------------------------------------ */
+/*  Ajax
+/* ------------------------------------------------------------------------ */
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
+    Route::post('like', ['as' => 'like', 'uses' => 'AjaxController@like']);
     Route::post('getSingleProperty', ['as' => 'getSingleProperty', 'uses' => 'AjaxController@getSingleProperty']);
     Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
     Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);

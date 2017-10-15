@@ -55,20 +55,20 @@
                 <!--end list tabs-->
                 <div class="list-search">
                     <div class="form-control" readonly="" >
-                        <p>{{ trans('form.from') . ' : ' . $dataSearch['min-price'] . ' ' . trans('form.to') . ' ' . $dataSearch['max-price'] }}</p>
+                        <p>{{ trans('form.from') . ' : ' . (isset($dataSearch['min-price']) ? $dataSearch['min-price'] : $prices->min) . ' ' . trans('form.to') . ' ' . (isset($dataSearch['max-price']) ? $dataSearch['max-price'] : $prices->max) }}</p>
                         @if ($dataSearch['keyword'])
                             <p>{{ trans('form.keyword') }}: {{ $dataSearch['keyword'] }}</p>
                         @endif
-                        @if ($dataSearch['location'])
+                        @if (isset($dataSearch['location']))
                             <p>{{ trans('form.township') }}: {{ $dataSearch['location'] }}</p>
                         @endif
-                        @if ($dataSearch['area'])
+                        @if (isset($dataSearch['area']))
                             <p>{{ trans('form.country') }}: {{ $dataSearch['area'] }}</p>
                         @endif
-                        @if ($dataSearch['status'])
+                        @if (isset($dataSearch['status']))
                             <p>{{ trans('form.status') }}: {{ $dataSearch['status'] }}</p>
                         @endif
-                        @if ($dataSearch['type'])
+                        @if (isset($dataSearch['type']))
                             <p>{{ trans('form.type') }}: {{ $dataSearch['type'] }}</p>
                         @endif
                     </div>

@@ -72,8 +72,26 @@
                                                 </a>
                                                 <ul class="actions">
                                                     <li>
-                                                        <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $element->id }}">
-                                                            <i class="fa fa-heart-o"></i>
+                                                        <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
+                                                            @forelse ($element->likes as $value)
+                                                                @php
+                                                                    if (auth()->check() && $value->user_id == auth()->user()->id) {
+                                                                        $like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>';
+                                                                    } else {
+                                                                        $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                    }
+                                                                @endphp
+                                                            @empty
+                                                                @php
+                                                                    $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                @endphp
+                                                            @endforelse
+                                                            {!! $like !!}
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span data-toggle="tooltip" data-placement="top" title="{{ $element->total_comment . trans('post.comment') }}">
+                                                            <i class="fa fa-comment"></i>
                                                         </span>
                                                     </li>
                                                     <li>
@@ -111,7 +129,7 @@
                                             <div class="info-row date hide-on-grid">
                                                 <p class="prop-user-agent">
                                                     <i class="fa fa-user"></i>
-                                                    <a href="">{{ $element->user->full_name }}</a>
+                                                    <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->full_name }}</a>
                                                 </p>
                                                 <p><i class="fa fa-calendar"></i>{{ $element->created_at }}</p>
                                             </div>
@@ -155,7 +173,7 @@
                                     <div class="item-foot-left col-xs-12 col-sm-6 no-padding">
                                         <p class="prop-user-agent">
                                             <i class="fa fa-user"></i>
-                                            <a href="">{{ $element->user->full_name }}</a>
+                                            <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->full_name }}</a>
                                         </p>
                                     </div>
                                     <div class="item-foot-right col-xs-12 col-sm-6 no-padding">

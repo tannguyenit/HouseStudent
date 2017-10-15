@@ -49,11 +49,20 @@
                                     <i class="fa fa-share-alt"></i>
                                 </span>
                             </li>
-                            {{-- <li class="fvrt-btn">
-                                <span class="add_fav" data-placement="bottom"  data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
-                                    <i class="fa fa-heart-o"></i>
+                            <li class="fvrt-btn">
+                                <span class="add_fav" data-placement="bottom"  data-toggle="tooltip" data-original-title="{{ $detailsPost->total_like . trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
+                                    @forelse ($detailsPost->likes as $element)
+                                        @if (auth()->check() && $element->user_id == auth()->user()->id)
+                                            @php($like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>')
+                                        @else
+                                            @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                        @endif
+                                    @empty
+                                        @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                    @endforelse
+                                    {!! $like !!}
                                 </span>
-                            </li> --}}
+                            </li>
                         </ul>
                         <span class="item-price">${{ $detailsPost->price }} {{ config('setting.price.vi') }}</span>
                     </div>
@@ -78,25 +87,25 @@
                                 <div class="detail-slider-wrap">
                                     <div class="detail-slider owl-carousel owl-theme">
                                         @forelse ($detailsPost->images as $image)
-                                            <div class="item" style="background-image: url('{{ $image->image }}')">
-                                                <a class="popup-trigger banner-link" href="#"></a>
-                                            </div>
+                                        <div class="item" style="background-image: url('{{ $image->image }}')">
+                                            <a class="popup-trigger banner-link" href="#"></a>
+                                        </div>
                                         @empty
-                                            <div class="item" style="background-image: url('{{ config('path.no-image') }}')">
-                                                <a class="popup-trigger banner-link" href="#"></a>
-                                            </div>
+                                        <div class="item" style="background-image: url('{{ config('path.no-image') }}')">
+                                            <a class="popup-trigger banner-link" href="#"></a>
+                                        </div>
                                         @endforelse
                                     </div>
                                     <div class="detail-slider-nav-wrap">
                                         <div class="detail-slider-nav owl-carousel owl-theme">
                                             @forelse ($detailsPost->images as $image)
-                                                <div class="item">
-                                                    <img src="{{ $image->image }}" alt="{{ $detailsPost->title }}" class="height-70"/>
-                                                </div>
+                                            <div class="item">
+                                                <img src="{{ $image->image }}" alt="{{ $detailsPost->title }}" class="height-70"/>
+                                            </div>
                                             @empty
-                                                <div class="item">
-                                                    <img src="{{ config('path.no-image') }}" alt="{{ $detailsPost->title }}" class="height-70"/>
-                                                </div>
+                                            <div class="item">
+                                                <img src="{{ config('path.no-image') }}" alt="{{ $detailsPost->title }}" class="height-70"/>
+                                            </div>
                                             @endforelse
                                         </div>
                                     </div>
@@ -132,7 +141,21 @@
                                         <a class="share_links" href="https://twitter.com/intent/tweet?text={{ $detailsPost->title }}url={{ Request::url() }}" ><i class="fa fa-twitter"></i></a>
                                         <a class="share_links" href="http://plus.google.com/share?url={{ Request::url() }}" ><i class="fa fa-google-plus"></i></a>
                                     </div>
-                                    <span title="" data-placement="right" data-toggle="tooltip" data-original-title="share"><i class="fa fa-share-alt"></i></span>
+                                    <span title="" data-placement="right" data-toggle="tooltip" data-original-title="{{ trans('post.share') }}"><i class="fa fa-share-alt"></i></span>
+                                </li>
+                                <li class="fvrt-btn">
+                                    <span class="add_fav" data-placement="bottom"  data-toggle="tooltip" data-original-title="{{ $detailsPost->total_like . trans('post.like') }}" data-postid="{{ $detailsPost->id }}">
+                                        @forelse ($detailsPost->likes as $element)
+                                            @if (auth()->check() && $element->user_id == auth()->user()->id)
+                                                @php($like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>')
+                                            @else
+                                                @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                            @endif
+                                        @empty
+                                            @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                        @endforelse
+                                        {!! $like !!}
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -233,18 +256,27 @@
                                             <figcaption class="thumb-caption">
                                                 <div class="cap-price pull-left"> ${{ $element->price }} {{ config('setting.price.vi') }}</div>
                                                 <ul class="list-unstyled actions pull-right">
-                                                    {{-- <li>
+                                                    <li>
                                                         <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
-                                                            <i class="fa fa-heart-o"></i>
+                                                            @forelse ($detailsPost->likes as $element)
+                                                                @if (auth()->check() && $element->user_id == auth()->user()->id)
+                                                                    @php($like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>')
+                                                                @else
+                                                                    @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                                                @endif
+                                                            @empty
+                                                                @php($like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>')
+                                                            @endforelse
+                                                            {!! $like !!}
                                                         </span>
-                                                    </li> --}}
+                                                    </li>
                                                     <li>
                                                         <span data-toggle="tooltip" data-placement="top" title="{{ $element->total_comment . trans('post.comment') }}">
                                                             <i class="fa fa-comment"></i>
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span id="compare-link-361" class="compare-property" data-toggle="tooltip" data-placement="top" title="{{ count($element->images) . trans('post.photo') }}">
+                                                        <span class="compare-property" data-toggle="tooltip" data-placement="top" title="{{ count($element->images) . trans('post.photo') }}">
                                                             <i class="fa fa-camera"></i>
                                                         </span>
                                                     </li>
