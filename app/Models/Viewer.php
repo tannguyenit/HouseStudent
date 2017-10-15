@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Viewer extends Model
+class Viewer extends AbstractModel
 {
-    //
+    protected $fillable = [
+        'post_id',
+        'mac_ip',
+        'browser',
+    ];
 }

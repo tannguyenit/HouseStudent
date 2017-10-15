@@ -85,3 +85,18 @@ function setBirthdayUser($value)
 
     return date('Y-m-d', strtotime($date));
 }
+
+function facebookComment($url)
+{
+    $address = "https://graph.facebook.com/?fields=og_object{id},share&id=" . $url;
+    $result  = file_get_contents($address);
+    if ($result) {
+        $array = json_decode($result);
+
+        if ($array) {
+            return $array->share->comment_count;
+        }
+    }
+
+    return 0;
+}

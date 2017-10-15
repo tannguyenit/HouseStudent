@@ -9,6 +9,7 @@ use App\Repositories\TypeRepository\TypeRepository;
 use App\Repositories\UserRepository\UserRepository;
 use Auth;
 use DB;
+use Event;
 use Illuminate\Http\Request as NewRequest;
 use Request;
 use Session;
@@ -198,7 +199,23 @@ class PostController extends BaseController
             } else {
                 Session::push('arrRecently', $detailsPost);
             }
+            /* ------------------------------------------------------------------------ */
+            /*  Start update total view post-Table
+            /* ------------------------------------------------------------------------ */
+            Event::fire('posts.view', $detailsPost);
 
+            $postVaribale = [
+                'total_comment' => facebookComment(action('PostController@show', $slug)),
+            ];
+
+            $updatePost = $this->postRepository->update($postVaribale, $detailsPost->id);
+
+            if (!$updatePost) {
+                return abort(404);
+            }
+            /* ------------------------------------------------------------------------ */
+            /*  End update total view post-Table
+            /* ------------------------------------------------------------------------ */
             $id                      = $detailsPost->type->id;
             $limit                   = config('setting.limit.similar_post');
             $similarPost             = $this->typeRepository->getSimilarPost($id, $limit);

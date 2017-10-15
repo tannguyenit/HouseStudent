@@ -48,7 +48,7 @@ class Post extends AbstractModel
 
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class)->where('status', config('setting.active'));
     }
 
     public function comments()
@@ -94,5 +94,14 @@ class Post extends AbstractModel
     public function getPriceAttribute($value)
     {
         return number_format($value, 0, ',', '.');
+    }
+
+    public function setTotalLikeAttribute($value)
+    {
+        if ($value < 0) {
+            $value = 0;
+        }
+
+        return $this->attributes['total_like'] = $value;
     }
 }
