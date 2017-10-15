@@ -83,6 +83,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $data;
     }
 
+    public function whereArray($array)
+    {
+        return $this->model->where($array)->first();
+    }
+
     public function paginate($limit = null, $columns = ['*'])
     {
         return $this->model->paginate($limit);

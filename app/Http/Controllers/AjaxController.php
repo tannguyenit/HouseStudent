@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ImageRepository\ImageRepository;
+use App\Repositories\LikeRepository\LikeRepository;
 use App\Repositories\PostRepository\PostRepository;
 use Illuminate\Http\Request;
 use View;
@@ -11,13 +12,16 @@ class AjaxController extends BaseController
 {
     protected $postRepository;
     protected $imageRepository;
+    protected $likeRepository;
 
     public function __construct(
         PostRepository $postRepository,
+        LikeRepository $likeRepository,
         ImageRepository $imageRepository
     ) {
         $this->postRepository  = $postRepository;
         $this->imageRepository = $imageRepository;
+        $this->likeRepository  = $likeRepository;
     }
 
     public function getMap(Request $request)
@@ -210,5 +214,62 @@ class AjaxController extends BaseController
                 'details' => [],
             ]);
         }
+    }
+
+    public function like(Request $request)
+    {
+        if ($request->ajax()) {
+            $data     = $request->all();
+            $id       = $request->id;
+            $variable = [
+                'post_id' => $id,
+                'user_id' => auth()->user()->id,
+            ];
+            $find               = $this->likeRepository->whereArray($variable);
+            $post               = $this->postRepository->find($id);
+            $variable['status'] = $request->status;
+
+            if ($find) {
+                if (config('setting.active') == $request->status) {
+                    $type      = config('setting.no-active');
+                    $active    = false;
+                    $attribute = [
+                        'total_like' => $post->total_like + 1,
+                    ];
+                } else {
+                    $type      = config('setting.active');
+                    $active    = true;
+                    $attribute = [
+                        'total_like' => $post->total_like - 1,
+                    ];
+                }
+
+                $result = $this->likeRepository->update($variable, $find->id);
+            } else {
+                $result    = $this->likeRepository->create($variable);
+                $attribute = [
+                    'total_like' => $post->total_like + 1,
+                ];
+                $type   = config('setting.no-active');
+                $active = false;
+            }
+
+            $updatePost = $this->postRepository->update($attribute, $id);
+
+            if ($result && $updatePost) {
+                return response()->json([
+                    'status'     => true,
+                    'type'       => $type,
+                    'active'     => $active,
+                    'total_like' => $attribute['total_like'] . trans('post.like'),
+                ]);
+            }
+        }
+
+        return response()->json([
+            'status' => false,
+            'title'  => trans('validate.errors'),
+            'msg'    => trans('validate.msg.delete-fail'),
+        ]);
     }
 }

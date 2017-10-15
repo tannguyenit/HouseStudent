@@ -17,7 +17,7 @@ class HomeController extends BaseController
     public function home()
     {
 
-        $relation = ['user', 'type', 'firstImages', 'features'];
+        $relation = ['user', 'type', 'likes', 'firstImages', 'features'];
         $limit    = config('setting.limit.news_post');
 
         $dataView['newsPost'] = $this->postRepository->getPost($limit, $relation);

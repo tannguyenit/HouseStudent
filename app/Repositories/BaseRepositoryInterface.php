@@ -10,6 +10,8 @@ interface BaseRepositoryInterface
 
     public function findByFirst($id, $columns);
 
+    public function whereArray($array);
+
     public function paginate($limit = null, $columns = ['*']);
 
     public function create($input);

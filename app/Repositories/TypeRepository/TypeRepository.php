@@ -21,7 +21,7 @@ class TypeRepository extends BaseRepository implements TypeRepositoryInterface
 
         return $this->model->where('id', $id)
             ->with(['posts' => function ($query) use ($limit) {
-                $query->with('firstImages')->limit($limit);
+                $query->with('firstImages', 'likes')->limit($limit);
             }])->first();
     }
 
