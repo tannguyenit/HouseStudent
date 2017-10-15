@@ -3,7 +3,7 @@
         <li class="media" data-text="Villa with pool">
             <div class="media-left">
                 <a href="{{ action('PostController@show', $element->slug) }}" class="media-object">
-                    <img src="http://houzez01.favethemes.com/wp-content/uploads/2016/01/villa-1-150x150.jpg" width="40" height="40">
+                    <img src="{{ $element->firstImages->image or config('path.no-image') }}" width="40" height="40">
                 </a>
             </div>
             <div class="media-body">

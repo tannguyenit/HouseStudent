@@ -33,10 +33,10 @@ class CreatePostsTable extends Migration
             $table->string('lat', 200);
             $table->string('lng', 200);
             $table->text('note')->nullable();
-            $table->string('total_view', 50)->default(0);
+            $table->integer('total_view', 50)->default(0);
             $table->integer('active')->default(0);
-            $table->string('total_like', 50)->default(0);
-            $table->string('total_comment', 50)->default(0);
+            $table->integer('total_like', 50)->default(0);
+            $table->integer('total_comment', 50)->default(0);
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

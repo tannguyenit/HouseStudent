@@ -1247,3 +1247,16 @@ padding-bottom: 15px;
 #houzez_properties_viewed-5 .item-thumb img {
     max-height: 80px;
 }
+.breadcrumb-top .breadcrumb {
+    padding: 10px;
+    background-color: #fff;
+}
+.banner-parallax {
+    height: 300px;
+}
+.banner-parallax .banner-bg-wrap{
+    transform: translate3d(0px, 0px, 0px);
+}
+.banner-parallax .banner-bg-wrap .banner-inner{
+    background-image: url(/default-image/da-nang-vietnam.jpg);
+}

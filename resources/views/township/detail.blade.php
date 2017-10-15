@@ -57,16 +57,34 @@
                                                     <span class="item-price">$ {{ $element->price . config('setting.price.vi') }}</span>
                                                 </div>
                                                 <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                                    <img width="385" height="258" src="../wp-content/uploads/2016/03/los-angeles-06-385x258.jpg" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image" alt="" srcset="http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-385x258.jpg 385w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-300x202.jpg 300w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-768x516.jpg 768w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-1024x688.jpg 1024w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-150x101.jpg 150w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06-350x235.jpg 350w, http://houzez01.favethemes.com/wp-content/uploads/2016/03/los-angeles-06.jpg 1170w" sizes="(max-width: 385px) 100vw, 385px" />
+                                                    <img width="385" height="258" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image"/>
                                                 </a>
                                                 <ul class="actions">
                                                     <li>
-                                                        <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ trans('post.like') }}" data-postid="{{ $element->id }}">
-                                                            <i class="fa fa-heart-o"></i>
+                                                        <span class="add_fav" data-placement="top" data-toggle="tooltip" data-original-title="{{ $element->total_like . trans('post.like') }}" data-postid="{{ $element->id }}">
+                                                            @forelse ($element->likes as $value)
+                                                                @php
+                                                                    if (auth()->check() && $value->user_id == auth()->user()->id) {
+                                                                        $like = '<i class="fa fa-heart" data-status="'.config('setting.no-active').'"></i>';
+                                                                    } else {
+                                                                        $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                    }
+                                                                @endphp
+                                                            @empty
+                                                                @php
+                                                                    $like = '<i class="fa fa-heart-o" data-status="'.config('setting.active').'"></i>';
+                                                                @endphp
+                                                            @endforelse
+                                                            {!! $like !!}
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span data-toggle="tooltip" data-placement="top" title="(7) {{ trans('post.photo') }}">
+                                                        <span data-toggle="tooltip" data-placement="top" title="{{ $element->total_comment . trans('post.comment') }}">
+                                                            <i class="fa fa-comment"></i>
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span data-toggle="tooltip" data-placement="top" title="({{ count($element->images) }}) {{ trans('post.photo') }}">
                                                             <i class="fa fa-camera"></i>
                                                         </span>
                                                     </li>
@@ -78,7 +96,7 @@
                                         <div class="body-left table-cell">
                                             <div class="info-row">
                                                 <div class="label-wrap hide-on-grid">
-                                                    <span class="label-status-8 label label-featured">{{ 'a' }}</span>
+                                                    <span class="label-status-8 label label-featured">{{ $element->status->title }}</span>
                                                 </div>
                                                 <h2 class="property-title">
                                                     <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
@@ -96,7 +114,7 @@
                                             <div class="info-row date hide-on-grid">
                                                 <p class="prop-user-agent">
                                                     <i class="fa fa-user"></i>
-                                                    <a href="">{{ $element->user->full_name }}</a>
+                                                    <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->full_name }}</a>
                                                 </p>
                                                 <p><i class="fa fa-calendar"></i>{{ $element->created_at }}</p>
                                             </div>
@@ -135,10 +153,10 @@
                                     <div class="item-foot-left col-xs-12 col-sm-6 no-padding">
                                         <p class="prop-user-agent">
                                             <i class="fa fa-user"></i>
-                                            <a href="">{{ $element->user->full_name }}</a>
+                                            <a href="{{ action('UserController@member', $element->user->username) }}">{{ $element->user->full_name }}</a>
                                         </p>
                                     </div>
-                                    <div class="item-foot-right col-xs-12 col-sm-6 no-padding">
+                                    <div class="item-foot-right col-xs-12 col-sm-3 no-padding pull-right">
                                         <p class="prop-date">
                                             <i class="fa fa-calendar"></i>{{ $element->created_at }}
                                         </p>
