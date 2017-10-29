@@ -126,7 +126,7 @@ class UserController extends BaseController
         $detailUser           = $this->userRepository->findByFirst('username', $slug);
         $relationShip         = ['user', 'type', 'firstImages'];
         $sortBy               = $this->postRepository->getSortBy(null);
-        $dataView['listings'] = $this->postRepository->getMyProperties($relationShip, 'user_id', $detailUser->id, $sortBy, config('setting.limit.my-properties'));
+        $dataView['listings'] = $this->postRepository->getMyProperties($relationShip, 'user_id', $detailUser->id, $sortBy, config('setting.limit.my-properties'), false);
 
         if ($detailUser) {
             $dataView['detailUser'] = $detailUser;

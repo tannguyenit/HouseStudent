@@ -36,7 +36,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $max_price = $maxPrice;
         $keyword   = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
         $result    = $this->model->with($array)
-            ->where('active', config('setting.active'))
+            ->active()
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
 
@@ -60,7 +60,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         }
 
         return $this->model->with($array)
-            ->where('active', config('setting.active'))
+            ->active()
             ->limit($limit)
             ->orderBy($orderBy, 'DESC')
             ->get();
@@ -71,7 +71,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $this->model->select(DB::raw('count(township) as total, township'))
             ->groupBy('township')
             ->orderBy('total', 'DESC')
-            ->where('active', config('setting.active'))
+            ->active()
             ->limit(config('setting.limit.country'))
             ->get();
     }
@@ -79,7 +79,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function getDataBySlug($slug, $array = [])
     {
         if (!empty($slug)) {
-            return $this->model->where('active', config('setting.active'))
+            return $this->model->active()
                 ->where('slug', $slug)
                 ->with($array)
                 ->first();
@@ -101,17 +101,22 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $this->model->where($column, $id)
             ->orderBy($sortBy->key, $sortBy->value)
             ->with($relationship)
-            ->where('active', config('setting.active'))
+            ->active()
             ->paginate($limit);
     }
 
-    public function getMyProperties($relationship, $column, $id, $sortBy, $limit)
+    public function getMyProperties($relationship, $column, $id, $sortBy, $limit, $public)
     {
         if (empty($id) || empty($column)) {
             return false;
         }
+        if ($public) {
+            $query = $this->model;
+        } else {
+            $query = $this->model->active();
+        }
 
-        return $this->model->where($column, $id)
+        return $query->where($column, $id)
             ->orderBy($sortBy->key, $sortBy->value)
             ->with($relationship)
             ->paginate($limit);
@@ -119,10 +124,17 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function getDataDistinct($column, $parentColumn)
     {
-        if ($column && $parentColumn) {
-            return $this->model->groupBy($column, $parentColumn)
-                ->where('active', config('setting.active'))
-                ->select($column, $parentColumn)
+        if ($column) {
+            return $this->model->select($column, $parentColumn)
+                ->distinct()
+                ->active()
+                ->get();
+        }
+
+        if ($parentColumn) {
+            return $this->model->groupBy($parentColumn)
+                ->active()
+                ->select($parentColumn)
                 ->get();
         }
 

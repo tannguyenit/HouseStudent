@@ -104,4 +104,9 @@ class Post extends AbstractModel
 
         return $this->attributes['total_like'] = $value;
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', config('setting.active'));
+    }
 }

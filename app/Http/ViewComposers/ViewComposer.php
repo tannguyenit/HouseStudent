@@ -34,7 +34,8 @@ class ViewComposer
         $this->dataView['setting']   = $this->settingRepository->getSetting();
         $this->dataView['types']     = $this->typeRepository->getData($relationship);
         $this->dataView['statuses']  = $this->statusRepository->getData();
-        $this->dataView['countries'] = $this->postRepository->getDataDistinct('township', 'country');
+        $this->dataView['township']  = $this->postRepository->getDataDistinct('township', 'country');
+        $this->dataView['countries'] = $this->postRepository->getDataDistinct(null, 'country');
         $this->dataView['prices']    = $this->postRepository->getPrice();
 
         $view->with($this->dataView);

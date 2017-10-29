@@ -66,10 +66,24 @@
                             <p>{{ trans('form.country') }}: {{ $dataSearch['area'] }}</p>
                         @endif
                         @if (isset($dataSearch['status']))
-                            <p>{{ trans('form.status') }}: {{ $dataSearch['status'] }}</p>
+                            <p>{{ trans('form.status') }}:
+                                @forelse ($statuses as $element)
+                                @if ($dataSearch['status'] == $element->id)
+                                {{ $element->title }}
+                                @endif
+                                @empty
+                                @endforelse
+                            </p>
                         @endif
                         @if (isset($dataSearch['type']))
-                            <p>{{ trans('form.type') }}: {{ $dataSearch['type'] }}</p>
+                            <p>{{ trans('form.type') }}:
+                               @forelse ($types as $element)
+                               @if ($dataSearch['type'] == $element->id)
+                               {{ $element->title }}
+                               @endif
+                               @empty
+                               @endforelse
+                           </p>
                         @endif
                     </div>
                 </div>
@@ -83,6 +97,7 @@
                                     <div class="figure-block">
                                         <figure class="item-thumb">
                                             <div class="label-wrap label-right hide-on-list">
+                                                <span class="label-status label-status-7 label label-default label label-success">{{ $element->status->title }}</span>
                                                 <span class="label-color-288 label label-default">{{ $element->type->title }}</span>
                                             </div>
                                             <div class="price hide-on-list">
@@ -116,6 +131,7 @@
                                         <div class="info-row">
                                             <div class="label-wrap hide-on-grid">
                                                 <span class="label-color-288 label label-default">{{ $element->type->title }}</span>
+                                                <span class="label-featured label label-success">{{ $element->status->title }}</span>
                                             </div>
                                             <h2 class="property-title">
                                                 <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>

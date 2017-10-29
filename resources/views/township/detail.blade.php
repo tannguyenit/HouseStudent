@@ -30,17 +30,17 @@
                     <div class="tabs table-cell">
                         <ul>
                             <li>
-                                <a href="javascript:void(0)" class="active hidden-md hidden-sm hidden-xs">ALL</a>
+                                <a href="javascript:void(0)" class="active hidden-md hidden-sm hidden-xs">{{ trans('index.all') }}</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="sort-tab table-cell text-right"> Sort by:
+                    <div class="sort-tab table-cell text-right"> {{ trans('index.sort-by') }}:
                         <select id="sort_properties" class="selectpicker bs-select-hidden" title="" data-live-search-style="begins" data-live-search="false">
-                            <option value="">Default Order</option>
-                            <option value="a_price">Price (Low to High)</option>
-                            <option value="d_price">Price (High to Low)</option>
-                            <option value="a_date">Date Old to New</option>
-                            <option value="d_date">Date New to Old</option>
+                            <option value="">{{ trans('index.default') }}</option>
+                            <option {{ Request::get('sortby') == 'a_price' ? 'selected' : '' }} value="a_price">{{ trans('index.a-price') }}</option>
+                            <option {{ Request::get('sortby') == 'd_price' ? 'selected' : '' }} value="d_price">{{ trans('index.d-price') }}</option>
+                            <option {{ Request::get('sortby') == 'a_date' ? 'selected' : '' }} value="a_date">{{ trans('index.a-date') }}</option>
+                            <option {{ Request::get('sortby') == 'd_date' ? 'selected' : '' }} value="d_date">{{ trans('index.d-date') }}</option>
                         </select>
                     </div>
                 </div>

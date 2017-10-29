@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="table-cell">
-                                        <button type="submit" class="btn btn-primary">{{ trans('post.send') }}</button>
+                                        <button type="submit" class="btn btn-primary" disabled="">{{ trans('post.send') }}</button>
                                     </div>
                                 </div>
                                 <ul class="social">
