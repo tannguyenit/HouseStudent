@@ -1,15 +1,16 @@
 <?php
 return [
-    'email'       => [
+    'email'                => [
         'required' => 'Please enter email',
         'email'    => 'Email is not correct',
         'exists'   => 'Email is exists',
     ],
-    'password'    => [
-        'required' => 'Please enter password',
-        'min'      => 'Your password must be at least 6 characters long',
+    'password'             => [
+        'required'  => 'Please enter password',
+        'minlength' => 'Your password must be at least 6 characters long',
+        'maxlength' => 'Your password may not be greater than 20 characters.',
     ],
-    'placeholder' => [
+    'placeholder'          => [
         'title'       => 'Enter your property title',
         'price'       => 'Enter Sale or Rent Price',
         'keyword'     => 'Enter address you want find .....',
@@ -33,7 +34,7 @@ return [
         'listing'     => 'Enter title you want search ...',
         'date'        => 'dd/mm/yyyy',
     ],
-    'msg'         => [
+    'msg'                  => [
         'digits'         => 'Please enter only digits',
         'create-success' => 'Create success !',
         'create-fail'    => 'Create fail !',
@@ -46,34 +47,66 @@ return [
         'send-fail'      => 'Send contact fail !',
         'send-success'   => 'Send contact success !',
     ],
-    'errors'      => 'Errors !',
-    'success'     => 'Success !',
-    'accept'      => 'Accept',
-    'sending'     => 'Sending.....',
-    'done'        => 'Done !',
-    'add-image'   => 'Upload at least one image.',
-    'required'    => 'Please fill out the following required fields',
-    'username'    => [
+    'errors'               => 'Errors !',
+    'success'              => 'Success !',
+    'accept'               => 'Accept',
+    'sending'              => 'Sending.....',
+    'done'                 => 'Done !',
+    'add-image'            => 'Upload at least one image.',
+    'required'             => 'Please fill out the following required fields',
+    'username'             => [
         'exists'   => 'Username is exists',
         'required' => 'The username field is required.',
     ],
-    'first_name'  => [
+    'first_name'           => [
         'title'    => 'First name',
         'required' => 'The Firstname field is required ',
     ],
-    'last_name'   => [
+    'last_name'            => [
         'title'    => 'Last name',
         'required' => 'The Lastname field is required ',
     ],
-    'phone'       => [
+    'phone'                => [
         'title'     => 'Phone',
         'required'  => 'The phone field is required ',
         'number'    => 'The phone field is number ',
         'minlength' => 'The phone must be at least 10 characters',
         'maxlength' => 'The phone may not be greater than 11 characters.',
     ],
-    'date'        => [
+    'phone_boss'           => [
+        'title'     => 'Phone boss',
+        'required'  => 'The phone of boss field is required ',
+        'number'    => 'The phone of boss field is number ',
+        'minlength' => 'The phone of boss must be at least 10 characters',
+        'maxlength' => 'The phone of boss may not be greater than 11 characters.',
+    ],
+    'price'                => [
+        'title'     => 'Price',
+        'required'  => 'The price field is required ',
+        'number'    => 'The price field is number ',
+        'minlength' => 'The price must be at least 6 characters',
+        'maxlength' => 'The phone may not be greater than 10 characters.',
+    ],
+    'area'                 => [
+        'title'     => 'Area',
+        'required'  => 'The area field is required ',
+        'number'    => 'The area field is number ',
+        'minlength' => 'The area must be at least 2 characters',
+        'maxlength' => 'The area may not be greater than 3 characters.',
+    ],
+    'date'                 => [
         'title'  => 'Date',
         'format' => 'Please enter a date in the format dd/mm/yyyy and  between 1900 and 2099',
     ],
+    'title_required'       => 'Please enter title',
+    'description_required' => 'Please enter description',
+    'prop_beds_required'   => 'Please enter description',
+    'number'               => 'Please enter a number',
+    'address_required'     => 'Please enter address',
+    'route_required'       => 'Please enter address',
+    'content_required'     => 'Please enter content here',
+    'type_required'        => 'Please select a room type',
+    'status_required'      => 'Please select room status',
+    'name_boss_required'   => 'Please enter name of boss',
+    'choose_image'         => 'Please select at least 1 photo',
 ];

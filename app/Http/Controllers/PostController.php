@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegisterAccount;
 use App\Repositories\ImageRepository\ImageRepository;
 use App\Repositories\PostRepository\PostRepository;
 use App\Repositories\StatusRepository\StatusRepository;
@@ -41,10 +42,11 @@ class PostController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function townShip(Request $request, $slug)
+    public function townShip(NewRequest $request, $slug)
     {
         $relationShip      = ['user', 'type', 'status'];
-        $sortBy            = $this->postRepository->getSortBy(null);
+        $getSortBy         = $request->get('sortby');
+        $sortBy            = $this->postRepository->getSortBy($getSortBy);
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
 
         if ($dataView['posts']) {
@@ -94,6 +96,19 @@ class PostController extends BaseController
                 $attributeUser        = array_only($data, $fillableUser);
                 $user                 = $this->userRepository->create($attributeUser);
                 $attribute['user_id'] = $user->id;
+                /* ------------------------------------------------------------------------ */
+                /*  Send mail to new user
+                /* ------------------------------------------------------------------------ */
+                $dataSend = [
+                    'id'       => $user->id,
+                    'email'    => $user->email,
+                    'fullname' => $user->fullname,
+                    'username' => $user->username,
+                    'phone'    => $user->phone,
+                    'token'    => $user->remember_token,
+                ];
+
+                \Mail::to($user->email)->send(new RegisterAccount($dataSend));
             }
 
             $savePost = $this->postRepository->create($attribute);
@@ -365,7 +380,7 @@ class PostController extends BaseController
         $relationShip = ['user', 'type', 'firstImages'];
         $getSortBy    = $request->get('sortby');
         $sortBy       = $this->postRepository->getSortBy($getSortBy);
-        $myProperties = $this->postRepository->getMyProperties($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'));
+        $myProperties = $this->postRepository->getMyProperties($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'), true);
 
         if ($myProperties) {
             return view('author.my-properties', compact('myProperties'));

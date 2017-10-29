@@ -108,6 +108,7 @@
                                             <div class="info-row">
                                                 <div class="label-wrap hide-on-grid">
                                                     <span class="label-status-8 label label-featured">{{ $detailsTypes->title }}</span>
+                                                    <span class="label-status-8 label label-default">{{ $element->status->title }}</span>
                                                 </div>
                                                 <h2 class="property-title">
                                                     <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>

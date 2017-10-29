@@ -11,8 +11,8 @@
                                 <div id="auto_complete_ajax" class="auto-complete"></div>
                             </div>
                             <select name="location" class="selectpicker" data-live-search="true" data-live-search-style="begins">
-                                <option value="">{{ trans('form.all-township') }}</option>
-                                @forelse ($countries as $element)
+                                <option data-parentstate="" value="">{{ trans('form.all-township') }}</option>
+                                @forelse ($township as $element)
                                     <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
                                 @empty
                                 @endforelse
@@ -20,7 +20,7 @@
                             <select name="area" class="selectpicker" data-live-search="true" data-live-search-style="begins">
                                 <option value="">{{ trans('form.all-countries') }}</option>
                                 @forelse ($countries as $element)
-                                    <option data-parentcity="{{ $element->township }}" value="{{ $element->country }}">{{ $element->country }}</option>
+                                    <option data-parentcity="{{ $element->country }}" value="{{ $element->country }}">{{ $element->country }}</option>
                                 @empty
                                 @endforelse
                             </select>
