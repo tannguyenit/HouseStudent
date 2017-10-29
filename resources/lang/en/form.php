@@ -1,8 +1,9 @@
 <?php
 return [
     'placeholder'       => [
-        'email'    => 'Email',
-        'password' => 'Password',
+        'email'        => 'Email',
+        'email-forgot' => 'Please enter email reset password',
+        'password'     => 'Password',
     ],
     'pass'              => [
         'required' => 'Please enter your password',
@@ -78,4 +79,7 @@ return [
     'price'             => 'Price',
     'list'              => 'Properties listed',
     'overview'          => 'Overview',
+    'your-name'         => 'Your name',
+    'subject'           => 'Subject',
+    'messages'          => 'Messages',
 ];

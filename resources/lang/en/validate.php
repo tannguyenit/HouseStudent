@@ -43,6 +43,8 @@ return [
         'delete-fail'    => 'Delete fail !',
         'change-success' => 'Change status success !',
         'change-fail'    => 'Change status fail !',
+        'send-fail'      => 'Send contact fail !',
+        'send-success'   => 'Send contact success !',
     ],
     'errors'      => 'Errors !',
     'success'     => 'Success !',
