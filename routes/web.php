@@ -31,6 +31,8 @@ Route::match(['get', 'post'], '/botman', 'ChatBotFacebookController@handle');
 Route::get('/about', ['as' => 'about', 'uses' => 'PageController@about']);
 Route::get('/faq', ['as' => 'faq', 'uses' => 'PageController@faq']);
 Route::get('/contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
+Route::post('/contact', ['as' => 'sendContact', 'uses' => 'PageController@sendContact']);
+Route::get('/regulations', ['as' => 'regulations', 'uses' => 'PageController@rule']);
 Route::group(['middleware' => 'viewpost'], function () {
     Route::resource('property', 'PostController');
 });

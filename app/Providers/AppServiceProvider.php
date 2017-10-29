@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App;
+use App\Repositories\ContactRepository\ContactRepository;
+use App\Repositories\ContactRepository\ContactRepositoryInterface;
 use App\Repositories\FeaturesRepository\FeaturesRepository;
 use App\Repositories\FeaturesRepository\FeaturesRepositoryInterface;
 use App\Repositories\ImageRepository\ImageRepository;
@@ -46,5 +48,6 @@ class AppServiceProvider extends ServiceProvider
         App::bind(SettingRepositoryInterface::class, SettingRepository::class);
         App::bind(StatusRepositoryInterface::class, StatusRepository::class);
         App::bind(TypeRepositoryInterface::class, TypeRepository::class);
+        App::bind(ContactRepositoryInterface::class, ContactRepository::class);
     }
 }

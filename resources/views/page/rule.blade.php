@@ -8,8 +8,8 @@
             </div>
         </div>
         <div class="banner-caption">
-            <h1>{{ trans('index.about-site') }}</h1>
-            <h2>{{ trans('index.about-site-content') }}</h2>
+            <h1>{{ trans('index.rule') }}</h1>
+            <h2>{{ trans('index.rule-content') }}</h2>
         </div>
     </div>
 </div>
@@ -24,11 +24,11 @@
                         <span itemprop="{{ trans('index.home') }}">{{ trans('index.home') }}</span>
                     </a>
                 </li>
-                <li class="active">{{ trans('index.about-site') }}</li>
+                <li class="active">{{ trans('index.rule') }}</li>
             </ol>
             <div class="page-title-left">
                 <h1 class="title-head">
-                    {{ trans('index.about-site') }}
+                    {{ trans('index.rule') }}
                 </h1>
             </div>
         </div>
