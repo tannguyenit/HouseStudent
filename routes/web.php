@@ -15,7 +15,6 @@ Route::post('/login', 'Auth\LoginController@postLogin');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendMail');
 Route::get('/change-password/{id}', 'Auth\ResetPasswordController@getPassword');
-Route::get('/active', 'Auth\RegisterController@activeUser');
 Route::post('/change-password/{id}', 'Auth\ResetPasswordController@change');
 Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
@@ -45,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/author/update/{id}', ['as' => 'updateUser', 'uses' => 'UserController@update']);
     Route::get('/my-properties', ['as' => 'myProperties', 'uses' => 'PostController@myProperties']);
 });
-
+Route::get('/active', 'UserController@activeUser');
 Route::get('/member/{slug}', ['as' => 'member', 'uses' => 'UserController@member']);
 /* ------------------------------------------------------------------------ */
 /*  Ajax

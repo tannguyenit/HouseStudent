@@ -134,4 +134,20 @@ class UserController extends BaseController
             return view('member.index', $dataView);
         }
     }
+
+    public function activeUser(Request $request)
+    {
+        $data     = $request->all();
+        $findUser = $this->userRepository->whereArray($data);
+        if ($findUser) {
+            $updateActive = $this->userRepository->update(['active' => config('setting.active')], $findUser->id);
+            if ($updateActive) {
+                return redirect()->action('HomeController@home')
+                    ->with('success', trans('validate.msg.active-success'));
+            }
+        }
+
+        return redirect()->action('HomeController@home')
+            ->with('error', trans('validate.msg.active-fail'));
+    }
 }

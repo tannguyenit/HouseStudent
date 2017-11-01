@@ -1,3 +1,4 @@
+var validate = JSON.parse(AJAX_VARIABLE.validate);
 function Validate(form) {
     this.form = form;
 }
@@ -52,6 +53,9 @@ Validate.prototype = {
                 address: {
                     required: true
                 },
+                route: {
+                    required: true
+                },
                 administrative_area_level_2: {
                     required: true
                 },
@@ -74,7 +78,9 @@ Validate.prototype = {
                     checkemail:true
                 },
                 password: {
-                    required: true
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
                 },
                 phone: {
                     required: true,
@@ -84,49 +90,54 @@ Validate.prototype = {
                 },
             },
             messages: {
-                title: "Vui long nhap noi dung",
-                description: "Vui long nhap noi dung",
+                title: validate.title_required,
+                description: validate.description_required,
                 price: {
-                    required: 'Vui long nhap gia',
-                    minlength: 'Phai nhap it nhat 6 so',
-                    maxlength:'Toi da 10 so',
+                    required: validate.price.required,
+                    minlength: validate.price.minlength,
+                    maxlength: validate.price.maxlength,
                 },
-                prop_beds: 'Vui long nhap so',
-                prop_baths: 'Vui long nhap so',
+                prop_beds: validate.number,
+                prop_baths: validate.number,
                 area: {
-                    required: 'Vui long nhap tai day',
-                    number:'Ban phai nhap so',
-                    minlength:'it nhat 2 ky tu',
-                    maxlength:'nhieu nhat 3 ky tu'
+                    required: validate.area.required,
+                    number: validate.area.number,
+                    minlength: validate.area.minlength,
+                    maxlength: validate.area.maxlength
                 },
-                address: "Vui long nhap noi dung",
-                administrative_area_level_2: "Vui long nhap noi dung",
-                administrative_area_level_1: "Vui long nhap noi dung",
-                type_id: "Vui long nhap noi dung",
-                status_id: "Vui long nhap noi dung",
+                address: validate.address_required,
+                route: validate.route_required,
+                administrative_area_level_2: validate.content_required,
+                administrative_area_level_1: validate.content_required,
+                type_id: validate.type_required,
+                status_id: validate.status_required,
                 phone_boss: {
-                    required: 'Vui long nhap tai day',
-                    number:'Ban phai nhap so',
-                    minlength:'it nhat 10 ky tu',
-                    maxlength:'nhieu nhat 11 ky tu'
+                    required: validate.phone_boss.required,
+                    number: validate.phone_boss.number,
+                    minlength: validate.phone_boss.minlength,
+                    maxlength: validate.phone_boss.maxlength
                 },
-                name_boss: "Vui long nhap noi dung",
-                file: "Vui long chon anh",
+                name_boss: validate.name_boss_required,
+                file: validate.choose_image,
                 username: {
-                    required: 'Vui long nhap ten'
+                    required: validate.username.required
                 },
-                first_name: "Please enter a username",
-                last_name: "Please enter a username",
+                first_name: validate.first_name.required,
+                last_name: validate.last_name.required,
                 email: {
-                    required: 'Vui long nhap email',
-                    email: 'Email chua dung dinh dang',
+                    required: validate.email.required,
+                    email: validate.email.email,
                 },
-                password: "Please enter a username",
+                password: {
+                    required: validate.password.required,
+                    minlength: validate.password.minlength,
+                    maxlength: validate.password.maxlength
+                },
                 phone: {
-                    required: 'Vui long nhap tai day',
-                    number:'Ban phai nhap so',
-                    minlength:'it nhat 10 ky tu',
-                    maxlength:'nhieu nhat 11 ky tu'
+                    required: validate.phone.required,
+                    number: validate.phone.number,
+                    minlength: validate.phone.minlength,
+                    maxlength: validate.phone.maxlength
                 },
             }
         });

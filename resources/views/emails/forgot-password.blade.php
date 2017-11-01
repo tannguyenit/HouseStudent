@@ -48,7 +48,7 @@
                                             </tr>
                                         </table>
                                         @php($browser = getBrowser())
-                                        <p>For security, this request was received from a <strong>{{ $browser->platform }}</strong> device using <strong>{{ $browser->name }}</strong>. If you did not request a password reset, please ignore this email or <a href="support_url">contact support</a> if you have questions.</p>
+                                        <p>For security, this request was received from a <strong>{{ $browser->platform }}</strong> device using <strong>{{ $browser->name }}</strong>. If you did not request a password reset, please ignore this email or <a href="{{ action('PageController@contact') }}">contact support</a> if you have questions.</p>
                                         <p>
                                             Thanks,<br>The House Student Team
                                         </p>

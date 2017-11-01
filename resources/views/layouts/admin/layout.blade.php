@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="xmlrpc.php">
-    <title>Houzez - Real Estate WordPress Theme</title>
+    <title>House for Student</title>
     <link rel="shortcut icon" href="/wp-content/uploads/2016/03/favicon.png">
     @section('css')
         {{ Html::style('wp-content/themes/houzez/css/bootstrap.min.css') }}
@@ -77,6 +77,7 @@
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/toastr.min.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/sweetalert.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/custom.toastr.js') }}
         {{ Html::script('wp-content/themes/houzez/admin/js/custom.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.validate.min.js') }}
@@ -118,6 +119,25 @@
                 @endif
             });
         </script>
+        @php($auth = auth()->user())
+        @if ($auth->active != config('setting.active'))
+        <script type="text/javascript">
+            if ($.cookie('check-active') != '1' && $.cookie('check-active') != 'undefined') {
+                swal({
+                    title: '{{ trans('validate.warning') }}',
+                    text: '{{ trans('validate.account_not_active') }}',
+                    icon: "warning",
+                    buttons: ["{{ trans('validate.cancel') }}", "{{ trans('validate.ok_gotit') }}"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.cookie("check-active", '1')
+                    }
+                });
+            }
+        </script>
+        @endif
     @show
 </body>
 </html>
