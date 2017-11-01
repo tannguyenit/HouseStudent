@@ -46,6 +46,8 @@ return [
         'change-fail'    => 'Change status fail !',
         'send-fail'      => 'Send contact fail !',
         'send-success'   => 'Send contact success !',
+        'active-success' => 'Active account success !',
+        'active-fail'    => 'Active account fail !',
     ],
     'errors'               => 'Errors !',
     'success'              => 'Success !',
@@ -109,4 +111,8 @@ return [
     'status_required'      => 'Please select room status',
     'name_boss_required'   => 'Please enter name of boss',
     'choose_image'         => 'Please select at least 1 photo',
+    'warning'              => 'Warning',
+    'account_not_active'   => 'Your account is not activated, please check your email to activate your account',
+    'cancel'               => 'Cancel',
+    'ok_gotit'             => 'Ok Got it',
 ];

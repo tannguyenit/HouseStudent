@@ -20,6 +20,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @php($auth = auth()->user())
+                @if ($auth->active != config('setting.active'))
+                <div class="alert alert-warning fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ trans('validate.warning') }}!</strong> {{ trans('validate.account_not_active') }}
+                </div>
+                @endif
                 <div class="my-profile-search">
                     <div class="profile-top-left">
                         {!! Form::open(['method' => 'GET']) !!}

@@ -2617,7 +2617,7 @@ var houzez_search_on_change = function (current_form, form_widget, current_page,
 
         var populate_area_dropdown = function(current_form) {
             var city;
-            city  = current_form.find('select[name="location"] option:selected').val();
+            city  = current_form.find('select[name="location"] option:selected').data('parentstate');
             //city  = current_form.find('select[name="location"]').val();
 
             if( city != '' ) {

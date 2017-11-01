@@ -43,10 +43,10 @@
     <div class="container">
         @yield('content')
     </div>
-
     @if (\Route::currentRouteName() != 'property.create')
         @include('layouts.includes.footer')
     @endif
+    @include('layouts.includes.facebook-messenger')
     @section('footerscript')
         {{ Html::script('wp-content/themes/houzez/js/bootstrap.min.js') }}
         {{ Html::script('wp-content/themes/houzez/js/jquery.custom.js') }}
@@ -59,28 +59,7 @@
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/position.mine899.js?ver=1.11.4') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/menu.mine899.js?ver=1.11.4') }}
         {{ Html::script('wp-content/wp-includes/js/wp-a11y.min66f2.js?ver=4.7.5') }}
-        <script type='text/javascript'>
-            /* <![CDATA[ */
-            var uiAutocompleteL10n = {
-                "noResults": "No results found.",
-                "oneResult": "1 result found. Use up and down arrow keys to navigate.",
-                "manyResults": "%d results found. Use up and down arrow keys to navigate.",
-                "itemSelected": "Item selected."
-            };
-            /* ]]> */
-        </script>
-        {{ Html::script('wp-content/wp-includes/js/jquery/ui/autocomplete.mine899.js?ver=1.11.4') }}
-        {{ Html::script('wp-content/wp-includes/js/jquery/ui/mouse.mine899.js?ver=1.11.4') }}
-        {{ Html::script('wp-content/wp-includes/js/jquery/jquery.ui.touch-punchc682.js?ver=0.2.2') }}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-            })
-        </script>
+        {{ Html::script('wp-content/themes/houzez/js/tannguyen/setting.js') }}
         <script type='text/javascript'>
             /* <![CDATA[ */
             var lat = $('#getGoogleMaps').data('lat');
@@ -210,28 +189,13 @@
             };
             /* ]]> */
         </script>
+        {{ Html::script('wp-content/wp-includes/js/jquery/ui/autocomplete.mine899.js?ver=1.11.4') }}
+        {{ Html::script('wp-content/wp-includes/js/jquery/ui/mouse.mine899.js?ver=1.11.4') }}
+        {{ Html::script('wp-content/wp-includes/js/jquery/jquery.ui.touch-punchc682.js?ver=0.2.2') }}
         {{ Html::script('wp-content/themes/houzez/js/houzez_ajax_calls2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/themes/houzez/js/custom2846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/wp-includes/js/wp-embed.min66f2.js?ver=4.7.5') }}
         {{ Html::script('wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min3c21.js?ver=5.1.1') }}
-        <script type='text/javascript'>
-            /* <![CDATA[ */
-            var prop_carousel_v2_uo8oC = {
-                "slide_auto": "false",
-                "auto_speed": "3000",
-                "slide_dots": "true",
-                "slide_infinite": "true",
-                "slides_to_scroll": "1"
-            };
-            var prop_carousel_v2_cSQhv = {
-                "slide_auto": "false",
-                "auto_speed": "3000",
-                "slide_dots": "true",
-                "slide_infinite": "true",
-                "slides_to_scroll": "1"
-            };
-            /* ]]> */
-        </script>
         {{ Html::script('wp-content/themes/houzez/js/property-carousels-v22846.js?ver=1.5.5') }}
         {{ Html::script('wp-content/plugins/js_composer/assets/lib/bower/skrollr/dist/skrollr.min3c21.js?ver=5.1.1') }}
         {{ Html::script('wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min3c21.js?ver=5.1.1') }}
