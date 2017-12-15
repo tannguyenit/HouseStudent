@@ -200,7 +200,7 @@ class AjaxController extends Controller
                     $value = config('setting.active');
                 }
                 $inputs = [
-                    'status' => $value,
+                    'active' => $value,
                 ];
                 $updatePost = $this->postRepository->update($inputs, $id);
 

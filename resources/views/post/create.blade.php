@@ -91,7 +91,12 @@
             <div class="dashboard-content-area dashboard-fix">
                 <div class="container">
                     <ol class="pay-step-bar">
-                        <li class="pay-step-block active">
+                        @if (!auth()->user())
+                            <li class="pay-step-block active">
+                                <span>{{ trans('post.account') }}</span>
+                            </li>
+                        @endif
+                        <li class="pay-step-block">
                             <span>{{ trans('post.infomation') }}</span>
                         </li>
                         <li class="pay-step-block ">
@@ -105,11 +110,6 @@
                         <li class="pay-step-block ">
                             <span>{{ trans('post.add-address') }}</span>
                         </li>
-                        @if (!auth()->user())
-                            <li class="pay-step-block ">
-                                <span>{{ trans('post.note') }}</span>
-                            </li>
-                        @endif
                         <li class="pay-step-block ">
                             <span>{{ trans('post.done') }}</span>
                         </li>
@@ -130,6 +130,75 @@
                                 <strong>{{ trans('validate.errors') }}</strong> {{ trans('validate.add-image') }}
                             </div>
                             <div class="submit-form-wrap">
+                                @if (!auth()->user())
+                                    {!! Form::hidden('check_login', '1') !!}
+                                    <div class="account-block class-for-register-msg form-step">
+                                        <div class="add-title-tab">
+                                            <h3>{{ trans('post.not-account') }}</h3>
+                                            <div class="add-expand"></div>
+                                        </div>
+                                        <div class="add-tab-content">
+                                            <div class="add-tab-row push-padding-bottom">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p>{{ trans('post.register-account') }}</p>
+                                                        <div class="form-group">
+                                                            <div class="houzez_messages_register message"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="tab-content">
+                                                            <div class="tab-pane fade in active step-tab-register">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('user_name', trans('form.username')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::text('username', '', ['class' => 'form-control', 'id' => 'user_name', 'placeholder' => trans('validate.placeholder.username')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('first_name', trans('form.first_name')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::text('first_name', '', ['class' => 'form-control', 'id' => 'first_name', 'placeholder' => trans('validate.placeholder.first_name')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('last_name', trans('form.last_name')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::text('last_name', '', ['class' => 'form-control', 'id' => 'last_name', 'placeholder' => trans('validate.placeholder.last_name')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('email', trans('form.email')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::email('email', '', ['class' => 'form-control', 'id' => 'email', 'placeholder' => trans('validate.placeholder.email')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('password', trans('form.password')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'placeholder' => trans('validate.placeholder.password')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            {!! Form::label('phone', trans('form.phone')) !!} <span class="error">(*)</span>
+                                                                            {!! Form::number('phone', '', ['class' => 'form-control', 'id' => 'phone', 'placeholder' => trans('validate.placeholder.phone')]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    {!! Form::hidden('check_login', '0') !!}
+                                @endif
                                 <div class="account-block form-step">
                                     <div class="add-title-tab">
                                         <h3>{{ trans('post.title-and-price') }}</h3>
@@ -140,13 +209,13 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        {!! Form::label('title', trans('post.title') . ' *') !!}
+                                                        {!! Form::label('title', trans('post.title')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('title', '', ['class' => 'form-control', 'id' => 'title', 'placeholder' => trans('validate.placeholder.title')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        {!! Form::label('description', trans('post.description')) !!}
+                                                        {!! Form::label('description', trans('post.description')) !!} <span class="error">(*)</span>
                                                         {!! Form::textarea('description', '', ['class' => 'text-editor-area form-control', 'id' => 'description', 'rows' => 10, 'cols' => 30]) !!}
                                                     </div>
                                                 </div>
@@ -156,7 +225,7 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('type_id', trans('post.type')) !!}
+                                                        {!! Form::label('type_id', trans('post.type')) !!} <span class="error">(*)</span>
                                                         <select name="type_id" id="type_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                                             <option selected="selected" value="">{{ trans('post.none') }}</option>
                                                             @forelse ($types as $element)
@@ -164,11 +233,12 @@
                                                             @empty
                                                             @endforelse
                                                         </select>
+                                                        <label id="type_id-error" class="error" for="type_id"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('status_id', trans('post.status')) !!}
+                                                        {!! Form::label('status_id', trans('post.status')) !!} <span class="error">(*)</span>
                                                         <select name="status_id" id="status_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                                             <option selected="selected" value="">{{ trans('post.none') }}</option>
                                                             @forelse ($statuses as $element)
@@ -176,11 +246,12 @@
                                                             @empty
                                                             @endforelse
                                                         </select>
+                                                        <label id="status_id-error" class="error" for="status_id"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('price', trans('post.price')) !!}
+                                                        {!! Form::label('price', trans('post.price')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('price', '', ['class' => 'form-control','pattern' =>'^\$\d{1,3}(,\d{3})*(\.\d+)?$', 'id' => 'price', 'placeholder' => trans('validate.placeholder.price')]) !!}
                                                     </div>
                                                 </div>
@@ -216,19 +287,19 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('name_boss', trans('post.name-boss')) !!}
+                                                        {!! Form::label('name_boss', trans('post.name-boss')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('name_boss', '', ['id' => 'name_boss', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.name-boss')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('phone_boss', trans('post.phone-boss')) !!}
+                                                        {!! Form::label('phone_boss', trans('post.phone-boss')) !!} <span class="error">(*)</span>
                                                         {!! Form::number('phone_boss', '', ['id' => 'phone_boss', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.phone-boss')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('area', trans('post.area')) !!}
+                                                        {!! Form::label('area', trans('post.area')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('area', '', ['id' => 'area', 'class' => 'form-control', 'placeholder' => trans('validate.placeholder.area')]) !!}
                                                     </div>
                                                 </div>
@@ -286,25 +357,25 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        {!! Form::label('geocomplete', trans('post.street') . ' *:') !!}
-                                                        {!! Form::text('address', '', ['class' => 'form-control', 'id' => 'geocomplete', 'placeholder' => trans('validate.placeholder.address')]) !!}
+                                                        {!! Form::label('geocomplete', trans('post.street')) !!} <span class="error">(*)</span>
+                                                        {!! Form::text('address', '', ['class' => 'form-control', 'id' => 'geocomplete', 'placeholder' => trans('validate.placeholder.street')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 submit_country_field">
                                                     <div class="form-group">
-                                                        {!! Form::label('country', trans('post.address') . ' *:') !!}
+                                                        {!! Form::label('country', trans('post.address')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('route', '', ['class' => 'form-control', 'id' => 'country', 'placeholder' => trans('validate.placeholder.address')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        {!! Form::label('countyState', trans('post.county') . ' *:') !!}
+                                                        {!! Form::label('countyState', trans('post.county')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('administrative_area_level_2', '', ['class' => 'form-control', 'id' => 'countyState', 'placeholder' => trans('validate.placeholder.county')]) !!}
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        {!! Form::label('city', trans('post.city') . ' *:') !!}
+                                                        {!! Form::label('city', trans('post.city')) !!} <span class="error">(*)</span>
                                                         {!! Form::text('administrative_area_level_1', '', ['class' => 'form-control', 'id' => 'city', 'placeholder' => trans('validate.placeholder.city')]) !!}
                                                     </div>
                                                 </div>
@@ -342,75 +413,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if (!auth()->user())
-                                    {!! Form::hidden('check_login', '1') !!}
-                                    <div class="account-block class-for-register-msg form-step">
-                                        <div class="add-title-tab">
-                                            <h3>{{ trans('post.not-account') }}</h3>
-                                            <div class="add-expand"></div>
-                                        </div>
-                                        <div class="add-tab-content">
-                                            <div class="add-tab-row push-padding-bottom">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <p>{{ trans('post.register-account') }}</p>
-                                                        <div class="form-group">
-                                                            <div class="houzez_messages_register message"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane fade in active step-tab-register">
-                                                                <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('user_name', trans('form.username') . ' *:') !!}
-                                                                            {!! Form::text('username', '', ['class' => 'form-control', 'id' => 'user_name', 'placeholder' => trans('validate.placeholder.username')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('first_name', trans('form.first_name') . ' *:') !!}
-                                                                            {!! Form::text('first_name', '', ['class' => 'form-control', 'id' => 'first_name', 'placeholder' => trans('validate.placeholder.first_name')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('last_name', trans('form.last_name') . ' *:') !!}
-                                                                            {!! Form::text('last_name', '', ['class' => 'form-control', 'id' => 'last_name', 'placeholder' => trans('validate.placeholder.last_name')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('email', trans('form.username') . ' *:') !!}
-                                                                            {!! Form::email('email', '', ['class' => 'form-control', 'id' => 'email', 'placeholder' => trans('validate.placeholder.email')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('password', trans('form.password') . ' *:') !!}
-                                                                            {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'placeholder' => trans('validate.placeholder.password')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            {!! Form::label('phone', trans('form.phone') . ' *:') !!}
-                                                                            {!! Form::number('phone', '', ['class' => 'form-control', 'id' => 'phone', 'placeholder' => trans('validate.placeholder.phone')]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @else
-                                    {!! Form::hidden('check_login', '0') !!}
-                                @endif
                                 <div class="steps-nav">
                                     <div class="btn-left btn-back action">
                                         <button type="button" class="btn">
