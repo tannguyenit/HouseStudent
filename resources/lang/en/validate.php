@@ -18,6 +18,7 @@ return [
         'price'       => 'Enter Sale or Rent Price',
         'name-boss'   => 'Enter fullname of boss',
         'phone-boss'  => 'Enter phone number of boss',
+        'street'      => 'Enter property street',
         'address'     => 'Enter property address',
         'area'        => 'Enter area size',
         'value'       => 'Value',
@@ -62,11 +63,11 @@ return [
     ],
     'first_name'           => [
         'title'    => 'First name',
-        'required' => 'The Firstname field is required ',
+        'required' => 'The firstname field is required ',
     ],
     'last_name'            => [
         'title'    => 'Last name',
-        'required' => 'The Lastname field is required ',
+        'required' => 'The lastname field is required ',
     ],
     'phone'                => [
         'title'     => 'Phone',

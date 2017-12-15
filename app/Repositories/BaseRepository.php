@@ -126,6 +126,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             }
         } catch (Exception $e) {
             DB::rollBack();
+            return false;
         }
     }
 

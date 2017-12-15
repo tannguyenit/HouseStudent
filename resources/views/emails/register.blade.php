@@ -75,7 +75,7 @@
                                                 <w:anchorlock/>
                                                 <center>
                                                     <![endif]-->
-                                                    <a href="{!! action('Auth\RegisterController@activeUser', ['email' => $email, 'id' => $id]) !!}" style="background-color:#178f8f;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;">Activate Account!</a>
+                                                    <a href="{!! action('UserController@activeUser', ['email' => $email, 'id' => $id]) !!}" style="background-color:#178f8f;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;">Activate Account!</a>
                                                 <!--[if mso]>
                                                 </center>
                                                 </v:roundrect>
