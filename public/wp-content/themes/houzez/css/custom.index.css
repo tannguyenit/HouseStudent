@@ -1152,6 +1152,7 @@ padding-bottom: 15px;
 .vc_custom_1494355113610 {
     padding-top: 40px !important;
     background-color: #0f2f4e !important;
+    background-image: url(/default-image/bg-feature.jpg);
 }
 .vc_custom_1459833943673 {
     background-color: #ffffff !important;
@@ -1182,6 +1183,7 @@ padding-bottom: 15px;
 }
 .label-wrap .label {
     padding:6px;
+    margin-bottom: 1px;
 }
 .header-mobile .header-logo img {
     max-height: inherit;

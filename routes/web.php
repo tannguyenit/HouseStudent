@@ -10,14 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-
-Route::post('/login', 'Auth\LoginController@postLogin');
-Route::get('/logout', 'Auth\LoginController@logout');
-Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendMail');
-Route::get('/change-password/{id}', 'Auth\ResetPasswordController@getPassword');
-Route::post('/change-password/{id}', 'Auth\ResetPasswordController@change');
-Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
+Route::group(['namespace' => 'Auth'], function () {
+    Route::post('/login', 'LoginController@postLogin');
+    Route::get('/logout', 'LoginController@logout');
+    Route::post('/forgot-password', 'ForgotPasswordController@sendMail');
+    Route::get('/change-password/{id}', 'ResetPasswordController@getPassword');
+    Route::post('/change-password/{id}', 'ResetPasswordController@change');
+    Route::get('auth/{provider}', 'RegisterController@redirectToProvider');
+    Route::get('auth/{provider}/callback', 'RegisterController@handleProviderCallback');
+});
 /*
 |--------------------------------------------------------------------------
 | index
