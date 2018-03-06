@@ -41,4 +41,5 @@ return [
     'contact-content'          => 'Contact Content',
     'contact-with-me'          => 'You need to contact us',
     'contact-infomation'       => 'Please fill in the form below, we will contact you again',
+    'please-login'             => 'Please login with facebook',
 ];

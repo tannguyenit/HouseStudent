@@ -1265,3 +1265,6 @@ padding-bottom: 15px;
 .error {
     color: red;
 }
+.modal-header button {
+    display:none;
+}

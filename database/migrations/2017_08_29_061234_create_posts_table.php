@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->longText('description');
             $table->uuid('type_id', 36);
             $table->uuid('status_id', 36);
-            $table->integer('price', 36);
+            $table->integer('price');
             $table->string('area', 36);
             $table->string('phone_boss', 30);
             $table->string('name_boss', 200);
@@ -33,10 +33,10 @@ class CreatePostsTable extends Migration
             $table->string('lat', 200);
             $table->string('lng', 200);
             $table->text('note')->nullable();
-            $table->integer('total_view', 50)->default(0);
+            $table->integer('total_view')->default(0);
             $table->integer('active')->default(0);
-            $table->integer('total_like', 50)->default(0);
-            $table->integer('total_comment', 50)->default(0);
+            $table->integer('total_like')->default(0);
+            $table->integer('total_comment')->default(0);
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

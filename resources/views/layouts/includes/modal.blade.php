@@ -1,5 +1,5 @@
 <!-- start modal -->
-<div class="modal fade" id="pop-login" tabindex="-1" role="dialog">
+<div class="modal fade" id="pop-login" tabindex="-1" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,7 +15,8 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div id="houzez_messages" class="houzez_messages message"></div>
-                        {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal', 'id' => 'formLogin']) }}
+                        @if (app('request')->input('admintrator') == 'true')
+                        {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal ' . $checkAdmin,  'id' => 'formLogin']) }}
                         <div class="form-group field-group">
                             <div class="input-user input-icon">
                                 {!! Form::text('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
@@ -36,6 +37,9 @@
                         </div>
                         <button type="submit" class="fave-login-button btn btn-primary btn-block">{{ trans('form.login') }}</button>
                         {!! Form::close() !!}
+                        @else
+                        {{ trans('index.please-login') }}
+                        @endif
                         <hr>
                         <a href="{{ url('/auth/facebook') }}" title="{{ trans('index.login-with-facebook') }}" class="margin-2">
                             <button class="btn btn-social btn-bg-facebook btn-block">
