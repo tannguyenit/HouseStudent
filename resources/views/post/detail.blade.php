@@ -184,7 +184,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            @if (count($detailsPost->features))
+                            @if ($detailsPost->features && count($detailsPost->features))
                             <ul class="list-three-col">
                                 @forelse ($detailsPost->features as $feature)
                                 <li><strong>{{ $feature->title }} : </strong> {{ $feature->value }}</li>

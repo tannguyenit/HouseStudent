@@ -1,5 +1,5 @@
 <!-- start modal -->
-<div class="modal fade" id="pop-login" tabindex="-1" role="dialog" data-backdrop="static">
+<div class="modal fade" id="pop-login" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
