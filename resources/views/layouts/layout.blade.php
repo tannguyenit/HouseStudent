@@ -188,11 +188,7 @@
                 "twocheckout_page": "http:\/\/houzez01.favethemes.com\/"
             };
             /* ]]> */
-            $(document).ready(function () {
-                if (AJAX_VARIABLE.user_id == 0) {
-                    $('#pop-login').modal('show');
-                }
-            })
+            
         </script>
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/autocomplete.mine899.js?ver=1.11.4') }}
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/mouse.mine899.js?ver=1.11.4') }}
