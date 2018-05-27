@@ -17,16 +17,12 @@ class HomeController extends BaseController
 
     public function home(Request $request)
     {
-        $ip = $request->ip();
-        $url = str_replace('IP_change', $ip, 'https://ipapi.co/IP_change/json');
-        $location = json_decode(file_get_contents($url));
         $relation = ['user', 'type', 'likes', 'firstImages', 'features'];
         $limit    = config('setting.limit.news_post');
 
         $dataView['newsPost'] = $this->postRepository->getPost($limit, $relation);
         $dataView['topView']  = $this->postRepository->getPost($limit, $relation, 'total_view');
         $dataView['country']  = $this->postRepository->getCountry();
-        $dataView['location'] = $location;
 
         return view('home.index', $dataView);
     }
