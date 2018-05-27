@@ -52,7 +52,7 @@
                                 <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
                             </h3>
                             <address class="property-address">{{ $element->address }}</address>
-                            <span id="getGoogleMaps" data-lat="{{ $location->latitude ?? '' }}" data-lng="{{ $location->longitude ?? '' }}"></span>
+                            <span id="getGoogleMaps" data-lat="" data-lng=""></span>
                         </div>
                         <div class="table-list full-width info-row">
                             <div class="cell">
