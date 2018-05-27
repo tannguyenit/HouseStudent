@@ -90,17 +90,17 @@
                 <div class="wpb_wrapper">
                     <div class="houzez-module module-title section-title-module text-center ">
                         <h2>{{ trans('index.our-team-title') }}</h2>
-                        <h3 class="sub-heading">{{ trans('index.our-team-content') }}</h3> </div>
-                        <div id="agents-module" class="houzez-module agents-module">
-                            @include('home.core-member')
-                        </div>
-                        <div class="vc_empty_space">
-                            <span class="vc_empty_space_inner"></span>
-                        </div>
+                        <h3 class="sub-heading">{{ trans('index.our-team-content') }}</h3>
+                    </div>
+                    <div id="agents-module" class="houzez-module agents-module">
+                        @include('home.core-member')
+                    </div>
+                    <div class="vc_empty_space">
+                        <span class="vc_empty_space_inner"></span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="vc_row-full-width vc_clearfix"></div>
     </div>
+    <div class="vc_row-full-width vc_clearfix"></div>
 @endsection

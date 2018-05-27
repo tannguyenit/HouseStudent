@@ -16,7 +16,7 @@
                     <div class="tab-pane fade in active">
                         <div id="houzez_messages" class="houzez_messages message"></div>
                         @if (app('request')->input('admintrator') == 'true')
-                        {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal ' . $checkAdmin,  'id' => 'formLogin']) }}
+                        {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal ',  'id' => 'formLogin']) }}
                         <div class="form-group field-group">
                             <div class="input-user input-icon">
                                 {!! Form::text('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
