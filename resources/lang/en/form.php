@@ -19,7 +19,7 @@ return [
     'login'             => 'Login',
     'remember'          => ' Remember me ',
     'login-success'     => 'Login success',
-    'login-fail'        => 'Please check email or password',
+    'login-fail'        => 'Please check email',
     'login-watting'     => 'Your account is locked, please contact the admin to open an account',
     'send-mail'         => 'Please enter your email address. You will receive a link to create a new password via email',
     'get-new-pass'      => 'Get new password',

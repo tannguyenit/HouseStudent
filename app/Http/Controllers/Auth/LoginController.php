@@ -43,30 +43,15 @@ class LoginController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-        $checkLogin = false;
-        $input      = $request->email;
-
-        if (strpos($input, "@")) {
-            $findUser = $this->userRepository->findByFirst('email', $input);
-
-            if ($findUser) {
-                $login = [
-                    'email'    => $request->email,
-                    'password' => $request->password,
-                ];
-            }
-        } else {
-            $findUser = $this->userRepository->findByFirst('username', $input);
-
-            if ($findUser) {
-                $login = [
-                    'username' => $request->email,
-                    'password' => $request->password,
-                ];
-            }
-        }
+        $input    = $request->email;
+        $findUser = $this->userRepository->findByFirst('email', $input);
 
         if ($findUser) {
+            $login = [
+                'email'    => $request->email,
+                'password' => $request->password,
+            ];
+
             if (config('setting.active') == $findUser->active) {
                 $checkLogin = Auth::attempt($login, $request->remember);
                 if ($checkLogin) {
