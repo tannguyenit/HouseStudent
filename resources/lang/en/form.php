@@ -4,6 +4,8 @@ return [
         'email'        => 'Email',
         'email-forgot' => 'Please enter email reset password',
         'password'     => 'Password',
+        'min-area'     => 'Min Area (sqft)',
+        'max-area'     => 'Max Area (sqft)',
     ],
     'pass'              => [
         'required' => 'Please enter your password',
@@ -55,6 +57,8 @@ return [
     'all-township'      => 'All Townships',
     'all-status'        => 'All Status',
     'all-type'          => 'All Type',
+    'bedrooms'          => 'Bedrooms',
+    'bathrooms'         => 'Bathrooms',
     'price-range'       => 'Price Range',
     'from'              => 'From',
     'to'                => 'to',

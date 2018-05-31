@@ -48,6 +48,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/active', 'UserController@activeUser');
 Route::get('/member/{slug}', ['as' => 'member', 'uses' => 'UserController@member']);
 /* ------------------------------------------------------------------------ */
+/*  News
+/* ------------------------------------------------------------------------ */
+Route::get('/news', 'NewsController@index');
+
+/* ------------------------------------------------------------------------ */
 /*  Ajax
 /* ------------------------------------------------------------------------ */
 Route::group(['as' => 'ajax.'], function () {

@@ -110,6 +110,9 @@
 .advanced-search-mobile .single-search-inner .form-control {
     color: #ffffff;
 }
+.advanced-search-mobile .features-list .checkbox-inline {
+    width: 42%;
+}
 .advanced-search-mobile .single-search-inner .form-control::-moz-placeholder {
     color: #ffffff !important;
 }
