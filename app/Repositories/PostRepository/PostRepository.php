@@ -44,6 +44,14 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             $result->where('address', 'LIKE', $keyword);
         }
 
+        if (isset($search['min_area']) && "" != $search['min_area']) {
+            $result->where('area', '>', $search['min_area']);
+        }
+
+        if (isset($search['max_area']) && "" != $search['max_area']) {
+            $result->where('area', '<', $search['max_area']);
+        }
+
         return $result->orderBy($sortBy->key, $sortBy->value);
     }
 
@@ -182,6 +190,14 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         if (isset($search['type']) && 'all' != $search['type']) {
             $arrWhere['type_id'] = $search['type'];
+        }
+
+        if (isset($search['bedrooms'])) {
+            $arrWhere['bedrooms'] = $search['bedrooms'];
+        }
+
+        if (isset($search['bathrooms'])) {
+            $arrWhere['bathrooms'] = $search['bathrooms'];
         }
 
         return $arrWhere;

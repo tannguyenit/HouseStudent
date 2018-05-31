@@ -54,6 +54,8 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'status_id'     => $faker->randomElement($statusId ?: $statusId = App\Models\Status::pluck('id')->toArray()),
         'price'         => rand(500000, 2000000),
         'area'          => rand(10, 20),
+        'bedrooms'      => rand(1, 10),
+        'bathrooms'     => rand(1, 10),
         'phone_boss'    => $faker->phoneNumber,
         'name_boss'     => $faker->name,
         'address'       => $faker->address,

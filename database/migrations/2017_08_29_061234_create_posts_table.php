@@ -24,7 +24,11 @@ class CreatePostsTable extends Migration
             $table->uuid('type_id', 36);
             $table->uuid('status_id', 36);
             $table->integer('price');
-            $table->string('area', 36);
+            $table->float('area');
+            $table->integer('pin');
+            $table->integer('bedrooms')->nullable();
+            $table->integer('bathrooms')->nullable();
+            $table->integer('floor_number')->nullable();
             $table->string('phone_boss', 30);
             $table->string('name_boss', 200);
             $table->string('address', 255);

@@ -55,46 +55,32 @@
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
-                    <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
-                        <option value="">{{ trans('form.all-type') }}</option>
-                        @forelse ($types as $element)
-                            <option value="{{ $element->id }}">{{ $element->title }}</option>
-                        @empty
-                        @endforelse
+                    <select class="selectpicker" name="bedrooms" data-live-search="false" data-live-search-style="begins">
+                        <option value="">{{ trans('form.bedrooms') }}</option>
+                        @for ($i = 0; $i < 10; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                     </select>
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
-                    <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
-                        <option value="">{{ trans('form.all-type') }}</option>
-                        @forelse ($types as $element)
-                            <option value="{{ $element->id }}">{{ $element->title }}</option>
-                        @empty
-                        @endforelse
+                    <select class="selectpicker" name="bathrooms" data-live-search="false" data-live-search-style="begins">
+                        <option value="">{{ trans('form.bathrooms') }}</option>
+                        @for ($i = 0; $i < 10; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                     </select>
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
-                    <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
-                        <option value="">{{ trans('form.all-type') }}</option>
-                        @forelse ($types as $element)
-                            <option value="{{ $element->id }}">{{ $element->title }}</option>
-                        @empty
-                        @endforelse
-                    </select>
+                    <input type="number" class="form-control" min="0" max="100" value="" name="min-area" placeholder="{{ trans('form.placeholder.min-area') }}">
                 </div>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
-                    <select class="selectpicker" name="type" data-live-search="false" data-live-search-style="begins">
-                        <option value="">{{ trans('form.all-type') }}</option>
-                        @forelse ($types as $element)
-                            <option value="{{ $element->id }}">{{ $element->title }}</option>
-                        @empty
-                        @endforelse
-                    </select>
+                    <input type="number" class="form-control" min="0" max="500" value="" name="max-area" placeholder="{{ trans('form.placeholder.max-area') }}">
                 </div>
             </div>
             <div class="col-sm-6 col-xs-6">

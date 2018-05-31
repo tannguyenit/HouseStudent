@@ -9,15 +9,34 @@
             </div>
             <nav class="navi main-nav">
                 <ul id="main-nav" class="">
-                    <li id="menu-item-955" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-955">
+                    <li class="menu-item">
                         <a href="{{ action('HomeController@home') }}">{{ trans('index.home') }}</a>
                     </li>
-                    @forelse ($types as $element)
-                        <li  class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-352">
-                            <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
-                        </li>
-                    @empty
-                    @endforelse
+                    <li class="menu-item">
+                        <a href="#">{{ trans('index.type') }}</a>
+                        <ul class="sub-menu">
+                            @forelse ($types as $element)
+                            <li class="menu-item">
+                                <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">{{ trans('index.project') }}</a>
+                        <ul class="sub-menu">
+                            @forelse ($types as $element)
+                            <li class="menu-item">
+                                <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
+                            </li>
+                            @empty
+                            @endforelse
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ action('NewsController@index') }}">{{ trans('index.news') }}</a>
+                    </li>
                 </ul>
             </nav>
         </div>
