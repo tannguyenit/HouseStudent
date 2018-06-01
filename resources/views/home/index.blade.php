@@ -5,7 +5,6 @@
         @include('layouts.includes.map')
     @endsection
 @section('content')
-    @include('home.load-more')
     <div class="row row-fluid">
         <div class="col-sm-12">
             <div class="vc_column-inner ">
@@ -23,6 +22,33 @@
                         <div class="row grid-row">
                             <div id="properties-carousel-v2-uo8oC" data-token="uo8oC" class="carousel slide-animated slide-animated owl-carousel owl-theme">
                                 @include('home.news-post')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="vc_row wpb_row vc_row-fluid">
+        <div class="wpb_column vc_column_container vc_col-sm-12">
+            <div class="vc_column-inner ">
+                <div class="wpb_wrapper">
+                    <div class="houzez-module module-title section-title-module text-center ">
+                        <h2>Discover Our Best Deals in South Florida</h2>
+                        <h3 class="sub-heading"></h3>
+                    </div>
+                    <div id="properties_module_section" class="houzez-module property-item-module">
+                        <div>
+                            <!-- Start container-content -->
+                            <div id="properties_module_container" data-nextpageurl="" data-url-load-more="{{ action('AjaxController@loadMoreHomePage') }}?page=1" class="property-listing grid-view grid-view-3-col"></div>
+                            <!-- End container-content -->
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="fave-pagination-loadmore" class="pagination-wrap fave-load-more">
+                            <div class="pagination">
+                                <a href="javascript:void(0)">
+                                    {{ trans('index.load-more') }}
+                                </a>
                             </div>
                         </div>
                     </div>

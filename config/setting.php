@@ -17,6 +17,7 @@ return [
         'user-table'    => 10,
         'my-properties' => 10,
         'first'         => 1,
+        'default'       => 10,
     ],
     'price'       => [
         'vi' => ' VNĐ',
@@ -24,4 +25,9 @@ return [
     'maintenance' => 1,
     'active'      => 1,
     'no-active'   => 0,
+    'pin'         => [
+        'not-active' => 0,
+        'waitting'   => 1,
+        'active'     => 2,
+    ],
 ];

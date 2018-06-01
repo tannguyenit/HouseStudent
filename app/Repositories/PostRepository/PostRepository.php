@@ -237,4 +237,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             DB::rollBack();
         }
     }
+
+    public function getNormalPost($limit)
+    {
+        $query = $this->model->where('pin', config('setting.pin.not-active'))
+            ->orderBy('updated_at', 'DESC')
+            ->paginate($limit);
+
+        return $query;
+    }
 }

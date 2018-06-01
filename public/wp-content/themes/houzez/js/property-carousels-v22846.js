@@ -1,16 +1,15 @@
 jQuery(document).ready( function($){
-
     $('.carousel[id^="properties-carousel-v2-"]').each(function(){
         var $div = jQuery(this);
         var token = $div.data('token');
         var obj = window['prop_carousel_v2_' + token];
 
         var slidesToShow = parseInt(obj.slides_to_show),
-            slidesToScroll = parseInt(obj.slides_to_scroll),
-            autoplay = parseBool(obj.slide_auto),
-            autoplaySpeed = parseInt(obj.auto_speed),
-            slide_infinite = parseBool(obj.slide_infinite),
-            dots = parseBool( obj.slide_dots );
+        slidesToScroll = parseInt(obj.slides_to_scroll),
+        autoplay = parseBool(obj.slide_auto),
+        autoplaySpeed = parseInt(obj.auto_speed),
+        slide_infinite = parseBool(obj.slide_infinite),
+        dots = parseBool( obj.slide_dots );
 
         var houzez_rtl = AJAX_VARIABLE.houzez_rtl;
 
@@ -43,25 +42,22 @@ jQuery(document).ready( function($){
                     items: 1
                 },
                 480: {
-                    items: 4
+                    items: 2
                 },
                 768: {
-                    items: 5
+                    items: 3
                 },
                 1000: {
-                    items: 5
+                    items: 4
                 }
             }
         });
 
-
         $('.btn-prev-'+token).on('click',function(){
-                faveOwl.trigger('prev.owl.carousel',[1000])
+            faveOwl.trigger('prev.owl.carousel',[1000])
         })
         $('.btn-next-'+token).on('click',function(){
             faveOwl.trigger('next.owl.carousel')
         })
-
     });
-
 });

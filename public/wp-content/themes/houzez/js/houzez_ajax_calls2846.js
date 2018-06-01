@@ -799,7 +799,7 @@
         /*--------------------------------------------------------------------------
          *  Property Module Ajax Pagination
          * -------------------------------------------------------------------------*/
-         var properties_module_section = $('#properties_module_section');
+         var properties_module_section = $('#properties_module_section_add');
          if( properties_module_section.length > 0 ) {
 
             var properties_module_container = $('#properties_module_container');

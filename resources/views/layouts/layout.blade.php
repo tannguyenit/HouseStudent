@@ -60,6 +60,7 @@
         {{ Html::script('wp-content/wp-includes/js/jquery/ui/menu.mine899.js?ver=1.11.4') }}
         {{ Html::script('wp-content/wp-includes/js/wp-a11y.min66f2.js?ver=4.7.5') }}
         {{ Html::script('wp-content/themes/houzez/js/tannguyen/setting.js') }}
+        {{ Html::script('wp-content/themes/houzez/js/tannguyen/home-page.js') }}
         <script type='text/javascript'>
             /* <![CDATA[ */
             var lat = $('#getGoogleMaps').data('lat');
