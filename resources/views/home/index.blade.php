@@ -5,6 +5,7 @@
         @include('layouts.includes.map')
     @endsection
 @section('content')
+    @include('home.load-more')
     <div class="row row-fluid">
         <div class="col-sm-12">
             <div class="vc_column-inner ">
