@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration
             $table->uuid('status_id', 36);
             $table->integer('price');
             $table->float('area');
-            $table->integer('pin');
+            $table->integer('pin')->default(0);
             $table->integer('bedrooms')->nullable();
             $table->integer('bathrooms')->nullable();
             $table->integer('floor_number')->nullable();
