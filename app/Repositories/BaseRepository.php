@@ -245,6 +245,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
                     'value' => 'DESC',
                 ];
                 break;
+            case 'a_pin':
+                $sortBy = [
+                    'key'   => 'pin',
+                    'value' => 'ASC',
+                ];
+                break;
+            case 'd_pin':
+                $sortBy = [
+                    'key'   => 'pin',
+                    'value' => 'DESC',
+                ];
+                break;
 
             default:
                 $sortBy = [

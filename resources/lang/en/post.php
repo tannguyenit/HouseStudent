@@ -67,4 +67,5 @@ return [
     'reset-maker'       => 'Reset Marker',
     'not-account'       => 'Do you have an account?',
     'register-account'  => "If you don't have an account you can create one below by entering your email address. Your account details will be confirmed via email",
+    'pin-to-top'        => 'Pin to top',
 ];

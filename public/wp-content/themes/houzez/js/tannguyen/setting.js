@@ -26,3 +26,38 @@ $(document).ready(function () {
     });
 })
 
+function Pin(url) {
+    this.url = url;
+}
+
+Pin.prototype = {
+    init:function () {
+        this.onChange();
+    },
+    onChange: function () {
+        var _self = this;
+        $('.channge-pin').on('click', function () {
+            var _this = $(this);
+            var id = _this.data('id');
+            $.ajax({
+                url: _self.url,
+                type: "POST",
+                dataType: 'JSON',
+                async: false,
+                data: {
+                    id:id,
+                },
+                success: function(response)
+                {
+                    if (response.status) {
+                        _this.closest('li').remove();
+                    }
+                    showNotification(response)
+                },
+                error: function (res) {
+                    console.log(res);
+                }
+            });
+        })
+    },
+}

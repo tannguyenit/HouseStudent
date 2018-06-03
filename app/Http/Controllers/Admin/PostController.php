@@ -10,6 +10,7 @@ use App\Repositories\StatusRepository\StatusRepository;
 use App\Repositories\TypeRepository\TypeRepository;
 use DB;
 use Illuminate\Http\Request;
+use Request as NewRequest;
 
 class PostController extends Controller
 {
@@ -36,7 +37,12 @@ class PostController extends Controller
     public function index()
     {
         $relationship      = ['user', 'images', 'features'];
-        $dataView['posts'] = $this->postRepository->getAllDatasAdmin($relationship, config('setting.limit.news_post'));
+        $getSortBy              = NewRequest::get('sortby');
+        $sortBy                 = $this->postRepository->getSortBy($getSortBy);
+        $dataSearch             = NewRequest::query();
+        $dataView['dataSearch'] = $dataSearch;
+        $dataView['posts']    = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
+            ->paginate(config('setting.limit.search'));
 
         return view('admin.post.index', $dataView);
     }

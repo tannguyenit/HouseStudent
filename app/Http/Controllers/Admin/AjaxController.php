@@ -205,20 +205,73 @@ class AjaxController extends Controller
                 $updatePost = $this->postRepository->update($inputs, $id);
 
                 if ($updatePost) {
-                    return response()->json([
-                        'status' => true,
+                    $data = [
                         'title'  => trans('validate.success'),
                         'msg'    => trans('validate.msg.change-success'),
                         'result' => $value,
-                    ]);
+                    ];
+                    return $this->success($data);
                 }
             }
 
-            return response()->json([
-                'status' => false,
-                'title'  => trans('validate.errors'),
-                'msg'    => trans('validate.msg.change-fail'),
-            ]);
+            $data = [
+                'title' => trans('validate.errors'),
+                'msg'   => trans('validate.msg.change-fail'),
+            ];
+
+            return $this->error($data);
+        }
+    }
+
+    public function changeStatusPin(Request $request)
+    {
+        if ($request->ajax()) {
+            $id     = $request->id;
+            $status = $request->status;
+
+            if ($id) {
+                if (config('setting.pin.not-active') == $status) {
+                    $value = config('setting.pin.not-active');
+                } else if (config('setting.pin.waitting') == $status) {
+                    $value = config('setting.pin.waitting');
+                } else {
+                    $value = config('setting.pin.active');
+                }
+
+                $inputs = [
+                    'pin' => $value,
+                ];
+                $updatePost  = $this->postRepository->update($inputs, $id);
+                $arrPost     = $this->postRepository->findBy('pin', config('setting.pin.active'))->count();
+                $arrWherePin = [
+                    'pin' => config('setting.pin.active'),
+                ];
+
+                if ($arrPost > config('constant.limit-pin')) {
+                    $changePin = $this->postRepository->whereArray($arrWherePin);
+                    $arWhere   = [
+                        'pin' => config('setting.pin.not-active'),
+                    ];
+                    $this->postRepository->update($arWhere, $changePin->id);
+                }
+
+                if ($updatePost) {
+                    $data = [
+                        'title'  => trans('validate.success'),
+                        'msg'    => trans('validate.msg.change-success'),
+                        'result' => $value,
+                    ];
+
+                    return $this->success($data);
+                }
+            }
+
+            $data = [
+                'title' => trans('validate.errors'),
+                'msg'   => trans('validate.msg.change-fail'),
+            ];
+
+            return $this->error($data);
         }
     }
 

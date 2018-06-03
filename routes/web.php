@@ -65,6 +65,7 @@ Route::group(['as' => 'ajax.'], function () {
     Route::get('load-more', ['as' => 'load-more', 'uses' => 'AjaxController@loadMoreHomePage']);
     Route::post('checkEmail', ['as' => 'checkEmail', 'uses' => 'UserController@checkEmail']);
     Route::post('checkusername', ['as' => 'checkusername', 'uses' => 'UserController@checkusername']);
+    Route::post('change-status-pin', ['as' => 'change-status-pin', 'uses' => 'AjaxController@changeStatusPin']);
 });
 /*
 |--------------------------------------------------------------------------

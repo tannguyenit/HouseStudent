@@ -32,6 +32,8 @@ return [
     'd-price'                  => 'Price (High to Low)',
     'a-date'                   => 'Date Old to New',
     'd-date'                   => 'Date New to Old',
+    'a-pin'                   => 'Pin Old to New',
+    'd-pin'                   => 'Pin New to Old',
     'all'                      => 'All',
     'type'                     => 'Property Types',
     'faq'                      => 'FAQ',

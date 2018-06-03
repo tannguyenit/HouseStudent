@@ -1,4 +1,13 @@
 @extends('layouts.admin.layout')
+
+@section('footerscript')
+    @parent
+    {{ Html::script('wp-content/themes/houzez/js/tannguyen/setting.js') }}
+    <script type="text/javascript">
+            pin = new Pin("{{ action('AjaxController@changeStatusPin') }}");
+            pin.init();
+    </script>
+@endsection
 @section('content')
 <div class="board-header board-header-4">
     <div class="container">
@@ -67,9 +76,15 @@
                                         <h4 class="my-heading">
                                             <a href="{{ action('PostController@show', $element->slug) }}" target="_blank">{{ $element->title }}</a>
                                             @if ($element->active == config('setting.active'))
-                                            <span class="label-status-8 label label-featured">{{ trans('post.active') }}</span>
+                                                <span class="label-status-8 label label-featured">{{ trans('post.active') }}</span>
                                             @else
-                                            <span class="label label-default label-color-289">{{ trans('post.no-active') }}</span>
+                                                <span class="label label-default label-color-289">{{ trans('post.no-active') }}</span>
+                                            @endif
+                                            @if ($element->pin == config('setting.pin.active'))
+                                                <span class="label-status-8 label label-featured">{{ trans('post.active') }}</span>
+                                            @endif
+                                            @if ($element->pin == config('setting.pin.waitting'))
+                                                <span class="label label-default">{{ trans('post.pin-to-top') }}</span>
                                             @endif
                                         </h4>
                                         <address class="address">{{ $element->address }}</address>
@@ -93,6 +108,13 @@
                                                 {{ trans('form.action') }} <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu actions-dropdown">
+                                                @if($element->pin == config('setting.pin.not-active'))
+                                                    <li id="pin-request-{{ $element->id }}">
+                                                        <a class="channge-pin" href="javascript:void(0)" data-id="{{ $element->id }}">
+                                                            <i class="fa fa-refresh"></i> {{ trans('form.pin-request') }}
+                                                        </a>
+                                                    </li>
+                                                @endif
                                                 <li>
                                                     <a href="{{ action('PostController@edit', $element->id) }}">
                                                         <i class="fa fa-edit"></i> {{ trans('form.edit') }}

@@ -15,14 +15,14 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div id="houzez_messages" class="houzez_messages message"></div>
-                        @if (app('request')->input('admintrator') == 'true')
+                        {{--  @if (app('request')->input('admintrator') == 'true')  --}}
                         {{ Form::open(['action' => 'Auth\LoginController@postLogin','method' => 'POST','class' => 'form-horizontal ',  'id' => 'formLogin']) }}
                         <div class="form-group field-group">
                             <div class="input-user input-icon">
-                                {!! Form::text('email', '', ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
+                                {!! Form::text('email', null, ['placeholder' => trans('form.placeholder.email'), 'class' => 'form-control',]) !!}
                             </div>
                             <div class="input-pass input-icon">
-                                {!! Form::password('password', '', ['placeholder' => trans('form.placeholder.password'), 'class' => 'form-control',]) !!}
+                                {!! Form::password('password', null, ['placeholder' => trans('form.placeholder.password'), 'class' => 'form-control',]) !!}
                             </div>
                         </div>
                         <div class="forget-block clearfix">
@@ -37,9 +37,9 @@
                         </div>
                         <button type="submit" class="fave-login-button btn btn-primary btn-block">{{ trans('form.login') }}</button>
                         {!! Form::close() !!}
-                        @else
+                        {{--  @else
                         {{ trans('index.please-login') }}
-                        @endif
+                        @endif  --}}
                         <hr>
                         <a href="{{ url('/auth/facebook') }}" title="{{ trans('index.login-with-facebook') }}" class="margin-2">
                             <button class="btn btn-social btn-bg-facebook btn-block">
