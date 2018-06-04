@@ -62,6 +62,7 @@ Route::group(['as' => 'ajax.'], function () {
     Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
     Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);
     Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'AjaxController@deletePost']);
+    Route::get('load-more', ['as' => 'load-more', 'uses' => 'AjaxController@loadMoreHomePage']);
     Route::post('checkEmail', ['as' => 'checkEmail', 'uses' => 'UserController@checkEmail']);
     Route::post('checkusername', ['as' => 'checkusername', 'uses' => 'UserController@checkusername']);
 });

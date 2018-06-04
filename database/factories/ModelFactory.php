@@ -34,8 +34,8 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 });
 $factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->name,
-        'typeable_id' => 1,
+        'title'         => $faker->name,
+        'typeable_id'   => 1,
         'typeable_type' => 'App\\\Post',
     ];
 });

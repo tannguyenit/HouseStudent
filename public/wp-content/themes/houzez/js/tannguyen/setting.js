@@ -5,14 +5,14 @@ var uiAutocompleteL10n = {
     "itemSelected": "Item selected."
 };
 var prop_carousel_v2_uo8oC = {
-    "slide_auto": "false",
+    "slide_auto": "true",
     "auto_speed": "3000",
     "slide_dots": "true",
     "slide_infinite": "true",
     "slides_to_scroll": "1"
 };
 var prop_carousel_v2_cSQhv = {
-    "slide_auto": "false",
+    "slide_auto": "true",
     "auto_speed": "3000",
     "slide_dots": "true",
     "slide_infinite": "true",

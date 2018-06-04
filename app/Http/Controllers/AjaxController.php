@@ -13,6 +13,7 @@ class AjaxController extends BaseController
     protected $postRepository;
     protected $imageRepository;
     protected $likeRepository;
+    protected $limit;
 
     public function __construct(
         PostRepository $postRepository,
@@ -22,6 +23,7 @@ class AjaxController extends BaseController
         $this->postRepository  = $postRepository;
         $this->imageRepository = $imageRepository;
         $this->likeRepository  = $likeRepository;
+        $this->limit           = config('setting.limit.news_post');
     }
 
     public function getMap(Request $request)
@@ -271,5 +273,20 @@ class AjaxController extends BaseController
             'title'  => trans('validate.errors'),
             'msg'    => trans('validate.msg.delete-fail'),
         ]);
+    }
+
+    public function loadMoreHomePage(Request $request)
+    {
+        if ($request->ajax()) {
+            $limit = $this->limit;
+            $post  = $this->postRepository->getNormalPost($limit);
+            $data  = [
+                'html'         => view('ajax.load-more', compact('post'))->render(),
+                'hasMorePages' => $post->hasMorePages(),
+                'nextPageUrl'  => $post->nextPageUrl(),
+            ];
+
+            return $this->success($data);
+        }
     }
 }
