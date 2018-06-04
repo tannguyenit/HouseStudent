@@ -34,6 +34,7 @@ return [
         'note'        => 'Enter your note',
         'listing'     => 'Enter title you want search ...',
         'date'        => 'dd/mm/yyyy',
+        'list-search'     => 'Enter title or address you want search ...',
     ],
     'msg'                  => [
         'digits'         => 'Please enter only digits',

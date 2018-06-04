@@ -86,4 +86,7 @@ return [
     'your-name'         => 'Your name',
     'subject'           => 'Subject',
     'messages'          => 'Messages',
+    'approve'           => 'Approve',
+    'pin'               => 'Pin',
+    'pin-request'       => 'Pin request'
 ];

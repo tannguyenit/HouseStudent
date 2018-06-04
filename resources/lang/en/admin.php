@@ -45,4 +45,5 @@ return [
     'view-user' => 'View Public Profile',
     'active'    => 'Active',
     'no-active' => 'No Active',
+    'change-appeove-post'   =>  'Change Approve',
 ];

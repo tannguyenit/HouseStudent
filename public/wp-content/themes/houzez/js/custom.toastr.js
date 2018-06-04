@@ -15,3 +15,11 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+
+function showNotification(data) {
+  if (data.status) {
+    toastr.success(data.data.msg, data.data.title)
+  } else {
+    toastr.warning(data.data.msg, data.data.title)
+  }
+}

@@ -289,4 +289,35 @@ class AjaxController extends BaseController
             return $this->success($data);
         }
     }
+
+    public function changeStatusPin(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+
+            if ($id) {
+                $inputs = [
+                    'pin' => config('setting.pin.waitting'),
+                ];
+                $updatePost = $this->postRepository->update($inputs, $id);
+
+                if ($updatePost) {
+                    $response = [
+                        'title'  => trans('validate.success'),
+                        'msg'    => trans('validate.msg.change-success'),
+                        'result' => $id,
+                    ];
+
+                    return $this->success($response);
+                }
+            }
+        }
+
+        $response = [
+            'title' => trans('validate.errors'),
+            'msg'   => trans('validate.msg.change-fail'),
+        ];
+
+        return $this->error($response);
+    }
 }

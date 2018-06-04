@@ -44,6 +44,10 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             $result->where('address', 'LIKE', $keyword);
         }
 
+        if ($keyword) {
+            $result->orWhere('title', 'LIKE', $keyword);
+        }
+
         if (isset($search['min_area']) && "" != $search['min_area']) {
             $result->where('area', '>', $search['min_area']);
         }

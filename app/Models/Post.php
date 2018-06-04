@@ -31,6 +31,7 @@ class Post extends AbstractModel
         'status_id',
         'price',
         'area',
+        'pin',
         'phone_boss',
         'name_boss',
         'address',

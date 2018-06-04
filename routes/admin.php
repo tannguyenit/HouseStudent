@@ -22,6 +22,7 @@ Route::post('/status', ['as' => 'storeStatus', 'uses' => 'StatusController@store
 Route::get('/post', ['as' => 'indexPost', 'uses' => 'PostController@index']);
 Route::get('/post/edit/{id}', ['as' => 'showPost', 'uses' => 'PostController@show']);
 Route::post('/post/edit/{id}', ['as' => 'updatePost', 'uses' => 'PostController@update']);
+Route::get('/post/advanced-search', ['as' => 'search', 'uses' => 'PostController@search']);
 Route::resource('/user', 'UserController');
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::group(['as' => 'ajax.'], function () {
     Route::post('updateStatus', ['as' => 'updateStatus', 'uses' => 'AjaxController@updateStatus']);
     Route::post('deleteStatus', ['as' => 'deleteStatus', 'uses' => 'AjaxController@deleteStatus']);
     Route::post('change-status-post', ['as' => 'change-status-post', 'uses' => 'AjaxController@changeStatusPost']);
+    Route::post('change-status-pin', ['as' => 'change-status-pin', 'uses' => 'AjaxController@changeStatusPin']);
     Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'AjaxController@deletePost']);
     Route::post('updateUser', ['as' => 'updateUser', 'uses' => 'AjaxController@updateUser']);
     Route::post('deleteUser', ['as' => 'deleteUser', 'uses' => 'AjaxController@deleteUser']);
