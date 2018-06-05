@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository\PostRepository;
-use App\Repositories\TypeRepository\TypeRepository;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
+use App\Repositories\PostRepository\PostRepositoryInterface;
 
 class NewsController extends BaseController
 {
     protected $postRepository;
-    protected $typeRepository;
+    protected $categoryRepository;
 
     public function __construct(
-        PostRepository $postRepository,
-        TypeRepository $typeRepository
+        PostRepositoryInterface $postRepository,
+        CategoryRepositoryInterface $categoryRepository
     ) {
-        $this->postRepository = $postRepository;
-        $this->typeRepository = $typeRepository;
+        $this->postRepository     = $postRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**

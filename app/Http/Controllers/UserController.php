@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository\PostRepository;
-use App\Repositories\UserRepository\UserRepository;
+use App\Repositories\PostRepository\PostRepositoryInterface;
+use App\Repositories\UserRepository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
@@ -12,8 +12,8 @@ class UserController extends BaseController
     protected $postRepository;
 
     public function __construct(
-        UserRepository $userRepository,
-        PostRepository $postRepository
+        UserRepositoryInterface $userRepository,
+        PostRepositoryInterface $postRepository
     ) {
         $this->userRepository = $userRepository;
         $this->postRepository = $postRepository;
@@ -124,7 +124,7 @@ class UserController extends BaseController
     public function member(Request $request, $slug)
     {
         $detailUser           = $this->userRepository->findByFirst('username', $slug);
-        $relationShip         = ['user', 'type', 'firstImages'];
+        $relationShip         = ['user', 'category', 'firstImages'];
         $sortBy               = $this->postRepository->getSortBy(null);
         $dataView['listings'] = $this->postRepository->getMyProperties($relationShip, 'user_id', $detailUser->id, $sortBy, config('setting.limit.my-properties'), false);
 

@@ -15,8 +15,8 @@ Route::get('/', ['as' => 'dashboard', 'uses' => 'DashboardController@dashboard']
 Route::get('/setting', ['as' => 'setting', 'uses' => 'SettingController@index']);
 Route::post('/setting/save', ['as' => 'setting.save', 'uses' => 'SettingController@save']);
 Route::post('/setting/{id}', ['as' => 'setting.update', 'uses' => 'SettingController@update']);
-Route::get('/type', ['as' => 'type', 'uses' => 'TypeController@index']);
-Route::post('/type', ['as' => 'store', 'uses' => 'TypeController@store']);
+Route::get('/type', ['as' => 'type', 'uses' => 'CategoryController@index']);
+Route::post('/type', ['as' => 'store', 'uses' => 'CategoryController@store']);
 Route::get('/status', ['as' => 'status', 'uses' => 'StatusController@index']);
 Route::post('/status', ['as' => 'storeStatus', 'uses' => 'StatusController@store']);
 Route::get('/post', ['as' => 'indexPost', 'uses' => 'PostController@index']);

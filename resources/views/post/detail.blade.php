@@ -14,8 +14,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a itemprop="url" href="{{ action('TypeController@show', $detailsPost->type->slug) }}">
-                                    <span itemprop="title">{{ $detailsPost->type->title }}</span>
+                                <a itemprop="url" href="{{ action('CategoryController@show', $detailsPost->category->slug) }}">
+                                    <span itemprop="title">{{ $detailsPost->category->title }}</span>
                                 </a>
                             </li>
                             <li class="active">{{ $detailsPost->title }}</li>
@@ -26,7 +26,7 @@
                             </div>
                             <div class="table-cell hidden-sm hidden-xs">
                                 <span class="label-wrap">
-                                    <span class="label-featured label label-success">{{ $detailsPost->type->title }}</span>
+                                    <span class="label-featured label label-success">{{ $detailsPost->category->title }}</span>
                                 </span>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                         <div class="tab-content">
                             <div id="gallery" class="tab-pane fade in active">
                                 <span class="label-wrap visible-sm visible-xs">
-                                    <span class="label label-primary label-status-7">{{ $detailsPost->type->title }}</span>
+                                    <span class="label label-primary label-status-7">{{ $detailsPost->category->title }}</span>
                                 </span>
                                 <div class="detail-slider-wrap">
                                     <div class="detail-slider owl-carousel owl-theme">

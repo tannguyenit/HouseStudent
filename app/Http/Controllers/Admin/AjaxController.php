@@ -3,29 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\PostRepository\PostRepository;
-use App\Repositories\StatusRepository\StatusRepository;
-use App\Repositories\TypeRepository\TypeRepository;
-use App\Repositories\UserRepository\UserRepository;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
+use App\Repositories\PostRepository\PostRepositoryInterface;
+use App\Repositories\StatusRepository\StatusRepositoryInterface;
+use App\Repositories\UserRepository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
-    protected $typeRepository;
+    protected $categoryRepository;
     protected $statusRepository;
     protected $postRepository;
     protected $userRepository;
 
     public function __construct(
-        TypeRepository $typeRepository,
-        StatusRepository $statusRepository,
-        PostRepository $postRepository,
-        UserRepository $userRepository
+        CategoryRepositoryInterface $categoryRepository,
+        StatusRepositoryInterface $statusRepository,
+        PostRepositoryInterface $postRepository,
+        UserRepositoryInterface $userRepository
     ) {
-        $this->typeRepository   = $typeRepository;
-        $this->statusRepository = $statusRepository;
-        $this->postRepository   = $postRepository;
-        $this->userRepository   = $userRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->statusRepository   = $statusRepository;
+        $this->postRepository     = $postRepository;
+        $this->userRepository     = $userRepository;
     }
 
     public function updateType(Request $request)
@@ -33,12 +33,12 @@ class AjaxController extends Controller
         if ($request->ajax()) {
             $data      = $request->all();
             $id        = $data['id'];
-            $fillable  = $this->typeRepository->getFillable();
+            $fillable  = $this->categoryRepository->getFillable();
             $attribute = array_only($data, $fillable);
-            $type      = $this->typeRepository->find($id);
+            $type      = $this->categoryRepository->find($id);
 
             if ($type) {
-                $result = $this->typeRepository->update($attribute, $id, $slug = true);
+                $result = $this->categoryRepository->update($attribute, $id, $slug = true);
                 if ($result) {
                     return response()->json([
                         'status' => true,
@@ -61,7 +61,7 @@ class AjaxController extends Controller
         if ($request->ajax()) {
             $data   = $request->all();
             $id     = $data['id'];
-            $result = $this->typeRepository->delete($id);
+            $result = $this->categoryRepository->delete($id);
 
             if ($result) {
                 return response()->json([

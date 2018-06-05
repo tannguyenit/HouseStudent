@@ -72,10 +72,10 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    {!! Form::label('type_id', trans('post.type')) !!}
-                                                    <select name="type_id" id="type_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                                                    {!! Form::label('category_id', trans('post.type')) !!}
+                                                    <select name="category_id" id="category_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                                         @forelse ($types as $element)
-                                                        <option value="{{ $element->id }}" {{ $post->type_id == $element->id ? 'selected="selected"' : '' }}>{{ $element->title }}</option>
+                                                        <option value="{{ $element->id }}" {{ $post->category_id == $element->id ? 'selected="selected"' : '' }}>{{ $element->title }}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>

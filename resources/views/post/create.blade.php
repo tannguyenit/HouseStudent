@@ -225,15 +225,15 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        {!! Form::label('type_id', trans('post.type')) !!} <span class="error">(*)</span>
-                                                        <select name="type_id" id="type_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
+                                                        {!! Form::label('category_id', trans('post.type')) !!} <span class="error">(*)</span>
+                                                        <select name="category_id" id="category_id" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                                                             <option selected="selected" value="">{{ trans('post.none') }}</option>
                                                             @forelse ($types as $element)
                                                                 <option value="{{ $element->id }}">{{ $element->title }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
-                                                        <label id="type_id-error" class="error" for="type_id"></label>
+                                                        <label id="category_id-error" class="error" for="category_id"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">

@@ -13,7 +13,7 @@ class AddSlugTable extends Migration
      */
     public function up()
     {
-        Schema::table('types', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->string('slug', 255)->nullable()->after('title');
         });
         Schema::table('statuses', function (Blueprint $table) {
@@ -28,7 +28,7 @@ class AddSlugTable extends Migration
      */
     public function down()
     {
-        Schema::table('types', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('slug');
         });
         Schema::table('statuses', function (Blueprint $table) {

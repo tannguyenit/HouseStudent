@@ -90,7 +90,7 @@
                                                     <div class="figure-block">
                                                         <figure class="item-thumb">
                                                             <div class="label-wrap label-right hide-on-list">
-                                                                <span class="label-status label-status-8 label label-default">{{ $element->type->title }}</span>
+                                                                <span class="label-status label-status-8 label label-default">{{ $element->category->title }}</span>
                                                             </div>
                                                             <div class="price hide-on-list">
                                                                 <span class="item-price">$ {{ $element->price }}</span>
@@ -122,7 +122,7 @@
                                                     <div class="body-left table-cell">
                                                         <div class="info-row">
                                                             <div class="label-wrap hide-on-grid">
-                                                                <span class="label-status label-status-8 label label-default">{{ $element->type->title }}</span>
+                                                                <span class="label-status label-status-8 label label-default">{{ $element->category->title }}</span>
                                                             </div>
                                                             <h2 class="property-title">
                                                                 <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>

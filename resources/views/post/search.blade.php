@@ -98,7 +98,7 @@
                                         <figure class="item-thumb">
                                             <div class="label-wrap label-right hide-on-list">
                                                 <span class="label-status label-status-7 label label-default label label-success">{{ $element->status->title }}</span>
-                                                <span class="label-color-288 label label-default">{{ $element->type->title }}</span>
+                                                <span class="label-color-288 label label-default">{{ $element->category->title }}</span>
                                             </div>
                                             <div class="price hide-on-list">
                                                 <span class="item-price">{{ $element->price . config('setting.price.vi') }}</span>
@@ -130,7 +130,7 @@
                                     <div class="body-left table-cell">
                                         <div class="info-row">
                                             <div class="label-wrap hide-on-grid">
-                                                <span class="label-color-288 label label-default">{{ $element->type->title }}</span>
+                                                <span class="label-color-288 label label-default">{{ $element->category->title }}</span>
                                                 <span class="label-featured label label-success">{{ $element->status->title }}</span>
                                             </div>
                                             <h2 class="property-title">

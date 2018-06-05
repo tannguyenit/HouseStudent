@@ -32,11 +32,10 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-$factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
-        'title'         => $faker->name,
-        'typeable_id'   => 1,
-        'typeable_type' => 'App\\\Post',
+        'title' => $faker->name,
+        'type'  => 'App\\Post',
     ];
 });
 $factory->define(App\Models\Status::class, function (Faker\Generator $faker) {
@@ -52,7 +51,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'user_id'       => $faker->randomElement($userIds ?: $userIds = App\Models\User::pluck('id')->toArray()),
         'title'         => $faker->name,
         'description'   => $faker->text($maxNbChars = 500),
-        'type_id'       => $faker->randomElement($typeId ?: $typeId = App\Models\Type::pluck('id')->toArray()),
+        'category_id'   => $faker->randomElement($typeId ?: $typeId = App\Models\Category::pluck('id')->toArray()),
         'status_id'     => $faker->randomElement($statusId ?: $statusId = App\Models\Status::pluck('id')->toArray()),
         'price'         => rand(500000, 2000000),
         'area'          => rand(10, 20),

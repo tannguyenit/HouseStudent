@@ -193,7 +193,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         }
 
         if (isset($search['type']) && 'all' != $search['type']) {
-            $arrWhere['type_id'] = $search['type'];
+            $arrWhere['category_id'] = $search['type'];
         }
 
         if (isset($search['bedrooms'])) {

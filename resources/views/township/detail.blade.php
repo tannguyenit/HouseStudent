@@ -181,7 +181,7 @@
                         <ul class="children">
                             @forelse ($types as $element)
                                 <li>
-                                    <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
+                                    <a href="{{ action('CategoryController@show', $element->slug) }}">{{ $element->title }}</a>
                                     <span class="cat-count">({{ count($element->posts) }})</span>
                                 </li>
                             @empty

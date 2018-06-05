@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ImageRepository\ImageRepository;
-use App\Repositories\LikeRepository\LikeRepository;
-use App\Repositories\PostRepository\PostRepository;
+use App\Repositories\ImageRepository\ImageRepositoryInterface;
+use App\Repositories\LikeRepository\LikeRepositoryInterface;
+use App\Repositories\PostRepository\PostRepositoryInterface;
 use Illuminate\Http\Request;
 use View;
 
@@ -16,9 +16,9 @@ class AjaxController extends BaseController
     protected $limit;
 
     public function __construct(
-        PostRepository $postRepository,
-        LikeRepository $likeRepository,
-        ImageRepository $imageRepository
+        PostRepositoryInterface $postRepository,
+        LikeRepositoryInterface $likeRepository,
+        ImageRepositoryInterface $imageRepository
     ) {
         $this->postRepository  = $postRepository;
         $this->imageRepository = $imageRepository;
@@ -31,7 +31,7 @@ class AjaxController extends BaseController
         if ($request->ajax()) {
             $dataSearch   = $request->all();
             $sortBy       = $this->postRepository->getSortBy(null);
-            $relationship = ['user', 'images', 'firstImages', 'type'];
+            $relationship = ['user', 'images', 'firstImages', 'category'];
             $data         = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)->get();
 
             if ($request->keyword) {
@@ -186,7 +186,7 @@ class AjaxController extends BaseController
     {
         if ($request->ajax()) {
             $id           = $request->id;
-            $relationship = ['user', 'firstImages', 'type'];
+            $relationship = ['user', 'firstImages', 'category'];
             $post         = $this->postRepository->find($id, $relationship);
             $firstImage   = isset($post->firstImages) ? $post->firstImages->image : config('path.no-image');
 
@@ -199,7 +199,7 @@ class AjaxController extends BaseController
                     "thumbnail"  => "<img width=\"385\" height=\"258\" src=\"$firstImage\" class=\"attachment-houzez-property-thumb-image size-houzez-property-thumb-image wp-post-image\" alt=\"\" sizes=\"(max-width: 385px) 100vw, 385px\" />",
                     "url"        => action('PostController@show', $post->slug),
                     "prop_meta"  => "<p><span>" . trans('post.area') . $post->area . "</span></p>",
-                    "type"       => $post->type->title,
+                    "type"       => $post->category->title,
                     "price"      => '$' . $post->price,
                     "icon"       => "http://sandbox.favethemes.com/houzez/wp-content/uploads/2016/02/x1-apartment.png",
                     "retinaIcon" => "http://sandbox.favethemes.com/houzez/wp-content/uploads/2016/02/x2-apartment.png",

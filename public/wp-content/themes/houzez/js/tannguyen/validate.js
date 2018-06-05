@@ -26,7 +26,7 @@ Validate.prototype = {
                 description: {
                     required: true
                 },
-                type_id: {
+                category_id: {
                     required: true
                 },
                 status_id: {
@@ -109,7 +109,7 @@ Validate.prototype = {
                 route: validate.route_required,
                 administrative_area_level_2: validate.content_required,
                 administrative_area_level_1: validate.content_required,
-                type_id: validate.type_required,
+                category_id: validate.type_required,
                 status_id: validate.status_required,
                 phone_boss: {
                     required: validate.phone_boss.required,
@@ -186,9 +186,9 @@ removeFeature: function () {
 },
 validateSelectBox: function () {
     var _self = this;
-    $('#type_id').on('hidden.bs.select', function (e) {
+    $('#category_id').on('hidden.bs.select', function (e) {
         var value = $(this).val();
-        _self.showError('type_id', value);
+        _self.showError('category_id', value);
     });
     $('#status_id').on('hidden.bs.select', function (e) {
         var value = $(this).val();

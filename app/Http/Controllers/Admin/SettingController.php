@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\SettingRepository\SettingRepository;
+use App\Repositories\SettingRepository\SettingRepositoryInterface;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
     protected $settingRepository;
 
-    public function __construct(SettingRepository $settingRepository)
+    public function __construct(SettingRepositoryInterface $settingRepository)
     {
         $this->settingRepository = $settingRepository;
     }

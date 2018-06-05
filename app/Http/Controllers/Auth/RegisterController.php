@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository\UserRepository;
+use App\Repositories\UserRepository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Socialite;
 
@@ -17,7 +17,7 @@ class RegisterController extends Controller
      */
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->middleware('guest');
         $this->userRepository = $userRepository;

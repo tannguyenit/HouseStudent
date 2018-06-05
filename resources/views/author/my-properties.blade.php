@@ -91,7 +91,7 @@
                                         <div class="status">
                                             <p>
                                                 <span>
-                                                    <strong>{{ trans('post.type') }}: </strong>{{ $element->type->title }}
+                                                    <strong>{{ trans('post.type') }}: </strong>{{ $element->category->title }}
                                                 </span>
                                                 <span>
                                                     <strong>{{ trans('post.price') }}: </strong> ${{ $element->price }}

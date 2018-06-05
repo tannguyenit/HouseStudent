@@ -1,7 +1,7 @@
 <?php
-namespace App\Repositories\TypeRepository;
+namespace App\Repositories\CategoryRepository;
 
-interface TypeRepositoryInterface
+interface CategoryRepositoryInterface
 {
     public function getSimilarPost($id, $limit);
 
