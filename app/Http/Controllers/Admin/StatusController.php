@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\StatusRepository\StatusRepository;
+use App\Repositories\StatusRepository\StatusRepositoryInterface;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
     protected $statusRepository;
 
-    public function __construct(StatusRepository $statusRepository)
+    public function __construct(StatusRepositoryInterface $statusRepository)
     {
         $this->statusRepository = $statusRepository;
     }

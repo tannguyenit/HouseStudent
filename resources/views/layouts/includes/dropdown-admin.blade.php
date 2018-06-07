@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="{!!  $route_name == 'admin.type' ? 'active' : '' !!}">
-            <a href="{{ action('Admin\TypeController@index') }}">
+            <a href="{{ action('Admin\CategoryController@index') }}">
                 <i class="fa fa-list"></i> {{ trans('admin.type') }}
             </a>
         </li>

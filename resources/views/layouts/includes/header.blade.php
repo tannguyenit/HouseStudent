@@ -17,7 +17,7 @@
                         <ul class="sub-menu">
                             @forelse ($types as $element)
                             <li class="menu-item">
-                                <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
+                                <a href="{{ action('CategoryController@show', $element->slug) }}">{{ $element->title }}</a>
                             </li>
                             @empty
                             @endforelse
@@ -28,7 +28,7 @@
                         <ul class="sub-menu">
                             @forelse ($types as $element)
                             <li class="menu-item">
-                                <a href="{{ action('TypeController@show', $element->slug) }}">{{ $element->title }}</a>
+                                <a href="{{ action('CategoryController@show', $element->slug) }}">{{ $element->title }}</a>
                             </li>
                             @empty
                             @endforelse

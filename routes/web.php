@@ -25,7 +25,7 @@ Route::group(['namespace' => 'Auth'], function () {
 |--------------------------------------------------------------------------
  */
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
-Route::get('/type/{slug}', ['as' => 'show', 'uses' => 'TypeController@show']);
+Route::get('/type/{slug}', ['as' => 'show', 'uses' => 'CategoryController@show']);
 Route::get('/township/{slug}', ['as' => 'township', 'uses' => 'PostController@townShip']);
 Route::get('/advanced-search', ['as' => 'search', 'uses' => 'PostController@search']);
 Route::match(['get', 'post'], '/botman', 'ChatBotFacebookController@handle');

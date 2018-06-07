@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\RegisterAccount;
-use App\Repositories\ImageRepository\ImageRepository;
-use App\Repositories\PostRepository\PostRepository;
-use App\Repositories\StatusRepository\StatusRepository;
-use App\Repositories\TypeRepository\TypeRepository;
-use App\Repositories\UserRepository\UserRepository;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
+use App\Repositories\ImageRepository\ImageRepositoryInterface;
+use App\Repositories\PostRepository\PostRepositoryInterface;
+use App\Repositories\StatusRepository\StatusRepositoryInterface;
+use App\Repositories\UserRepository\UserRepositoryInterface;
 use Auth;
 use DB;
 use Event;
@@ -18,23 +18,23 @@ use Session;
 class PostController extends BaseController
 {
     protected $postRepository;
-    protected $typeRepository;
+    protected $categoryRepository;
     protected $statusRepository;
     protected $imageRepository;
     protected $userRepository;
 
     public function __construct(
-        PostRepository $postRepository,
-        TypeRepository $typeRepository,
-        ImageRepository $imageRepository,
-        StatusRepository $statusRepository,
-        UserRepository $userRepository
+        PostRepositoryInterface $postRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        ImageRepositoryInterface $imageRepository,
+        StatusRepositoryInterface $statusRepository,
+        UserRepositoryInterface $userRepository
     ) {
-        $this->postRepository   = $postRepository;
-        $this->typeRepository   = $typeRepository;
-        $this->statusRepository = $statusRepository;
-        $this->imageRepository  = $imageRepository;
-        $this->userRepository   = $userRepository;
+        $this->postRepository     = $postRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->statusRepository   = $statusRepository;
+        $this->imageRepository    = $imageRepository;
+        $this->userRepository     = $userRepository;
     }
 
     /**
@@ -44,7 +44,7 @@ class PostController extends BaseController
      */
     public function townShip(NewRequest $request, $slug)
     {
-        $relationShip      = ['user', 'type', 'status'];
+        $relationShip      = ['user', 'category', 'status'];
         $getSortBy         = $request->get('sortby');
         $sortBy            = $this->postRepository->getSortBy($getSortBy);
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
@@ -193,7 +193,7 @@ class PostController extends BaseController
     public function show(Request $request, $slug)
     {
 
-        $relationShip = ['user', 'likes', 'firstImages', 'images', 'type', 'features', 'comments' => function ($query) {
+        $relationShip = ['user', 'likes', 'firstImages', 'images', 'category', 'features', 'comments' => function ($query) {
             $query->with('user')->get();
         }];
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
@@ -231,9 +231,9 @@ class PostController extends BaseController
             /* ------------------------------------------------------------------------ */
             /*  End update total view post-Table
             /* ------------------------------------------------------------------------ */
-            $id                      = $detailsPost->type->id;
+            $id                      = $detailsPost->category->id;
             $limit                   = config('setting.limit.similar_post');
-            $similarPost             = $this->typeRepository->getSimilarPost($id, $limit);
+            $similarPost             = $this->categoryRepository->getSimilarPost($id, $limit);
             $dataView['detailsPost'] = $detailsPost;
             $dataView['similarPost'] = $similarPost;
 
@@ -252,8 +252,8 @@ class PostController extends BaseController
     public function edit($id)
     {
         if ($id) {
-            $relationship         = ['images', 'type', 'status', 'features'];
-            $dataView['types']    = $this->typeRepository->all();
+            $relationship         = ['images', 'category', 'status', 'features'];
+            $dataView['types']    = $this->categoryRepository->all();
             $dataView['statuses'] = $this->statusRepository->all();
             $dataView['post']     = $this->postRepository->find($id, $relationship);
 
@@ -377,7 +377,7 @@ class PostController extends BaseController
      */
     public function myProperties(NewRequest $request)
     {
-        $relationShip = ['user', 'type', 'firstImages'];
+        $relationShip = ['user', 'category', 'firstImages'];
         $getSortBy    = $request->get('sortby');
         $sortBy       = $this->postRepository->getSortBy($getSortBy);
         $myProperties = $this->postRepository->getMyProperties($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'), true);

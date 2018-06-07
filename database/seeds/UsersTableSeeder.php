@@ -13,10 +13,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(User::class, 20)->create();
-        $user = User::find('dcc23fc7-ea44-487f-84d1-87d1cb4cd38a');
+        $user = User::where('email', 'tannguyenit95@gmail.com')->first();
         if (!$user) {
             factory(User::class)->create([
-                'id'             => 'dcc23fc7-ea44-487f-84d1-87d1cb4cd38a',
                 'username'       => 'tannguyenit',
                 'first_name'     => 'Nguyen',
                 'last_name'      => 'Tan',

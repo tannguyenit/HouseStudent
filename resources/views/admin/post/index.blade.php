@@ -106,7 +106,7 @@
                                 <p>{{ $element->address }}</p>
                             </td>
                             <td>
-                                <p>{{ $element->type->title }}</p>
+                                <p>{{ $element->category->title }}</p>
                             </td>
                             <td>
                                 <p>{{ $element->price }} {{ config('setting.price.vi') }}</p>

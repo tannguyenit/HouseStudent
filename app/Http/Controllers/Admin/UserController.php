@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository\UserRepository;
+use App\Repositories\UserRepository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     protected $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -26,17 +26,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data      = $request->all();
-        $fillable  = $this->typeRepository->getFillable();
+        $fillable  = $this->categoryRepository->getFillable();
         $attribute = array_only($data, $fillable);
-        $type      = $this->typeRepository->create($attribute);
+        $type      = $this->categoryRepository->create($attribute);
 
         if ($type) {
-            return redirect()->action('Admin\TypeController@index')->with([
+            return redirect()->action('Admin\CategoryController@index')->with([
                 'status' => true,
                 'msg'    => trans('form.success'),
             ]);
         } else {
-            return redirect()->action('Admin\TypeController@index')->with([
+            return redirect()->action('Admin\CategoryController@index')->with([
                 'status' => false,
                 'msg'    => trans('form.fail'),
             ]);

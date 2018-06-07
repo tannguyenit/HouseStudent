@@ -1,16 +1,16 @@
 <?php
-namespace App\Repositories\TypeRepository;
+namespace App\Repositories\CategoryRepository;
 
-use App\Models\Type;
+use App\Models\Category;
 use App\Repositories\BaseRepository;
-use App\Repositories\TypeRepository\TypeRepositoryInterface;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
 
-class TypeRepository extends BaseRepository implements TypeRepositoryInterface
+class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
 
     public function model()
     {
-        return Type::class;
+        return Category::class;
     }
 
     public function getSimilarPost($id, $limit)

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\FeaturesRepository\FeaturesRepository;
-use App\Repositories\ImageRepository\ImageRepository;
-use App\Repositories\PostRepository\PostRepository;
-use App\Repositories\StatusRepository\StatusRepository;
-use App\Repositories\TypeRepository\TypeRepository;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
+use App\Repositories\FeaturesRepository\FeaturesRepositoryInterface;
+use App\Repositories\ImageRepository\ImageRepositoryInterface;
+use App\Repositories\PostRepository\PostRepositoryInterface;
+use App\Repositories\StatusRepository\StatusRepositoryInterface;
 use DB;
 use Illuminate\Http\Request;
 use Request as NewRequest;
@@ -16,18 +16,18 @@ class PostController extends Controller
 {
     protected $postRepository;
     protected $featuresRepository;
-    protected $typeRepository;
+    protected $categoryRepository;
     protected $statusRepository;
     protected $imageRepository;
 
     public function __construct(
-        TypeRepository $typeRepository,
-        StatusRepository $statusRepository,
-        PostRepository $postRepository,
-        FeaturesRepository $featuresRepository,
-        ImageRepository $imageRepository
+        CategoryRepositoryInterface $categoryRepository,
+        StatusRepositoryInterface $statusRepository,
+        PostRepositoryInterface $postRepository,
+        FeaturesRepositoryInterface $featuresRepository,
+        ImageRepositoryInterface $imageRepository
     ) {
-        $this->typeRepository     = $typeRepository;
+        $this->categoryRepository = $categoryRepository;
         $this->statusRepository   = $statusRepository;
         $this->postRepository     = $postRepository;
         $this->featuresRepository = $featuresRepository;
@@ -36,12 +36,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $relationship      = ['user', 'images', 'features'];
+        $relationship           = ['user', 'images', 'features'];
         $getSortBy              = NewRequest::get('sortby');
         $sortBy                 = $this->postRepository->getSortBy($getSortBy);
         $dataSearch             = NewRequest::query();
         $dataView['dataSearch'] = $dataSearch;
-        $dataView['posts']    = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
+        $dataView['posts']      = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
             ->paginate(config('setting.limit.search'));
 
         return view('admin.post.index', $dataView);
@@ -50,8 +50,8 @@ class PostController extends Controller
     public function show(Request $request, $id)
     {
         if ($id) {
-            $relationship         = ['images', 'type', 'status', 'features'];
-            $dataView['types']    = $this->typeRepository->all();
+            $relationship         = ['images', 'category', 'status', 'features'];
+            $dataView['types']    = $this->categoryRepository->all();
             $dataView['statuses'] = $this->statusRepository->all();
             $dataView['post']     = $this->postRepository->find($id, $relationship);
 

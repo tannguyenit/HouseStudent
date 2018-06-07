@@ -5,7 +5,7 @@
                 <div class="figure-block">
                     <figure class="item-thumb">
                         <div class="label-wrap label-right hide-on-list">
-                            <span class="label label-default label-color-288">{{ $element->type->title }}</span>
+                            <span class="label label-default label-color-288">{{ $element->category->title }}</span>
                         </div>
                         <div class="price hide-on-list">
                             <span class="item-price">{{ $element->price . config('setting.price.vi') }} </span>

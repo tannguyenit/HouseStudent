@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ContactRepository\ContactRepository;
+use App\Repositories\ContactRepository\ContactRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PageController extends BaseController
 {
     protected $contactRepository;
 
-    public function __construct(ContactRepository $contactRepository)
+    public function __construct(ContactRepositoryInterface $contactRepository)
     {
         $this->contactRepository = $contactRepository;
     }

@@ -27,7 +27,7 @@ class Post extends AbstractModel
         'title',
         'slug',
         'description',
-        'type_id',
+        'category_id',
         'status_id',
         'price',
         'area',
@@ -77,9 +77,9 @@ class Post extends AbstractModel
         return $this->hasMany(Features::class);
     }
 
-    public function type()
+    public function category()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function status()
