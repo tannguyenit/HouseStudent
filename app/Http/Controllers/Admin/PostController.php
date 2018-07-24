@@ -28,20 +28,20 @@ class PostController extends Controller
         ImageRepositoryInterface $imageRepository
     ) {
         $this->categoryRepository = $categoryRepository;
-        $this->statusRepository   = $statusRepository;
-        $this->postRepository     = $postRepository;
+        $this->statusRepository = $statusRepository;
+        $this->postRepository = $postRepository;
         $this->featuresRepository = $featuresRepository;
-        $this->imageRepository    = $imageRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     public function index()
     {
-        $relationship           = ['user', 'images', 'features'];
-        $getSortBy              = NewRequest::get('sortby');
-        $sortBy                 = $this->postRepository->getSortBy($getSortBy);
-        $dataSearch             = NewRequest::query();
+        $relationship = ['user', 'images', 'features'];
+        $getSortBy = NewRequest::get('sortby');
+        $sortBy = $this->postRepository->getSortBy($getSortBy);
+        $dataSearch = NewRequest::query();
         $dataView['dataSearch'] = $dataSearch;
-        $dataView['posts']      = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
+        $dataView['posts'] = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
             ->paginate(config('setting.limit.search'));
 
         return view('admin.post.index', $dataView);
@@ -50,10 +50,10 @@ class PostController extends Controller
     public function show(Request $request, $id)
     {
         if ($id) {
-            $relationship         = ['images', 'category', 'status', 'features'];
-            $dataView['types']    = $this->categoryRepository->all();
+            $relationship = ['images', 'category', 'status', 'features'];
+            $dataView['types'] = $this->categoryRepository->all();
             $dataView['statuses'] = $this->statusRepository->all();
-            $dataView['post']     = $this->postRepository->find($id, $relationship);
+            $dataView['post'] = $this->postRepository->find($id, $relationship);
 
             return view('admin.post.edit', $dataView);
         }
@@ -64,18 +64,18 @@ class PostController extends Controller
         DB::beginTransaction();
         try {
             if ($id) {
-                $result                     = true;
-                $deleteFeatures             = true;
-                $data                       = $request->all();
-                $fillable                   = $this->postRepository->getFillable();
-                $attribute                  = array_only($data, $fillable);
-                $attribute['price']         = setPrice($request->price);
+                $result = true;
+                $deleteFeatures = true;
+                $data = $request->all();
+                $fillable = $this->postRepository->getFillable();
+                $attribute = array_only($data, $fillable);
+                $attribute['price'] = setPrice($request->price);
                 $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
-                $attribute['township']      = $request->administrative_area_level_2;
-                $attribute['country']       = $request->administrative_area_level_1;
-                $attribute['phone_boss']    = $request->phone_boss ? $request->phone_boss : 0;
-                $updatePost                 = $this->postRepository->update($attribute, $id, true);
-                $detailPost                 = $this->postRepository->find($id, ['features']);
+                $attribute['township'] = $request->administrative_area_level_2;
+                $attribute['country'] = $request->administrative_area_level_1;
+                $attribute['phone_boss'] = $request->phone_boss ? $request->phone_boss : 0;
+                $updatePost = $this->postRepository->update($attribute, $id, true);
+                $detailPost = $this->postRepository->find($id, ['features']);
 
                 if (count($detailPost->features)) {
                     $deleteFeatures = $this->featuresRepository->deleteByColum('post_id', $id);

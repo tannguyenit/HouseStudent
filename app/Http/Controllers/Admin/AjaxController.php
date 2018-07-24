@@ -23,27 +23,27 @@ class AjaxController extends Controller
         UserRepositoryInterface $userRepository
     ) {
         $this->categoryRepository = $categoryRepository;
-        $this->statusRepository   = $statusRepository;
-        $this->postRepository     = $postRepository;
-        $this->userRepository     = $userRepository;
+        $this->statusRepository = $statusRepository;
+        $this->postRepository = $postRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function updateType(Request $request)
     {
         if ($request->ajax()) {
-            $data      = $request->all();
-            $id        = $data['id'];
-            $fillable  = $this->categoryRepository->getFillable();
+            $data = $request->all();
+            $id = $data['id'];
+            $fillable = $this->categoryRepository->getFillable();
             $attribute = array_only($data, $fillable);
-            $type      = $this->categoryRepository->find($id);
+            $type = $this->categoryRepository->find($id);
 
             if ($type) {
                 $result = $this->categoryRepository->update($attribute, $id, $slug = true);
                 if ($result) {
                     return response()->json([
                         'status' => true,
-                        'title'  => trans('validate.success'),
-                        'msg'    => trans('validate.msg.edit-success'),
+                        'title' => trans('validate.success'),
+                        'msg' => trans('validate.msg.edit-success'),
                     ]);
                 }
             }
@@ -51,50 +51,50 @@ class AjaxController extends Controller
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.edit-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.edit-fail'),
         ]);
     }
 
     public function deleteType(Request $request)
     {
         if ($request->ajax()) {
-            $data   = $request->all();
-            $id     = $data['id'];
+            $data = $request->all();
+            $id = $data['id'];
             $result = $this->categoryRepository->delete($id);
 
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'title'  => trans('validate.success'),
-                    'msg'    => trans('validate.msg.delete-success'),
+                    'title' => trans('validate.success'),
+                    'msg' => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.delete-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.delete-fail'),
         ]);
     }
 
     public function updateStatus(Request $request)
     {
         if ($request->ajax()) {
-            $data      = $request->all();
-            $id        = $data['id'];
-            $fillable  = $this->statusRepository->getFillable();
+            $data = $request->all();
+            $id = $data['id'];
+            $fillable = $this->statusRepository->getFillable();
             $attribute = array_only($data, $fillable);
-            $type      = $this->statusRepository->find($id);
+            $type = $this->statusRepository->find($id);
 
             if ($type) {
                 $result = $this->statusRepository->update($attribute, $id, $slug = true);
                 if ($result) {
                     return response()->json([
                         'status' => true,
-                        'title'  => trans('validate.success'),
-                        'msg'    => trans('validate.msg.edit-success'),
+                        'title' => trans('validate.success'),
+                        'msg' => trans('validate.msg.edit-success'),
                     ]);
                 }
             }
@@ -102,67 +102,67 @@ class AjaxController extends Controller
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.edit-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.edit-fail'),
         ]);
     }
 
     public function deleteStatus(Request $request)
     {
         if ($request->ajax()) {
-            $data   = $request->all();
-            $id     = $data['id'];
+            $data = $request->all();
+            $id = $data['id'];
             $result = $this->statusRepository->delete($id);
 
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'title'  => trans('validate.success'),
-                    'msg'    => trans('validate.msg.delete-success'),
+                    'title' => trans('validate.success'),
+                    'msg' => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.delete-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.delete-fail'),
         ]);
     }
 
     public function deletePost(Request $request)
     {
         if ($request->ajax()) {
-            $data   = $request->all();
-            $id     = $data['id'];
+            $data = $request->all();
+            $id = $data['id'];
             $result = $this->postRepository->deletePost($id);
 
             if ($result) {
                 return response()->json([
                     'status' => true,
-                    'title'  => trans('validate.success'),
-                    'msg'    => trans('validate.msg.delete-success'),
+                    'title' => trans('validate.success'),
+                    'msg' => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.delete-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.delete-fail'),
         ]);
     }
 
     public function deleteUser(Request $request)
     {
         if ($request->ajax()) {
-            $data   = $request->all();
-            $id     = $data['id'];
+            $data = $request->all();
+            $id = $data['id'];
             $status = true;
-            $user   = $this->userRepository->find($id);
+            $user = $this->userRepository->find($id);
 
             if (config('path.defaul-avatar') != $user->avatar) {
-                $path   = public_path() . $user->avatar;
+                $path = public_path() . $user->avatar;
                 $remove = $this->userRepository->deleteFiles($user->avatar, $path);
 
                 if (!$remove) {
@@ -175,23 +175,23 @@ class AjaxController extends Controller
             if ($deleteUser && $status) {
                 return response()->json([
                     'status' => true,
-                    'title'  => trans('validate.success'),
-                    'msg'    => trans('validate.msg.delete-success'),
+                    'title' => trans('validate.success'),
+                    'msg' => trans('validate.msg.delete-success'),
                 ]);
             }
         }
 
         return response()->json([
             'status' => false,
-            'title'  => trans('validate.errors'),
-            'msg'    => trans('validate.msg.delete-fail'),
+            'title' => trans('validate.errors'),
+            'msg' => trans('validate.msg.delete-fail'),
         ]);
     }
 
     public function changeStatusPost(Request $request)
     {
         if ($request->ajax()) {
-            $id     = $request->id;
+            $id = $request->id;
             $status = $request->status;
             if ($id) {
                 if (config('setting.active') == $status) {
@@ -206,8 +206,8 @@ class AjaxController extends Controller
 
                 if ($updatePost) {
                     $data = [
-                        'title'  => trans('validate.success'),
-                        'msg'    => trans('validate.msg.change-success'),
+                        'title' => trans('validate.success'),
+                        'msg' => trans('validate.msg.change-success'),
                         'result' => $value,
                     ];
                     return $this->success($data);
@@ -216,7 +216,7 @@ class AjaxController extends Controller
 
             $data = [
                 'title' => trans('validate.errors'),
-                'msg'   => trans('validate.msg.change-fail'),
+                'msg' => trans('validate.msg.change-fail'),
             ];
 
             return $this->error($data);
@@ -226,7 +226,7 @@ class AjaxController extends Controller
     public function changeStatusPin(Request $request)
     {
         if ($request->ajax()) {
-            $id     = $request->id;
+            $id = $request->id;
             $status = $request->status;
 
             if ($id) {
@@ -241,15 +241,15 @@ class AjaxController extends Controller
                 $inputs = [
                     'pin' => $value,
                 ];
-                $updatePost  = $this->postRepository->update($inputs, $id);
-                $arrPost     = $this->postRepository->findBy('pin', config('setting.pin.active'))->count();
+                $updatePost = $this->postRepository->update($inputs, $id);
+                $arrPost = $this->postRepository->findBy('pin', config('setting.pin.active'))->count();
                 $arrWherePin = [
                     'pin' => config('setting.pin.active'),
                 ];
 
-                if ($arrPost > config('constant.limit-pin')) {
+                if ($arrPost > config('constants.LIMIT_PIN')) {
                     $changePin = $this->postRepository->whereArray($arrWherePin);
-                    $arWhere   = [
+                    $arWhere = [
                         'pin' => config('setting.pin.not-active'),
                     ];
                     $this->postRepository->update($arWhere, $changePin->id);
@@ -257,8 +257,8 @@ class AjaxController extends Controller
 
                 if ($updatePost) {
                     $data = [
-                        'title'  => trans('validate.success'),
-                        'msg'    => trans('validate.msg.change-success'),
+                        'title' => trans('validate.success'),
+                        'msg' => trans('validate.msg.change-success'),
                         'result' => $value,
                     ];
 
@@ -268,7 +268,7 @@ class AjaxController extends Controller
 
             $data = [
                 'title' => trans('validate.errors'),
-                'msg'   => trans('validate.msg.change-fail'),
+                'msg' => trans('validate.msg.change-fail'),
             ];
 
             return $this->error($data);
@@ -278,7 +278,7 @@ class AjaxController extends Controller
     public function changeActiveUser(Request $request)
     {
         if ($request->ajax()) {
-            $id     = $request->id;
+            $id = $request->id;
             $status = $request->status;
             if ($id) {
                 if (config('setting.active') == $status) {
@@ -294,8 +294,8 @@ class AjaxController extends Controller
                 if ($update) {
                     return response()->json([
                         'status' => true,
-                        'title'  => trans('validate.success'),
-                        'msg'    => trans('validate.msg.change-success'),
+                        'title' => trans('validate.success'),
+                        'msg' => trans('validate.msg.change-success'),
                         'result' => $value,
                     ]);
                 }
@@ -303,8 +303,8 @@ class AjaxController extends Controller
 
             return response()->json([
                 'status' => false,
-                'title'  => trans('validate.errors'),
-                'msg'    => trans('validate.msg.change-fail'),
+                'title' => trans('validate.errors'),
+                'msg' => trans('validate.msg.change-fail'),
             ]);
         }
     }

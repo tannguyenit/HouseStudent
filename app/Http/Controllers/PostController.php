@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\RegisterAccount;
 use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
+use App\Repositories\FeaturesRepository\FeaturesRepositoryInterface;
 use App\Repositories\ImageRepository\ImageRepositoryInterface;
 use App\Repositories\PostRepository\PostRepositoryInterface;
 use App\Repositories\StatusRepository\StatusRepositoryInterface;
@@ -22,6 +23,7 @@ class PostController extends BaseController
     protected $statusRepository;
     protected $imageRepository;
     protected $userRepository;
+    protected $featuresRepository;
 
     public function __construct(
         PostRepositoryInterface $postRepository,
@@ -30,11 +32,12 @@ class PostController extends BaseController
         StatusRepositoryInterface $statusRepository,
         UserRepositoryInterface $userRepository
     ) {
-        $this->postRepository     = $postRepository;
+        $this->postRepository = $postRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->statusRepository   = $statusRepository;
-        $this->imageRepository    = $imageRepository;
-        $this->userRepository     = $userRepository;
+        $this->statusRepository = $statusRepository;
+        $this->imageRepository = $imageRepository;
+        $this->userRepository = $userRepository;
+        $this->featuresRepository = app(FeaturesRepositoryInterface::class);
     }
 
     /**
@@ -44,9 +47,9 @@ class PostController extends BaseController
      */
     public function townShip(NewRequest $request, $slug)
     {
-        $relationShip      = ['user', 'category', 'status'];
-        $getSortBy         = $request->get('sortby');
-        $sortBy            = $this->postRepository->getSortBy($getSortBy);
+        $relationShip = ['user', 'category', 'status'];
+        $getSortBy = $request->get('sortby');
+        $sortBy = $this->postRepository->getSortBy($getSortBy);
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
 
         if ($dataView['posts']) {
@@ -76,36 +79,36 @@ class PostController extends BaseController
     {
         DB::beginTransaction();
         try {
-            $result                     = true;
-            $data                       = $request->all();
-            $fillable                   = $this->postRepository->getFillable();
-            $attribute                  = array_only($data, $fillable);
-            $attribute['price']         = setPrice($request->price);
+            $result = true;
+            $data = $request->all();
+            $fillable = $this->postRepository->getFillable();
+            $attribute = array_only($data, $fillable);
+            $attribute['price'] = setPrice($request->price);
             $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
-            $attribute['township']      = $request->administrative_area_level_2;
-            $attribute['country']       = $request->administrative_area_level_1;
-            $attribute['description']   = $request->description;
-            $auth                       = Auth::user();
+            $attribute['township'] = vn_to_str($request->administrative_area_level_2);
+            $attribute['country'] = vn_to_str($request->administrative_area_level_1);
+            $attribute['description'] = $request->description;
+            $auth = Auth::user();
             /* ------------------------------------------------------------------------ */
             /*  Save Auth
             /* ------------------------------------------------------------------------ */
             if ($auth) {
                 $attribute['user_id'] = $auth->id;
             } else {
-                $fillableUser         = $this->userRepository->getFillable();
-                $attributeUser        = array_only($data, $fillableUser);
-                $user                 = $this->userRepository->create($attributeUser);
+                $fillableUser = $this->userRepository->getFillable();
+                $attributeUser = array_only($data, $fillableUser);
+                $user = $this->userRepository->create($attributeUser);
                 $attribute['user_id'] = $user->id;
                 /* ------------------------------------------------------------------------ */
                 /*  Send mail to new user
                 /* ------------------------------------------------------------------------ */
                 $dataSend = [
-                    'id'       => $user->id,
-                    'email'    => $user->email,
+                    'id' => $user->id,
+                    'email' => $user->email,
                     'fullname' => $user->fullname,
                     'username' => $user->username,
-                    'phone'    => $user->phone,
-                    'token'    => $user->remember_token,
+                    'phone' => $user->phone,
+                    'token' => $user->remember_token,
                 ];
 
                 \Mail::to($user->email)->send(new RegisterAccount($dataSend));
@@ -231,9 +234,9 @@ class PostController extends BaseController
             /* ------------------------------------------------------------------------ */
             /*  End update total view post-Table
             /* ------------------------------------------------------------------------ */
-            $id                      = $detailsPost->category->id;
-            $limit                   = config('setting.limit.similar_post');
-            $similarPost             = $this->categoryRepository->getSimilarPost($id, $limit);
+            $id = $detailsPost->category->id;
+            $limit = config('setting.limit.similar_post');
+            $similarPost = $this->categoryRepository->getSimilarPost($id, $limit);
             $dataView['detailsPost'] = $detailsPost;
             $dataView['similarPost'] = $similarPost;
 
@@ -252,10 +255,10 @@ class PostController extends BaseController
     public function edit($id)
     {
         if ($id) {
-            $relationship         = ['images', 'category', 'status', 'features'];
-            $dataView['types']    = $this->categoryRepository->all();
+            $relationship = ['images', 'category', 'status', 'features'];
+            $dataView['types'] = $this->categoryRepository->all();
             $dataView['statuses'] = $this->statusRepository->all();
-            $dataView['post']     = $this->postRepository->find($id, $relationship);
+            $dataView['post'] = $this->postRepository->find($id, $relationship);
 
             return view('post.edit', $dataView);
         }
@@ -273,17 +276,17 @@ class PostController extends BaseController
         DB::beginTransaction();
         try {
             if ($id) {
-                $result                     = true;
-                $deleteFeatures             = true;
-                $data                       = $request->all();
-                $fillable                   = $this->postRepository->getFillable();
-                $attribute                  = array_only($data, $fillable);
-                $attribute['price']         = setPrice($request->price);
+                $result = true;
+                $deleteFeatures = true;
+                $data = $request->all();
+                $fillable = $this->postRepository->getFillable();
+                $attribute = array_only($data, $fillable);
+                $attribute['price'] = setPrice($request->price);
                 $attribute['township_slug'] = str_slug($request->administrative_area_level_2);
-                $attribute['township']      = $request->administrative_area_level_2;
-                $attribute['country']       = $request->administrative_area_level_1;
-                $updatePost                 = $this->postRepository->update($attribute, $id, $slug = true);
-                $detailPost                 = $this->postRepository->find($id, ['features']);
+                $attribute['township'] = vn_to_str($request->administrative_area_level_2);
+                $attribute['country'] = vn_to_str($request->administrative_area_level_1);
+                $updatePost = $this->postRepository->update($attribute, $id, $slug = true);
+                $detailPost = $this->postRepository->find($id, ['features']);
 
                 if (count($detailPost->features)) {
                     $deleteFeatures = $this->featuresRepository->deleteByColum('post_id', $id);
@@ -359,11 +362,11 @@ class PostController extends BaseController
      */
     public function search()
     {
-        $getSortBy              = Request::get('sortby');
-        $sortBy                 = $this->postRepository->getSortBy($getSortBy);
-        $dataSearch             = Request::query();
+        $getSortBy = Request::get('sortby');
+        $sortBy = $this->postRepository->getSortBy($getSortBy);
+        $dataSearch = Request::query();
         $dataView['dataSearch'] = $dataSearch;
-        $dataView['searchs']    = $this->postRepository->getAllData($dataSearch, $sortBy, ['user', 'firstImages'])
+        $dataView['searchs'] = $this->postRepository->getAllData($dataSearch, $sortBy, ['user', 'firstImages'])
             ->paginate(config('setting.limit.search'));
 
         return view('post.search', $dataView);
@@ -378,8 +381,8 @@ class PostController extends BaseController
     public function myProperties(NewRequest $request)
     {
         $relationShip = ['user', 'category', 'firstImages'];
-        $getSortBy    = $request->get('sortby');
-        $sortBy       = $this->postRepository->getSortBy($getSortBy);
+        $getSortBy = $request->get('sortby');
+        $sortBy = $this->postRepository->getSortBy($getSortBy);
         $myProperties = $this->postRepository->getMyProperties($relationShip, 'user_id', auth()->user()->id, $sortBy, config('setting.limit.my-properties'), true);
 
         if ($myProperties) {

@@ -18,7 +18,7 @@ class CreateFeaturesTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->uuid('post_id', 36);
-            $table->string('key');
+            $table->string('title');
             $table->string('value');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();

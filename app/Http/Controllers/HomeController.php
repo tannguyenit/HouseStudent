@@ -17,12 +17,26 @@ class HomeController extends BaseController
 
     public function home(Request $request)
     {
+        if ($request->ip() == '127.0.0.1') {
+            $ip = config('constants.IP_DEFAULT');
+        } else {
+            $ip = $request->ip();
+        }
+
+        $url = str_replace('IP_change', $ip, config('constants.URL.GET_IP') . '/IP_change/json');
+        try {
+            $result = file_get_contents($url);
+            $location = json_decode($result);
+        } catch (Exception $e) {
+            abort(404);
+        }
         $relation = ['user', 'category', 'likes', 'firstImages', 'features'];
-        $limit    = config('setting.limit.news_post');
+        $limit = config('setting.limit.news_post');
 
         $dataView['newsPost'] = $this->postRepository->getPost($limit, $relation);
-        $dataView['topView']  = $this->postRepository->getPost($limit, $relation, 'total_view');
-        $dataView['country']  = $this->postRepository->getCountry();
+        $dataView['topView'] = $this->postRepository->getPost($limit, $relation, 'total_view');
+        $dataView['country'] = $this->postRepository->getCountry();
+        $dataView['location'] = '';
 
         return view('home.index', $dataView);
     }

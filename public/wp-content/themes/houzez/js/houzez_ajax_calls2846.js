@@ -2211,7 +2211,7 @@
         var houzez_header_listing_map = function(keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_lat, search_long, search_radius, search_location, use_radius ) {
             var headerMapSecurity = $('#securityHouzezHeaderMap').val();
             var initial_city = AJAX_VARIABLE.header_map_selected_city;
-
+            // var IpLocation = 'Da Nang'
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -2331,10 +2331,19 @@
 
                         reloadMarkers();
                         houzezAddMarkers( data.properties, houzezMap );
+                        // houzezMap.fitBounds( markers.reduce(function(bounds, marker ) {
+                        //     return bounds.extend( marker.getPosition() );
+                        // }, new google.maps.LatLngBounds()));
 
-                        houzezMap.fitBounds( markers.reduce(function(bounds, marker ) {
-                            return bounds.extend( marker.getPosition() );
-                        }, new google.maps.LatLngBounds()));
+                        const bounds  = new google.maps.LatLngBounds();
+                        const loc = new google.maps.LatLng('21.0333','105.8500');
+                        bounds.extend(loc);
+                        houzezMap.fitBounds(bounds);       // auto-zoom
+                        houzezMap.panToBounds(bounds);     // auto-center
+                        var listener = google.maps.event.addListener(houzezMap, "idle", function() {
+                            if (houzezMap.getZoom() > parseInt(googlemap_default_zoom)) houzezMap.setZoom(parseInt(googlemap_default_zoom));
+                            google.maps.event.removeListener(listener);
+                        });
 
                         google.maps.event.trigger( houzezMap, 'resize' );
 

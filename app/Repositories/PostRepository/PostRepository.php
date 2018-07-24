@@ -30,12 +30,12 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             $maxPrice = $getPrice->max;
         }
 
-        $arrWhere  = [];
-        $arrWhere  = $this->getDataSearch($search);
+        $arrWhere = [];
+        $arrWhere = $this->getDataSearch($search);
         $min_price = $minPrice;
         $max_price = $maxPrice;
-        $keyword   = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
-        $result    = $this->model->with($array)
+        $keyword = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
+        $result = $this->model->with($array)
             ->active()
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
@@ -217,8 +217,8 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         DB::beginTransaction();
         try {
             $relationship = ['images', 'features'];
-            $post         = $this->model->with($relationship)->find($id);
-            $result       = true;
+            $post = $this->model->with($relationship)->find($id);
+            $result = true;
 
             if (count($post->features)) {
                 if (!$post->features()->delete()) {

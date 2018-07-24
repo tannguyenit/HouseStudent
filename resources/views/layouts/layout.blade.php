@@ -115,7 +115,7 @@
                 "advanced_search_price_slide": "1",
                 "fave_page_template": "",
                 "google_map_style": "[{\"featureType\":\"administrative\",\"elementType\":\"labels.text.fill\",\"stylers\":[{\"color\":\"#444444\"}]},{\"featureType\":\"landscape\",\"elementType\":\"all\",\"stylers\":[{\"color\":\"#f2f2f2\"}]},{\"featureType\":\"poi\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"road\",\"elementType\":\"all\",\"stylers\":[{\"saturation\":-100},{\"lightness\":45}]},{\"featureType\":\"road.highway\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"simplified\"}]},{\"featureType\":\"road.arterial\",\"elementType\":\"labels.icon\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"transit\",\"elementType\":\"all\",\"stylers\":[{\"visibility\":\"off\"}]},{\"featureType\":\"water\",\"elementType\":\"all\",\"stylers\":[{\"color\":\"#46bcec\"},{\"visibility\":\"on\"}]}]",
-                "googlemap_default_zoom": "1",
+                "googlemap_default_zoom": "16",
                 "googlemap_pin_cluster": "yes",
                 "googlemap_zoom_cluster": "5",
                 "map_icons_path": "http:\/\/houzez01.favethemes.com\/wp-content\/themes\/houzez\/images\/map\/",
@@ -170,8 +170,8 @@
                 "monthly_payment": "Monthly Payment",
                 "weekly_payment": "Weekly Payment",
                 "bi_weekly_payment": "Bi-Weekly Payment",
-                "compare_button_url": "http:\/\/houzez01.favethemes.com\/compare-properties\/",
-                "template_thankyou": "http:\/\/houzez01.favethemes.com\/thank-you\/",
+                "compare_button_url": "",
+                "template_thankyou": "",
                 "compare_page_not_found": "Please create page using compare properties template",
                 "property_detail_top": "v1",
                 "keyword_search_field": "prop_title",
@@ -185,8 +185,8 @@
                 "houzez_logged_in": "no",
                 "ipinfo_location": "0",
                 "gallery_autoplay": "1",
-                "stripe_page": "http:\/\/houzez01.favethemes.com\/stripe\/",
-                "twocheckout_page": "http:\/\/houzez01.favethemes.com\/"
+                "stripe_page": "",
+                "twocheckout_page": ""
             };
             /* ]]> */
         </script>
