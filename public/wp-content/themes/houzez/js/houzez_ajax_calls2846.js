@@ -2336,7 +2336,7 @@
                         // }, new google.maps.LatLngBounds()));
 
                         const bounds  = new google.maps.LatLngBounds();
-                        const loc = new google.maps.LatLng('21.0333','105.8500');
+                        const loc = new google.maps.LatLng("16.047079", "108.206230");
                         bounds.extend(loc);
                         houzezMap.fitBounds(bounds);       // auto-zoom
                         houzezMap.panToBounds(bounds);     // auto-center
