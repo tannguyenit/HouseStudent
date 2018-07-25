@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0",
+        "artesaos/seotools": "^0.12.0",
         "botman/botman": "~2.0",
         "botman/driver-facebook": "^1.0",
         "botman/driver-web": "~1.0",

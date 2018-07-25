@@ -11,7 +11,7 @@ interface PostRepositoryInterface
 
     public function getDataBySlug($slug);
 
-    public function getDataByColumn($column, $id, $sortBy, $limit);
+    public function getDataByColumn($relationship, $column, $id, $sortBy, $limit);
 
     public function getMyProperties($relationship, $column, $id, $sortBy, $limit, $public);
 
@@ -26,4 +26,7 @@ interface PostRepositoryInterface
     public function getAllDatasAdmin($relationship, $limit);
 
     public function deletePost($id);
+
+    public function getSortBy($getSortBy);
+
 }

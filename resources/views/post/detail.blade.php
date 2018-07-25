@@ -1,3 +1,6 @@
+@section('seo')
+    {!! SEO::generate() !!}
+@endsection
 @extends('layouts.layout')
 @section('content')
 <!--start detail top-->
@@ -200,7 +203,7 @@
                         </div>
                         <div class="media agent-media">
                             <div class="media-left">
-                                <a href="../../agent/brittany-watkins/index.html">
+                                <a href="{{ action('UserController@member', $detailsPost->user->username) }}">
                                     <img src="{{ $detailsPost->user->avatar }}" alt="{{ $detailsPost->user->fullname }}" title="{{ $detailsPost->user->fullname }}" width="80" height="80">
                                 </a>
                             </div>
