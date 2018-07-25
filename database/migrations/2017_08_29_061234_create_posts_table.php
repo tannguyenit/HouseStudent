@@ -15,14 +15,13 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('id');
-            $table->primary('id');
-            $table->uuid('user_id', 36);
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('title', 255);
             $table->string('slug', 255);
             $table->longText('description');
-            $table->uuid('category_id', 36);
-            $table->uuid('status_id', 36);
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('status_id');
             $table->integer('price');
             $table->float('area');
             $table->integer('pin')->default(0);

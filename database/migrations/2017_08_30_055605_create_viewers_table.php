@@ -15,9 +15,8 @@ class CreateViewersTable extends Migration
     {
         Schema::create('viewers', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('id');
-            $table->primary('id');
-            $table->uuid('post_id', 36);
+            $table->increments('id');
+            $table->unsignedInteger('post_id');
             $table->string('mac_ip', 255);
             $table->string('browser', 200);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

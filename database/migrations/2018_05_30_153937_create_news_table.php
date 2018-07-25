@@ -15,9 +15,8 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('id');
-            $table->primary('id');
-            $table->uuid('user_id', 36);
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('title');
             $table->text('content');
             $table->foreign('user_id')->references('id')->on('news')->onDelete('cascade');
