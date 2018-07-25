@@ -15,9 +15,8 @@ class CreateFeaturesTable extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('id');
-            $table->primary('id');
-            $table->uuid('post_id', 36);
+            $table->increments('id');
+            $table->unsignedInteger('post_id');
             $table->string('title');
             $table->string('value');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

@@ -12,10 +12,9 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = Setting::find('cb675bb9-8fc4-11e7-8201-74867a426052');
+        $user = Setting::find('1');
         if (!$user) {
             factory(User::class)->create([
-                'id'          => 'cb675bb9-8fc4-11e7-8201-74867a426052',
                 'email'       => 'tannguyenit95@gmail.com',
                 'copyright'   => 'Copyright @ Tannguyen',
                 'address'     => 'Da Nang Viet Nam',

@@ -15,10 +15,9 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('id');
-            $table->primary('id');
-            $table->uuid('user_id', 36);
-            $table->uuid('post_id', 36);
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('post_id');
             $table->tinyInteger('status');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

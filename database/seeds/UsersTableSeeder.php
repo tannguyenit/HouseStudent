@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'first_name'     => 'Nguyen',
                 'last_name'      => 'Tan',
                 'email'          => 'tannguyenit95@gmail.com',
-                'password'       => bcrypt('mylove'),
+                'password'       => Hash::make('123qweasd'),
                 'avatar'         => 'default.jpg',
                 'birthday'       => '1995-08-06',
                 'gender'         => null,
