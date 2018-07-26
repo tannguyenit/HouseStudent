@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\PostSeoService;
 use App\Mail\RegisterAccount;
 use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
 use App\Repositories\FeaturesRepository\FeaturesRepositoryInterface;
@@ -13,7 +14,7 @@ use Auth;
 use DB;
 use Event;
 use Illuminate\Http\Request as NewRequest;
-use Request;
+use Illuminate\Http\Request;
 use Session;
 
 class PostController extends BaseController
@@ -24,6 +25,8 @@ class PostController extends BaseController
     protected $imageRepository;
     protected $userRepository;
     protected $featuresRepository;
+    /* @var PostSeoService $postSeoService*/
+    protected $postSeoService;
 
     public function __construct(
         PostRepositoryInterface $postRepository,
@@ -32,17 +35,21 @@ class PostController extends BaseController
         StatusRepositoryInterface $statusRepository,
         UserRepositoryInterface $userRepository
     ) {
+        parent::__construct();
         $this->postRepository = $postRepository;
         $this->categoryRepository = $categoryRepository;
         $this->statusRepository = $statusRepository;
         $this->imageRepository = $imageRepository;
         $this->userRepository = $userRepository;
         $this->featuresRepository = app(FeaturesRepositoryInterface::class);
+        $this->postSeoService = app(PostSeoService::class);
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param NewRequest $request
+     * @param $slug
      * @return \Illuminate\Http\Response
      */
     public function townShip(NewRequest $request, $slug)
@@ -190,20 +197,20 @@ class PostController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param $slug
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $slug)
     {
-
         $relationShip = ['user', 'likes', 'firstImages', 'images', 'category', 'features', 'comments' => function ($query) {
             $query->with('user')->get();
         }];
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
 
         if ($detailsPost) {
-            if (Session::has('arrRecently')) {
-                $sessionData = array_unique(Session::get('arrRecently'));
+            if ($request->session()->has('arrRecently')) {
+                $sessionData = $request->session()->get('arrRecently');
 
                 foreach ($sessionData as $value) {
                     if ($value->id != $detailsPost->id) {
@@ -239,6 +246,7 @@ class PostController extends BaseController
             $similarPost = $this->categoryRepository->getSimilarPost($id, $limit);
             $dataView['detailsPost'] = $detailsPost;
             $dataView['similarPost'] = $similarPost;
+            $this->postSeoService->seoDetail($detailsPost);
 
             return view('post.detail', $dataView);
         }
@@ -357,7 +365,6 @@ class PostController extends BaseController
     /**
      * Search the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function search()
