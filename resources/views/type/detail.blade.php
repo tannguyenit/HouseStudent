@@ -189,8 +189,8 @@
                             </div>
                         @empty
                         @endforelse
+                        {{ $posts->appends(['sortby' => Request::get('sortby')])->links() }}
                     </div>
-                    {{ $posts->appends(['sortby' => Request::get('sortby')])->links() }}
                 </div>
                 <hr>
             </div>

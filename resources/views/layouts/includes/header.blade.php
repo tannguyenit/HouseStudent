@@ -4,7 +4,7 @@
         <div class="header-left">
             <div class="logo logo-desktop">
                 <a href="{{ action('HomeController@home') }}">
-                    <img src="/wp-content/uploads/2016/03/logo.png" alt="logo">
+                <img src="{{ config('constants.LOGO') }}" alt="logo">
                 </a>
             </div>
             <nav class="navi main-nav">
@@ -14,17 +14,6 @@
                     </li>
                     <li class="menu-item">
                         <a href="#">{{ trans('index.type') }}</a>
-                        <ul class="sub-menu">
-                            @forelse ($types as $element)
-                            <li class="menu-item">
-                                <a href="{{ action('CategoryController@show', $element->slug) }}">{{ $element->title }}</a>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#">{{ trans('index.project') }}</a>
                         <ul class="sub-menu">
                             @forelse ($types as $element)
                             <li class="menu-item">

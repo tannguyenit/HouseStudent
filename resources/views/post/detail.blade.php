@@ -279,7 +279,8 @@
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span class="compare-property" data-toggle="tooltip" data-placement="top" title="{{ count($element->images) . trans('post.photo') }}">
+                                                        {{-- $element->images()->count() . --}}
+                                                        <span class="compare-property" data-toggle="tooltip" data-placement="top" title="{{ trans('post.photo') }}">
                                                             <i class="fa fa-camera"></i>
                                                         </span>
                                                     </li>

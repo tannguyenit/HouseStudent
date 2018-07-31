@@ -13,7 +13,6 @@ use App\Repositories\UserRepository\UserRepositoryInterface;
 use Auth;
 use DB;
 use Event;
-use Illuminate\Http\Request as NewRequest;
 use Illuminate\Http\Request;
 use Session;
 
@@ -48,16 +47,17 @@ class PostController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @param NewRequest $request
+     * @param Request $request
      * @param $slug
      * @return \Illuminate\Http\Response
      */
-    public function townShip(NewRequest $request, $slug)
+    public function townShip(Request $request, $slug)
     {
         $relationShip = ['user', 'category', 'status'];
         $getSortBy = $request->get('sortby');
         $sortBy = $this->postRepository->getSortBy($getSortBy);
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
+        $this->postSeoService->seoTowship($dataView['posts']);
 
         if ($dataView['posts']) {
             return view('township.detail', $dataView);
@@ -79,10 +79,10 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request as NewRequest  $request
+     * @param  \Illuminate\Http\Request as Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
         try {
@@ -275,11 +275,11 @@ class PostController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request as NewRequest  $request
+     * @param  \Illuminate\Http\Request as Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewRequest $request, $id)
+    public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try {
@@ -369,23 +369,23 @@ class PostController extends BaseController
      */
     public function search()
     {
-        $getSortBy = Request::get('sortby');
+        $getSortBy = app('request')->get('sortby');
         $sortBy = $this->postRepository->getSortBy($getSortBy);
-        $dataSearch = Request::query();
+        $dataSearch = app('request')->query();
         $dataView['dataSearch'] = $dataSearch;
         $dataView['searchs'] = $this->postRepository->getAllData($dataSearch, $sortBy, ['user', 'firstImages'])
             ->paginate(config('setting.limit.search'));
 
-        return view('post.search', $dataView);
+            return view('post.search', $dataView);
     }
 
     /**
      * Get My Property the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request as NewRequest  $request
+     * @param  \Illuminate\Http\Request as Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function myProperties(NewRequest $request)
+    public function myProperties(Request $request)
     {
         $relationShip = ['user', 'category', 'firstImages'];
         $getSortBy = $request->get('sortby');
