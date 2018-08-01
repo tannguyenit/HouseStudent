@@ -1,3 +1,6 @@
+@section('seo')
+    {!! SEO::generate() !!}
+@endsection
 @extends('layouts.layout')
 @section('include')
     @parent

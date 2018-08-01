@@ -1,3 +1,7 @@
+@section('footerscript')
+    @parent
+    <script src="{{ elixir('js/home-page-component.js') }}"></script>
+@endsection
 @extends('layouts.layout')
     @section('include')
         @parent

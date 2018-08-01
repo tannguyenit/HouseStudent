@@ -24,17 +24,6 @@
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <a href="#">{{ trans('index.project') }}</a>
-                        <ul class="sub-menu">
-                            @forelse ($types as $element)
-                            <li class="menu-item">
-                                <a href="{{ action('CategoryController@show', $element->slug) }}">{{ $element->title }}</a>
-                            </li>
-                            @empty
-                            @endforelse
-                        </ul>
-                    </li>
-                    <li class="menu-item">
                         <a href="{{ action('NewsController@index') }}">{{ trans('index.news') }}</a>
                     </li>
                 </ul>

@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 
 /**
- * CategorySeoService
+ * PostSeoService
  */
 class PostSeoService extends BaseService
 {
@@ -13,6 +13,18 @@ class PostSeoService extends BaseService
         $this->seo()->setDescription($data->description);
         $this->seo()->opengraph()->setUrl(app('request')->url());
         $this->seo()->opengraph()->addProperty('type', 'articles', 'Bai dang');
+
+        return $this;
+    }
+
+    public function seoTowship($datas)
+    {
+        foreach ($datas as $key => $data) {
+            $this->seo()->setTitle($data->title);
+            $this->seo()->setDescription($data->description);
+            $this->seo()->opengraph()->setUrl(app('request')->url());
+            $this->seo()->opengraph()->addProperty('type', 'articles', 'Bai dang');
+        }
 
         return $this;
     }

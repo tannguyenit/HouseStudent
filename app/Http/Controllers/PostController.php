@@ -13,8 +13,8 @@ use App\Repositories\UserRepository\UserRepositoryInterface;
 use Auth;
 use DB;
 use Event;
-use Illuminate\Http\Request as NewRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Request as NewRequest;
 use Session;
 
 class PostController extends BaseController
@@ -58,6 +58,7 @@ class PostController extends BaseController
         $getSortBy = $request->get('sortby');
         $sortBy = $this->postRepository->getSortBy($getSortBy);
         $dataView['posts'] = $this->postRepository->getDataByColumn($relationShip, 'township_slug', $slug, $sortBy, config('setting.limit.search'));
+        $this->postSeoService->seoTowship($dataView['posts']);
 
         if ($dataView['posts']) {
             return view('township.detail', $dataView);
