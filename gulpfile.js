@@ -17,6 +17,7 @@ var elixir = require('laravel-elixir');
         'themes/font-awesome.min.css',
         'themes/all.min.css',
         'themes/main.css',
+        'themes/loading.min.css',
         'themes/style.css',
         'themes/toastr.min.css',
         'themes/custom.index.css',
@@ -33,7 +34,7 @@ var elixir = require('laravel-elixir');
         ], 'public/js/headerscript.js')
     .scripts([
         'themes/bootstrap.min.js',
-        'themes/jquery.custom.js',
+        'themes/scroll-pagination.js',
         'themes/toastr.min.js',
         'themes/custom.toastr.js',
         'themes/jquery.validate.min.js',

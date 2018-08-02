@@ -56,7 +56,7 @@
                 <div class="list-search">
                     <div class="form-control" readonly="" >
                         <p>{{ trans('form.from') . ' : ' . (isset($dataSearch['min-price']) ? $dataSearch['min-price'] : $prices->min) . ' ' . trans('form.to') . ' ' . (isset($dataSearch['max-price']) ? $dataSearch['max-price'] : $prices->max) }}</p>
-                        @if ($dataSearch['keyword'])
+                        @if (isset($dataSearch['keyword'])))
                             <p>{{ trans('form.keyword') }}: {{ $dataSearch['keyword'] }}</p>
                         @endif
                         @if (isset($dataSearch['location']))
@@ -89,7 +89,7 @@
                 </div>
                 <!--start property items-->
                 <div class="property-listing list-view">
-                    <div class="row">
+                    <div class="row infinite-scroll">
                         @forelse ($searchs as $element)
                         <div class="item-wrap infobox_trigger item-gorgeous-villa-for-sale">
                             <div class="property-item table-list">
@@ -196,12 +196,12 @@
                         </div>
                         @empty
                         @endforelse
+                        <!--start Pagination-->
+                        {{ $searchs->appends(request()->query())->links() }}
+                        <!--start Pagination-->
                     </div>
                 </div>
                 <hr>
-                <!--start Pagination-->
-                {{ $searchs->links() }}
-                <!--start Pagination-->
             </div>
         </div>
         <!-- end container-content -->

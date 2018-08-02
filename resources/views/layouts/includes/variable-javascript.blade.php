@@ -186,4 +186,3 @@
 <div>
     <div id='variable-javascript' data-variable="{{ json_encode($data) }}"></div>
 </div>
-

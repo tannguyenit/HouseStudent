@@ -13,7 +13,7 @@ return [
         'country'       => 4,
         'similar_post'  => 4,
         'type'          => 6,
-        'search'        => 9,
+        'search'        => 8,
         'user-table'    => 10,
         'my-properties' => 10,
         'first'         => 1,
