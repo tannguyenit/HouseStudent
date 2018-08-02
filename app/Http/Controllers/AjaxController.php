@@ -278,7 +278,7 @@ class AjaxController extends BaseController
     public function loadMoreHomePage(Request $request)
     {
         if ($request->ajax()) {
-            $limit = $this->limit;
+            $limit = $request->get('limit');
             $post = $this->postRepository->getNormalPost($limit);
             $data = [
                 'html' => view('ajax.load-more', compact('post'))->render(),
