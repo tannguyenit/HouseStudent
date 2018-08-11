@@ -177,7 +177,7 @@
         "houzez_primary_color" =>  "#00aeef",
         "geocomplete_country" =>  "",
         "houzez_logged_in" =>  "no",
-        "ipinfo_location" =>  "0",
+        "ipinfo_location" =>  "1",
         "gallery_autoplay" =>  "1",
         "stripe_page" =>  "",
         "twocheckout_page" =>  ""

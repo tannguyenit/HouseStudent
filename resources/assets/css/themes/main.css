@@ -4053,7 +4053,7 @@ figure .thumb-caption .cap-social {
     width: 26px;
 }
 .header-mobile .user-icon {
-    width: 24px;
+    width: 35px;
     display: inline-block;
     text-align: center;
     font-size: 18px;
@@ -8798,7 +8798,7 @@ div.mce-edit-area {
 .dashboard-content-area {
     overflow: auto;
     position: relative;
-    padding: 40px;
+    padding: 10px;
 }
 .dashboard-content-area .container {
     padding-bottom: 40px;

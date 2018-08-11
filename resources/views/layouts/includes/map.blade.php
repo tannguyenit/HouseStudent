@@ -49,6 +49,9 @@
                             <i class="fa fa-arrows-alt"></i>
                             <span>Fullscreen</span>
                         </span>
+                        <span id="houzez-gmap-location" class="map-btn">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
                     </div>
                 </div>
             </div>

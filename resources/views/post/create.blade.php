@@ -1,12 +1,11 @@
 @extends('layouts.layout')
 @section('css')
     @parent
-    {{ Html::style('wp-content/themes/houzez/css/jquery.fileuploader.css') }}
-    {{ Html::style('wp-content/themes/houzez/css/jquery.fileuploader-theme-thumbnails.css') }}
+    <link rel="stylesheet" href="{{ elixir('css/file-upload.css') }}">
 @endsection
 @section('headerscript')
     @parent
-    {{ Html::script('wp-content/wp-includes/js/plupload/plupload.full.mincc91.js') }}
+    <script src="{{ elixir('js/plupload.full.min.js') }}"></script>
     <script>
         jQuery(function($) {
             "use strict";
@@ -32,21 +31,21 @@
                     geocoder.geocode({
                         'latLng': latLng
                     }, function(results, status) {
-                            if (status == google.maps.GeocoderStatus.OK) { //alert(JSON.stringify(results));
-                                if (results[0]) {
-                                    var _length = results[0].address_components.length;
-                                    var road = results[0].address_components[1].long_name;
-                                    var town = results[0].address_components[_length-4].long_name;
-                                    var county = results[0].address_components[_length-3].long_name;
-                                    var country = results[0].address_components[_length-2].short_name;
-                                    var formatted_address = results[0].formatted_address;
-                                    $("input[name=address]").val(formatted_address);
-                                    $("#countyState").val(county);
-                                    $("#country").val(road);
-                                    $("#country_short").val(country);
-                                }
+                        if (status == google.maps.GeocoderStatus.OK) { //alert(JSON.stringify(results));
+                            if (results[0]) {
+                                var _length = results[0].address_components.length;
+                                var road = results[0].address_components[1].long_name;
+                                var town = results[0].address_components[_length-4].long_name;
+                                var county = results[0].address_components[_length-3].long_name;
+                                var country = results[0].address_components[_length-2].short_name;
+                                var formatted_address = results[0].formatted_address;
+                                $("input[name=address]").val(formatted_address);
+                                $("#countyState").val(county);
+                                $("#country").val(road);
+                                $("#country_short").val(country);
                             }
-                        });
+                        }
+                    });
                 });
                 geo_input.on('focus', function() {
                     var map = $("#geocomplete").geocomplete("map");
@@ -67,7 +66,7 @@
     </script>
 @endsection
 @section('create')
-        <div id="section-body" class="landing-page">
+    <div id="section-body" class="landing-page">
         <div class="user-dashboard-right houzez-m-step-form ">
             <div class="board-header board-header-4">
                 <div class="container">
@@ -95,10 +94,11 @@
                             <li class="pay-step-block active">
                                 <span>{{ trans('post.account') }}</span>
                             </li>
+                        @else
+                            <li class="pay-step-block active">
+                                <span>{{ trans('post.infomation') }}</span>
+                            </li>
                         @endif
-                        <li class="pay-step-block">
-                            <span>{{ trans('post.infomation') }}</span>
-                        </li>
                         <li class="pay-step-block ">
                             <span>
                                 {{ trans('post.add-image') }}
@@ -309,39 +309,39 @@
                                             <h4>{{ trans('post.features') }}</h4>
                                             <table class="additional-block">
                                                 <thead>
-                                                    <tr>
-                                                        <td> </td>
-                                                        <td><label>{{ trans('post.title') }}</label></td>
-                                                        <td><label>{{ trans('post.value') }}</label></td>
-                                                        <td> </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td> </td>
+                                                    <td><label>{{ trans('post.title') }}</label></td>
+                                                    <td><label>{{ trans('post.value') }}</label></td>
+                                                    <td> </td>
+                                                </tr>
                                                 </thead>
                                                 <tbody id="houzez_additional_details_main">
-                                                    <tr>
-                                                        <td class="action-field">
-                                                            <span class="sort-additional-row"><i class="fa fa-navicon"></i></span>
-                                                        </td>
-                                                        <td class="field-title">
-                                                            {!! Form::text('additional_features[0][key]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_title_0', 'placeholder' => trans('validate.placeholder.electricity')]) !!}
-                                                        </td>
-                                                        <td>
-                                                            {!! Form::text('additional_features[0][value]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_value_0', 'placeholder' => trans('validate.placeholder.value')]) !!}
-                                                        </td>
-                                                        <td class="action-field">
-                                                            <span data-remove="0" class="remove-additional-row"><i class="fa fa-remove"></i></span>
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td class="action-field">
+                                                        <span class="sort-additional-row"><i class="fa fa-navicon"></i></span>
+                                                    </td>
+                                                    <td class="field-title">
+                                                        {!! Form::text('additional_features[0][key]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_title_0', 'placeholder' => trans('validate.placeholder.electricity')]) !!}
+                                                    </td>
+                                                    <td>
+                                                        {!! Form::text('additional_features[0][value]', '', ['class' => 'form-control', 'id' => 'fave_additional_feature_value_0', 'placeholder' => trans('validate.placeholder.value')]) !!}
+                                                    </td>
+                                                    <td class="action-field">
+                                                        <span data-remove="0" class="remove-additional-row"><i class="fa fa-remove"></i></span>
+                                                    </td>
+                                                </tr>
                                                 </tbody>
                                                 <tfoot>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td>
-                                                            <button data-increment="0" class="add-additional-row">
-                                                                <i class="fa fa-plus"></i>{{ trans('post.add-new') }}
-                                                            </button>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <button data-increment="0" class="add-additional-row">
+                                                            <i class="fa fa-plus"></i>{{ trans('post.add-new') }}
+                                                        </button>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -434,35 +434,32 @@
                                     </div>
                                 </div>
                             </div>
-                        {!! Form::close() !!}
+                            {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@section('footerscript')
-    @parent
-    <script type='text/javascript'>
-        var houseStudent = {
-            "ajaxURL": "{{ action('AjaxController@uploadFileUploader') }}",
-            "url_check_email": "{{ action('UserController@checkEmail') }}",
-            "url_check_username": "{{ action('UserController@checkusername') }}",
-            "msg_digits": '{{ trans('validate.msg.digits') }}',
-            "login_loading": "Sending user info, please wait...",
-            "checkusername": "User name đã tồn tại. Vui lòng nhập lại",
-            "checkemail": "Email đã tồn tại. Vui lòng nhập lại",
-            "processing_text": "Processing, Please wait...",
-            "add_listing_msg": "Submitting, Please wait..."
-        };
-    </script>
-    {{ Html::script('wp-content/themes/houzez/js/tannguyen/validate.js') }}
-    {{ Html::script('wp-content/themes/houzez/js/houzez_property2846.js') }}
-    {{ Html::script('wp-content/wp-includes/js/wp-embed.min66f2.js') }}
-    {{ Html::script('wp-content/themes/houzez/js/jquery.uploadFile.js') }}
-    {{ Html::script('wp-content/themes/houzez/js/tannguyen/format-price.js') }}
-    <script type="text/javascript">
-        var upload = new Upload('{{ action('AjaxController@uploadFileUploader') }}','{{ action('AjaxController@removeFileUploader') }}')
-        upload.init();
-    </script>
+    @endsection
+    @section('footerscript')
+        @parent
+        <script type='text/javascript'>
+            var houseStudent = {
+                "ajaxURL": "{{ action('AjaxController@uploadFileUploader') }}",
+                "url_check_email": "{{ action('UserController@checkEmail') }}",
+                "url_check_username": "{{ action('UserController@checkusername') }}",
+                "msg_digits": '{{ trans('validate.msg.digits') }}',
+                "login_loading": "Sending user info, please wait...",
+                "checkusername": "User name đã tồn tại. Vui lòng nhập lại",
+                "checkemail": "Email đã tồn tại. Vui lòng nhập lại",
+                "processing_text": "Processing, Please wait...",
+                "add_listing_msg": "Submitting, Please wait..."
+            };
+        </script>
+        <script src="{{ elixir('js/create-post.min.js') }}"></script>
+        <script type="text/javascript">
+            var upload = new Upload('{{ action('AjaxController@uploadFileUploader') }}','{{ action('AjaxController@removeFileUploader') }}')
+            upload.init();
+        </script>
 @endsection
