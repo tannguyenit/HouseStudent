@@ -27,7 +27,7 @@
                     <div class="account-dropdown">
                         <ul>
                             <li>
-                                <a href="add-new-property/index.html">
+                                <a href="{{ action('PostController@create') }}">
                                     <i class="fa fa-plus-circle"></i>{{ trans('post.create') }}
                                 </a>
                             </li>

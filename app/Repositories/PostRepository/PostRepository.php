@@ -3,8 +3,7 @@ namespace App\Repositories\PostRepository;
 
 use App\Models\Post;
 use App\Repositories\BaseRepository;
-use App\Repositories\PostRepository\PostRepositoryInterface;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
@@ -30,15 +29,18 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             $maxPrice = $getPrice->max;
         }
 
-        $arrWhere = [];
         $arrWhere = $this->getDataSearch($search);
         $min_price = $minPrice;
         $max_price = $maxPrice;
         $keyword = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
+        $lat = explode(',',$search['lat']);
+        $lng = explode(',',$search['lng']);
         $result = $this->model->with($array)
-            ->active()
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
+        if (!array_has($arrWhere, 'township') && !array_has($arrWhere, 'country')) {
+            $result->whereBetween('lat', $lat)->whereBetween('lng', $lng);
+        }
 
         if ($keyword) {
             $result->where('address', 'LIKE', $keyword);
@@ -62,7 +64,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     /**
      * @param number limit
      * @param array relationship
-     * @param string orderby
+     * @param string orderBy
      * @return array
      */
     public function getPost($limit, $array = [], $orderBy = null)

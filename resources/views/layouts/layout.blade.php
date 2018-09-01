@@ -17,7 +17,7 @@
     @show
     <!-- End css -->
     @section('headerscript')
-        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en_US&amp;key=AIzaSyCBnyL9MhOZlec1Mz1_qImukxi-VFqQKJw&amp;ver=1.0') }}
+        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&#038;language=en_US&#038;key=') }}
         <script src="{{ elixir('js/headerscript.js') }}"></script>
     @show
 </head>
@@ -42,13 +42,16 @@
         <script src="{{ elixir('js/plugins.js') }}"></script>
         <script src="{{ elixir('js/setting-component.js') }}"></script>
         <script src="{{ elixir('js/custom-jquery.js') }}"></script>
+        <script src="{{ elixir('js/map-components.js') }}"></script>
+        
         <script type='text/javascript'>
             /* <![CDATA[ */
             const lat = $('#getGoogleMaps').data('lat');
             const lng = $('#getGoogleMaps').data('lng');
             var VARIABLE_JS = $('#variable-javascript').data('variable');
-            VARIABLE_JS.lat = lat
-            VARIABLE_JS.lng = lng
+            VARIABLE_JS.property_lat = lat
+            VARIABLE_JS.property_lng = lng
+            var houseMapComponent = {}
             /* ]]> */
         </script>
     @show

@@ -15,6 +15,12 @@ class AjaxController extends BaseController
     protected $likeRepository;
     protected $limit;
 
+    /**
+     * AjaxController constructor.
+     * @param PostRepositoryInterface $postRepository
+     * @param LikeRepositoryInterface $likeRepository
+     * @param ImageRepositoryInterface $imageRepository
+     */
     public function __construct(
         PostRepositoryInterface $postRepository,
         LikeRepositoryInterface $likeRepository,

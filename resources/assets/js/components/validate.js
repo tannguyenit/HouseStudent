@@ -1,4 +1,4 @@
-var validate = JSON.parse(VARIABLE_JS.validate);
+var validate = VARIABLE_JS.validate
 function Validate(form) {
     this.form = form;
 }
