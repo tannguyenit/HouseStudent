@@ -58,7 +58,8 @@ Route::get('/news', 'NewsController@index');
 Route::group(['as' => 'ajax.'], function () {
     Route::post('getMap', ['as' => 'getMap', 'uses' => 'AjaxController@getMap']);
     Route::post('like', ['as' => 'like', 'uses' => 'AjaxController@like']);
-    Route::post('getSingleProperty', ['as' => 'getSingleProperty', 'uses' => 'AjaxController@getSingleProperty']);
+    Route::post('get-detail-property', ['as' => 'getSingleProperty', 'uses' => 'AjaxController@getSingleProperty']);
+    Route::get('get-property-viewed', ['as' => 'getPropertyViewed', 'uses' => 'AjaxController@getPropertyViewed']);
     Route::post('uploadImage', ['as' => 'uploadImage', 'uses' => 'AjaxController@uploadFileUploader']);
     Route::post('removeImage', ['as' => 'removeImage', 'uses' => 'AjaxController@removeFileUploader']);
     Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'AjaxController@deletePost']);

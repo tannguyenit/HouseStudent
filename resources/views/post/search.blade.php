@@ -227,7 +227,7 @@
                                                 <div class="form-group">
                                                     <select name="location" class="selectpicker bs-select-hidden" data-live-search="true">
                                                         <option value="">{{ trans('form.all-township') }}</option>
-                                                        @forelse ($countries as $element)
+                                                        @forelse ($township as $element)
                                                             <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
                                                         @empty
                                                         @endforelse
@@ -239,7 +239,7 @@
                                                     <select name="area" class="selectpicker bs-select-hidden" data-live-search="true">
                                                         <option value="">{{ trans('form.all-countries') }}</option>
                                                         @forelse ($countries as $element)
-                                                            <option data-parentcity="{{ $element->township }}" value="{{ $element->country }}">{{ $element->country }}</option>
+                                                            <option data-parentcity="{{ $element->country }}" value="{{ $element->country }}">{{ $element->country }}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>
@@ -280,6 +280,10 @@
                                             {!! Form::text('min-price', '', ['class' => 'pull-left range-input text-left', 'id' => 'min-price', 'readonly' => 'readonly']) !!}
                                             {!! Form::text('max-price', '', ['class' => 'pull-right range-input text-right', 'id' => 'max-price', 'readonly' => 'readonly']) !!}
                                         </div>
+                                    </div>
+                                    <div class="hidden-input">
+                                        {!! Form::hidden('lat', '', ['class' => 'lat-input', 'readonly' => 'readonly']) !!}
+                                        {!! Form::hidden('lng', '', ['class' => 'lng-input', 'readonly' => 'readonly']) !!}
                                     </div>
                                     <div class="range-block rang-form-block">
                                         <div class="row">

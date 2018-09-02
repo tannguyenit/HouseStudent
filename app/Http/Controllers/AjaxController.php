@@ -198,6 +198,7 @@ class AjaxController extends BaseController
 
             if ($post) {
                 $properties[] = [
+                    'id' => $post->id,
                     "title" => $post->title,
                     "lat" => $post->lat,
                     "lng" => $post->lng,
@@ -211,16 +212,10 @@ class AjaxController extends BaseController
                     "retinaIcon" => url('/') . "/img/apartment-x2.png",
                 ];
 
-                return response()->json([
-                    'status' => true,
-                    'details' => $properties,
-                ]);
+                return $this->success($properties);
             }
 
-            return response()->json([
-                'status' => false,
-                'details' => [],
-            ]);
+            return $this->notFound();
         }
     }
 
@@ -325,5 +320,19 @@ class AjaxController extends BaseController
         ];
 
         return $this->error($response);
+    }
+
+    public function getPropertyViewed(Request $request)
+    {
+        if ($request->ajax()) {
+            $ids = $request->ids;
+            $currentPost = $request->currentPost;
+            $arrViewed = $this->postRepository->whereIn('id', $ids)->get();
+            $view = view('post.post-viewed', compact('arrViewed', 'currentPost'))->render();
+
+            return $this->success($view);
+        }
+
+        return abort(404);
     }
 }

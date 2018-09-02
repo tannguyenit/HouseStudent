@@ -1196,7 +1196,7 @@ blockquote p {
     transform: translate(-50%, -50%);
     width: 8px;
     height: 10px;
-    background-image: url("../images/range-handle-image.png");
+    background-image: url("../../img/range-handle-image.png");
     background-position: center;
     background-repeat: no-repeat;
 }

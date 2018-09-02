@@ -22,36 +22,8 @@
                     </ul>
                 </div>
             </div>
-            @if (Session::has('arrRecently'))
-            <div id="houzez_properties_viewed-5" class="widget widget_houzez_properties_viewed">
-                <div class="widget-top">
-                    <h3 class="widget-title">{{ trans('post.recently') }}</h3>
-                </div>
-                <div class="widget-body">
-                    @php($arrRecently = array_unique(Session::get('arrRecently')))
-                    @foreach ($arrRecently as $element)
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="item-thumb">
-                                <a class="hover-effect" href="{{ action('PostController@show', $element->slug) }}">
-                                    <img width="150" height="110" src="{{ $element->firstImages->image or config('path.no-image') }}" class="attachment-houzez-widget-prop size-houzez-widget-prop wp-post-image" alt="" sizes="(max-width: 150px) 100vw, 150px" />
-                                </a>
-                            </figure>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="media-heading">
-                                <a href="{{ action('PostController@show', $element->slug) }}">{{ $element->title }}</a>
-                            </h3>
-                            <h4> ${{ $element->price }} {{ config('setting.price.vi') }}</h4>
-                            <div class="amenities">
-                                <p>{{ trans('post.area') }} {{ $element->area }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+            <div id="properties_viewed" class="widget widget_houzez_properties_viewed">
             </div>
-            @endif
         </aside>
     </div>
 </div>

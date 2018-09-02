@@ -209,21 +209,6 @@ class PostController extends BaseController
         $detailsPost = $this->postRepository->getDataBySlug($slug, $relationShip);
 
         if ($detailsPost) {
-            if ($request->session()->has('arrRecently')) {
-                $sessionData = $request->session()->get('arrRecently');
-
-                foreach ($sessionData as $value) {
-                    if ($value->id != $detailsPost->id) {
-                        if (count($sessionData) >= 4) {
-                            array_shift($sessionData);
-                            break;
-                        }
-                        Session::push('arrRecently', $detailsPost);
-                    }
-                }
-            } else {
-                Session::push('arrRecently', $detailsPost);
-            }
             /* ------------------------------------------------------------------------ */
             /*  Start update total view post-Table
             /* ------------------------------------------------------------------------ */
@@ -235,9 +220,6 @@ class PostController extends BaseController
 
             $updatePost = $this->postRepository->update($postVaribale, $detailsPost->id);
 
-            if (!$updatePost) {
-                return abort(404);
-            }
             /* ------------------------------------------------------------------------ */
             /*  End update total view post-Table
             /* ------------------------------------------------------------------------ */
