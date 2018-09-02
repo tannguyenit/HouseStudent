@@ -41,7 +41,7 @@ class PostController extends Controller
         $sortBy = $this->postRepository->getSortBy($getSortBy);
         $dataSearch = NewRequest::query();
         $dataView['dataSearch'] = $dataSearch;
-        $dataView['posts'] = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship)
+        $dataView['posts'] = $this->postRepository->getAllData($dataSearch, $sortBy, $relationship, $admin = true)
             ->paginate(config('setting.limit.search'));
 
         return view('admin.post.index', $dataView);

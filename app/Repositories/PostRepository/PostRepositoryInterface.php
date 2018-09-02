@@ -3,7 +3,7 @@ namespace App\Repositories\PostRepository;
 
 interface PostRepositoryInterface
 {
-    public function getAllData($search, $sortBy, $array = []);
+    public function getAllData($search, $sortBy, $array = [], $admin = false);
 
     public function getPost($limit, $array = [], $orderBy = null);
 

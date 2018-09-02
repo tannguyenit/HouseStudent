@@ -13,7 +13,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return Post::class;
     }
 
-    public function getAllData($search, $sortBy, $array = [])
+    public function getAllData($search, $sortBy, $array = [], $admin = false)
     {
         $getPrice = $this->getPrice();
 
@@ -33,13 +33,17 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $min_price = $minPrice;
         $max_price = $maxPrice;
         $keyword = isset($search['keyword']) ? '%' . $search['keyword'] . '%' : '';
-        $lat = explode(',',$search['lat']);
-        $lng = explode(',',$search['lng']);
         $result = $this->model->with($array)
             ->where($arrWhere)
             ->whereBetween('price', [$min_price, $max_price]);
-        if (!array_has($arrWhere, 'township') && !array_has($arrWhere, 'country')) {
-            $result->whereBetween('lat', $lat)->whereBetween('lng', $lng);
+
+        if (!$admin) {
+            $lat = explode(',', $search['lat']);
+            $lng = explode(',', $search['lng']);
+
+            if (!array_has($arrWhere, 'township') && !array_has($arrWhere, 'country')) {
+                $result->whereBetween('lat', $lat)->whereBetween('lng', $lng);
+            }
         }
 
         if ($keyword) {
