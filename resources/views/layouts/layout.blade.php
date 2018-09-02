@@ -17,7 +17,7 @@
     @show
     <!-- End css -->
     @section('headerscript')
-        {{ Html::script('http://maps.googleapis.com/maps/api/js?libraries=places&#038;language=en_US&#038;key=') }}
+        {{ Html::script('https://maps.google.com/maps/api/js?v=3.exp&libraries=places,geometry,drawing&key=AIzaSyCH6whmz7Lxkbi-6h_ruIZK1OKg9GFf8Lo&language=vi') }}
         <script src="{{ elixir('js/headerscript.js') }}"></script>
     @show
 </head>
