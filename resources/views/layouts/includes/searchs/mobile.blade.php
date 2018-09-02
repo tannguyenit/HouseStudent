@@ -107,7 +107,11 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.includes.searchs.other-features')
+            <div class="hidden-input">
+                {!! Form::hidden('lat', '', ['class' => 'lat-input', 'readonly' => 'readonly']) !!}
+                {!! Form::hidden('lng', '', ['class' => 'lng-input', 'readonly' => 'readonly']) !!}
+            </div>
+            {{-- @include('layouts.includes.searchs.other-features') --}}
             <div class="col-sm-12 col-xs-12">
                 <button type="submit" class="btn btn-secondary btn-block houzez-theme-button">
                     <i class="fa fa-search pull-left"></i> {{ trans('form.search') }}

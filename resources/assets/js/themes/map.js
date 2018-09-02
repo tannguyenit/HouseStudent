@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
     "use strict"
 
     if (typeof VARIABLE_JS !== "undefined") {
-        
+
         var houzezMap
         var initMap = true
         var range_location = {}
@@ -101,6 +101,7 @@ jQuery(document).ready(function ($) {
         var delete_property_confirmation = VARIABLE_JS.delete_confirmation
         var compare_button_url = VARIABLE_JS.compare_button_url
         var compare_page_not_found = VARIABLE_JS.compare_page_not_found
+        var postComponent = new Post()
 
         var houzezHeaderMapOptions = {
             maxZoom: 20,
@@ -210,7 +211,13 @@ jQuery(document).ready(function ($) {
                 }
             }
 
-            
+            if ($('#properties_viewed')) {
+                if ($.cookie('properties_viewed')) {
+                    postComponent.callAjaxRecently()
+                } else {
+                    $('#properties_viewed').remove()
+                }
+            }
 
             var infobox = new InfoBox({
                 disableAutoPan: true, //false
@@ -2131,7 +2138,7 @@ jQuery(document).ready(function ($) {
                     styles: styles
                 })
             }
-            
+
             google.maps.event.addListener(houzezMap, 'bounds_changed', function() {
                 houseMapComponent.cookie.update()
             })
@@ -2175,6 +2182,8 @@ jQuery(document).ready(function ($) {
                     dataSend.lat = data.range_latlng.lat
                     dataSend.lng = data.range_latlng.lng
                 }
+                $('.hidden-input .lat-input').val(dataSend.lat)
+                $('.hidden-input .lng-input').val(dataSend.lng)
             }
 
             $.ajax({
@@ -2213,7 +2222,7 @@ jQuery(document).ready(function ($) {
 
 
 
-                    
+
                     // remove_map_loader(houzezMap)
 
                     //enable/disable dragable on mobile
@@ -2264,7 +2273,7 @@ jQuery(document).ready(function ($) {
                             console.log('nextMarker')
                             houseMapComponent.action.nextMarker()
                         })
-    
+
                         $('#houzez-gmap-prev').click(function () {
                             console.log('preMarker')
                             houseMapComponent.action.preMarker()
@@ -2313,6 +2322,9 @@ jQuery(document).ready(function ($) {
                     console.log(xhr.status)
                     console.log(xhr.responseText)
                     console.log(thrownError)
+                },
+                complete: function () {
+                    houseMapComponent.event.hideLoadingWhenShowTitleMap()
                 }
             })
         }
@@ -2918,14 +2930,24 @@ jQuery(document).ready(function ($) {
                         lastLenght = currentLenght
                         auto_complete_container.fadeIn()
 
+                        let dataSearch = {
+                            'action': 'houzez_get_auto_complete_search',
+                            'keyword': keyword,
+                            'lat': '15.989239746610254,16.170679502513632',
+                            'lng': '108.07970273500973,108.33273160463864',
+                        }
+
+                        if (houseMapComponent.cookie.data) {
+                            let data = houseMapComponent.cookie.data
+                            if (data.range_latlng) {
+                                dataSearch.lat = data.range_latlng.lat
+                                dataSearch.lng = data.range_latlng.lng
+                            }
+                        }
                         $.ajax({
                             type: 'POST',
                             url: ajaxurl,
-                            data: {
-                                'action': 'houzez_get_auto_complete_search',
-                                'keyword': keyword,
-                                //'nonce' : VARIABLE_JS.houzez_autoComplete_nonce
-                            },
+                            data: dataSearch,
                             beforeSend: function () {
                                 ajaxCount++
                                 if (ajaxCount == 1) {
@@ -3199,7 +3221,7 @@ jQuery(document).ready(function ($) {
                     margin: 0,
                     nav: true,
                     dots: false,
-                    loop: false,
+                    loop: true,
                     navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
                     autoplay: gallery_autoplay,
                     smartSpeed: slider_speed,
@@ -3247,11 +3269,11 @@ jQuery(document).ready(function ($) {
 
                 detail_slider_nav.on('initialized.owl.carousel', function () {
                     detail_slider_nav.find(".owl-item").eq(0).addClass("current")
-                }).owlCarousel(houzez_detail_slider_nav_settings()) /*.on('changed.owl.carousel', syncPosition2)*/ 
+                }).owlCarousel(houzez_detail_slider_nav_settings()) /*.on('changed.owl.carousel', syncPosition2)*/
 
                 function syncPosition(el) {
                     //if you set loop to false, you have to restore this next line
-                    var current = el.item.index
+                    var current = el.item.index - 4
 
                     detail_slider_nav.find(".owl-item").removeClass("current").eq(current).addClass("current")
                     var onscreen = detail_slider_nav.find('.owl-item.active').length - 1
@@ -3381,7 +3403,7 @@ jQuery(document).ready(function ($) {
                     if (document.getElementById('singlePropertyMap')) {
                         map = new google.maps.Map(document.getElementById('singlePropertyMap'), mapOptions)
                     }
-                    
+
                     if ($('#street-map').length > 0) {
                         panorama = new google.maps.StreetViewPanorama(document.getElementById('street-map'), panoramaOptions)
                     }
@@ -3389,7 +3411,7 @@ jQuery(document).ready(function ($) {
                     $.ajax({
                         type: 'POST',
                         dataType: 'json',
-                        url: '/getSingleProperty',
+                        url: '/get-detail-property',
                         data: {
                             'id': $('#getPropertiesId').data('id'),
                         },
@@ -3402,7 +3424,8 @@ jQuery(document).ready(function ($) {
                             }
 
                             if (data.status === true) {
-                                houzezAddMarkers(data.details, map)
+                                houzezAddMarkers(data.data, map)
+                                postComponent.cookie.addOrUpdate(data.data[0].id)
                                 houzezSetPOIControls(map, map.getCenter())
                             }
                         },

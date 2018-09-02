@@ -9,8 +9,7 @@ var elixir = require('laravel-elixir');
  | file for our application, as well as publishing vendor resources.
  |
  */
-
- elixir(function (mix) {
+elixir(function (mix) {
     mix.styles([
         'plugins/slider.min.css',
         'themes/bootstrap.min.css',
@@ -68,6 +67,10 @@ var elixir = require('laravel-elixir');
         'components/map/map.js',
         ],'public/js/map-components.js')
     .scripts([
+        'components/post/post-cookie.js',
+        'components/post/post.js',
+        ],'public/js/post-components.js')
+    .scripts([
         'themes/map.js',
         'themes/custom-script.js',
         'themes/custom-carousels.js',
@@ -102,5 +105,6 @@ var elixir = require('laravel-elixir');
         'public/js/plupload.full.min.js',
         'public/js/create-post.min.js',
         'public/js/map-components.js',
+        'public/js/post-components.js',
     ]);
 });

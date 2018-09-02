@@ -42,8 +42,9 @@
         <script src="{{ elixir('js/plugins.js') }}"></script>
         <script src="{{ elixir('js/setting-component.js') }}"></script>
         <script src="{{ elixir('js/custom-jquery.js') }}"></script>
+        <script src="{{ elixir('js/post-components.js') }}"></script>
         <script src="{{ elixir('js/map-components.js') }}"></script>
-        
+
         <script type='text/javascript'>
             /* <![CDATA[ */
             const lat = $('#getGoogleMaps').data('lat');

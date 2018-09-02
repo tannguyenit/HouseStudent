@@ -99,7 +99,11 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.includes.searchs.other-features')
+            <div class="hidden-input">
+                {!! Form::hidden('lat', '', ['class' => 'lat-input', 'readonly' => 'readonly']) !!}
+                {!! Form::hidden('lng', '', ['class' => 'lng-input', 'readonly' => 'readonly']) !!}
+            </div>
+            {{-- @include('layouts.includes.searchs.other-features') --}}
         </div>
     </div>
 {!! Form::close() !!}
