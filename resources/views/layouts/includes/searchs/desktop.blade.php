@@ -53,7 +53,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            {{-- <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
                     <select class="selectpicker" name="bedrooms" data-live-search="false" data-live-search-style="begins">
                         <option value="">{{ trans('form.bedrooms') }}</option>
@@ -72,7 +72,7 @@
                         @endfor
                     </select>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
                     <input type="number" class="form-control" min="0" max="100" value="" name="min-area" placeholder="{{ trans('form.placeholder.min-area') }}">

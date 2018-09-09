@@ -3,6 +3,7 @@ MapMarker = function(options) {
     this.options = options
     this.data = []
     this.currentMarker = 0
+    this.MarkerClusterer = null
     this.initInfoBox()
 }
 MapMarker.prototype = {
@@ -34,7 +35,6 @@ MapMarker.prototype = {
                     marker_size = new google.maps.Size(44, 56)
                 }
             }
-            
 
             let icon = {
                 url: marker_url,
@@ -99,25 +99,29 @@ MapMarker.prototype = {
             })(marker, index))
             _self.data.push(marker)
         })
+
+        return _self.data
     },
     removeAll: function() {
-        let markers = this.data
+        const _self = this
+        let markers = _self.data
         for (let i = 0; i < markers.length; i++) {
             markers[i].setMap(null)
         }
-        this.data = []
+        return _self.data = []
     },
     fitBoundsFromMarkers: function () {
-        const markers = this.data
+        let markers = this.data
         this.map.fitBounds(markers.reduce(function (bounds, marker) {
             return bounds.extend(marker.getPosition())
         }, new google.maps.LatLngBounds()))
     },
     addClusterer: function () {
-        const map = this.map
+        let map = this.map
         let clusterIcon = this.options.img.clusterIcon
         let markers = this.data
-        return new MarkerClusterer(map, markers, {
+
+        this.MarkerClusterer = new MarkerClusterer(map, markers, {
             maxZoom: 18,
             gridSize: 60,
             styles: [{
@@ -127,5 +131,6 @@ MapMarker.prototype = {
                 textColor: "#fff"
             }]
         })
+console.log('test', this.MarkerClusterer);
     }
 }

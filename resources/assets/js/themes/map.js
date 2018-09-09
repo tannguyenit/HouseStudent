@@ -2169,8 +2169,6 @@ jQuery(document).ready(function ($) {
                 'max_area': max_area,
                 'features': features,
                 'publish_date': publish_date,
-                'search_lat': search_lat,
-                'search_long': search_long,
                 'use_radius': use_radius,
                 'search_location': search_location,
                 'search_radius': search_radius,
@@ -2267,6 +2265,7 @@ jQuery(document).ready(function ($) {
                         // reloadMarkers()
                         houseMapComponent.markers.removeAll()
                         houseMapComponent.markers.add(data.properties)
+                        houseMapComponent.markers.addClusterer()
                         houseMapComponent.markers.fitBoundsFromMarkers()
 
                         $('#houzez-gmap-next').click(function () {
@@ -2302,7 +2301,7 @@ jQuery(document).ready(function ($) {
 
                         houseMapComponent.event.triggerResize()
                         // google.maps.event.trigger(houzezMap, 'resize')
-                        houseMapComponent.markers.addClusterer()
+
 
                         // markerCluster = new MarkerClusterer(houzezMap, markers, {
                         //     maxZoom: 18,
