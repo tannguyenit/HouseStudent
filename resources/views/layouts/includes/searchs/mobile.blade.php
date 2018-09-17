@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <select name="location" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                         <option value="">{{ trans('form.all-township') }}</option>
-                        @forelse ($countries as $element)
+                        @forelse ($township as $element)
                             <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
                         @empty
                         @endforelse
@@ -61,7 +61,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            {{-- <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
                     <select class="selectpicker" name="bedrooms" data-live-search="false" data-live-search-style="begins">
                         <option value="">{{ trans('form.bedrooms') }}</option>
@@ -80,7 +80,7 @@
                         @endfor
                     </select>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
                     <input type="number" class="form-control" min="0" max="100" value="" name="min-area" placeholder="{{ trans('form.placeholder.min-area') }}">

@@ -38,7 +38,7 @@
             <div class="vc_column-inner ">
                 <div class="wpb_wrapper">
                     <div class="houzez-module module-title section-title-module text-center ">
-                        <h2>Discover Our Best Deals in South Florida</h2>
+                        <h2>{{ trans('index.more-post') }}</h2>
                         <h3 class="sub-heading"></h3>
                     </div>
                     <div id="properties_module_section" class="houzez-module property-item-module">

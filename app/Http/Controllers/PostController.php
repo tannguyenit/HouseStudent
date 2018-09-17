@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\PostSeoService;
+use App\Mail\PublicNewPost;
 use App\Mail\RegisterAccount;
 use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
 use App\Repositories\FeaturesRepository\FeaturesRepositoryInterface;
@@ -96,6 +97,7 @@ class PostController extends BaseController
             $attribute['country'] = vn_to_str($request->administrative_area_level_1);
             $attribute['description'] = $request->description;
             $auth = Auth::user();
+            $userInfor = $auth;
             /* ------------------------------------------------------------------------ */
             /*  Save Auth
             /* ------------------------------------------------------------------------ */
@@ -119,6 +121,7 @@ class PostController extends BaseController
                 ];
 
                 \Mail::to($user->email)->send(new RegisterAccount($dataSend));
+                $userInfor = (object) $dataSend;
             }
 
             $savePost = $this->postRepository->create($attribute);
@@ -159,6 +162,10 @@ class PostController extends BaseController
                         return $result = false;
                     };
                 }
+                /* ------------------------------------------------------------------------ */
+                /*  Send mail to owner system active this post
+                /* ------------------------------------------------------------------------ */
+                \Mail::to(config('mail.email_receive'))->send(new PublicNewPost($userInfor));
             } else {
                 $result = false;
             }

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterAccount extends Mailable
+class PublicNewPost extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +29,6 @@ class RegisterAccount extends Mailable
         $this->email    = $data['email'];
         $this->fullname = $data['fullname'];
         $this->phone    = $data['phone'];
-        $this->token    = $data['token'];
     }
 
     /**
@@ -39,14 +38,13 @@ class RegisterAccount extends Mailable
      */
     public function build()
     {
-        return $this->subject('Register Account Success')->view('emails.register')
+        return $this->subject('New post public to website')->view('emails.public_post')
             ->with([
                 'id'       => $this->id,
                 'email'    => $this->email,
                 'fullname' => $this->fullname,
                 'username' => $this->username,
                 'phone'    => $this->phone,
-                'token'    => $this->token,
             ]);
     }
 }

@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'first_name' => 'Nguyen',
                 'last_name' => 'Tan',
                 'email' => 'tannguyenit95@gmail.com',
-                'password' => Hash::make('123qweasd'),
+                'password' => '$2y$10$wUo4AucAFD7DsCIQmoeQ3uQ6T45TF9jAeIuG1r3buNJeuX1EBVUsm',
                 'avatar' => 'default.jpg',
                 'birthday' => '1995-08-06',
                 'gender' => null,

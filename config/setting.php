@@ -30,4 +30,5 @@ return [
         'waitting'   => 1,
         'active'     => 2,
     ],
+    'access_token' => 'EAAEQZCMwztUEBAICDKY1lZCOkk8cqXTYw973q2ZBI6Uk7ykce5v42Ulp9HGsyPjZAf6M3SHLKrAQOKapTpFrAvCLTFyOCUCCGJLRidKIhMvtZCksVQiNLlkRZAfW1tQiqrjoBHbXkJ3Aow1EMSkRgtQY7rbEp71YPuOnt60d86S9ePtdwKsh0RkAKK1Kzz5Blth5qUd79AqQZDZD'
 ];
