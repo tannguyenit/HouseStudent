@@ -8,6 +8,7 @@ use App\Repositories\PostRepository\PostRepositoryInterface;
 use App\Repositories\StatusRepository\StatusRepositoryInterface;
 use App\Repositories\UserRepository\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class AjaxController extends Controller
 {
@@ -15,6 +16,7 @@ class AjaxController extends Controller
     protected $statusRepository;
     protected $postRepository;
     protected $userRepository;
+    protected $client;
 
     public function __construct(
         CategoryRepositoryInterface $categoryRepository,
@@ -26,6 +28,7 @@ class AjaxController extends Controller
         $this->statusRepository = $statusRepository;
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
+        $this->client = new Client();
     }
 
     public function updateType(Request $request)
@@ -193,14 +196,42 @@ class AjaxController extends Controller
         if ($request->ajax()) {
             $id = $request->id;
             $status = $request->status;
+            $getDetail = $this->postRepository->find($id);
+            $idPostFb = '';
             if ($id) {
                 if (config('setting.active') == $status) {
                     $value = config('setting.no-active');
+
+                    if ($getDetail->fb_post_id) {
+                        $options = [
+                            'query' => [
+                                'access_token' => config('setting.access_token'),
+                            ],
+                            'http_errors' => false
+                        ];
+                        $res = $this->client->request('DELETE', 'https://graph.facebook.com/'.$getDetail->fb_post_id, $options);
+                    }
                 } else {
                     $value = config('setting.active');
+                    $message = '☀🌳 Phòng Trọ ☀🌳\n';
+                    $message .= $getDetail->title . '\n';
+                    $message .= $getDetail->description . '\n';
+                    $options = [
+                        'query' => [
+                            'access_token' => config('setting.access_token'),
+                        ],
+                        'json' => [
+                            'message' => $message,
+                            'link' => action('PostController@show', ['slug' => $getDetail->slug])
+                        ],
+                        'http_errors' => false
+                    ];
+                    $res = $this->client->request('POST', 'https://graph.facebook.com/863136087181437/feed', $options);
+                    $idPostFb = json_decode($res->getBody()->getContents())->id;
                 }
                 $inputs = [
                     'active' => $value,
+                    'fb_post_id' => $idPostFb
                 ];
                 $updatePost = $this->postRepository->update($inputs, $id);
 

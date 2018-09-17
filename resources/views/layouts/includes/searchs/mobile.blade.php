@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <select name="location" class="selectpicker" data-live-search="false" data-live-search-style="begins">
                         <option value="">{{ trans('form.all-township') }}</option>
-                        @forelse ($countries as $element)
+                        @forelse ($township as $element)
                             <option data-parentstate="{{ $element->country }}" value="{{ $element->township }}">{{ $element->township }}</option>
                         @empty
                         @endforelse

@@ -118,13 +118,7 @@ jQuery(document).ready(function ($) {
             draggable: drgflag,
         }
 
-        if($('#houzez-listing-map').length) {
-            houzezMap = new google.maps.Map(document.getElementById('houzez-listing-map'), houzezHeaderMapOptions)
-            let option = {
-                map:houzezMap
-            }
-            houseMapComponent = new HouseMap(option)
-        }
+
 
         if (houzez_rtl == 'yes') {
             houzez_rtl = true
@@ -2129,6 +2123,13 @@ jQuery(document).ready(function ($) {
         var houzez_header_listing_map = function (keyword, country, state, location, area, status, type, label, property_id, bedrooms, bathrooms, min_price, max_price, min_area, max_area, features, publish_date, search_lat, search_long, search_radius, search_location, use_radius) {
             var headerMapSecurity = $('#securityHouzezHeaderMap').val()
             var initial_city = VARIABLE_JS.header_map_selected_city
+            if($('#houzez-listing-map').length) {
+                houzezMap = new google.maps.Map(document.getElementById('houzez-listing-map'), houzezHeaderMapOptions)
+                let option = {
+                    map:houzezMap
+                }
+                houseMapComponent = new HouseMap(option)
+            }
             houseMapComponent.action.getCurrentLocation()
 
             google.maps.event.trigger(houzezMap, 'resize')

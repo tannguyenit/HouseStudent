@@ -7,14 +7,10 @@
     "require": {
         "php": ">=7.0",
         "artesaos/seotools": "^0.12.0",
-        "botman/botman": "~2.0",
-        "botman/driver-facebook": "^1.0",
-        "botman/driver-web": "~1.0",
-        "botman/studio-addons": "~1.0",
-        "botman/tinker": "~1.0",
         "clue/stdio-react": "^1.0",
         "cviebrock/eloquent-sluggable": "^4.3",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
@@ -53,12 +49,10 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "BotMan\\Studio\\Providers\\DriverServiceProvider::publishDriverConfigurations",
             "php artisan optimize"
         ],
         "post-autoload-dump": [

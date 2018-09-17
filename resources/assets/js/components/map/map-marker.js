@@ -131,6 +131,5 @@ MapMarker.prototype = {
                 textColor: "#fff"
             }]
         })
-console.log('test', this.MarkerClusterer);
     }
 }
